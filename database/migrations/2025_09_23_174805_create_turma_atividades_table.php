@@ -10,19 +10,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('turma_alunos', function (Blueprint $table) {
+        Schema::create('turma_atividades', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_turma');
-            $table->unsignedBigInteger('id_aluno');
+            $table->unsignedBigInteger('id_atividade');
             $table->unsignedBigInteger('criador');
-            $table->unsignedBigInteger('ultimo_editor');
             $table->enum('status', ['Ativo', 'Inativo'])->default('Ativo');
             $table->timestamps();
 
             $table->foreign('id_turma')->references('id')->on('turmas')->onDelete('cascade');
-            $table->foreign('id_aluno')->references('id')->on('system_users')->onDelete('cascade');
+            $table->foreign('id_atividade')->references('id')->on('atividades')->onDelete('cascade');
             $table->foreign('criador')->references('id')->on('system_users')->onDelete('cascade');
-            $table->foreign('ultimo_editor')->references('id')->on('system_users')->onDelete('cascade');
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('turma_alunos');
+        Schema::dropIfExists('turma_atividades');
     }
 };
