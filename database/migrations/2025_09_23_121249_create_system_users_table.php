@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nome', 255);
             $table->string('email', 100)->unique();
-            $table->string('password', 32);
+            $table->string('password', 255);
             $table->string('cpf', 11)->unique();
-            $table->enum('tipo', ['Professor', 'Aluno', 'ADM'])->default('Aluno');
+            $table->enum('tipo', ['Professor', 'Aluno', 'ADM', 'Moderador', 'Operador'])->default('Aluno');
             $table->unsignedBigInteger('criador')->nullable();
             $table->unsignedBigInteger('ultimo_editor')->nullable();
             $table->enum('status', ['Ativo', 'Inativo', 'Bloqueado'])->default('Ativo');
