@@ -44,14 +44,6 @@ class SystemUserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreSystemUserRequest $request): JsonResponse
@@ -88,14 +80,6 @@ class SystemUserController extends Controller
             'sucess' => true,
             'data' => $user->load(['creator', 'lastEditor']),
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(SystemUser $systemUser)
-    {
-        //
     }
 
     /**
