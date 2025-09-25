@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSystemUserRequest;
 use App\Http\Requests\UpdateSystemUserRequest;
 use App\Models\SystemUser;
@@ -11,23 +10,20 @@ use Illuminate\Http\Request;
 
 class SystemUserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request): JsonResponse
     {
         $query = SystemUser::with(['creator', 'lastEditor']);
 
         if ($request->has('tipo')) {
-            $query->where('tipo', $request->tipo);
+            $query->where('tipo', $request->input('tipo'));
         }
 
         if ($request->has('status')) {
-            $query->where('status', $request->status);
+            $query->where('status', $request->input('status'));
         }
 
         if ($request->has('search')) {
-            $search = $request->search;
+            $search = $request->input('search');
             $query->where(function ($q) use ($search) {
                 $q->where('nome', 'like', "%{$search}%")
                     ->orWhere('email', 'like', "%{$search}%")
