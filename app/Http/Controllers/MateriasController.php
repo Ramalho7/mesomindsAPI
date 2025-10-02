@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMateriasRequest;
 use Illuminate\Http\JsonResponse;
-use App\Models\materias;
+use App\Models\Materias;
 
 class MateriasController extends Controller
 {
