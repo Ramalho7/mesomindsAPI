@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangeStatusMateriaRequest;
 use App\Http\Requests\StoreMateriasRequest;
 use App\Http\Requests\UpdateMateriasRequest;
 use App\Models\Materias;
@@ -51,6 +52,32 @@ class MateriasController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Erro ao atualizar a matéria',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function changeStatus(ChangeStatusMateriaRequest $request, Materias $materia){
+
+        try{
+            $validated = $request->validated();
+
+            $validated['ultimo_editor'] = auth()->user()->id;
+
+            $materia->update([
+                'status' => $validated['status'],
+                'ultimo_editor' => $validated['ultimo_editor'],
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Status alterado com sucesso',
+                'data' => $materia->fresh(),
+            ]);
+        }catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao alterar status',
                 'error' => $e->getMessage(),
             ], 500);
         }

@@ -12,5 +12,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware('auth:api')->group(function () {
     Route::apiResource('users', SystemUserController::class);
     Route::apiResource('materias', MateriasController::class);
+    Route::patch('materias/{materia}/status', [MateriasController::class, 'changeStatus']);
     Route::patch('users/{user}/status', [SystemUserController::class, 'changeStatus']);
 });
