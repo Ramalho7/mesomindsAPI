@@ -11,13 +11,10 @@ use Illuminate\Http\Request;
 
 class MateriasController extends Controller
 {
-    public function index(Request $request, $nome = null, $status = null): JsonResponse
+    public function index(Request $request): JsonResponse
     {
 
         $query = Materias::with(['creator', 'lastEditor']);
-
-        $nome = $request->query('nome');
-        $status = $request->query('status');
 
         $nome = trim((string) $request->query('nome', ''));
         $status = trim((string) $request->query('status', ''));
@@ -56,7 +53,7 @@ class MateriasController extends Controller
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
-                'sucess' => false,
+                'success' => false,
                 'message' => 'Erro ao cadastrar matéria',
                 'error' => $e->getMessage(),
             ], 500);
