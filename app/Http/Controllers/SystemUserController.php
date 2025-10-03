@@ -20,7 +20,7 @@ class SystemUserController extends Controller
 
         if ($request->has('status')) {
             $query->where('status', $request->input('status'));
-        } // usar input como padrõa para coleta de dados dos requests
+        }
 
         if ($request->has('search')) {
             $search = $request->input('search');

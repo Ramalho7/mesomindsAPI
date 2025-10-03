@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
 
 // ...existing code...
-class SystemUser extends Authenticatable
+class SystemUser extends Model
 {
     // ...existing code...
-    use HasFactory, HasApiTokens, Notifiable;
+    use HasFactory;
 
     protected $table = 'system_users';
 
@@ -35,11 +32,6 @@ class SystemUser extends Authenticatable
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-
-    public function findForPassport($username)
-    {
-        return $this->where('email', $username)->first();
-    }
 
     public function creator()
     {
