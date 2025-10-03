@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule; 
 
-class StoreMateriasRequest extends FormRequest
+class UpdateMateriasRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,11 +22,17 @@ class StoreMateriasRequest extends FormRequest
      */
     public function rules(): array
     {
+        $materiaId = $this->route('id');
+
         return [
-            'nome' => 'required|string|max:255|unique:materias,nome',
-            'descricao' => 'required|string|min:10',
-            'criador' => 'required|exists:system_users,id',
-            'ultimo_editor' => 'required|exists:system_users,id'
+            'nome' => [
+                'sometimes',
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('materias', 'nome')->ignore($materiaId), 
+            ],
+            'descricao' => 'sometimes|required|string',
         ];
     }
 }

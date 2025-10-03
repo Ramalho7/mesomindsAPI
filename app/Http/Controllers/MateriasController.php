@@ -3,19 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMateriasRequest;
-use Illuminate\Http\JsonResponse;
+use App\Http\Requests\UpdateMateriasRequest;
 use App\Models\Materias;
+use Illuminate\Http\JsonResponse;
 
 class MateriasController extends Controller
 {
     public function store(StoreMateriasRequest $request): JsonResponse
     {
         try {
-
-            //     if ($request->user()) {
-            //     $validated['criador'] = $request->user()->id;
-            //     $validated['ultimo_editor'] = $request->user()->id;
-            // } após sistema de auth usar isso
 
             $validated = $request->validated();
 
@@ -33,6 +29,28 @@ class MateriasController extends Controller
             return response()->json([
                 'sucess' => false,
                 'message' => 'Erro ao cadastrar matéria',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function update(UpdateMateriasRequest $request, Materias $materia): JsonResponse {
+        try{
+            $validated = $request->validated();
+
+            $validated['ultimo_editor'] = auth()->user()->id;
+
+            $materia->update($validated);
+
+            return response()->json([
+                'success' => true, 
+                'message' => 'Materia atualizada com sucesso',
+                'data' => $materia->fresh()->load('lastEditor')
+            ]);
+        }catch(\Exception $e){
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao atualizar a matéria',
                 'error' => $e->getMessage(),
             ], 500);
         }
