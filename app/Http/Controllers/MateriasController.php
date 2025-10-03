@@ -60,6 +60,13 @@ class MateriasController extends Controller
         }
     }
 
+    public function show(Materias $materia): JsonResponse{
+        return response()->json([
+            'success' => true,
+            'data' => $materia->load(['creator', 'lastEditor']),
+        ]);
+    }
+
     public function update(UpdateMateriasRequest $request, Materias $materia): JsonResponse
     {
         try {
