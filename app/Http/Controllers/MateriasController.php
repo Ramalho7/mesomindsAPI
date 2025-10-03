@@ -7,9 +7,34 @@ use App\Http\Requests\StoreMateriasRequest;
 use App\Http\Requests\UpdateMateriasRequest;
 use App\Models\Materias;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class MateriasController extends Controller
 {
+    public function index(Request $request): JsonResponse
+    {
+
+        $query = Materias::with(['creator', 'lastEditor']);
+
+        $nome = trim((string) $request->query('nome', ''));
+        $status = trim((string) $request->query('status', ''));
+
+        if (! empty($nome)) {
+            $query->where('nome', 'like', "%{$nome}%");
+        }
+
+        if (! empty($status)) {
+            $query->where('status', $status);
+        }
+
+        $materias = $query->paginate($request->get('per_page', 15));
+
+        return response()->json([
+            'success' => true,
+            'data' => $materias,
+        ]);
+    }
+
     public function store(StoreMateriasRequest $request): JsonResponse
     {
         try {
@@ -28,15 +53,16 @@ class MateriasController extends Controller
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
-                'sucess' => false,
+                'success' => false,
                 'message' => 'Erro ao cadastrar matéria',
                 'error' => $e->getMessage(),
             ], 500);
         }
     }
 
-    public function update(UpdateMateriasRequest $request, Materias $materia): JsonResponse {
-        try{
+    public function update(UpdateMateriasRequest $request, Materias $materia): JsonResponse
+    {
+        try {
             $validated = $request->validated();
 
             $validated['ultimo_editor'] = auth()->user()->id;
@@ -44,11 +70,11 @@ class MateriasController extends Controller
             $materia->update($validated);
 
             return response()->json([
-                'success' => true, 
+                'success' => true,
                 'message' => 'Materia atualizada com sucesso',
-                'data' => $materia->fresh()->load('lastEditor')
+                'data' => $materia->fresh()->load('lastEditor'),
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Erro ao atualizar a matéria',
@@ -57,9 +83,10 @@ class MateriasController extends Controller
         }
     }
 
-    public function changeStatus(ChangeStatusMateriaRequest $request, Materias $materia){
+    public function changeStatus(ChangeStatusMateriaRequest $request, Materias $materia)
+    {
 
-        try{
+        try {
             $validated = $request->validated();
 
             $validated['ultimo_editor'] = auth()->user()->id;
@@ -74,7 +101,7 @@ class MateriasController extends Controller
                 'message' => 'Status alterado com sucesso',
                 'data' => $materia->fresh(),
             ]);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Erro ao alterar status',
