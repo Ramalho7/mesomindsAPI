@@ -116,4 +116,30 @@ class MateriasController extends Controller
             ], 500);
         }
     }
+
+    public function destroy(Materias $materia):JsonResponse{
+        try{
+
+            if(! (auth()->user() && auth()->user()->tipo === "ADM")){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Acesso negado',
+                ],403);
+            }
+            
+
+            $materia->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Materia excluir com sucesso',
+            ]);
+        }catch(\Exception $e){
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao excluir a matéria'
+            ], 500);
+        }
+    }
+
 }
