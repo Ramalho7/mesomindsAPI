@@ -41,7 +41,7 @@ class UpdateSystemUserRequest extends FormRequest
                 'size:11',
                 Rule::unique('system_users')->ignore($userId)
             ],
-            'tipo' => 'sometimes|required|in:Professor,Aluno,ADM',
+            'tipo' => 'sometimes|required|in:Professor,Aluno,ADM,Moderador,Operador',
             'status' => 'sometimes|in:Ativo,Inativo,Bloqueado'
         ];
     }
