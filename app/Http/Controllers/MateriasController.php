@@ -8,7 +8,8 @@ use App\Http\Requests\UpdateMateriasRequest;
 use App\Models\Materias;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-
+use App\Models\SystemUser;
+use Illuminate\Support\Facades\Auth;
 class MateriasController extends Controller
 {
     public function index(Request $request): JsonResponse
@@ -72,7 +73,8 @@ class MateriasController extends Controller
         try {
             $validated = $request->validated();
 
-            $validated['ultimo_editor'] = auth()->user()->id;
+            $user = Auth::user();
+            $validated['ultimo_editor'] = $user->id;
 
             $materia->update($validated);
 
@@ -96,7 +98,8 @@ class MateriasController extends Controller
         try {
             $validated = $request->validated();
 
-            $validated['ultimo_editor'] = auth()->user()->id;
+            $user = Auth::user();
+            $validated['ultimo_editor'] = $user->id;
 
             $materia->update([
                 'status' => $validated['status'],
@@ -120,13 +123,15 @@ class MateriasController extends Controller
     public function destroy(Materias $materia):JsonResponse{
         try{
 
-            if(! (auth()->user() && auth()->user()->tipo === "ADM")){
+            $user = Auth::user();
+
+            if(! ($user && $user->tipo === "ADM")){
                 return response()->json([
                     'success' => false,
                     'message' => 'Acesso negado',
                 ],403);
             }
-            
+
 
             $materia->delete();
 
