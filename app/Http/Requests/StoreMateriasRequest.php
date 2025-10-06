@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreMateriasRequest extends FormRequest
 {
@@ -11,7 +12,9 @@ class StoreMateriasRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user() && auth()->user()->tipo === 'ADM';
+        $user = Auth::user();
+
+        return $user && $user->tipo === 'ADM' || 'Moderador';
     }
 
     /**

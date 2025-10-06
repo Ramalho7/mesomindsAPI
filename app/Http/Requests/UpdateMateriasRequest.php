@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule; 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UpdateMateriasRequest extends FormRequest
 {
@@ -12,7 +13,9 @@ class UpdateMateriasRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user() && auth()->user()->tipo === 'ADM';
+        $user = Auth::user();
+
+        return $user && $user->tipo === 'ADM' || 'Moderador';
     }
 
     /**
@@ -30,7 +33,7 @@ class UpdateMateriasRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('materias', 'nome')->ignore($materiaId), 
+                Rule::unique('materias', 'nome')->ignore($materiaId),
             ],
             'descricao' => 'sometimes|required|string',
         ];
