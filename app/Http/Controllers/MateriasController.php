@@ -42,8 +42,11 @@ class MateriasController extends Controller
 
             $validated = $request->validated();
 
-            $validated['criador'] = $request->input('criador', $validated['criador'] ?? null);
-            $validated['ultimo_editor'] = $request->input('ultimo_editor', $validated['ultimo_editor'] ?? null);
+            $user = Auth::user();
+
+            $validated['criador'] = $user->id;
+
+            $validated['ultimo_editor'] = $user->id;
 
             $materia = Materias::create($validated);
 

@@ -12,6 +12,6 @@ class MateriasSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\materias::factory()->count(20)->create();
+        \App\Models\Materias::factory()->count(20)->create();
     }
 }
