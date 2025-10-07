@@ -24,7 +24,9 @@ class MateriasController extends Controller
             $query->where('nome', 'like', "%{$nome}%");
         }
 
-        if (! empty($status)) {
+        if (empty($status)) {
+            $query->where('status', 'Ativo');
+        }else{
             $query->where('status', $status);
         }
 
