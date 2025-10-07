@@ -14,16 +14,28 @@ return new class extends Migration
             $table->id();
             $table->string('title', 255);
             $table->longText('content');
-            $table->unsignedBigInteger('id_materia');
-            $table->unsignedBigInteger('criador');
-            $table->unsignedBigInteger('ultimo_editor')->nullable();
-            $table->enum('status', ['Ativo', 'Inativo', 'Rascunho'])->default('Ativo');
-            $table->timestamp('published_at');
-            $table->timestamps();
 
-            // $table->foreign('id_materia')->references('id')->on('materias')->onDelete('cascade');
-            $table->foreign('criador')->references('id')->on('system_users')->onDelete('cascade');
-            $table->foreign('ultimo_editor')->references('id')->on('system_users')->onDelete('set null');
+            $table->foreignId('id_materia')
+                ->nullable()
+                ->constrained('materias')
+                ->cascadeOnDelete();
+
+            $table->foreignId('content_types_id')
+                ->constrained('content_types')
+                ->restrictOnDelete();
+
+            $table->foreignId('criador')
+                ->constrained('system_users')
+                ->cascadeOnDelete();
+
+            $table->foreignId('ultimo_editor')
+                ->nullable()
+                ->constrained('system_users')
+                ->nullOnDelete();
+
+            $table->enum('status', ['Ativo', 'Inativo', 'Rascunho'])->default('Ativo');
+            $table->timestamp('published_at')->nullable();
+            $table->timestamps();
         });
     }
 

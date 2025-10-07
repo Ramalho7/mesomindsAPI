@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContentTypeController;
 use App\Http\Controllers\MateriasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -14,4 +15,6 @@ Route::middleware('auth:api')->group(function () {
     Route::patch('materias/{materia}/status', [MateriasController::class, 'changeStatus']);
 
     Route::apiResource('materias', MateriasController::class);
+
+    Route::apiResource('tiposconteudo', ContentTypeController::class);
 });

@@ -25,4 +25,9 @@ class Conteudo extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function contentType()
+    {
+        return $this->belongsTo(ContentType::class, 'post_type_id');
+    }
 }
