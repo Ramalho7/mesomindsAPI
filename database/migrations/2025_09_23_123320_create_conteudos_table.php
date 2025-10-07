@@ -12,12 +12,13 @@ return new class extends Migration
     {
         Schema::create('conteudos', function (Blueprint $table) {
             $table->id();
-            $table->string('nome', 255);
-            $table->text('corpo');
+            $table->string('title', 255);
+            $table->longText('content');
             $table->unsignedBigInteger('id_materia');
             $table->unsignedBigInteger('criador');
             $table->unsignedBigInteger('ultimo_editor')->nullable();
-            $table->enum('status', ['Ativo', 'Inativo'])->default('Ativo');
+            $table->enum('status', ['Ativo', 'Inativo', 'Rascunho'])->default('Ativo');
+            $table->timestamp('published_at');
             $table->timestamps();
 
             // $table->foreign('id_materia')->references('id')->on('materias')->onDelete('cascade');
