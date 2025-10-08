@@ -24,6 +24,11 @@ return new class extends Migration
                 ->constrained('content_types')
                 ->restrictOnDelete();
 
+            $table->foreignId('image_id')
+                ->nullable()
+                ->constrained('content_images')
+                ->nullOnDelete();
+
             $table->foreignId('criador')
                 ->constrained('system_users')
                 ->cascadeOnDelete();

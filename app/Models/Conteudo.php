@@ -16,6 +16,9 @@ class Conteudo extends Model
         'title',
         'content',
         'criador',
+        'image_id',
+        'content_types_id',
+        'content_tags_id',
         'status',
         'id_materia',
         'ultimo_editor',
@@ -36,6 +39,11 @@ class Conteudo extends Model
     public function contentTag()
     {
         return $this->belongsTo(ContentTag::class, 'content_tags_id');
+    }
+
+    public function contentImage()
+    {
+        return $this->belongsTo(ContentImage::class, 'image_id');
     }
 
     public function creator()
