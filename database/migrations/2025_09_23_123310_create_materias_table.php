@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('materias', function (Blueprint $table) {
             $table->id();
-            $table->string('nome', 255);
+            $table->string('nome', 255)->unique();
             $table->string('descricao');
             $table->unsignedBigInteger('criador');
             $table->enum('status', ["Ativo", "Inativo"])->default('Ativo');

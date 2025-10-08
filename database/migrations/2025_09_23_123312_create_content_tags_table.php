@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('content_types', function (Blueprint $table) {
+        Schema::create('content_tags', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 255)->unique();
-            $table->string('description');
-
+            $table->string('tag_name', 255);
+            $table->boolean('is_moderator_only')->default(false);
+            $table->integer('count')->default(0);
+            $table->string('description', 255);
             $table->foreignId('criador')
                 ->constrained('system_users')
                 ->cascadeOnDelete();
@@ -24,7 +25,6 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('system_users')
                 ->nullOnDelete();
-
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_content_type');
+        Schema::dropIfExists('content_tags');
     }
 };

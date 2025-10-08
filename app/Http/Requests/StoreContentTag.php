@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class StoreMateriasRequest extends FormRequest
+class StoreContentTag extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,7 @@ class StoreMateriasRequest extends FormRequest
     {
         $user = Auth::user();
 
-        return $user && $user->tipo === 'ADM' || 'Moderador';
+        return $user && in_array($user->tipo, ['ADM', 'Moderador', 'Operador']);
     }
 
     /**
@@ -25,8 +25,10 @@ class StoreMateriasRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|string|max:255|unique:materias,nome',
-            'descricao' => 'required|string|min:10',
+            'tag_name' => 'required|string|max:255|unique:content_tags,tag_name',
+            'description' => 'required|string|max:255',
+            'is_moderator_only' => 'required|boolean',
+            'count' => 'nullable|integer',
         ];
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContentTagController;
 use App\Http\Controllers\ContentTypeController;
 use App\Http\Controllers\MateriasController;
 use Illuminate\Http\Request;
@@ -17,4 +18,6 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('materias', MateriasController::class);
 
     Route::apiResource('tiposconteudo', ContentTypeController::class);
+
+    Route::apiResource('tagsconteudo', ContentTagController::class);
 });

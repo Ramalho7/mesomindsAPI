@@ -33,6 +33,10 @@ return new class extends Migration
                 ->constrained('system_users')
                 ->nullOnDelete();
 
+        $table->foreignId('content_tags_id')
+                ->constrained('content_tags')
+                ->restrictOnDelete();
+
             $table->enum('status', ['Ativo', 'Inativo', 'Rascunho'])->default('Ativo');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

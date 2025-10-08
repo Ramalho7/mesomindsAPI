@@ -13,12 +13,14 @@ class Conteudo extends Model
     protected $table = 'conteudos';
 
     protected $fillable = [
-        'nome',
-        'corpo',
+        'title',
+        'content',
         'criador',
         'status',
         'id_materia',
         'ultimo_editor',
+        'content_tags_id',
+        'content_types_id'
     ];
 
     protected $casts = [
@@ -28,6 +30,21 @@ class Conteudo extends Model
 
     public function contentType()
     {
-        return $this->belongsTo(ContentType::class, 'post_type_id');
+        return $this->belongsTo(ContentType::class, 'post_types_id');
+    }
+
+    public function contentTag()
+    {
+        return $this->belongsTo(ContentTag::class, 'content_tags_id');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(SystemUser::class, 'criador');
+    }
+
+    public function lastEditor()
+    {
+        return $this->belongsTo(SystemUser::class, 'ultimo_editor');
     }
 }
