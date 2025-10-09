@@ -67,7 +67,6 @@ class ConteudoController extends Controller
         return response()->json([
             'success' => true,
             'conteudo' => $conteudo,
-            // Usar contentImage ao invés de image
             'image_url' => $conteudo->contentImage ? asset('storage/' . $conteudo->contentImage->file_path) : null,
         ], 201);
     }
