@@ -12,9 +12,11 @@ class StoreContentType extends FormRequest
      */
     public function authorize(): bool
     {
-        $user = Auth::user();
+        // $user = Auth::user();
 
-        return $user && $user->tipo === 'ADM' || 'Moderador';
+        // return $user && $user->tipo === 'ADM' || 'Moderador';
+
+        return true;
     }
 
     /**

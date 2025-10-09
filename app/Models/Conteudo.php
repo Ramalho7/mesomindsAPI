@@ -33,7 +33,7 @@ class Conteudo extends Model
 
     public function contentType()
     {
-        return $this->belongsTo(ContentType::class, 'post_types_id');
+        return $this->belongsTo(ContentType::class, 'content_types_id');
     }
 
     public function contentTag()
