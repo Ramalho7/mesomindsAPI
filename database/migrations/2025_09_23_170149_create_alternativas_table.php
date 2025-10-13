@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('valor', 255);
             $table->boolean('correta');
             $table->unsignedBigInteger('criador');
-            $table->unsignedBigInteger('ultimo_editor');
+            $table->unsignedBigInteger('ultimo_editor')->nullable();
             $table->enum('status', ['Ativo', 'Inativo'])->default('Ativo');
             $table->timestamps();
 

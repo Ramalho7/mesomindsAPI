@@ -24,6 +24,7 @@ return new class extends Migration
 
             $table->foreign('criador')->references('id')->on('system_users')->onDelete('cascade');
             $table->foreign('ultimo_editor')->references('id')->on('system_users')->onDelete('set null');
+            $table->foreign('materia')->references('id')->on('materias')->onDelete('cascade');
         });
     }
 
