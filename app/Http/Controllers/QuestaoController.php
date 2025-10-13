@@ -12,7 +12,7 @@ class QuestaoController extends Controller
      */
     public function index()
     {
-        return 'index';
+        return Questao::all();
     }
 
     /**
@@ -28,7 +28,7 @@ class QuestaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Questao::create($request->all());
     }
 
     /**
@@ -52,7 +52,8 @@ class QuestaoController extends Controller
      */
     public function update(Request $request, Questao $questao)
     {
-        //
+        $questao->update($request->all());
+        return $questao;
     }
 
     /**
@@ -60,6 +61,7 @@ class QuestaoController extends Controller
      */
     public function destroy(Questao $questao)
     {
-        //
+        $questao->delete();
+        return response()->json(['message' => 'Questão deletada com sucesso']);
     }
 }

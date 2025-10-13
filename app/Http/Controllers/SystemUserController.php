@@ -75,7 +75,7 @@ class SystemUserController extends Controller
         return response()->json([
             'sucess' => true,
             'data' => $user->load(['creator', 'lastEditor']),
-        ]);
+        ]); 
     }
 
     /**

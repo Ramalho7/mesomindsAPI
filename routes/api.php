@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuestaoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SystemUserController;
@@ -13,3 +14,7 @@ Route::apiResource('users', SystemUserController::class);
 Route::patch('users/{user}/status', [SystemUserController::class, 'changeStatus']);
 
 // Route::get('users/{user}/status', [SystemUserController::class, 'changeStatus']); adiciionar
+
+Route::apiResource('questao', QuestaoController::class);
+
+
