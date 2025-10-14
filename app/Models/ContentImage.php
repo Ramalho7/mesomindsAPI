@@ -18,6 +18,8 @@ class ContentImage extends Model
 
     public function conteudos()
     {
-        return $this->hasMany(Conteudo::class, 'image_id');
+        return $this->belongsToMany(Conteudo::class, 'content_content_images', 'content_image_id', 'content_id')
+                ->withPivot('order')
+                ->orderBy('order');
     }
 }

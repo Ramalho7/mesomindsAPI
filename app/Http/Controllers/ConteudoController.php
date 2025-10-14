@@ -7,7 +7,6 @@ use App\Models\ContentImage;
 use App\Models\ContentTag;
 use App\Models\ContentType;
 use App\Models\Conteudo;
-use App\Models\Materias;
 use Illuminate\Support\Facades\Auth;
 
 class ConteudoController extends Controller
@@ -15,7 +14,6 @@ class ConteudoController extends Controller
     public function store(StoreContent $request)
     {
         $validated = $request->validated();
-
         $user = Auth::user();
 
         $contentType = ContentType::firstOrCreate(
@@ -35,39 +33,40 @@ class ConteudoController extends Controller
             ]
         );
 
-        $imageId = null;
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images', 'public');
-
-            $image = ContentImage::create([
-                'file_name' => $request->file('image')->getClientOriginalName(),
-                'file_path' => $path,
-                'alt_text' => $validated['image_alt_text'] ?? null,
-            ]);
-
-            $imageId = $image->id;
-        }
-
-        $materiaId = null;
-
         $conteudo = Conteudo::create([
             'title' => $validated['title'],
             'content' => $validated['content'],
             'content_types_id' => $contentType->id,
             'content_tags_id' => $contentTag->id,
-            'image_id' => $imageId,
-            'id_materia' => $materiaId,
+            'id_materia' => null,
             'status' => $validated['status'],
             'published_at' => $validated['published_at'],
             'criador' => $user->id,
         ]);
 
-        $conteudo->load(['contentImage', 'contentType', 'contentTag', 'creator']);
+        if ($request->hasFile('images')) {
+            $imageIds = [];
+            foreach ($request->file('images') as $index => $image) {
+                $path = $image->store('images', 'public');
+
+                $contentImage = ContentImage::create([
+                    'file_name' => $image->getClientOriginalName(),
+                    'file_path' => $path,
+                    'alt_text' => $validated['image_alt_text'][$index] ?? null,
+                ]);
+
+                $imageIds[$contentImage->id] = ['order' => $index];
+            }
+
+            $conteudo->images()->attach($imageIds);
+        }
+
+        $conteudo->load(['images', 'contentType', 'contentTag', 'creator']);
 
         return response()->json([
             'success' => true,
             'conteudo' => $conteudo,
-            'image_url' => $conteudo->contentImage ? asset('storage/' . $conteudo->contentImage->file_path) : null,
+            'image_urls' => $conteudo->images->map(fn ($img) => asset('storage/'.$img->file_path)),
         ], 201);
     }
 }

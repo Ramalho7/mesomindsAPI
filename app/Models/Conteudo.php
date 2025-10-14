@@ -41,9 +41,11 @@ class Conteudo extends Model
         return $this->belongsTo(ContentTag::class, 'content_tags_id');
     }
 
-    public function contentImage()
+    public function images()
     {
-        return $this->belongsTo(ContentImage::class, 'image_id');
+        return $this->belongsToMany(ContentImage::class, 'content_content_images', 'content_id', 'content_image_id')
+                ->withPivot('order')
+                ->orderBy('order');
     }
 
     public function creator()
