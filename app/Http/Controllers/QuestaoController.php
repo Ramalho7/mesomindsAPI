@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreQuestaoComAlternativas;
 use App\Models\Questao;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QuestaoController extends Controller
 {
@@ -26,9 +28,33 @@ class QuestaoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreQuestaoComAlternativas $request)
     {
-        Questao::create($request->all());
+        DB::beginTransaction();
+        try {
+            $validated = $request->validated();
+            $alternativasData = $validated['alternativas'];
+            $criadorId = $validated['criador'];
+             // Remove 'alternativas' do array validado para evitar erro de mass assignment
+            unset($validated['alternativas']);
+
+           $alternativasParaSalvar = collect($alternativasData)->map(function ($alternativa) use ($criadorId) {
+                $alternativa['criador'] = $criadorId;
+                return $alternativa;
+             })->toArray();
+
+            $questao = Questao::create($validated);
+            $questao->alternativas()->createMany($alternativasParaSalvar);
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => 'Questão criada com sucesso']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao criar questão: ' . $e->getMessage()], 500);
+        }
     }
 
     /**
