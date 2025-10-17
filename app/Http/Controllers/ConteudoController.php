@@ -8,6 +8,7 @@ use App\Models\ContentTag;
 use App\Models\ContentType;
 use App\Models\Conteudo;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ConteudoController extends Controller
 {
@@ -44,15 +45,26 @@ class ConteudoController extends Controller
             'criador' => $user->id,
         ]);
 
-        if ($request->hasFile('images')) {
+        if (!empty($validated['images'])) {
             $imageIds = [];
-            foreach ($request->file('images') as $index => $image) {
-                $path = $image->store('images', 'public');
+
+            foreach ($validated['images'] as $index => $base64Image) {
+                if (preg_match('/^data:image\/(\w+);base64,/', $base64Image, $matches)) {
+                    $mimeType = "image/{$matches[1]}";
+                    $base64Data = substr($base64Image, strpos($base64Image, ',') + 1);
+                } else {
+                    $mimeType = 'image/png';
+                    $base64Data = $base64Image;
+                }
+
+                $fileName = Str::uuid() . '.' . $matches[1] ?? 'png';
 
                 $contentImage = ContentImage::create([
-                    'file_name' => $image->getClientOriginalName(),
-                    'file_path' => $path,
+                    'file_name' => $fileName,
+                    'file_path' => null,
                     'alt_text' => $validated['image_alt_text'][$index] ?? null,
+                    'base64_data' => $base64Data,
+                    'mime_type' => $mimeType,
                 ]);
 
                 $imageIds[$contentImage->id] = ['order' => $index];
@@ -66,7 +78,11 @@ class ConteudoController extends Controller
         return response()->json([
             'success' => true,
             'conteudo' => $conteudo,
-            'image_urls' => $conteudo->images->map(fn ($img) => asset('storage/'.$img->file_path)),
+            'images' => $conteudo->images->map(fn($img) => [
+                'id' => $img->id,
+                'alt_text' => $img->alt_text,
+                'base64' => $img->full_base64,
+            ]),
         ], 201);
     }
 }
