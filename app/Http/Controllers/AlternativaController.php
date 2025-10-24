@@ -44,7 +44,7 @@ class AlternativaController extends Controller
      */
     public function edit(Alternativa $alternativa)
     {
-        //
+
     }
 
     /**
@@ -52,7 +52,7 @@ class AlternativaController extends Controller
      */
     public function update(Request $request, Alternativa $alternativa)
     {
-        //
+        
     }
 
     /**

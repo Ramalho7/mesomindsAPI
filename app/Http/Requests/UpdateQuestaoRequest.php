@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreQuestaoComAlternativas extends FormRequest
+class UpdateQuestaoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,24 +25,17 @@ class StoreQuestaoComAlternativas extends FormRequest
             'titulo' => 'required|string|max:255',
             'corpo' => 'required|string|max:255',
             'materia' => 'required|integer|exists:materias,id',
-            'alternativas' => 'required|array|min:2',
-            'alternativas.*.valor' => 'required|string|max:255',
-            'alternativas.*.correta' => 'nullable|boolean',
             'criador' => 'required|integer|exists:system_users,id',
             'tipo' => 'required|string|in:multipla,verdadeiroFalso,aberta',
+            'alternativas' => 'sometimes|array|min:2',
+            'alternativas.*.valor' => 'required_with:alternativas|string|max:255',
+            'alternativas.*.correta' => 'nullable|boolean',
         ];
     }
 
     public function messages()
     {
         return [
-            'alternativas.required' => 'O campo alternativas é obrigatório e deve conter pelo menos 2 alternativas.',
-            'alternativas.array' => 'O campo alternativas deve ser um array.',
-            'alternativas.min' => 'O campo alternativas deve conter pelo menos 2 alternativas.',
-            'alternativas.*.valor.required' => 'Cada alternativa deve ter um valor.',
-            'alternativas.*.valor.string' => 'O valor de cada alternativa deve ser uma string.',
-            'alternativas.*.valor.max' => 'O valor de cada alternativa não pode exceder 255 caracteres.',
-            'alternativas.*.correta.boolean' => 'O campo correta de cada alternativa deve ser verdadeiro ou falso.',
             'criador.required' => 'O campo criador é obrigatório.',
             'criador.integer' => 'O campo criador deve ser um número inteiro.',
             'criador.exists' => 'O criador especificado não existe.',
@@ -58,6 +51,12 @@ class StoreQuestaoComAlternativas extends FormRequest
             'corpo.required' => 'O campo corpo é obrigatório.',
             'corpo.string' => 'O campo corpo deve ser uma string.',
             'corpo.max' => 'O campo corpo não pode exceder 255 caracteres.',
+            'alternativas.array' => 'O campo alternativas deve ser um array.',
+            'alternativas.min' => 'O campo alternativas deve conter pelo menos 2 alternativas.',
+            'alternativas.*.valor.required_with' => 'Cada alternativa deve ter um valor quando o campo alternativas estiver presente.',
+            'alternativas.*.valor.string' => 'O valor de cada alternativa deve ser uma string.',
+            'alternativas.*.valor.max' => 'O valor de cada alternativa não pode exceder 255 caracteres.',
+            'alternativas.*.correta.boolean' => 'O campo correta de cada alternativa deve ser verdadeiro ou falso.',
         ];
     }
 }

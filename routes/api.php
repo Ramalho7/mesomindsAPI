@@ -17,4 +17,6 @@ Route::patch('users/{user}/status', [SystemUserController::class, 'changeStatus'
 
 Route::apiResource('questao', QuestaoController::class);
 
+// Route::put('questao/{questao}/update', [QuestaoController::class, 'update']);
+Route::patch('questao/{questao}/setStatus', [QuestaoController::class, 'setStatus']);
 
