@@ -5,10 +5,12 @@ use App\Http\Controllers\ContentTagController;
 use App\Http\Controllers\ContentTypeController;
 use App\Http\Controllers\MateriasController;
 use App\Http\Controllers\SystemUserController;
+use App\Models\ContentTag;
 use App\Models\ContentType;
 use Illuminate\Support\Facades\Route;
 
 Route::model('tiposconteudo', ContentType::class);
+Route::model('tagsconteudo', ContentTag::class);
 
 Route::middleware('auth:api')->group(function () {
     Route::apiResource('users', SystemUserController::class);
@@ -26,6 +28,7 @@ Route::middleware('auth:api')->group(function () {
     Route::patch('tiposconteudo/{tiposconteudo}/status', [ContentTypeController::class, 'changeStatus']);   
     Route::apiResource('tiposconteudo', ContentTypeController::class);
 
+    Route::patch('tagsconteudo/{tagsconteudo}/status', [ContentTagController::class, 'changeStatus']);
     Route::apiResource('tagsconteudo', ContentTagController::class);
 
 });

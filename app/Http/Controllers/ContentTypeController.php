@@ -79,7 +79,7 @@ class ContentTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateContentTypeRequest $request, contentType $contentType)
+    public function update(UpdateContentTypeRequest $request, ContentType $contentType)
     {
         try {
 
@@ -110,7 +110,7 @@ class ContentTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(contentType $contentType)
+    public function destroy(ContentType $contentType)
     {
         try {
             $user = Auth::user();
@@ -137,30 +137,30 @@ class ContentTypeController extends Controller
     }
 
     public function changeStatus(ChangeStatusContentTypeRequest $request, ContentType $contentType)
-{
-    try {
-        $user = Auth::user();
+    {
+        try {
+            $user = Auth::user();
 
-        $validated = $request->validated();
+            $validated = $request->validated();
 
-        $contentType->update([
-            'status' => $validated['status'],
-            'ultimo_editor' => $user->id,
-        ]);
+            $contentType->update([
+                'status' => $validated['status'],
+                'ultimo_editor' => $user->id,
+            ]);
 
-        $contentType->refresh();
+            $contentType->refresh();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Status alterado com sucesso',
-            'data' => $contentType,
-        ]);
-    } catch (\Exception $e) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Erro ao alterar status',
-            'error' => $e->getMessage(),
-        ], 500);
+            return response()->json([
+                'success' => true,
+                'message' => 'Status alterado com sucesso',
+                'data' => $contentType,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao alterar status',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
-}
 }

@@ -18,7 +18,8 @@ class ContentTag extends Model
         'count',
         'criador',
         'description',
-        'ultimo_editor'
+        'ultimo_editor',
+        'status'
     ];
 
     public function content()
