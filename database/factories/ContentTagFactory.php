@@ -15,7 +15,9 @@ class ContentTagFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {
+    {   
+
+        $statuses = ['Ativo', 'Inativo'];
         return [
             'tag_name' => $this->faker->word(),
             'description' => $this->faker->sentence(),
@@ -23,6 +25,7 @@ class ContentTagFactory extends Factory
             'ultimo_editor' => \App\Models\SystemUser::factory()->create()->id,
             'is_moderator_only' => $this->faker->boolean(),
             'count' => $this->faker->randomNumber(),
+            'status' => $this->faker->randomElement([$statuses]),
         ];
     }
 }

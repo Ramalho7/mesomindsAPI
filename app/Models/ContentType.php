@@ -16,6 +16,7 @@ class ContentType extends Model
         'title',
         'description',
         'criador',
+        'status',
         'ultimo_editor'
     ];
 

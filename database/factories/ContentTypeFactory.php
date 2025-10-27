@@ -16,11 +16,14 @@ class ContentTypeFactory extends Factory
      */
     public function definition(): array
     {
+
+        $statuses = ['Ativo', 'Inativo'];
         return [
             'title' => $this->faker->name(),
             'description' => $this->faker->sentence(),
             'criador' => \App\Models\SystemUser::factory()->create()->id,
             'ultimo_editor' => \App\Models\SystemUser::factory()->create()->id,
+            'status' => $this->faker->randomElement([$statuses]),
         ];
     }
 }
