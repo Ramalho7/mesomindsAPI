@@ -4,23 +4,31 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreContent extends FormRequest
+class UpdateContentRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'content_type' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
+            'content' => 'nullable|string',
+            'content_type' => 'nullable|string|max:255',
             'content_type_description' => 'nullable|string',
-            'content_tag' => 'required|string|max:255',
+            'content_tag' => 'nullable|string|max:255',
             'content_tag_description' => 'nullable|string',
-            'status' => 'required|in:Ativo,Inativo,Rascunho',
+            'status' => 'nullable|in:Ativo,Inativo,Rascunho',
             'published_at' => 'nullable|date',
             'is_moderator_only' => 'nullable|boolean',
             'images' => 'nullable|array',
@@ -32,11 +40,6 @@ class StoreContent extends FormRequest
 
     public function messages():array{
         return [
-            'title.required' => 'O campo título é obrigatório.',
-            'content.required' => 'O campo conteúdo é obrigatório.',
-            'content_type.required' => 'O campo tipo de conteúdo é obrigatório.',
-            'content_tag.required' => 'O campo tag de conteúdo é obrigatório.',
-            'status.required' => 'O campo status é obrigatório.',
             'status.in' => 'O campo status deve ser um dos seguintes valores: Ativo, Inativo, Rascunho.',
             'published_at.date' => 'O campo data de publicação deve ser uma data válida.',
             'is_moderator_only.boolean' => 'A tag deve ser apenas para moderadores deve ser verdadeiro ou falso.',

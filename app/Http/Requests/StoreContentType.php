@@ -31,4 +31,15 @@ class StoreContentType extends FormRequest
             'description' => 'required|string',
         ];
     }
+
+    public function messages (): array{
+        return [
+            'title.required' => 'O campo título é obrigatório.',
+            'title.string' => 'O campo título deve ser uma string.',
+            'title.max' => 'O campo título execeu o limite máximo de caracteres(255).',
+            'title.unique' => 'O título já existe.',
+            'description.required' => 'O campo descrição é obrigatório.',
+            'description.string' => 'O campo descrição deve ser uma string.',
+        ];
+    }
 }

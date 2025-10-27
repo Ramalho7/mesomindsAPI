@@ -18,9 +18,9 @@ class ContentImage extends Model
     ];
 
     protected $appends = ['full_base64'];
-    public function conteudos()
+    public function contents()
     {
-        return $this->belongsToMany(Conteudo::class, 'content_content_images', 'content_image_id', 'content_id')
+        return $this->belongsToMany(Content::class, 'content_content_images', 'content_image_id', 'content_id')
                 ->withPivot('order')
                 ->orderBy('order');
     }

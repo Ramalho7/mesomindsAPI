@@ -33,4 +33,19 @@ class StoreContentTag extends FormRequest
             'count' => 'nullable|integer',
         ];
     }
+
+    public function messages (): array{
+        return [
+            'tag_name.required' => 'O campo nome da tag é obrigatório.',
+            'tag_name.string' => 'O campo nome da tag deve ser uma string.',
+            'tag_name.max' => 'O campo nome execeu o limite máximo de caracteres(255).',
+            'tag_name.unique' => 'O nome da tag já existe.',
+            'description.required' => 'O campo descrição é obrigatório.',
+            'description.string' => 'O campo descrição deve ser uma string.',
+            'description.max' => 'O campo descrição execeu o limite máximo de caracteres(255).',
+            'is_moderator_only.required' => 'O campo apenas para moderadores é obrigatório.',
+            'is_moderator_only.boolean' => 'O campo apenas para moderadores deve ser verdadeiro ou falso.',
+            'count.integer' => 'O campo contagem deve ser um número inteiro.'
+        ];
+    }
 }

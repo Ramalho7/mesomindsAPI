@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Conteudo extends Model
+class Content extends Model
 {
-    /** @use HasFactory<\Database\Factories\ConteudoFactory> */
+    /** @use HasFactory<\Database\Factories\ContentFactory> */
     use HasFactory;
 
-    protected $table = 'conteudos';
+    protected $table = 'contents';
 
     protected $fillable = [
         'title',
@@ -44,8 +44,8 @@ class Conteudo extends Model
     public function images()
     {
         return $this->belongsToMany(ContentImage::class, 'content_content_images', 'content_id', 'content_image_id')
-                ->withPivot('order')
-                ->orderBy('order');
+            ->withPivot('order')
+            ->orderBy('order');
     }
 
     public function creator()

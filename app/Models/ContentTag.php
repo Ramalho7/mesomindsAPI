@@ -23,7 +23,7 @@ class ContentTag extends Model
 
     public function content()
     {
-        return $this->hasMany(Conteudo::class, 'content_tags_id');
+        return $this->hasMany(Content::class, 'content_tags_id');
     }
 
     public function creator()

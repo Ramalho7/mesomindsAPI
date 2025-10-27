@@ -21,7 +21,7 @@ class ContentType extends Model
 
     public function content()
     {
-        return $this->hasMany(Conteudo::class, 'content_type_id');
+        return $this->hasMany(Content::class, 'content_type_id');
     }
 
     public function creator()

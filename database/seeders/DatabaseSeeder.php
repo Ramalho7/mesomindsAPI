@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         MateriasSeeder::class,
         ContentTagSeeder::class,
         ContentTypeSeeder::class,
-        ConteudoSeeder::class,
+        ContentSeeder::class,
         ]);
     }
 }
