@@ -12,9 +12,7 @@ class ChangeStatusMateriaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $user = Auth::user();
-
-        return $user && $user->tipo === 'ADM' || 'Moderador';
+        return true;
 
     }
 

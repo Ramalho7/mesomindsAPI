@@ -142,7 +142,7 @@ class MateriasController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Materia excluir com sucesso',
+                'message' => 'Materia excluído com sucesso',
             ]);
         }catch(\Exception $e){
             return response()->json([

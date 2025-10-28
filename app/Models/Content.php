@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Content extends Model
+{
+    /** @use HasFactory<\Database\Factories\ContentFactory> */
+    use HasFactory;
+
+    protected $table = 'contents';
+
+    protected $fillable = [
+        'title',
+        'content',
+        'criador',
+        'image_id',
+        'content_types_id',
+        'content_tags_id',
+        'status',
+        'id_materia',
+        'ultimo_editor',
+        'content_tags_id',
+        'content_types_id'
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    public function contentType()
+    {
+        return $this->belongsTo(ContentType::class, 'content_types_id');
+    }
+
+    public function contentTag()
+    {
+        return $this->belongsTo(ContentTag::class, 'content_tags_id');
+    }
+
+    public function images()
+    {
+        return $this->belongsToMany(ContentImage::class, 'content_content_images', 'content_id', 'content_image_id')
+            ->withPivot('order')
+            ->orderBy('order');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(SystemUser::class, 'criador');
+    }
+
+    public function lastEditor()
+    {
+        return $this->belongsTo(SystemUser::class, 'ultimo_editor');
+    }
+}

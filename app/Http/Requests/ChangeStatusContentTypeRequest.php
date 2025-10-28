@@ -3,18 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreMateriasRequest extends FormRequest
+class ChangeStatusContentTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        $user = Auth::user();
-
-        return $user && $user->tipo === 'ADM' || 'Moderador';
+        return true;
     }
 
     /**
@@ -25,8 +22,7 @@ class StoreMateriasRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|string|max:255|unique:materias,nome',
-            'descricao' => 'required|string|min:10',
+            'status' => 'required|in:Ativo,Inativo'
         ];
     }
 }
