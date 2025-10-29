@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ContentTagController;
 use App\Http\Controllers\ContentTypeController;
@@ -9,10 +10,16 @@ use App\Models\ContentTag;
 use App\Models\ContentType;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/register', [AuthController::class, 'register']); 
+Route::post('/login', [AuthController::class, 'login']);
+
 Route::model('tiposconteudo', ContentType::class);
 Route::model('tagsconteudo', ContentTag::class);
 
 Route::middleware('auth:api')->group(function () {
+
+    Route::post('/logout', [AuthController::class,'logout']);
+
     Route::apiResource('users', SystemUserController::class);
     Route::patch('users/{user}/status', [SystemUserController::class, 'changeStatus']);
 

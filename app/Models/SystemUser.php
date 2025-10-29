@@ -8,10 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-// ...existing code...
 class SystemUser extends Authenticatable
 {
-    // ...existing code...
     use HasFactory, HasApiTokens, Notifiable;
 
     protected $table = 'system_users';
@@ -20,7 +18,6 @@ class SystemUser extends Authenticatable
         'nome',
         'email',
         'password',
-        'cpf',
         'tipo',
         'criador',
         'ultimo_editor',
