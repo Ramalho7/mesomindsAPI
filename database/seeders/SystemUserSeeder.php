@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 
+use App\Models\SystemUser;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +12,17 @@ class SystemUserSeeder extends Seeder
 {
     public function run(): void
     {
-        \App\Models\SystemUser::factory()->count(20)->create();
+
+        SystemUser::create([
+            "nome" => "Administrador",
+            "email"=> "admin@mesominds.com",
+            "password"=> bcrypt("admin123"),
+            "tipo" => "ADM",
+            "status" => "Ativo",
+            "criador" => null
+        ]);
+
+        SystemUser::factory()->count(20)->create();
         Faker::create()->unique(true);
     }
 }

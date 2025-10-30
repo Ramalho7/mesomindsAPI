@@ -12,6 +12,14 @@ class AuthController extends Controller
 {
     public function register(RegisterUserRequest $request){
         try{
+
+            if ($request->user()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Usuários autenticados devem usar a rota /api/users para criar novos usuários',
+                ], 403);
+            }
+
             $validated = $request->validated();
 
             $user = SystemUser::create([

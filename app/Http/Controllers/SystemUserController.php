@@ -1,17 +1,23 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSystemUserRequest;
+use App\Http\Requests\UpdateSystemUserPassword;
 use App\Http\Requests\UpdateSystemUserRequest;
 use App\Models\SystemUser;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SystemUserController extends Controller
 {
+    use AuthorizesRequests;
     public function index(Request $request): JsonResponse
     {
+        $this->authorize("viewAny", SystemUser::class);
+
         $query = SystemUser::with(['creator', 'lastEditor']);
 
         if ($request->has('tipo')) {
@@ -26,8 +32,7 @@ class SystemUserController extends Controller
             $search = $request->input('search');
             $query->where(function ($q) use ($search) {
                 $q->where('nome', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%")
-                    ->orWhere('cpf', 'like', "%{$search}%");
+                    ->orWhere('email', 'like', "%{$search}%");
             });
         }
 
@@ -44,8 +49,17 @@ class SystemUserController extends Controller
      */
     public function store(StoreSystemUserRequest $request): JsonResponse
     {
+
+        $this->authorize('create', SystemUser::class);
+
         try {
             $validated = $request->validated();
+
+            $user = Auth::user();
+
+            $validated['criador'] = $user->id;
+
+            $validated['ultimo_editor'] = $user->id;
 
             if (! empty($validated['password'])) {
                 $validated['password'] = bcrypt($validated['password']);
@@ -72,6 +86,9 @@ class SystemUserController extends Controller
      */
     public function show(SystemUser $user): JsonResponse
     {
+
+        $this->authorize('view', $user);
+
         return response()->json([
             'sucess' => true,
             'data' => $user->load(['creator', 'lastEditor']),
@@ -83,8 +100,18 @@ class SystemUserController extends Controller
      */
     public function update(UpdateSystemUserRequest $request, SystemUser $user): JsonResponse
     {
+        $this->authorize('update', $user);
         try {
             $validated = $request->validated();
+
+            if($request->has('password')) {
+                return response()->json([
+                    'success'=> false,
+                    'message'=> 'A senha não pode ser atualizado neste endpoint.',
+                ], 422);
+            };
+
+            $validated['ultimo_editor'] = auth()->id();
 
             $user->update($validated);
 
@@ -103,11 +130,37 @@ class SystemUserController extends Controller
         }
     }
 
+    public function updatePassword(UpdateSystemUserPassword $request, SystemUser $user): JsonResponse
+{
+    $this->authorize('update', $user);
+
+    try {
+        $user->update([
+            'password' => bcrypt($request->input('password')),
+            'ultimo_editor' => auth()->id(),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Senha atualizada com sucesso',
+        ]);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Erro ao atualizar senha',
+            'error' => $e->getMessage(),
+        ], 500);
+    }
+}
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(SystemUser $user)
     {
+
+        $this->authorize('delete', $user);
 
         try {
             $user->delete();

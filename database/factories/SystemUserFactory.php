@@ -23,7 +23,6 @@ class SystemUserFactory extends Factory
             'nome' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt('password'),
-            'cpf' => $this->faker->unique()->numerify('###########'),
             'tipo' => $this->faker->randomElement($types),
             'status' => $this->faker->randomElement($statuses),
         ];
