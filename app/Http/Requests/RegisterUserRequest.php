@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSystemUserRequest extends FormRequest
+class RegisterUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,18 @@ class StoreSystemUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|string|max:255',
-            'email' => 'required|email|max:100|unique:system_users,email',
+            'nome' => 'required|string',
+            'email'=> 'required|email|unique:system_users,email',
             'password' => 'required|string|min:8|confirmed',
-            'tipo' => 'required|in:Professor,Aluno,ADM,Moderador,Operador',
-            'status' => 'sometimes|in:Ativo,Inativo,Bloqueado'
+            'tipo' => 'required|in:Aluno,Professor',
+        ];
+    }
+
+    public function messages(): array{
+        return [
+            'password.confirmed' => 'As senhas não coincidem',
+            'email.unique' => 'Email já cadastrado',
+            'tipo.in' => 'Tipo de usário inválido. Escolha entre Aluno e Professor.'
         ];
     }
 }
