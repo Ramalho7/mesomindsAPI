@@ -25,7 +25,7 @@ class ContentTagFactory extends Factory
             'ultimo_editor' => \App\Models\SystemUser::factory()->create()->id,
             'is_moderator_only' => $this->faker->boolean(),
             'count' => $this->faker->randomNumber(),
-            'status' => $this->faker->randomElement([$statuses]),
+            'status' => $this->faker->randomElement($statuses),
         ];
     }
 }

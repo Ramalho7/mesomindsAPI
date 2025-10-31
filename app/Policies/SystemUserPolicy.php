@@ -12,7 +12,7 @@ class SystemUserPolicy
      */
     public function viewAny(SystemUser $user): bool
     {
-        return false;
+        return $user->tipo === 'ADM';
     }
 
     /**
@@ -20,7 +20,11 @@ class SystemUserPolicy
      */
     public function view(SystemUser $user, SystemUser $systemUser): bool
     {
-        return false;
+        if($user->tipo === 'ADM'){
+            return true;
+        }
+
+        return $user->id === $systemUser->id;
     }
 
     /**
@@ -28,7 +32,7 @@ class SystemUserPolicy
      */
     public function create(SystemUser $user): bool
     {
-        return false;
+        return $user->tipo === 'ADM';
     }
 
     /**
@@ -36,7 +40,12 @@ class SystemUserPolicy
      */
     public function update(SystemUser $user, SystemUser $systemUser): bool
     {
-        return false;
+
+        if($user->tipo === 'ADM'){
+            return true;
+        }
+
+        return $user->id === $systemUser->id;
     }
 
     /**
@@ -44,7 +53,11 @@ class SystemUserPolicy
      */
     public function delete(SystemUser $user, SystemUser $systemUser): bool
     {
-        return false;
+        if($user->tipo === 'ADM'){
+            return true;
+        }
+
+        return $user->id === $systemUser->id;
     }
 
     /**
@@ -60,6 +73,10 @@ class SystemUserPolicy
      */
     public function forceDelete(SystemUser $user, SystemUser $systemUser): bool
     {
-        return false;
+        if($user->tipo === 'ADM'){
+            return true;
+        }
+
+        return $user->id === $systemUser->id;
     }
 }

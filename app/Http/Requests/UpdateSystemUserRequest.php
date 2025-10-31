@@ -33,14 +33,6 @@ class UpdateSystemUserRequest extends FormRequest
                 'max:100',
                 Rule::unique('system_users')->ignore($userId)
             ],
-            'password' => 'sometimes|string|min:8|confirmed',
-            'cpf' => [
-                'sometimes',
-                'required',
-                'string',
-                'size:11',
-                Rule::unique('system_users')->ignore($userId)
-            ],
             'tipo' => 'sometimes|required|in:Professor,Aluno,ADM,Moderador,Operador',
             'status' => 'sometimes|in:Ativo,Inativo,Bloqueado'
         ];

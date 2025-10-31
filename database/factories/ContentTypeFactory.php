@@ -23,7 +23,7 @@ class ContentTypeFactory extends Factory
             'description' => $this->faker->sentence(),
             'criador' => \App\Models\SystemUser::factory()->create()->id,
             'ultimo_editor' => \App\Models\SystemUser::factory()->create()->id,
-            'status' => $this->faker->randomElement([$statuses]),
+            'status' => $this->faker->randomElement($statuses),
         ];
     }
 }

@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSystemUserRequest extends FormRequest
+class UpdateSystemUserPassword extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->can('update', $this->route('user'));
     }
 
     /**
@@ -22,11 +22,7 @@ class StoreSystemUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|string|max:255',
-            'email' => 'required|email|max:100|unique:system_users,email',
-            'password' => 'required|string|min:8|confirmed',
-            'tipo' => 'required|in:Professor,Aluno,ADM,Moderador,Operador',
-            'status' => 'sometimes|in:Ativo,Inativo,Bloqueado'
+            "password"=> "required|string|min:8|confirmed",
         ];
     }
 }
