@@ -31,7 +31,7 @@ class AuthController extends Controller
                 'criador' => null,
             ]);
 
-            $token = $user->createToken('authToken')->accessToken;
+            $token = $user->generateToken();
 
             return response()->json([
                 'success' => true,
@@ -75,7 +75,7 @@ class AuthController extends Controller
                 ], 403);
             }
 
-            $token = $user->createToken('authToken')->accessToken;
+            $token = $user->generateToken();
 
             return response()->json([
                 'success' => true,
@@ -104,6 +104,48 @@ class AuthController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Erro a realizar logout',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function validateToken(Request $request){
+        try{
+            $user = $request->user();
+
+            if (!$user) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Token inválido ou expirado',
+                ], 401);
+            }
+
+            $token = $user->token();
+
+            if (!$token || $token->revoked) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Token revogado',
+                ], 401);
+            }
+
+            if ($token->expires_at && $token->expires_at->isPast()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Token expirado',
+                ], 401);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Token válido',
+                'user' => $user,
+                'expires_at' => $token->expires_at,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao validar token',
                 'error' => $e->getMessage(),
             ], 500);
         }

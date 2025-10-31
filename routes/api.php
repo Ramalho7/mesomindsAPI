@@ -19,6 +19,8 @@ Route::model('tagsconteudo', ContentTag::class);
 Route::middleware('auth:api')->group(function () {
 
     Route::post('/logout', [AuthController::class,'logout']);
+    Route::post('/validatetoken', [AuthController::class,'validateToken']);
+
     Route::put('/users/{user}/password', [SystemUserController::class, 'updatePassword']);
     Route::apiResource('users', SystemUserController::class);
     Route::patch('users/{user}/status', [SystemUserController::class, 'changeStatus']);
