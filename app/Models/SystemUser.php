@@ -47,4 +47,9 @@ class SystemUser extends Authenticatable
     {
         return $this->belongsTo(self::class, 'ultimo_editor');
     }
+
+    public function generateToken()
+    {
+        return $this->createToken('MesoMindsWebSiteToken')->accessToken;
+    }
 }
