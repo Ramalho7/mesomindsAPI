@@ -41,5 +41,4 @@ Route::middleware('auth:api')->group(function () {
 
     Route::patch('tagsconteudo/{tagsconteudo}/status', [ContentTagController::class, 'changeStatus']);
     Route::apiResource('tagsconteudo', ContentTagController::class);
-
 });

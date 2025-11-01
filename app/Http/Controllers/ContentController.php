@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChangeStatusContentRequest;
 use App\Http\Requests\StoreContent;
 use App\Http\Requests\UpdateContentRequest;
+use App\Models\Content;
 use App\Models\ContentImage;
 use App\Models\ContentTag;
 use App\Models\ContentType;
-use App\Models\Content;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,8 +18,7 @@ class ContentController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $query = Content::with(['creator', 'contentType', 'contentTag', 'images']);
-
+        $query = Content::withoutGlobalScopes()->with(['creator', 'contentType', 'contentTag', 'images']);
         if ($request->has('status')) {
             $query->where('status', $request->input('status'));
         }
@@ -32,15 +31,15 @@ class ContentController extends Controller
             });
         }
 
-        if ($request->has("content_type")) {
-            $contentType = $request->input("content_type");
+        if ($request->has('content_type')) {
+            $contentType = $request->input('content_type');
             $query->whereHas('contentType', function ($q) use ($contentType) {
                 $q->where('title', 'like', "%{$contentType}%");
             });
         }
 
-        if ($request->has("content_tag")) {
-            $contenTag = $request->input("content_tag");
+        if ($request->has('content_tag')) {
+            $contenTag = $request->input('content_tag');
             $query->whereHas('contentTag', function ($q) use ($contenTag) {
                 $q->where('tag_name', 'like', "%{$contenTag}%");
             });
@@ -50,7 +49,7 @@ class ContentController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $contents
+            'data' => $contents,
         ]);
     }
 
@@ -68,27 +67,31 @@ class ContentController extends Controller
                 ]
             );
 
-            $contentTag = ContentTag::firstOrCreate(
-                ['tag_name' => $validated['content_tag']],
-                [
-                    'description' => $validated['content_tag_description'] ?? '',
-                    'is_moderator_only' => $validated['is_moderator_only'] ?? false,
-                    'criador' => $user->id,
-                ]
-            );
-
             $conteudo = Content::create([
                 'title' => $validated['title'],
                 'content' => $validated['content'],
                 'content_types_id' => $contentType->id,
-                'content_tags_id' => $contentTag->id,
                 'id_materia' => null,
                 'status' => $validated['status'],
                 'published_at' => $validated['published_at'],
                 'criador' => $user->id,
             ]);
 
-            if (!empty($validated['images'])) {
+            if (! empty($validated['content_tags'])) {
+                $tags = collect($validated['content_tags'])->map(function ($tag) use ($user) {
+                    return ContentTag::firstOrCreate(
+                        ['tag_name' => $tag['tag_name']],
+                        [
+                            'description' => $tag['description'] ?? '',
+                            'criador' => $user->id,
+                        ]
+                    );
+                });
+
+                $conteudo->contentTags()->sync($tags->pluck('id'));
+            }
+
+            if (! empty($validated['images'])) {
                 $imageIds = [];
 
                 foreach ($validated['images'] as $index => $base64Image) {
@@ -100,7 +103,7 @@ class ContentController extends Controller
                         $base64Data = $base64Image;
                     }
 
-                    $fileName = Str::uuid() . '.' . $matches[1] ?? 'png';
+                    $fileName = Str::uuid().'.'.($matches[1] ?? 'png');
 
                     $contentImage = ContentImage::create([
                         'file_name' => $fileName,
@@ -116,33 +119,33 @@ class ContentController extends Controller
                 $conteudo->images()->attach($imageIds);
             }
 
-            $conteudo->load(['images', 'contentType', 'contentTag', 'creator']);
+            $conteudo->load(['images', 'contentType', 'contentTags', 'creator']);
 
             return response()->json([
                 'success' => true,
                 'conteudo' => $conteudo,
-                'images' => $conteudo->images->map(fn($img) => [
+                'images' => $conteudo->images->map(fn ($img) => [
                     'id' => $img->id,
                     'alt_text' => $img->alt_text,
                     'base64' => $img->full_base64,
-                ], 201),
+                ]),
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => "Erro ao cadastrar conteúdos",
+                'message' => 'Erro ao cadastrar conteúdos',
                 'error' => $e->getMessage(),
             ], 500);
         }
     }
 
-   public function show(Content $conteudo): JsonResponse
-{   
-    return response()->json([
-        'success' => true,
-        'data' => $conteudo->load(['creator', 'contentType', 'contentTag', 'images']),
-    ]);
-}
+    public function show(Content $conteudo): JsonResponse
+    {
+        return response()->json([
+            'success' => true,
+            'data' => $conteudo->load(['creator', 'contentType', 'contentTag', 'images']),
+        ]);
+    }
 
     public function update(UpdateContentRequest $request, Content $content): JsonResponse
     {
@@ -159,17 +162,17 @@ class ContentController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => "Conteúdo cadastrado com sucesso",
+                'message' => 'Conteúdo cadastrado com sucesso',
                 'data' => $content->fresh()->load(['creator', 'contentType', 'contentTag', 'images']),
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => "Erro ao atualiza conteúdo",
+                'message' => 'Erro ao atualiza conteúdo',
                 'error' => $e->getMessage(),
             ], 500);
         }
-        ;
+
     }
 
     public function destroy(Content $content): JsonResponse
@@ -177,9 +180,9 @@ class ContentController extends Controller
         try {
             $user = Auth::user();
 
-            if (!($user && $user->tipo === "ADM")) {
+            if (! ($user && $user->tipo === 'ADM')) {
                 return response()->json([
-                    "success" => false,
+                    'success' => false,
                     'message' => 'Acesso negado',
                 ], 403);
             }
@@ -193,7 +196,7 @@ class ContentController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Erro ao excluir o conteúdo'
+                'message' => 'Erro ao excluir o conteúdo',
             ], 500);
         }
     }
