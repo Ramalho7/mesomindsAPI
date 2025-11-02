@@ -9,6 +9,8 @@ use App\Models\Content;
 use App\Models\ContentImage;
 use App\Models\ContentTag;
 use App\Models\ContentType;
+use App\Models\SystemUser;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +18,10 @@ use Illuminate\Support\Str;
 
 class ContentController extends Controller
 {
+    use AuthorizesRequests;
     public function index(Request $request): JsonResponse
     {
-        $query = Content::withoutGlobalScopes()->with(['creator', 'contentType', 'contentTag', 'images']);
+        $query = Content::withoutGlobalScopes()->with(['creator', 'contentType', 'contentTags', 'images']);
         if ($request->has('status')) {
             $query->where('status', $request->input('status'));
         }
@@ -40,7 +43,7 @@ class ContentController extends Controller
 
         if ($request->has('content_tag')) {
             $contenTag = $request->input('content_tag');
-            $query->whereHas('contentTag', function ($q) use ($contenTag) {
+            $query->whereHas('contentTags', function ($q) use ($contenTag) {
                 $q->where('tag_name', 'like', "%{$contenTag}%");
             });
         }
@@ -143,7 +146,7 @@ class ContentController extends Controller
     {
         return response()->json([
             'success' => true,
-            'data' => $conteudo->load(['creator', 'contentType', 'contentTag', 'images']),
+            'data' => $conteudo->load(['creator', 'contentType', 'contentTags', 'images']),
         ]);
     }
 
@@ -154,25 +157,45 @@ class ContentController extends Controller
 
             $user = Auth::user();
 
-            $validated['criador'] = $user->id;
-
             $validated['ultimo_editor'] = $user->id;
 
             $content->update($validated);
 
+            $updatedContent = Content::withoutGlobalScopes()->find($content->id);
+
+            if (! $updatedContent) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Erro ao recarregar o conteúdo atualizado.',
+                ], 500);
+            }
+
+            if (! empty($validated['content_tags'])) {
+                $tags = collect($validated['content_tags'])->map(function ($tag) use ($user) {
+                    return ContentTag::firstOrCreate(
+                        ['tag_name' => $tag['tag_name']],
+                        [
+                            'description' => $tag['description'] ?? '',
+                            'criador' => $user->id,
+                        ]
+                    );
+                });
+
+                $updatedContent->contentTags()->sync($tags->pluck('id'));
+            }
+
             return response()->json([
                 'success' => true,
-                'message' => 'Conteúdo cadastrado com sucesso',
-                'data' => $content->fresh()->load(['creator', 'contentType', 'contentTag', 'images']),
+                'message' => 'Conteúdo atualizado com sucesso',
+                'data' => $updatedContent->load(['creator', 'contentType', 'contentTags', 'images']),
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Erro ao atualiza conteúdo',
+                'message' => 'Erro ao atualizar conteúdo',
                 'error' => $e->getMessage(),
             ], 500);
         }
-
     }
 
     public function destroy(Content $content): JsonResponse
@@ -203,11 +226,13 @@ class ContentController extends Controller
 
     public function changeStatus(ChangeStatusContentRequest $request, Content $content)
     {
+        
+        $this->authorize('changeStatus', $content);
+
         try {
-            $user = Auth::user();
 
             $validated = $request->validated();
-            $validated['ultimo_editor'] = $user->id;
+            $validated['ultimo_editor'] = Auth::id();
 
             $content->update([
                 'status' => $validated['status'],

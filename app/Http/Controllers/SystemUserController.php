@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -104,10 +104,10 @@ class SystemUserController extends Controller
         try {
             $validated = $request->validated();
 
-            if($request->has('password')) {
+            if ($request->has('password')) {
                 return response()->json([
-                    'success'=> false,
-                    'message'=> 'A senha não pode ser atualizado neste endpoint.',
+                    'success' => false,
+                    'message' => 'A senha não pode ser atualizado neste endpoint.',
                 ], 422);
             };
 
@@ -131,28 +131,28 @@ class SystemUserController extends Controller
     }
 
     public function updatePassword(UpdateSystemUserPassword $request, SystemUser $user): JsonResponse
-{
-    $this->authorize('update', $user);
+    {
+        $this->authorize('update', $user);
 
-    try {
-        $user->update([
-            'password' => bcrypt($request->input('password')),
-            'ultimo_editor' => auth()->id(),
-        ]);
+        try {
+            $user->update([
+                'password' => bcrypt($request->input('password')),
+                'ultimo_editor' => auth()->id(),
+            ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Senha atualizada com sucesso',
-        ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Senha atualizada com sucesso',
+            ]);
 
-    } catch (\Exception $e) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Erro ao atualizar senha',
-            'error' => $e->getMessage(),
-        ], 500);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao atualizar senha',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
-}
 
     /**
      * Remove the specified resource from storage.

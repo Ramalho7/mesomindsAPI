@@ -6,15 +6,17 @@ use App\Http\Controllers\ContentTagController;
 use App\Http\Controllers\ContentTypeController;
 use App\Http\Controllers\MateriasController;
 use App\Http\Controllers\SystemUserController;
+use App\Models\Content;
 use App\Models\ContentTag;
 use App\Models\ContentType;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/register', [AuthController::class, 'register']); 
+Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::model('tiposconteudo', ContentType::class);
 Route::model('tagsconteudo', ContentTag::class);
+Route::model('conteudo', Content::class);
 
 Route::middleware('auth:api')->group(function () {
 
@@ -22,7 +24,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/validatetoken', [AuthController::class,'validateToken']);
 
     Route::post('/validatetoken', [AuthController::class,'validateToken']);
-    
+
     Route::put('/users/{user}/password', [SystemUserController::class, 'updatePassword']);
     Route::apiResource('users', SystemUserController::class);
     Route::patch('users/{user}/status', [SystemUserController::class, 'changeStatus']);
@@ -36,9 +38,10 @@ Route::middleware('auth:api')->group(function () {
     Route::patch('conteudos/{conteudo}/status', [ContentController::class, 'changeStatus']);
     Route::apiResource('conteudos', ContentController::class);
 
-    Route::patch('tiposconteudo/{tiposconteudo}/status', [ContentTypeController::class, 'changeStatus']);   
+    Route::patch('tiposconteudo/{tiposconteudo}/status', [ContentTypeController::class, 'changeStatus']);
     Route::apiResource('tiposconteudo', ContentTypeController::class);
 
     Route::patch('tagsconteudo/{tagsconteudo}/status', [ContentTagController::class, 'changeStatus']);
     Route::apiResource('tagsconteudo', ContentTagController::class);
 });
+
