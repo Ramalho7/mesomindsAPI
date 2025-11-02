@@ -21,6 +21,7 @@ class ContentController extends Controller
     use AuthorizesRequests;
     public function index(Request $request): JsonResponse
     {
+        $this->authorize("viewAny", Content::class);
         $query = Content::withoutGlobalScopes()->with(['creator', 'contentType', 'contentTags', 'images']);
         if ($request->has('status')) {
             $query->where('status', $request->input('status'));
@@ -58,6 +59,7 @@ class ContentController extends Controller
 
     public function store(StoreContent $request)
     {
+        $this->authorize("create", Content::class);
         try {
             $validated = $request->validated();
             $user = Auth::user();
@@ -144,6 +146,7 @@ class ContentController extends Controller
 
     public function show(Content $conteudo): JsonResponse
     {
+        $this->authorize('view', $conteudo);
         return response()->json([
             'success' => true,
             'data' => $conteudo->load(['creator', 'contentType', 'contentTags', 'images']),
@@ -152,12 +155,12 @@ class ContentController extends Controller
 
     public function update(UpdateContentRequest $request, Content $content): JsonResponse
     {
+        $this->authorize('update', $content);
         try {
             $validated = $request->validated();
 
             $user = Auth::user();
-
-            $validated['ultimo_editor'] = $user->id;
+            $validated['ultimo_editor'] = Auth::id();
 
             $content->update($validated);
 
@@ -176,7 +179,7 @@ class ContentController extends Controller
                         ['tag_name' => $tag['tag_name']],
                         [
                             'description' => $tag['description'] ?? '',
-                            'criador' => $user->id,
+                            'criador' => Auth::id(),
                         ]
                     );
                 });
@@ -200,16 +203,8 @@ class ContentController extends Controller
 
     public function destroy(Content $content): JsonResponse
     {
+        $this->authorize('delete', $content);
         try {
-            $user = Auth::user();
-
-            if (! ($user && $user->tipo === 'ADM')) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Acesso negado',
-                ], 403);
-            }
-
             $content->delete();
 
             return response()->json([
