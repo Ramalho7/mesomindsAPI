@@ -23,7 +23,7 @@ class Content extends Model
         'id_materia',
         'ultimo_editor',
         'content_tags_id',
-        'content_types_id'
+        'content_types_id',
     ];
 
     protected $casts = [
@@ -36,9 +36,9 @@ class Content extends Model
         return $this->belongsTo(ContentType::class, 'content_types_id');
     }
 
-    public function contentTag()
+    public function contentTags()
     {
-        return $this->belongsTo(ContentTag::class, 'content_tags_id');
+        return $this->belongsToMany(ContentTag::class, 'content_tag_pivot', 'content_id', 'tag_id');
     }
 
     public function images()

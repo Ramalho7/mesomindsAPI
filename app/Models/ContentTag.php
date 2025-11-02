@@ -19,12 +19,12 @@ class ContentTag extends Model
         'criador',
         'description',
         'ultimo_editor',
-        'status'
+        'status',
     ];
 
-    public function content()
+    public function contents()
     {
-        return $this->hasMany(Content::class, 'content_tags_id');
+        return $this->belongsToMany(Content::class, 'content_tag_pivot', 'tag_id', 'content_id');
     }
 
     public function creator()

@@ -20,7 +20,7 @@ class SystemUserPolicy
      */
     public function view(SystemUser $user, SystemUser $systemUser): bool
     {
-        if($user->tipo === 'ADM'){
+        if ($user->tipo === 'ADM') {
             return true;
         }
 
@@ -41,7 +41,7 @@ class SystemUserPolicy
     public function update(SystemUser $user, SystemUser $systemUser): bool
     {
 
-        if($user->tipo === 'ADM'){
+        if ($user->tipo === 'ADM') {
             return true;
         }
 
@@ -53,7 +53,7 @@ class SystemUserPolicy
      */
     public function delete(SystemUser $user, SystemUser $systemUser): bool
     {
-        if($user->tipo === 'ADM'){
+        if ($user->tipo === 'ADM') {
             return true;
         }
 
@@ -73,10 +73,11 @@ class SystemUserPolicy
      */
     public function forceDelete(SystemUser $user, SystemUser $systemUser): bool
     {
-        if($user->tipo === 'ADM'){
+        if ($user->tipo === 'ADM') {
             return true;
         }
 
         return $user->id === $systemUser->id;
     }
 }
+

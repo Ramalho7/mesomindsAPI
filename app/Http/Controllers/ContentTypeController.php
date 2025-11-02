@@ -16,7 +16,7 @@ class ContentTypeController extends Controller
      */
     public function index(Request $request)
     {
-        $query = ContentType::with(['creator']);
+        $query = ContentType::with(['creator', 'lastEditor']);
 
         if ($request->has('search')) {
             $search = $request->input('search');
