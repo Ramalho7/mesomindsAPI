@@ -22,7 +22,25 @@ class SystemUserSeeder extends Seeder
             "criador" => null
         ]);
 
-        SystemUser::factory()->count(20)->create();
+        SystemUser::create([
+            "nome" => "Moderador",
+            "email"=> "moderador@mesominds.com",
+            "password"=> bcrypt("mod123"),
+            "tipo" => "Moderador",
+            "status" => "Ativo",
+            "criador" => null
+        ]);
+
+        SystemUser::create([
+            "nome" => "Operador",
+            "email"=> "operador@mesominds.com",
+            "password"=> bcrypt("op123"),
+            "tipo" => "Operador",
+            "status" => "Ativo",
+            "criador" => null
+        ]);
+
+        SystemUser::factory()->count(5)->create();
         Faker::create()->unique(true);
     }
 }
