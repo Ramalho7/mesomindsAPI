@@ -18,6 +18,15 @@ Route::model('tiposconteudo', ContentType::class);
 Route::model('tagsconteudo', ContentTag::class);
 Route::model('conteudo', Content::class);
 
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::get('conteudos', [ContentController::class, 'index']); 
+Route::get('conteudos/{conteudo}', [ContentController::class, 'show']); 
+
+Route::get('tiposconteudo', [ContentTypeController::class, 'index']); 
+Route::get('tagsconteudo', [ContentTagController::class, 'index']); 
+
 Route::middleware('auth:api')->group(function () {
 
     Route::post('/logout', [AuthController::class,'logout']);
@@ -36,12 +45,12 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('materias', MateriasController::class);
 
     Route::patch('conteudos/{conteudo}/status', [ContentController::class, 'changeStatus']);
-    Route::apiResource('conteudos', ContentController::class);
+    Route::apiResource('conteudos', ContentController::class)->except('index', 'show');
 
     Route::patch('tiposconteudo/{tiposconteudo}/status', [ContentTypeController::class, 'changeStatus']);
-    Route::apiResource('tiposconteudo', ContentTypeController::class);
+    Route::apiResource('tiposconteudo', ContentTypeController::class)->except('index');
 
     Route::patch('tagsconteudo/{tagsconteudo}/status', [ContentTagController::class, 'changeStatus']);
-    Route::apiResource('tagsconteudo', ContentTagController::class);
+    Route::apiResource('tagsconteudo', ContentTagController::class)->except('index');
 });
 

@@ -10,17 +10,17 @@ class ContentPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(SystemUser $systemUser): bool
+    public function viewAny(?SystemUser $systemUser): bool
     {
-        return in_array($systemUser->tipo, ['Professor', 'Aluno', 'ADM', 'Moderador', 'Operador']);
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(SystemUser $systemUser, Content $content): bool
+    public function view(?SystemUser $systemUser, Content $content): bool
     {
-        return in_array($systemUser->tipo, ['Professor', 'Aluno', 'ADM', 'Moderador', 'Operador']);
+        return true;
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Content;
+use App\Models\ContentTag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -26,7 +28,14 @@ class ContentFactory extends Factory
             'ultimo_editor' => \App\Models\SystemUser::factory()->create()->id,
             'status' => $this->faker->randomElement($status),
             'content_types_id' => \App\Models\ContentType::factory()->create()->id,
-            'content_tags_id' => \App\Models\ContentTag::factory()->create()->id,
         ];
+    }
+
+    public function withTags(int $count = 3): self
+    {
+        return $this->afterCreating(function (Content $content) use ($count) {
+            $tags = ContentTag::factory()->count($count)->create();
+            $content->contentTags()->attach($tags->pluck('id'));
+        });
     }
 }

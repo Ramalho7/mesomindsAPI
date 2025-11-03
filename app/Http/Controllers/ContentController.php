@@ -22,7 +22,7 @@ class ContentController extends Controller
     public function index(Request $request): JsonResponse
     {
         $this->authorize("viewAny", Content::class);
-        $query = Content::withoutGlobalScopes()->with(['creator', 'contentType', 'contentTags', 'images']);
+        $query = Content::withoutGlobalScopes()->with(['creator', 'contentType', 'contentTags', 'images', 'lastEditor']);
         if ($request->has('status')) {
             $query->where('status', $request->input('status'));
         }
