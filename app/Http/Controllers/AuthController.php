@@ -75,7 +75,7 @@ class AuthController extends Controller
                 ], 403);
             }
 
-            $token = $user->generateToken();
+            $token = $user->createToken('Mesominds personal access token')->accessToken;
 
             return response()->json([
                 'success' => true,
