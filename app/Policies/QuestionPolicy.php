@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\SystemUser;
-use App\Models\question;
+use App\Models\Question;
 use Illuminate\Auth\Access\Response;
 
 class QuestionPolicy
@@ -11,7 +11,7 @@ class QuestionPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(SystemUser $systemUser): bool
+    public function viewAny(?SystemUser $systemUser): bool
     {
         return true;
     }
@@ -19,7 +19,7 @@ class QuestionPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(SystemUser $systemUser, question $question): bool
+    public function view(?SystemUser $systemUser, Question $question): bool
     {
         return true;
     }
@@ -35,7 +35,7 @@ class QuestionPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(SystemUser $systemUser, question $question): bool
+    public function update(SystemUser $systemUser, Question $question): bool
     {
         return in_array($systemUser->tipo, ['ADM', 'Moderador', 'Operador']);
     }
@@ -43,7 +43,7 @@ class QuestionPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(SystemUser $systemUser, question $question): bool
+    public function delete(SystemUser $systemUser, Question $question): bool
     {
         return $systemUser->tipo === 'ADM';
     }
@@ -51,7 +51,7 @@ class QuestionPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(SystemUser $systemUser, question $question): bool
+    public function restore(SystemUser $systemUser, Question $question): bool
     {
         return false;
     }
@@ -59,7 +59,7 @@ class QuestionPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(SystemUser $systemUser, question $question): bool
+    public function forceDelete(SystemUser $systemUser, Question $question): bool
     {
         return $systemUser->tipo === 'ADM';
     }

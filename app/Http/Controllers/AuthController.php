@@ -81,7 +81,7 @@ class AuthController extends Controller
                 'success' => true,
                 'message' => 'Login realizado com sucesso',
                 'token' => $token,
-                'user' => $user,Correct
+                'user' => $user,
             ], 200);
         }catch (\Exception $e) {
             return response()->json([

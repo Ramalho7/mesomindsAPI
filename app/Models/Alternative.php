@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class alternative extends Model
+class Alternative extends Model
 {
     /** @use HasFactory<\Database\Factories\AlternativeFactory> */
     use HasFactory;
@@ -23,6 +23,16 @@ class alternative extends Model
 
     public function question(): BelongsTo
     {
-        return $this->belongsTo(question::class);
+        return $this->belongsTo(Question::class);
+    }
+
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(SystemUser::class, 'criador');
+    }
+
+    public function lastEditor(): BelongsTo
+    {
+        return $this->belongsTo(SystemUser::class, 'ultimo_editor');
     }
 }

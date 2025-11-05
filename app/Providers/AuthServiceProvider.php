@@ -2,13 +2,15 @@
 
 namespace App\Providers;
 
+use App\Models\Question;
+use App\Policies\QuestionPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Question::class => QuestionPolicy::class,
     ];
 
     public function boot(): void

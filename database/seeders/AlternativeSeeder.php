@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\alternative;
+use App\Models\Alternative;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -15,7 +15,7 @@ class AlternativeSeeder extends Seeder
      */
     public function run(): void
     {
-        alternative::factory()->count(3)->create();
+        Alternative::factory()->count(3)->create();
         Faker::create()->unique(true);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\question;
+use App\Models\Question;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\alternative>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Alternative>
  */
 class AlternativeFactory extends Factory
 {
@@ -20,7 +20,7 @@ class AlternativeFactory extends Factory
         $status = ['Ativo', 'Inativo'];
 
         return [
-            'question_id' => question::factory(),
+            'question_id' => Question::factory(),
             'content' => $this->faker->sentence(),
             'correct' => $this->faker->boolean(),
             'criador' => \App\Models\SystemUser::factory()->create()->id,

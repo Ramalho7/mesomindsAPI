@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class question extends Model
+class Question extends Model
 {
     /** @use HasFactory<\Database\Factories\QuestionFactory> */
     use HasFactory;
@@ -31,11 +31,21 @@ class question extends Model
 
     public function alternatives(): HasMany
     {
-        return $this->hasMany(alternative::class, 'question_id');
+        return $this->hasMany(Alternative::class, 'question_id');
     }
 
     public function materia(): BelongsTo
     {
         return $this->belongsTo(Materias::class);
+    }
+
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(SystemUser::class, 'criador');
+    }
+
+    public function lastEditor(): BelongsTo
+    {
+        return $this->belongsTo(SystemUser::class, 'ultimo_editor');
     }
 }
