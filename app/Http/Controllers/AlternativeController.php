@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\alternative;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
 class AlternativeController extends Controller
@@ -10,9 +11,11 @@ class AlternativeController extends Controller
     /**
      * Display a listing of the resource.
      */
+    use AuthorizesRequests;
+
     public function index()
     {
-        //
+        $this->authorize("viewAny",alternative::class);
     }
 
     /**
@@ -20,7 +23,7 @@ class AlternativeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize("create",alternative::class);
     }
 
     /**
@@ -28,7 +31,7 @@ class AlternativeController extends Controller
      */
     public function show(alternative $alternative)
     {
-        //
+        $this->authorize("view",alternative::class);
     }
 
     /**
@@ -36,7 +39,7 @@ class AlternativeController extends Controller
      */
     public function update(Request $request, alternative $alternative)
     {
-        //
+        $this->authorize("update",alternative::class);
     }
 
     /**
@@ -44,6 +47,6 @@ class AlternativeController extends Controller
      */
     public function destroy(alternative $alternative)
     {
-        //
+        $this->authorize("delete",alternative::class);
     }
 }

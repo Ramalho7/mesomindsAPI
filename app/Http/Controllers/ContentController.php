@@ -9,7 +9,6 @@ use App\Models\Content;
 use App\Models\ContentImage;
 use App\Models\ContentTag;
 use App\Models\ContentType;
-use App\Models\SystemUser;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
