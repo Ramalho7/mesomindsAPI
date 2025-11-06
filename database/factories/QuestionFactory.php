@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Alternative;
 use App\Models\Materias;
 use App\Models\SystemUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -30,5 +31,14 @@ class QuestionFactory extends Factory
             'type' => $this->faker->randomElement($types), 
             'status' => $this->faker->randomElement($status),
         ];
+    }
+
+    public function withAlternatives(int $count = 4): self
+    {
+        return $this->afterCreating(function ($question) use ($count) {
+            Alternative::factory()->count($count)->create([
+                'question_id' => $question->id,
+            ]);
+        });
     }
 }

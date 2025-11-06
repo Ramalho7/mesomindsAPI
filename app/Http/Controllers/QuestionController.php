@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChanceStatusQuestionRequest;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Alternative;
@@ -25,12 +26,10 @@ class QuestionController extends Controller
 
         $query = Question::with(['creator', 'lastEditor', 'alternatives', 'materia']);
 
-        // Filtrar por status
         if ($request->has('status')) {
             $query->where('status', $request->input('status'));
         }
 
-        // Filtrar por busca (título ou conteúdo)
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where(function ($q) use ($search) {
@@ -39,13 +38,11 @@ class QuestionController extends Controller
             });
         }
 
-        // Filtrar por tipo de questão
         if ($request->has('type')) {
             $type = $request->input('type');
             $query->where('type', $type);
         }
 
-        // Filtrar por matéria
         if ($request->has('materia')) {
             $materia = $request->input('materia');
             $query->whereHas('materia', function ($q) use ($materia) {
@@ -54,7 +51,6 @@ class QuestionController extends Controller
             });
         }
 
-        // Filtrar por criador
         if ($request->has('creator')) {
             $creator = $request->input('creator');
             $query->whereHas('creator', function ($q) use ($creator) {
@@ -218,31 +214,27 @@ class QuestionController extends Controller
     /**
      * Change the status of the specified resource.
      */
-    public function changeStatus(Request $request, Question $question): JsonResponse
-    {
-        $this->authorize('update', $question);
+    public function changeStatus(ChanceStatusQuestionRequest $request, Question $question): JsonResponse
+{
+    $this->authorize('update', $question);
 
-        try {
-            $request->validate([
-                'status' => 'required|in:ativo,inativo',
-            ]);
+    try {
+        $question->update([
+            'status' => $request->input('status'),
+            'ultimo_editor' => Auth::id(),
+        ]);
 
-            $question->update([
-                'status' => $request->input('status'),
-                'ultimo_editor' => Auth::id(),
-            ]);
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Status da questão atualizado com sucesso',
-                'data' => $question->fresh()->load(['alternatives']),
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Erro ao alterar status da questão',
-                'error' => $e->getMessage(),
-            ], 500);
-        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Status da questão atualizado com sucesso',
+            'data' => $question->fresh()->load(['alternatives']),
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Erro ao alterar status da questão',
+            'error' => $e->getMessage(),
+        ], 500);
     }
+}
 }

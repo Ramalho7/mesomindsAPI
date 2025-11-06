@@ -11,6 +11,7 @@ class AuthServiceProvider extends ServiceProvider
 {
     protected $policies = [
         Question::class => QuestionPolicy::class,
+        QuestionCollection::class => QuestionCollectionPolicy::class,
     ];
 
     public function boot(): void

@@ -16,6 +16,5 @@ class AlternativeSeeder extends Seeder
     public function run(): void
     {
         Alternative::factory()->count(3)->create();
-        Faker::create()->unique(true);
     }
 }

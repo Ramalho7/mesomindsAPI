@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class ChangeStatusMateriaRequest extends FormRequest
+class ChanceStatusQuestionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +12,6 @@ class ChangeStatusMateriaRequest extends FormRequest
     public function authorize(): bool
     {
         return auth()->check();
-
     }
 
     /**
@@ -24,7 +22,18 @@ class ChangeStatusMateriaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => 'required|in:Ativo,Inativo'
+            'status' => 'required|in:Ativo,Inativo',
+        ];
+    }
+
+    /**
+     * Custom error messages for validation rules.
+     */
+    public function messages(): array
+    {
+        return [
+            'status.required' => 'O campo status é obrigatório.',
+            'status.in' => 'O status deve ser "ativo" ou "inativo".',
         ];
     }
 }

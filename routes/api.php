@@ -5,12 +5,14 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ContentTagController;
 use App\Http\Controllers\ContentTypeController;
 use App\Http\Controllers\MateriasController;
+use App\Http\Controllers\QuestionCollectionController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SystemUserController;
 use App\Models\Content;
 use App\Models\ContentTag;
 use App\Models\ContentType;
 use App\Models\Question;
+use App\Models\QuestionCollection;
 use Illuminate\Support\Facades\Route;
 
 // model binds
@@ -18,6 +20,7 @@ Route::model('tiposconteudo', ContentType::class);
 Route::model('tagsconteudo', ContentTag::class);
 Route::model('conteudo', Content::class);
 Route::model('questo', Question::class);
+Route::model('questoescolecao', QuestionCollection::class);
 
 // end-points auth
 Route::post('/register', [AuthController::class, 'register']);
@@ -32,6 +35,9 @@ Route::get('tagsconteudo', [ContentTagController::class, 'index']);
 
 // end-points questao public
 Route::get('questoes', [QuestionController::class, 'index']);
+
+Route::get('questoescolecao', [QuestionCollectionController::class, 'index']);
+Route::get('questoescolecao/{questoescolecao}', [QuestionCollectionController::class, 'show']);
 
 Route::middleware('auth:api')->group(function () {
 
@@ -60,5 +66,9 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('tagsconteudo', ContentTagController::class)->except('index');
 
     // end-points questao
+    Route::patch('questoes/{questo}/status', [QuestionController::class, 'changeStatus']);
     Route::apiResource('questoes', QuestionController::class)->except('index');
+
+    Route::patch('questoescolecao/{questoescolecao}/status', [QuestionCollectionController::class,'changeStatus']);
+    Route::apiResource('questoescolecao', QuestionCollectionController::class)->except('index', 'show');
 });

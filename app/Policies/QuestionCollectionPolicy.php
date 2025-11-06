@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\QuestionCollection;
 use App\Models\SystemUser;
-use App\Models\Question;
 use Illuminate\Auth\Access\Response;
 
-class QuestionPolicy
+class QuestionCollectionPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class QuestionPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(?SystemUser $systemUser, Question $question): bool
+    public function view(?SystemUser $systemUser, QuestionCollection $questionCollection): bool
     {
         return true;
     }
@@ -35,7 +35,7 @@ class QuestionPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(SystemUser $systemUser, Question $question): bool
+    public function update(SystemUser $systemUser, QuestionCollection $questionCollection): bool
     {
         return in_array($systemUser->tipo, ['ADM', 'Moderador', 'Operador']);
     }
@@ -43,7 +43,7 @@ class QuestionPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(SystemUser $systemUser, Question $question): bool
+    public function delete(SystemUser $systemUser, QuestionCollection $questionCollection): bool
     {
         return $systemUser->tipo === 'ADM';
     }
@@ -51,7 +51,7 @@ class QuestionPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(SystemUser $systemUser, Question $question): bool
+    public function restore(SystemUser $systemUser, QuestionCollection $questionCollection): bool
     {
         return false;
     }
@@ -59,12 +59,12 @@ class QuestionPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(SystemUser $systemUser, Question $question): bool
+    public function forceDelete(SystemUser $systemUser, QuestionCollection $questionCollection): bool
     {
         return $systemUser->tipo === 'ADM';
     }
 
-    public function changeStatus(SystemUser $systemUser, Question $question): bool
+    public function changeStatus(SystemUser $systemUser, QuestionCollection $questionCollection): bool
     {
         return in_array($systemUser->tipo, ['ADM', 'Moderador']);
     }
