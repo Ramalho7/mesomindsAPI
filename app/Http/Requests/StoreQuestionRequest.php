@@ -24,6 +24,7 @@ class StoreQuestionRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'correction' => 'nullable|string',
             'materia' => 'required|integer|exists:materias,id',
             'type' => 'required|string|in:Multipla,VerdadeiroFalso,Aberta',
             'status' => 'required|string|in:Active,Inactive',
@@ -44,6 +45,7 @@ class StoreQuestionRequest extends FormRequest
             'title.max' => 'O campo título não pode exceder 255 caracteres.',
             'content.required' => 'O campo conteúdo é obrigatório.',
             'content.string' => 'O campo conteúdo deve ser uma string.',
+            'correction.string' => 'O campo correção deve ser uma string.',
             'materia.required' => 'O campo matéria é obrigatório.',
             'materia.integer' => 'O campo matéria deve ser um número inteiro.',
             'materia.exists' => 'A matéria especificada não existe.',

@@ -78,9 +78,9 @@ class QuestionController extends Controller
             DB::beginTransaction();
 
             $validated = $request->validated();
-            $alternativesData = $validated['alternatives'];
             $user = Auth::user();
 
+            $alternativesData = $validated['alternatives'];
             unset($validated['alternatives']);
 
             $validated['criador'] = $user->id;
@@ -88,21 +88,24 @@ class QuestionController extends Controller
 
             $question = Question::create($validated);
 
-            $alternativesToSave = collect($alternativesData)->map(function ($alternative) use ($user) {
-                $alternative['criador'] = $user->id;
-                $alternative['ultimo_editor'] = $user->id;
-
-                return $alternative;
-            })->toArray();
-
-            $question->alternatives()->createMany($alternativesToSave);
+            foreach ($alternativesData as $alternativeData) {
+                Alternative::create([
+                    'question_id' => $question->id,
+                    'content' => $alternativeData['content'],
+                    'correct' => $alternativeData['correct'] ?? false,
+                    'criador' => $user->id,
+                    'ultimo_editor' => $user->id,
+                ]);
+            }
 
             DB::commit();
+
+            $question->load(['alternatives', 'materia', 'creator', 'lastEditor']);
 
             return response()->json([
                 'success' => true,
                 'message' => 'Questão cadastrada com sucesso',
-                'data' => $question->load(['creator', 'lastEditor', 'alternatives', 'materia']),
+                'data' => $question,
             ], 201);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -154,7 +157,7 @@ class QuestionController extends Controller
 
             foreach ($alternativesData as $alternative) {
                 $alternativesToSave[] = [
-                    'question_id' => $question->id, 
+                    'question_id' => $question->id,
                     'content' => $alternative['content'],
                     'correct' => $alternative['correct'] ?? false,
                     'criador' => $user->id,

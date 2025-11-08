@@ -14,7 +14,7 @@ class Alternative extends Model
     protected $table = 'alternatives';
 
     protected $fillable = [
-        'quesion_id',
+        'question_id',
         'content',
         'correct',
         'criador',

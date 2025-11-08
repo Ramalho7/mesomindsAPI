@@ -21,7 +21,8 @@ class Question extends Model
         'ultimo_editor',
         'criador',
         'status',
-        'type'
+        'type',
+        'correction'
     ];
 
     protected $casts = [

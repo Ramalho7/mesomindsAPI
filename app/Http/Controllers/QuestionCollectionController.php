@@ -144,7 +144,6 @@ class QuestionCollectionController extends Controller
                 foreach ($questionsData as $index => $questionData) {
                     $questionId = $questionData['id'];
 
-                    // Atualizar os dados da questão
                     $questionUpdateData = array_filter([
                         'title' => $questionData['title'] ?? null,
                         'content' => $questionData['content'] ?? null,
@@ -160,7 +159,6 @@ class QuestionCollectionController extends Controller
                             ->update(array_merge($questionUpdateData, ['updated_at' => now()]));
                     }
 
-                    // Atualizar alternativas se fornecidas
                     if (isset($questionData['alternatives'])) {
                         foreach ($questionData['alternatives'] as $alternativeData) {
                             if (isset($alternativeData['id'])) {
@@ -175,7 +173,6 @@ class QuestionCollectionController extends Controller
                                         'updated_at' => now(),
                                     ]);
                             } else {
-                                // Criar nova alternativa
                                 DB::table('alternatives')->insert([
                                     'question_id' => $questionId,
                                     'content' => $alternativeData['content'],
@@ -189,7 +186,6 @@ class QuestionCollectionController extends Controller
                         }
                     }
 
-                    // Adicionar ao pivot
                     $pivotData[$questionId] = [
                         'status' => 'Active',
                         'order' => $index + 1,
