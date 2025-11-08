@@ -14,11 +14,12 @@ return new class () extends Migration {
             $table->id();
             $table->string('title');
             $table->longText('content');
+            $table->longText('correction');
             $table->unsignedBigInteger('materia');
             $table->unsignedBigInteger('ultimo_editor')->nullable();
             $table->unsignedBigInteger('criador');
             $table->enum('type', ['Multipla', 'VerdadeiroFalso', 'Aberta'])->default('Multipla');
-            $table->enum('status', ['Ativo', 'Inativo'])->default('Ativo');
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
 
             $table->foreign('criador')->references('id')->on('system_users')->onDelete('cascade');

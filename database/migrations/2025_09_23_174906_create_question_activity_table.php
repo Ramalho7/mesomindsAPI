@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('question_activity_pivot', function (Blueprint $table) {
+        Schema::create('question_colletion_pivot', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('collection_id');
             $table->unsignedBigInteger('question_id');
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('question_activity_pivot');
+        Schema::dropIfExists('question_colletion_pivot');
     }
 };

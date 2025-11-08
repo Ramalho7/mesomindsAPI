@@ -59,9 +59,10 @@ class QuestionCollection extends Model
      */
     public function questions(): BelongsToMany
     {
-        return $this->belongsToMany(Question::class, 'question_activity_pivot', 'collection_id', 'question_id')
+        return $this->belongsToMany(Question::class, 'question_colletion_pivot', 'collection_id', 'question_id')
+            ->where('questions.status', 'Active')
             ->withPivot('status', 'order', 'created_by', 'updated_by', 'created_at', 'updated_at')
-            ->orderBy('question_activity_pivot.order');
+            ->orderBy('question_colletion_pivot.order');
     }
 
 }

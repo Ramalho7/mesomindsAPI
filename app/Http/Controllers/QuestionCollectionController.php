@@ -141,7 +141,55 @@ class QuestionCollectionController extends Controller
             if ($questionsData !== null) {
                 $pivotData = [];
 
-                foreach ($questionsData as $index => $questionId) {
+                foreach ($questionsData as $index => $questionData) {
+                    $questionId = $questionData['id'];
+
+                    // Atualizar os dados da questão
+                    $questionUpdateData = array_filter([
+                        'title' => $questionData['title'] ?? null,
+                        'content' => $questionData['content'] ?? null,
+                        'correction' => $questionData['correction'] ?? null,
+                        'type' => $questionData['type'] ?? null,
+                        'status' => $questionData['status'] ?? null,
+                        'ultimo_editor' => $user->id,
+                    ], fn($value) => $value !== null);
+
+                    if (!empty($questionUpdateData)) {
+                        DB::table('questions')
+                            ->where('id', $questionId)
+                            ->update(array_merge($questionUpdateData, ['updated_at' => now()]));
+                    }
+
+                    // Atualizar alternativas se fornecidas
+                    if (isset($questionData['alternatives'])) {
+                        foreach ($questionData['alternatives'] as $alternativeData) {
+                            if (isset($alternativeData['id'])) {
+                                // Atualizar alternativa existente
+                                DB::table('alternatives')
+                                    ->where('id', $alternativeData['id'])
+                                    ->where('question_id', $questionId)
+                                    ->update([
+                                        'content' => $alternativeData['content'],
+                                        'correct' => $alternativeData['correct'] ?? false,
+                                        'ultimo_editor' => $user->id,
+                                        'updated_at' => now(),
+                                    ]);
+                            } else {
+                                // Criar nova alternativa
+                                DB::table('alternatives')->insert([
+                                    'question_id' => $questionId,
+                                    'content' => $alternativeData['content'],
+                                    'correct' => $alternativeData['correct'] ?? false,
+                                    'criador' => $user->id,
+                                    'ultimo_editor' => $user->id,
+                                    'created_at' => now(),
+                                    'updated_at' => now(),
+                                ]);
+                            }
+                        }
+                    }
+
+                    // Adicionar ao pivot
                     $pivotData[$questionId] = [
                         'status' => 'Active',
                         'order' => $index + 1,
@@ -157,7 +205,7 @@ class QuestionCollectionController extends Controller
 
             DB::commit();
 
-            $questionCollection->load(['createdBy', 'updatedBy', 'questions']);
+            $questionCollection->load(['createdBy', 'updatedBy', 'questions.alternatives']);
 
             return response()->json([
                 'success' => true,
@@ -214,13 +262,41 @@ class QuestionCollectionController extends Controller
             ]);
 
             if ($questionCollection->questions()->exists()) {
-                DB::table('question_activity_pivot')
+                DB::table('question_colletion_pivot')
                     ->where('collection_id', $questionCollection->id)
                     ->update([
                         'status' => $status,
                         'updated_by' => $user->id,
                         'updated_at' => now(),
                     ]);
+
+                if ($status === 'Inactive') {
+                    $questionIds = DB::table('questions')
+                        ->join('question_colletion_pivot', 'questions.id', '=', 'question_colletion_pivot.question_id')
+                        ->where('question_colletion_pivot.collection_id', $questionCollection->id)
+                        ->pluck('questions.id');
+
+                    DB::table('questions')
+                        ->whereIn('id', $questionIds)
+                        ->update([
+                            'status' => 'Inactive',
+                            'ultimo_editor' => $user->id,
+                            'updated_at' => now(),
+                        ]);
+                } else if ($status === 'Active') {
+                    $questionIds = DB::table('questions')
+                        ->join('question_colletion_pivot', 'questions.id', '=', 'question_colletion_pivot.question_id')
+                        ->where('question_colletion_pivot.collection_id', $questionCollection->id)
+                        ->pluck('questions.id');
+
+                    DB::table('questions')
+                        ->whereIn('id', $questionIds)
+                        ->update([
+                            'status' => 'Active',
+                            'ultimo_editor' => $user->id,
+                            'updated_at' => now(),
+                        ]);
+                }
             }
 
             DB::commit();

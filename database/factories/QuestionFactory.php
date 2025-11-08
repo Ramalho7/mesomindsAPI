@@ -20,11 +20,12 @@ class QuestionFactory extends Factory
     public function definition(): array
     {
         $types = ['Multipla', 'VerdadeiroFalso', 'Aberta'];
-        $status = ['Ativo', 'Inativo'];
+        $status = ['Active', 'Inactive'];
 
         return [
             'title' => $this->faker->sentence(), 
             'content' => $this->faker->paragraph(), 
+            'correction' => $this->faker->paragraph(),
             'materia' => Materias::factory(), 
             'ultimo_editor' => SystemUser::factory()->create()->id, 
             'criador' => SystemUser::factory()->create()->id, 

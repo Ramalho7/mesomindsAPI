@@ -28,8 +28,18 @@ class UpdateQuestionCollectionRequest extends FormRequest
             'type' => 'sometimes|required|in:Exam,Simulation,Activity,Exercise',
             'due_date' => 'nullable|date|after:now',
             'status' => 'nullable|in:Active,Inactive',
+
             'questions' => 'nullable|array',
-            'questions.*' => 'exists:questions,id',
+            'questions.*.id' => 'required|exists:questions,id',
+            'questions.*.title' => 'sometimes|required|string|max:255',
+            'questions.*.content' => 'sometimes|required|string',
+            'questions.*.correction' => 'nullable|string',
+            'questions.*.type' => 'sometimes|required|in:Multipla,VerdadeiroFalso,Aberta',
+            'questions.*.status' => 'nullable|in:Active,Inactive',
+            'questions.*.alternatives' => 'nullable|array',
+            'questions.*.alternatives.*.id' => 'nullable|exists:alternatives,id',
+            'questions.*.alternatives.*.content' => 'required|string|max:255',
+            'questions.*.alternatives.*.correct' => 'nullable|boolean',
         ];
     }
 
@@ -44,12 +54,11 @@ class UpdateQuestionCollectionRequest extends FormRequest
             'subject_id.required' => 'A matéria é obrigatória.',
             'subject_id.exists' => 'A matéria selecionada não existe.',
             'type.required' => 'O tipo é obrigatório.',
-            'type.in' => 'O tipo deve ser: Exam, Simulation, Activity ou Exercise.',
-            'due_date.date' => 'A data de entrega deve ser uma data válida.',
-            'due_date.after' => 'A data de entrega deve ser posterior à data atual.',
-            'status.in' => 'O status deve ser Active ou Inactive.',
-            'questions.array' => 'As questões devem ser um array.',
-            'questions.*.exists' => 'Uma ou mais questões selecionadas não existem.',
+            'type.in' => 'O tipo deve ser um dos seguintes valores: Exam, Simulation, Activity, Exercise.',
+            'questions.*.id.required' => 'O ID da questão é obrigatório.',
+            'questions.*.id.exists' => 'Uma das questões não existe.',
+            'questions.*.title.required' => 'O título da questão é obrigatório.',
+            'questions.*.content.required' => 'O conteúdo da questão é obrigatório.',
         ];
     }
 }
