@@ -22,7 +22,7 @@ class ChanceStatusQuestionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => 'required|in:Ativo,Inativo',
+            'status' => 'required|in:Inactive,Active',
         ];
     }
 
@@ -33,7 +33,7 @@ class ChanceStatusQuestionRequest extends FormRequest
     {
         return [
             'status.required' => 'O campo status é obrigatório.',
-            'status.in' => 'O status deve ser "ativo" ou "inativo".',
+            'status.in' => 'O status deve ser "Active" ou "Inactive".',
         ];
     }
 }

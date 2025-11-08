@@ -49,4 +49,9 @@ class Question extends Model
     {
         return $this->belongsTo(SystemUser::class, 'ultimo_editor');
     }
+
+    public function studentAnswers(): HasMany
+    {
+        return $this->hasMany(StudentAnswer::class);
+    }
 }

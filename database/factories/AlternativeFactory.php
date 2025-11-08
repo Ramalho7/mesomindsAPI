@@ -17,15 +17,12 @@ class AlternativeFactory extends Factory
      */
     public function definition(): array
     {
-        $status = ['Ativo', 'Inativo'];
-
         return [
             'question_id' => Question::factory(),
             'content' => $this->faker->sentence(),
             'correct' => $this->faker->boolean(),
             'criador' => \App\Models\SystemUser::factory()->create()->id,
             'ultimo_editor' => \App\Models\SystemUser::factory()->create()->id,
-            'status' => $this->faker->randomElement($status),
         ];
     }
 }

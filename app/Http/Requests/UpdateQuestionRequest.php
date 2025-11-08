@@ -27,8 +27,8 @@ class UpdateQuestionRequest extends FormRequest
             'correction' => 'nullable|string',
             'materia' => 'sometimes|integer|exists:materias,id',
             'type' => 'sometimes|string|in:Multipla,VerdadeiroFalso,Aberta',
-            'status' => 'sometimes|string|in:Active,Inactive',
             'alternatives' => 'sometimes|array|min:2',
+            'alternatives.*.id' => 'nullable|exists:alternatives,id',
             'alternatives.*.content' => 'required_with:alternatives|string|max:255',
             'alternatives.*.correct' => 'nullable|boolean',
         ];

@@ -80,7 +80,7 @@ class QuestionController extends Controller
             $validated = $request->validated();
             $user = Auth::user();
 
-            $alternativesData = $validated['alternatives'];
+            $alternativesData = $validated['alternatives'] ?? [];
             unset($validated['alternatives']);
 
             $validated['criador'] = $user->id;
@@ -88,14 +88,16 @@ class QuestionController extends Controller
 
             $question = Question::create($validated);
 
-            foreach ($alternativesData as $alternativeData) {
-                Alternative::create([
-                    'question_id' => $question->id,
-                    'content' => $alternativeData['content'],
-                    'correct' => $alternativeData['correct'] ?? false,
-                    'criador' => $user->id,
-                    'ultimo_editor' => $user->id,
-                ]);
+            if ($question->type !== 'Aberta' && !empty($alternativesData)) {
+                foreach ($alternativesData as $alternativeData) {
+                    Alternative::create([
+                        'question_id' => $question->id,
+                        'content' => $alternativeData['content'],
+                        'correct' => $alternativeData['correct'] ?? false,
+                        'criador' => $user->id,
+                        'ultimo_editor' => $user->id,
+                    ]);
+                }
             }
 
             DB::commit();
@@ -135,61 +137,72 @@ class QuestionController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateQuestionRequest $request, Question $question): JsonResponse
-{
-    $this->authorize('update', $question);
+    {
+        $this->authorize('update', $question);
 
-    try {
-        DB::beginTransaction();
+        try {
+            DB::beginTransaction();
 
-        $validated = $request->validated();
-        $alternativesData = $validated['alternatives'] ?? null;
-        $user = Auth::user();
+            $validated = $request->validated();
+            $alternativesData = $validated['alternatives'] ?? null;
+            $user = Auth::user();
 
-        unset($validated['alternatives']);
+            unset($validated['alternatives']);
 
-        $validated['ultimo_editor'] = $user->id;
+            $validated['ultimo_editor'] = $user->id;
+            $question->update($validated);
 
-        // Mark existing alternatives as inactive
-        Alternative::where('question_id', $question->id)->update(['status' => 'inativo']);
+            if ($alternativesData !== null) {
+                $alternativeIds = [];
 
-        if ($alternativesData) {
-            $alternativesToSave = [];
+                foreach ($alternativesData as $alternativeData) {
+                    if (isset($alternativeData['id'])) {
+                        $alternative = Alternative::find($alternativeData['id']);
 
-            foreach ($alternativesData as $alternative) {
-                $alternativesToSave[] = [
-                    'question_id' => $question->id,
-                    'content' => $alternative['content'],
-                    'correct' => $alternative['correct'] ?? false,
-                    'criador' => $user->id,
-                    'ultimo_editor' => $user->id,
-                ];
+                        if ($alternative && $alternative->question_id === $question->id) {
+                            $alternative->update([
+                                'content' => $alternativeData['content'],
+                                'correct' => $alternativeData['correct'] ?? false,
+                                'ultimo_editor' => $user->id,
+                            ]);
+                            $alternativeIds[] = $alternative->id;
+                        }
+                    } else {
+                        $newAlternative = Alternative::create([
+                            'question_id' => $question->id,
+                            'content' => $alternativeData['content'],
+                            'correct' => $alternativeData['correct'] ?? false,
+                            'criador' => $user->id,
+                            'ultimo_editor' => $user->id,
+                        ]);
+                        $alternativeIds[] = $newAlternative->id;
+                    }
+                }
+
+                Alternative::where('question_id', $question->id)
+                    ->whereNotIn('id', $alternativeIds)
+                    ->delete();
             }
 
-            $question->alternatives()->createMany($alternativesToSave);
+            DB::commit();
+
+            $question->load(['alternatives', 'materia', 'creator', 'lastEditor']);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Questão atualizada com sucesso',
+                'data' => $question,
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao atualizar questão',
+                'error' => $e->getMessage(),
+            ], 500);
         }
-
-        $question->update($validated);
-
-        DB::commit();
-
-        $questionFresh = $question->fresh();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Questão atualizada com sucesso',
-            'data' => $questionFresh->load(['creator', 'lastEditor', 'materia']),
-            'alternatives' => $questionFresh->alternatives()->where('status', 'ativo')->get(),
-        ]);
-    } catch (\Exception $e) {
-        DB::rollBack();
-
-        return response()->json([
-            'success' => false,
-            'message' => 'Erro ao atualizar questão',
-            'error' => $e->getMessage(),
-        ], 500);
     }
-}
 
     /**
      * Remove the specified resource from storage.

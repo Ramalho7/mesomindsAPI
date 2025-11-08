@@ -17,7 +17,6 @@ return new class () extends Migration {
             $table->boolean('correct');
             $table->unsignedBigInteger('criador');
             $table->unsignedBigInteger('ultimo_editor');
-            $table->enum('status', ['Ativo', 'Inativo'])->default('Ativo');
             $table->timestamps();
 
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');

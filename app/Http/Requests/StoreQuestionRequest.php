@@ -21,17 +21,22 @@ class StoreQuestionRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'correction' => 'nullable|string',
             'materia' => 'required|integer|exists:materias,id',
             'type' => 'required|string|in:Multipla,VerdadeiroFalso,Aberta',
             'status' => 'required|string|in:Active,Inactive',
-            'alternatives' => 'required|array|min:2',
-            'alternatives.*.content' => 'required|string|max:255',
-            'alternatives.*.correct' => 'nullable|boolean',
         ];
+
+        if ($this->input('type') !== 'Aberta') {
+            $rules['alternatives'] = 'required|array|min:2';
+            $rules['alternatives.*.content'] = 'required|string|max:255';
+            $rules['alternatives.*.correct'] = 'nullable|boolean';
+        }
+
+        return $rules;
     }
 
     /**
