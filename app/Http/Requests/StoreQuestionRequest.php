@@ -27,13 +27,12 @@ class StoreQuestionRequest extends FormRequest
             'correction' => 'nullable|string',
             'materia' => 'required|integer|exists:materias,id',
             'type' => 'required|string|in:Multipla,VerdadeiroFalso,Aberta',
-            'status' => 'required|string|in:Active,Inactive',
         ];
 
         if ($this->input('type') !== 'Aberta') {
             $rules['alternatives'] = 'required|array|min:2';
             $rules['alternatives.*.content'] = 'required|string|max:255';
-            $rules['alternatives.*.correct'] = 'nullable|boolean';
+            $rules['alternatives.*.correct'] = 'required|boolean';
         }
 
         return $rules;
@@ -57,9 +56,6 @@ class StoreQuestionRequest extends FormRequest
             'type.required' => 'O campo tipo é obrigatório.',
             'type.string' => 'O campo tipo deve ser uma string.',
             'type.in' => 'O campo tipo deve ser um dos seguintes valores: Multipla, VerdadeiroFalso, Aberta.',
-            'status.required' => 'O campo status é obrigatório.',
-            'status.string' => 'O campo status deve ser uma string.',
-            'status.in' => 'O campo status deve ser um dos seguintes valores: Active, Inactive.',
             'alternatives.required' => 'O campo alternativas é obrigatório.',
             'alternatives.array' => 'O campo alternativas deve ser um array.',
             'alternatives.min' => 'O campo alternativas deve conter pelo menos 2 alternativas.',
