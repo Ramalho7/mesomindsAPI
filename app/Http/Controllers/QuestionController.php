@@ -129,6 +129,7 @@ class QuestionController extends Controller
 
         return response()->json([
             'success' => true,
+            'message'=> 'Questão carregada com sucesso',
             'data' => $question->load(['creator', 'lastEditor', 'alternatives', 'materia']),
         ]);
     }
