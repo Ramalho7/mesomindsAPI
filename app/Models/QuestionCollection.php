@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class QuestionCollection extends Model
 {
@@ -60,9 +59,9 @@ class QuestionCollection extends Model
     public function questions(): BelongsToMany
     {
         return $this->belongsToMany(Question::class, 'question_colletion_pivot', 'collection_id', 'question_id')
+            ->withPivot('status', 'order', 'created_by', 'updated_by')
+            ->withTimestamps()
             ->where('questions.status', 'Active')
-            ->withPivot('status', 'order', 'created_by', 'updated_by', 'created_at', 'updated_at')
             ->orderBy('question_colletion_pivot.order');
     }
-
 }

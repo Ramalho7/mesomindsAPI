@@ -29,13 +29,18 @@ class StoreQuestionCollectionRequest extends FormRequest
             'due_date' => 'nullable|date|after:now',
             'status' => 'nullable|in:Active,Inactive',
             'questions' => 'nullable|array',
-            'questions.*' => 'exists:questions,id',
+            'questions.*.title' => 'required|string|max:255',
+            'questions.*.content' => 'required|string',
+            'questions.*.correction' => 'nullable|string',
+            'questions.*.materia' => 'required|integer|exists:materias,id',
+            'questions.*.type' => 'required|in:Multipla,VerdadeiroFalso,Aberta',
+            'questions.*.status' => 'required|in:Active,Inactive',
+            'questions.*.alternatives' => 'nullable|array',
+            'questions.*.alternatives.*.content' => 'required|string',
+            'questions.*.alternatives.*.correct' => 'required|boolean',
         ];
     }
 
-    /**
-     * Custom error messages for validation rules.
-     */
     public function messages(): array
     {
         return [
@@ -48,8 +53,15 @@ class StoreQuestionCollectionRequest extends FormRequest
             'due_date.date' => 'A data de entrega deve ser uma data válida.',
             'due_date.after' => 'A data de entrega deve ser posterior à data atual.',
             'status.in' => 'O status deve ser Active ou Inactive.',
-            'questions.array' => 'As questões devem ser um array.',
-            'questions.*.exists' => 'Uma ou mais questões selecionadas não existem.',
+            'questions.*.title.required' => 'O título da questão é obrigatório.',
+            'questions.*.content.required' => 'O conteúdo da questão é obrigatório.',
+            'questions.*.materia.required' => 'A matéria da questão é obrigatória.',
+            'questions.*.materia.exists' => 'A matéria selecionada não existe.',
+            'questions.*.type.required' => 'O tipo da questão é obrigatório.',
+            'questions.*.type.in' => 'O tipo da questão deve ser: Multipla, VerdadeiroFalso ou Aberta.',
+            'questions.*.status.required' => 'O status da questão é obrigatório.',
+            'questions.*.alternatives.*.content.required' => 'O conteúdo da alternativa é obrigatório.',
+            'questions.*.alternatives.*.correct.required' => 'O campo "correct" da alternativa é obrigatório.',
         ];
     }
 }

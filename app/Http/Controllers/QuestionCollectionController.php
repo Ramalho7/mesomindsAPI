@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChanceStatusQuestionCollectionRequest;
 use App\Http\Requests\StoreQuestionCollectionRequest;
 use App\Http\Requests\UpdateQuestionCollectionRequest;
+use App\Models\Question;
 use App\Models\QuestionCollection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
@@ -37,10 +38,15 @@ class QuestionCollectionController extends Controller
             });
         }
 
+        if ($request->has('type')) {
+            $query->where('type', $request->input('type'));
+        }
+
         $collections = $query->paginate($request->get('per_page', 10));
 
         return response()->json([
             'success' => true,
+            'message' => 'Coleção carregada com sucesso',
             'data' => $collections,
         ]);
     }
@@ -66,28 +72,33 @@ class QuestionCollectionController extends Controller
 
             $questionCollection = QuestionCollection::create($validated);
 
-            if (! empty($questionsData)) {
-                $pivotData = [];
+            foreach ($questionsData as $index => $questionData) {
+                $alternativesData = $questionData['alternatives'] ?? [];
+                unset($questionData['alternatives']);
 
-                foreach ($questionsData as $index => $questionId) {
-                    // Seguindo o padrão do ContentController com images
-                    $pivotData[$questionId] = [
-                        'status' => 'Active',
-                        'order' => $index + 1,
-                        'created_by' => $user->id,
-                        'updated_by' => $user->id,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ];
+                $question = Question::create(array_merge($questionData, [
+                    'criador' => $user->id,
+                    'ultimo_editor' => $user->id,
+                ]));
+
+                $questionCollection->questions()->attach($question->id, [
+                    'order' => $index + 1,
+                    'status' => $questionData['status'] ?? 'Active',
+                    'created_by' => $user->id,
+                    'updated_by' => $user->id,
+                ]);
+
+                foreach ($alternativesData as $alternativeData) {
+                    $question->alternatives()->create(array_merge($alternativeData, [
+                        'criador' => $user->id,
+                        'ultimo_editor' => $user->id,
+                    ]));
                 }
-
-                $questionCollection->questions()->attach($pivotData);
             }
 
             DB::commit();
 
-            // Recarregar com relacionamentos
-            $questionCollection->load(['createdBy', 'updatedBy', 'questions']);
+            $questionCollection->load(['createdBy', 'updatedBy', 'questions.alternatives']);
 
             return response()->json([
                 'success' => true,
@@ -114,7 +125,8 @@ class QuestionCollectionController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $questionCollection->load(['createdBy', 'updatedBy', 'questions']),
+            'message' => 'Conteúdo carregada com sucesso',
+            'data' => $questionCollection->load(['createdBy', 'updatedBy', 'questions.alternatives']),
         ]);
     }
 
@@ -151,9 +163,9 @@ class QuestionCollectionController extends Controller
                         'type' => $questionData['type'] ?? null,
                         'status' => $questionData['status'] ?? null,
                         'ultimo_editor' => $user->id,
-                    ], fn($value) => $value !== null);
+                    ], fn ($value) => $value !== null);
 
-                    if (!empty($questionUpdateData)) {
+                    if (! empty($questionUpdateData)) {
                         DB::table('questions')
                             ->where('id', $questionId)
                             ->update(array_merge($questionUpdateData, ['updated_at' => now()]));
@@ -279,7 +291,7 @@ class QuestionCollectionController extends Controller
                             'ultimo_editor' => $user->id,
                             'updated_at' => now(),
                         ]);
-                } else if ($status === 'Active') {
+                } elseif ($status === 'Active') {
                     $questionIds = DB::table('questions')
                         ->join('question_colletion_pivot', 'questions.id', '=', 'question_colletion_pivot.question_id')
                         ->where('question_colletion_pivot.collection_id', $questionCollection->id)
