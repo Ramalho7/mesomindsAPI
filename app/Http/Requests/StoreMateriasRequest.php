@@ -12,9 +12,7 @@ class StoreMateriasRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $user = Auth::user();
-
-        return $user && $user->tipo === 'ADM' || 'Moderador';
+        return auth()->check();
     }
 
     /**

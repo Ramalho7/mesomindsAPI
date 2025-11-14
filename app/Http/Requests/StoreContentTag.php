@@ -12,11 +12,8 @@ class StoreContentTag extends FormRequest
      */
     public function authorize(): bool
     {
-        // $user = Auth::user();
 
-        // return $user && in_array($user->tipo, ['ADM', 'Moderador', 'Operador']);
-
-        return true;
+        return auth()->check();
     }
 
     /**

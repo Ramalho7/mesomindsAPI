@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
             ContentTagSeeder::class,
             ContentTypeSeeder::class,
             ContentSeeder::class,
+            QuestionSeeder::class,
+            QuestionCollectionSeeder::class,
         ]);
     }
 }
