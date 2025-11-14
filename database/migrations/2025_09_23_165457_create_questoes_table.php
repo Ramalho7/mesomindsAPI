@@ -4,20 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('questoes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('content');
+            $table->string('titulo');
+            $table->string('corpo');
             $table->unsignedBigInteger('materia');
             $table->unsignedBigInteger('ultimo_editor')->nullable();
             $table->unsignedBigInteger('criador');
-            $table->enum('type', ['Multipla', 'VerdadeiroFalso', 'Aberta'])->default('Multipla');
+            $table->enum('tipo', ['Multipla', 'VerdadeiroFalso', 'aberta'])->default('Multipla');
             $table->enum('status', ['Ativo', 'Inativo'])->default('Ativo');
             $table->timestamps();
 
