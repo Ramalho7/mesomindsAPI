@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Content;
 use App\Models\ContentType;
 use App\Models\SystemUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -103,7 +104,7 @@ class ContentTest extends TestCase
 
         $contentType = ContentType::factory()->create();
 
-        $content = \App\Models\Content::factory()->create([
+        $content = Content::factory()->create([
             'title' => 'Meu Conteúdo',
             'content' => 'Texto do conteúdo aqui',
             'content_types_id' => $contentType->id,
@@ -121,4 +122,35 @@ class ContentTest extends TestCase
             'id' => $content->id,
         ]);
     }
+
+    public function test_can_view_content_index(): void
+{
+    $user = SystemUser::factory()->create([
+        'status' => 'Ativo',
+        'tipo' => 'ADM',
+    ]);
+
+    Content::factory()->count(5)->create([
+        'status' => 'Ativo',
+        'published_at' => now(),
+    ]);
+
+    Passport::actingAs($user);
+
+    $response = $this->getJson('/api/conteudos');
+
+    $response->assertStatus(200);
+
+    $response->assertJsonStructure([
+        'data' => [
+            'data' => [
+                '*' => ['id', 'title', 'content', 'status', 'published_at']
+            ],
+            'links',
+            'meta'
+        ]
+    ]);
+
+    $response->assertJsonCount(5, 'data.data');
+}
 }
