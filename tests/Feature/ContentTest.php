@@ -19,7 +19,7 @@ class ContentTest extends TestCase
         $this->artisan('passport:keys');
     }
 
-    public function test_can_create_content(): void
+    public function test_adm_can_create_content(): void
     {
         $user = SystemUser::factory()->create([
             'status' => 'Ativo',
@@ -52,7 +52,7 @@ class ContentTest extends TestCase
         $response->assertStatus(201);
     }
 
-    public function test_can_update_content(): void
+    public function test_adm_can_update_content(): void
     {
         $user = SystemUser::factory()->create([
             'status' => 'Ativo',
@@ -91,6 +91,34 @@ class ContentTest extends TestCase
             'id' => $content->id,
             'title' => 'Conteúdo Atualizado',
             'content' => 'Texto atualizado do conteúdo',
+        ]);
+    }
+
+    public function test_adm_can_delete_content(): void
+    {
+        $user = SystemUser::factory()->create([
+            'status' => 'Ativo',
+            'tipo' => 'ADM',
+        ]);
+
+        $contentType = ContentType::factory()->create();
+
+        $content = \App\Models\Content::factory()->create([
+            'title' => 'Meu Conteúdo',
+            'content' => 'Texto do conteúdo aqui',
+            'content_types_id' => $contentType->id,
+            'status' => 'Ativo',
+            'published_at' => now(),
+        ]);
+
+        Passport::actingAs($user);
+
+        $deleteResponse = $this->deleteJson("/api/conteudos/{$content->id}");
+
+        $deleteResponse->assertStatus(200);
+
+        $this->assertDatabaseMissing('contents', [
+            'id' => $content->id,
         ]);
     }
 }
