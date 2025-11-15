@@ -29,4 +29,4 @@ jobs:
           commit_message: Apply automatic changes - pint
           commit_user_name: ramalho7
           commit_user_email: adryelll85@gmail.com
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
