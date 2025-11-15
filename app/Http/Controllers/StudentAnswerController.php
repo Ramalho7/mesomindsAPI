@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CorrectStudentAnswerRequest;
 use App\Http\Requests\StoreStudentAnswerRequest;
 use App\Http\Requests\UpdateStudentAnswerRequest;
-use App\Http\Requests\CorrectStudentAnswerRequest;
 use App\Models\StudentAnswer;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\DB;
 class StudentAnswerController extends Controller
 {
     use AuthorizesRequests;
-
 
     public function index(Request $request): JsonResponse
     {

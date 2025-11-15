@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome', 255);
             $table->integer('limite');
-            $table->enum('status', ["Ativo", "Inativo"])->default("Ativo");
+            $table->enum('status', ['Ativo', 'Inativo'])->default('Ativo');
             $table->unsignedBigInteger('responsavel');
             $table->unsignedBigInteger('criador');
             $table->unsignedBigInteger('ultimo_editor');

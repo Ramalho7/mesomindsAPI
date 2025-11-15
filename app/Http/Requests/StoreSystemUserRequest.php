@@ -26,7 +26,7 @@ class StoreSystemUserRequest extends FormRequest
             'email' => 'required|email|max:100|unique:system_users,email',
             'password' => 'required|string|min:8|confirmed',
             'tipo' => 'required|in:Professor,Aluno,ADM,Moderador,Operador',
-            'status' => 'sometimes|in:Ativo,Inativo,Bloqueado'
+            'status' => 'sometimes|in:Ativo,Inativo,Bloqueado',
         ];
     }
 }

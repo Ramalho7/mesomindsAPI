@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        DB::table('content_tag_pivot')->truncate(); 
+        DB::table('content_tag_pivot')->truncate();
         DB::table('contents')->truncate();
         DB::table('content_tags')->truncate();
         DB::table('content_types')->truncate();

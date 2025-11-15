@@ -15,7 +15,7 @@ class UpdateContentTagRequest extends FormRequest
     {
         $contentTag = $this->route('tagsconteudo');
         $contentTagId = $contentTag->id ?? $contentTag;
-        
+
         return [
             'tag_name' => "nullable|string|max:255|unique:content_tags,tag_name,{$contentTagId}",
             'description' => 'nullable|string',

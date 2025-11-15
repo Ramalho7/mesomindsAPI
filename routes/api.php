@@ -45,8 +45,8 @@ Route::get('questoescolecao/{questoescolecao}', [QuestionCollectionController::c
 Route::middleware('auth:api')->group(function () {
 
     // end-points auth
-    Route::post('/logout', [AuthController::class,'logout']);
-    Route::post('/validatetoken', [AuthController::class,'validateToken']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/validatetoken', [AuthController::class, 'validateToken']);
 
     // end-points user
     Route::put('/users/{user}/password', [SystemUserController::class, 'updatePassword']);
@@ -72,7 +72,7 @@ Route::middleware('auth:api')->group(function () {
     Route::patch('questoes/{questo}/status', [QuestionController::class, 'changeStatus']);
     Route::apiResource('questoes', QuestionController::class)->except('index');
 
-    Route::patch('questoescolecao/{questoescolecao}/status', [QuestionCollectionController::class,'changeStatus']);
+    Route::patch('questoescolecao/{questoescolecao}/status', [QuestionCollectionController::class, 'changeStatus']);
     Route::apiResource('questoescolecao', QuestionCollectionController::class)->except('index', 'show');
 
     Route::post('respostasalunos/{respostaaluno}/corrigir', [StudentAnswerController::class, 'correct']);

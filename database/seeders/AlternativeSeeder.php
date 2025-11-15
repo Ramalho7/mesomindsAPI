@@ -3,10 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Alternative;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
-
 
 class AlternativeSeeder extends Seeder
 {

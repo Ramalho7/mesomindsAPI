@@ -30,7 +30,7 @@ class ContentTypeController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $contentType
+            'data' => $contentType,
         ]);
     }
 
@@ -62,7 +62,7 @@ class ContentTypeController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
-        ;
+
     }
 
     /**
@@ -95,13 +95,13 @@ class ContentTypeController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => "Tipo de conteúdo cadastrado com sucesso",
+                'message' => 'Tipo de conteúdo cadastrado com sucesso',
                 'data' => $contentType->fresh()->load(['creator']),
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => "Erro ao atualiza o tipo de conteúdo",
+                'message' => 'Erro ao atualiza o tipo de conteúdo',
                 'error' => $e->getMessage(),
             ], 500);
         }
@@ -115,9 +115,9 @@ class ContentTypeController extends Controller
         try {
             $user = Auth::user();
 
-            if (!($user && $user->tipo === "ADM")) {
+            if (! ($user && $user->tipo === 'ADM')) {
                 return response()->json([
-                    "success" => false,
+                    'success' => false,
                     'message' => 'Acesso negado',
                 ], 403);
             }
@@ -131,7 +131,7 @@ class ContentTypeController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Erro ao excluir o tipo de conteúdo'
+                'message' => 'Erro ao excluir o tipo de conteúdo',
             ], 500);
         }
     }

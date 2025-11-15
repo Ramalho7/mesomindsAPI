@@ -18,6 +18,7 @@ class ContentTypeFactory extends Factory
     {
 
         $statuses = ['Ativo', 'Inativo'];
+
         return [
             'title' => $this->faker->name(),
             'description' => $this->faker->sentence(),

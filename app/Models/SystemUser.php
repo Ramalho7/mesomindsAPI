@@ -2,15 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
 class SystemUser extends Authenticatable
 {
-    use HasFactory, HasApiTokens, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'system_users';
 
@@ -21,7 +20,7 @@ class SystemUser extends Authenticatable
         'tipo',
         'criador',
         'ultimo_editor',
-        'status'
+        'status',
     ];
 
     protected $hidden = [

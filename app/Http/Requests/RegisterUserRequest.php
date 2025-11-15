@@ -23,17 +23,18 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'nome' => 'required|string',
-            'email'=> 'required|email|unique:system_users,email',
+            'email' => 'required|email|unique:system_users,email',
             'password' => 'required|string|min:8|confirmed',
             'tipo' => 'required|in:Aluno,Professor',
         ];
     }
 
-    public function messages(): array{
+    public function messages(): array
+    {
         return [
             'password.confirmed' => 'As senhas não coincidem',
             'email.unique' => 'Email já cadastrado',
-            'tipo.in' => 'Tipo de usário inválido. Escolha entre Aluno e Professor.'
+            'tipo.in' => 'Tipo de usário inválido. Escolha entre Aluno e Professor.',
         ];
     }
 }

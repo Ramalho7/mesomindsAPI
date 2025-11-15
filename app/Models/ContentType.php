@@ -17,7 +17,7 @@ class ContentType extends Model
         'description',
         'criador',
         'status',
-        'ultimo_editor'
+        'ultimo_editor',
     ];
 
     public function content()
@@ -34,5 +34,4 @@ class ContentType extends Model
     {
         return $this->belongsTo(SystemUser::class, 'ultimo_editor');
     }
-
 }

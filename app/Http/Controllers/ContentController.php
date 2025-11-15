@@ -18,9 +18,10 @@ use Illuminate\Support\Str;
 class ContentController extends Controller
 {
     use AuthorizesRequests;
+
     public function index(Request $request): JsonResponse
     {
-        $this->authorize("viewAny", Content::class);
+        $this->authorize('viewAny', Content::class);
         $query = Content::withoutGlobalScopes()->with(['creator', 'contentType', 'contentTags', 'images', 'lastEditor']);
         if ($request->has('status')) {
             $query->where('status', $request->input('status'));
@@ -58,7 +59,7 @@ class ContentController extends Controller
 
     public function store(StoreContent $request)
     {
-        $this->authorize("create", Content::class);
+        $this->authorize('create', Content::class);
         try {
             $validated = $request->validated();
             $user = Auth::user();
@@ -146,6 +147,7 @@ class ContentController extends Controller
     public function show(Content $conteudo): JsonResponse
     {
         $this->authorize('view', $conteudo);
+
         return response()->json([
             'success' => true,
             'data' => $conteudo->load(['creator', 'contentType', 'contentTags', 'images']),
@@ -173,7 +175,7 @@ class ContentController extends Controller
             }
 
             if (! empty($validated['content_tags'])) {
-                $tags = collect($validated['content_tags'])->map(function ($tag) use ($user) {
+                $tags = collect($validated['content_tags'])->map(function ($tag) {
                     return ContentTag::firstOrCreate(
                         ['tag_name' => $tag['tag_name']],
                         [
@@ -220,7 +222,7 @@ class ContentController extends Controller
 
     public function changeStatus(ChangeStatusContentRequest $request, Content $content)
     {
-        
+
         $this->authorize('changeStatus', $content);
 
         try {

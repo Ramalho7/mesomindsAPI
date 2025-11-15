@@ -8,8 +8,8 @@ use App\Http\Requests\UpdateMateriasRequest;
 use App\Models\Materias;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Models\SystemUser;
 use Illuminate\Support\Facades\Auth;
+
 class MateriasController extends Controller
 {
     public function index(Request $request): JsonResponse
@@ -26,7 +26,7 @@ class MateriasController extends Controller
 
         if (empty($status)) {
             $query->where('status', 'Ativo');
-        }else{
+        } else {
             $query->where('status', $status);
         }
 
@@ -66,7 +66,8 @@ class MateriasController extends Controller
         }
     }
 
-    public function show(Materias $materia): JsonResponse{
+    public function show(Materias $materia): JsonResponse
+    {
         return response()->json([
             'success' => true,
             'data' => $materia->load(['creator', 'lastEditor']),
@@ -125,18 +126,18 @@ class MateriasController extends Controller
         }
     }
 
-    public function destroy(Materias $materia):JsonResponse{
-        try{
+    public function destroy(Materias $materia): JsonResponse
+    {
+        try {
 
             $user = Auth::user();
 
-            if(! ($user && $user->tipo === "ADM")){
+            if (! ($user && $user->tipo === 'ADM')) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Acesso negado',
-                ],403);
+                ], 403);
             }
-
 
             $materia->delete();
 
@@ -144,12 +145,11 @@ class MateriasController extends Controller
                 'success' => true,
                 'message' => 'Materia excluído com sucesso',
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Erro ao excluir a matéria'
+                'message' => 'Erro ao excluir a matéria',
             ], 500);
         }
     }
-
 }

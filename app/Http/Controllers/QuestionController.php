@@ -88,7 +88,7 @@ class QuestionController extends Controller
 
             $question = Question::create($validated);
 
-            if ($question->type !== 'Aberta' && !empty($alternativesData)) {
+            if ($question->type !== 'Aberta' && ! empty($alternativesData)) {
                 foreach ($alternativesData as $alternativeData) {
                     Alternative::create([
                         'question_id' => $question->id,
@@ -129,7 +129,7 @@ class QuestionController extends Controller
 
         return response()->json([
             'success' => true,
-            'message'=> 'Questão carregada com sucesso',
+            'message' => 'Questão carregada com sucesso',
             'data' => $question->load(['creator', 'lastEditor', 'alternatives', 'materia']),
         ]);
     }
@@ -232,26 +232,26 @@ class QuestionController extends Controller
      * Change the status of the specified resource.
      */
     public function changeStatus(ChanceStatusQuestionRequest $request, Question $question): JsonResponse
-{
-    $this->authorize('update', $question);
+    {
+        $this->authorize('update', $question);
 
-    try {
-        $question->update([
-            'status' => $request->input('status'),
-            'ultimo_editor' => Auth::id(),
-        ]);
+        try {
+            $question->update([
+                'status' => $request->input('status'),
+                'ultimo_editor' => Auth::id(),
+            ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Status da questão atualizado com sucesso',
-            'data' => $question->fresh()->load(['alternatives']),
-        ]);
-    } catch (\Exception $e) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Erro ao alterar status da questão',
-            'error' => $e->getMessage(),
-        ], 500);
+            return response()->json([
+                'success' => true,
+                'message' => 'Status da questão atualizado com sucesso',
+                'data' => $question->fresh()->load(['alternatives']),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao alterar status da questão',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
-}
 }

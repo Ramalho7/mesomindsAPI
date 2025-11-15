@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\QuestionCollection;
 use App\Models\SystemUser;
-use Illuminate\Auth\Access\Response;
 
 class QuestionCollectionPolicy
 {

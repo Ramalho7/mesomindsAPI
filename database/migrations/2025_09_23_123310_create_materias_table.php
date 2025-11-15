@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome', 255)->unique();
             $table->string('descricao');
             $table->unsignedBigInteger('criador');
-            $table->enum('status', ["Ativo", "Inativo"])->default('Ativo');
+            $table->enum('status', ['Ativo', 'Inativo'])->default('Ativo');
             $table->unsignedBigInteger('ultimo_editor')->nullable();
             $table->timestamps();
 

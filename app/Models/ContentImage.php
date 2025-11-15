@@ -18,11 +18,12 @@ class ContentImage extends Model
     ];
 
     protected $appends = ['full_base64'];
+
     public function contents()
     {
         return $this->belongsToMany(Content::class, 'content_content_images', 'content_image_id', 'content_id')
-                ->withPivot('order')
-                ->orderBy('order');
+            ->withPivot('order')
+            ->orderBy('order');
     }
 
     public function getFullBase64Attribute()
@@ -30,6 +31,7 @@ class ContentImage extends Model
         if ($this->base64_data) {
             return "data:{$this->mime_type};base64,{$this->base64_data}";
         }
+
         return null;
     }
 }

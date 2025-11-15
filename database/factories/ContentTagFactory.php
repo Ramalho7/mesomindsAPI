@@ -15,9 +15,10 @@ class ContentTagFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {   
+    {
 
         $statuses = ['Ativo', 'Inativo'];
+
         return [
             'tag_name' => $this->faker->word(),
             'description' => $this->faker->sentence(),
