@@ -12,7 +12,7 @@ on:
 
 jobs:
   run-tests:
-    name: Run Laravel Tests
+    name: Run Tests - CI
     runs-on: ubuntu-latest
 
     steps:
