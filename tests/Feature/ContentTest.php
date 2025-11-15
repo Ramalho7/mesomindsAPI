@@ -49,7 +49,48 @@ class ContentTest extends TestCase
             'published_at' => now(),
         ]);
 
-        $response->dump();
         $response->assertStatus(201);
+    }
+
+    public function test_can_update_content(): void
+    {
+        $user = SystemUser::factory()->create([
+            'status' => 'Ativo',
+            'tipo' => 'ADM',
+        ]);
+
+        $contentType = ContentType::factory()->create();
+
+        $content = \App\Models\Content::factory()->create([
+            'title' => 'Meu Conteúdo',
+            'content' => 'Texto do conteúdo aqui',
+            'content_types_id' => $contentType->id,
+            'status' => 'Ativo',
+            'published_at' => now(),
+        ]);
+
+        Passport::actingAs($user);
+
+        $updateResponse = $this->putJson("/api/conteudos/{$content->id}", [
+            'title' => 'Conteúdo Atualizado',
+            'content' => 'Texto atualizado do conteúdo',
+            'content_type' => $contentType->title,
+            'content_type_description' => 'Descrição atualizada do tipo',
+            'content_tags' => [
+                [
+                    'tag_name' => 'Tag Atualizada',
+                    'description' => 'Descrição atualizada da tag',
+                ],
+            ],
+            'published_at' => now(),
+        ]);
+
+        $updateResponse->assertStatus(200);
+
+        $this->assertDatabaseHas('contents', [
+            'id' => $content->id,
+            'title' => 'Conteúdo Atualizado',
+            'content' => 'Texto atualizado do conteúdo',
+        ]);
     }
 }
