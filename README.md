@@ -2,6 +2,9 @@
 
 Mesominds API é uma aplicação desenvolvida em Laravel para gerenciar conteúdos, usuários e outras funcionalidades relacionadas ao sistema.
 
+
+121232312
+
 ## Tecnologias Utilizadas
 
 - **PHP** 8.3
