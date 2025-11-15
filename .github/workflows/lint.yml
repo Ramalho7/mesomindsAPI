@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -23,13 +23,5 @@ jobs:
       - name: Run Pint
         run: pint
 
-      - name: Configure Git
-        run: |
-          git config user.name "ramalho7"
-          git config user.email "adryelll85@gmail.com"
-          git remote set-url origin https://ramalho7:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/Ramalho7/mesomindsAPI.git
-
       - name: Commit linted files
         uses: stefanzweifel/git-auto-commit-action@v6
-        with:
-          commit_message: Apply automatic changes - pint
