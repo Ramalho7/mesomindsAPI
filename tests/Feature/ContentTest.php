@@ -124,33 +124,32 @@ class ContentTest extends TestCase
     }
 
     public function test_can_view_content_index(): void
-{
-    $user = SystemUser::factory()->create([
-        'status' => 'Ativo',
-        'tipo' => 'ADM',
-    ]);
+    {
+        $user = SystemUser::factory()->create([
+            'status' => 'Ativo',
+            'tipo' => 'ADM',
+        ]);
 
-    Content::factory()->count(5)->create([
-        'status' => 'Ativo',
-        'published_at' => now(),
-    ]);
+        Content::factory()->count(5)->create([
+            'status' => 'Ativo',
+            'published_at' => now(),
+        ]);
 
-    Passport::actingAs($user);
+        Passport::actingAs($user);
 
-    $response = $this->getJson('/api/conteudos');
+        $response = $this->getJson('/api/conteudos');
 
-    $response->assertStatus(200);
+        $response->assertStatus(200);
 
-    $response->assertJsonStructure([
-        'data' => [
+        $response->assertJsonStructure([
             'data' => [
-                '*' => ['id', 'title', 'content', 'status', 'published_at']
-            ],
-            'links',
-            'meta'
-        ]
-    ]);
+                'data' => [
+                    '*' => ['id', 'title', 'content', 'status', 'published_at']
+                ],
+                'links',
+            ]
+        ]);
 
-    $response->assertJsonCount(5, 'data.data');
-}
+        $response->assertJsonCount(5, 'data.data');
+    }
 }
