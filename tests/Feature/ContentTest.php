@@ -135,7 +135,6 @@ class ContentTest extends TestCase
             'published_at' => now(),
         ]);
 
-        Passport::actingAs($user);
 
         $response = $this->getJson('/api/conteudos');
 
@@ -152,4 +151,29 @@ class ContentTest extends TestCase
 
         $response->assertJsonCount(5, 'data.data');
     }
+
+
+    public function test_can_view_content_show(): void
+    {
+        $user = SystemUser::factory()->create([
+            'status' => 'Ativo',
+            'tipo' => 'ADM',
+        ]);
+
+        $content = Content::factory()->create([
+            'title' => 'Conteúdo Show',
+            'content' => 'Texto do conteúdo para show',
+            'status' => 'Ativo',
+            'published_at' => now(),
+        ]);
+
+        $response = $this->getJson("/api/conteudos/{$content->id}");
+
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            'id' => $content->id,
+            'title' => $content->title,
+        ]);
+    }
+
 }
