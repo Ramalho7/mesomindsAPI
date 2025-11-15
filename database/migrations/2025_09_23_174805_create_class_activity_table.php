@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreign('collection_id')->references('id')->on('question_collections')->onDelete('cascade');
             $table->foreign('created_by')->references('id')->on('system_users')->onDelete('cascade');
             $table->foreign('updated_by')->references('id')->on('system_users')->onDelete('cascade');
-            
+
             $table->unique(['class_id', 'collection_id']);
         });
     }
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_activity_pivot'); 
+        Schema::dropIfExists('class_activity_pivot');
     }
 };

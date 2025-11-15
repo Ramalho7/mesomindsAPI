@@ -19,7 +19,7 @@ class ContentFactory extends Factory
     public function definition(): array
     {
 
-        $status = [ 'Ativo', 'Inativo', 'Rascunho' ];
+        $status = ['Ativo', 'Inativo', 'Rascunho'];
 
         return [
             'title' => $this->faker->sentence(),

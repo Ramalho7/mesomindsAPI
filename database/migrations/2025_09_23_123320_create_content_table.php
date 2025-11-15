@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -33,7 +34,7 @@ return new class extends Migration
                 ->constrained('system_users')
                 ->nullOnDelete();
 
-        $table->foreignId('content_tags_id')
+            $table->foreignId('content_tags_id')
                 ->constrained('content_tags')
                 ->restrictOnDelete();
 

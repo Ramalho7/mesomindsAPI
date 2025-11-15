@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class ChangeStatusMateriaRequest extends FormRequest
 {
@@ -24,7 +23,7 @@ class ChangeStatusMateriaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => 'required|in:Ativo,Inativo'
+            'status' => 'required|in:Ativo,Inativo',
         ];
     }
 }

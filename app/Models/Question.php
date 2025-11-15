@@ -22,7 +22,7 @@ class Question extends Model
         'criador',
         'status',
         'type',
-        'correction'
+        'correction',
     ];
 
     protected $casts = [

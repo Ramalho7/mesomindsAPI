@@ -59,7 +59,7 @@ class QuestionCollectionFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'type' => 'Simulation',
-                'title' => 'Simulado - ' . $this->faker->word(),
+                'title' => 'Simulado - '.$this->faker->word(),
             ];
         });
     }
@@ -69,7 +69,7 @@ class QuestionCollectionFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'type' => 'Exam',
-                'title' => 'Prova - ' . $this->faker->word(),
+                'title' => 'Prova - '.$this->faker->word(),
             ];
         });
     }
@@ -79,7 +79,7 @@ class QuestionCollectionFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'type' => 'Activity',
-                'title' => 'Atividade - ' . $this->faker->word(),
+                'title' => 'Atividade - '.$this->faker->word(),
             ];
         });
     }
@@ -89,7 +89,7 @@ class QuestionCollectionFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'type' => 'Exercise',
-                'title' => 'Exercício - ' . $this->faker->word(),
+                'title' => 'Exercício - '.$this->faker->word(),
             ];
         });
     }

@@ -30,7 +30,7 @@ class ContentTagController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $contentTag
+            'data' => $contentTag,
         ]);
     }
 
@@ -88,13 +88,13 @@ class ContentTagController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => "Tag de conteúdo atualizada com sucesso",
+                'message' => 'Tag de conteúdo atualizada com sucesso',
                 'data' => $contentTag->fresh()->load(['creator', 'lastEditor']),
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => "Erro ao atualizar a tag de conteúdo",
+                'message' => 'Erro ao atualizar a tag de conteúdo',
                 'error' => $e->getMessage(),
             ], 500);
         }
@@ -108,9 +108,9 @@ class ContentTagController extends Controller
         try {
             $user = Auth::user();
 
-            if (!($user && $user->tipo === "ADM")) {
+            if (! ($user && $user->tipo === 'ADM')) {
                 return response()->json([
-                    "success" => false,
+                    'success' => false,
                     'message' => 'Acesso negado',
                 ], 403);
             }

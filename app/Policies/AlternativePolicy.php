@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\SystemUser;
 use App\Models\Alternative;
-use Illuminate\Auth\Access\Response;
+use App\Models\SystemUser;
 
 class AlternativePolicy
 {

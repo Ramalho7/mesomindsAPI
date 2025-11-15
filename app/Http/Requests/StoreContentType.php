@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class StoreContentType extends FormRequest
 {
@@ -29,7 +28,8 @@ class StoreContentType extends FormRequest
         ];
     }
 
-    public function messages (): array{
+    public function messages(): array
+    {
         return [
             'title.required' => 'O campo título é obrigatório.',
             'title.string' => 'O campo título deve ser uma string.',

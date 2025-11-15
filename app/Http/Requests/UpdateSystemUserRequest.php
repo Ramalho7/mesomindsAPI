@@ -23,7 +23,7 @@ class UpdateSystemUserRequest extends FormRequest
     public function rules(): array
     {
         $userId = $this->route('user');
-        
+
         return [
             'nome' => 'sometimes|required|string|max:255',
             'email' => [
@@ -31,10 +31,10 @@ class UpdateSystemUserRequest extends FormRequest
                 'required',
                 'email',
                 'max:100',
-                Rule::unique('system_users')->ignore($userId)
+                Rule::unique('system_users')->ignore($userId),
             ],
             'tipo' => 'sometimes|required|in:Professor,Aluno,ADM,Moderador,Operador',
-            'status' => 'sometimes|in:Ativo,Inativo,Bloqueado'
+            'status' => 'sometimes|in:Ativo,Inativo,Bloqueado',
         ];
     }
 }

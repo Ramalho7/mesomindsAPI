@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Auth;
 class SystemUserController extends Controller
 {
     use AuthorizesRequests;
+
     public function index(Request $request): JsonResponse
     {
-        $this->authorize("viewAny", SystemUser::class);
+        $this->authorize('viewAny', SystemUser::class);
 
         $query = SystemUser::with(['creator', 'lastEditor']);
 
@@ -109,7 +110,7 @@ class SystemUserController extends Controller
                     'success' => false,
                     'message' => 'A senha não pode ser atualizado neste endpoint.',
                 ], 422);
-            };
+            }
 
             $validated['ultimo_editor'] = auth()->id();
 

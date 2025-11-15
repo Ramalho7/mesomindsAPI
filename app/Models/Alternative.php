@@ -18,7 +18,7 @@ class Alternative extends Model
         'content',
         'correct',
         'criador',
-        'ultimo_editor'
+        'ultimo_editor',
     ];
 
     public function question(): BelongsTo

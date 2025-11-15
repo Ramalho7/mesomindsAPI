@@ -38,7 +38,8 @@ class UpdateContentRequest extends FormRequest
         ];
     }
 
-    public function messages():array{
+    public function messages(): array
+    {
         return [
             'status.in' => 'O campo status deve ser um dos seguintes valores: Ativo, Inativo, Rascunho.',
             'published_at.date' => 'O campo data de publicação deve ser uma data válida.',

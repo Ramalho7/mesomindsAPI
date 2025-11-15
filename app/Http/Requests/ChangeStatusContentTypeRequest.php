@@ -22,7 +22,7 @@ class ChangeStatusContentTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => 'required|in:Ativo,Inativo'
+            'status' => 'required|in:Ativo,Inativo',
         ];
     }
 }

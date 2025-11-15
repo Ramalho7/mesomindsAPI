@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class StoreContentTag extends FormRequest
 {
@@ -31,7 +30,8 @@ class StoreContentTag extends FormRequest
         ];
     }
 
-    public function messages (): array{
+    public function messages(): array
+    {
         return [
             'tag_name.required' => 'O campo nome da tag é obrigatório.',
             'tag_name.string' => 'O campo nome da tag deve ser uma string.',
@@ -42,7 +42,7 @@ class StoreContentTag extends FormRequest
             'description.max' => 'O campo descrição execeu o limite máximo de caracteres(255).',
             'is_moderator_only.required' => 'O campo apenas para moderadores é obrigatório.',
             'is_moderator_only.boolean' => 'O campo apenas para moderadores deve ser verdadeiro ou falso.',
-            'count.integer' => 'O campo contagem deve ser um número inteiro.'
+            'count.integer' => 'O campo contagem deve ser um número inteiro.',
         ];
     }
 }

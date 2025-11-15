@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function register(RegisterUserRequest $request){
-        try{
+    public function register(RegisterUserRequest $request)
+    {
+        try {
 
             if ($request->user()) {
                 return response()->json([
@@ -43,18 +44,19 @@ class AuthController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Erro ao realizar cadastro',
-                'error' => $e->getMessage(), 
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
 
-    public function login(LoginUserRequest $request){
-        try{
+    public function login(LoginUserRequest $request)
+    {
+        try {
             $validated = $request->validated();
 
             $user = SystemUser::where('email', $validated['email'])->first();
 
-            if (!$user || !Hash::check($validated['password'], $user->password)) {
+            if (! $user || ! Hash::check($validated['password'], $user->password)) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Credenciais inválidas',
@@ -83,7 +85,7 @@ class AuthController extends Controller
                 'token' => $token,
                 'user' => $user,
             ], 200);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Erro ao realizar login',
@@ -92,15 +94,16 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request){
-        try{
+    public function logout(Request $request)
+    {
+        try {
             $request->user()->token()->revoke();
 
             return response()->json([
                 'success' => true,
-                'message' => 'Logout realizado com sucesso'
+                'message' => 'Logout realizado com sucesso',
             ], 200);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Erro a realizar logout',
@@ -109,11 +112,12 @@ class AuthController extends Controller
         }
     }
 
-    public function validateToken(Request $request){
-        try{
+    public function validateToken(Request $request)
+    {
+        try {
             $user = $request->user();
 
-            if (!$user) {
+            if (! $user) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Token inválido ou expirado',
@@ -122,7 +126,7 @@ class AuthController extends Controller
 
             $token = $user->token();
 
-            if (!$token || $token->revoked) {
+            if (! $token || $token->revoked) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Token revogado',

@@ -1,12 +1,10 @@
 <?php
+
 namespace Database\Seeders;
 
 use App\Models\SystemUser;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Faker\Factory as Faker;
-
+use Illuminate\Database\Seeder;
 
 class SystemUserSeeder extends Seeder
 {
@@ -14,30 +12,30 @@ class SystemUserSeeder extends Seeder
     {
 
         SystemUser::create([
-            "nome" => "Administrador",
-            "email"=> "admin@mesominds.com",
-            "password"=> bcrypt("admin123"),
-            "tipo" => "ADM",
-            "status" => "Ativo",
-            "criador" => null
+            'nome' => 'Administrador',
+            'email' => 'admin@mesominds.com',
+            'password' => bcrypt('admin123'),
+            'tipo' => 'ADM',
+            'status' => 'Ativo',
+            'criador' => null,
         ]);
 
         SystemUser::create([
-            "nome" => "Moderador",
-            "email"=> "moderador@mesominds.com",
-            "password"=> bcrypt("mod123"),
-            "tipo" => "Moderador",
-            "status" => "Ativo",
-            "criador" => null
+            'nome' => 'Moderador',
+            'email' => 'moderador@mesominds.com',
+            'password' => bcrypt('mod123'),
+            'tipo' => 'Moderador',
+            'status' => 'Ativo',
+            'criador' => null,
         ]);
 
         SystemUser::create([
-            "nome" => "Operador",
-            "email"=> "operador@mesominds.com",
-            "password"=> bcrypt("op123"),
-            "tipo" => "Operador",
-            "status" => "Ativo",
-            "criador" => null
+            'nome' => 'Operador',
+            'email' => 'operador@mesominds.com',
+            'password' => bcrypt('op123'),
+            'tipo' => 'Operador',
+            'status' => 'Ativo',
+            'criador' => null,
         ]);
 
         SystemUser::factory()->count(5)->create();
