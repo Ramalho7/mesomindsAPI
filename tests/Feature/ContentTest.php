@@ -53,8 +53,8 @@ class ContentTest extends TestCase
         $response->assertStatus(201);
 
         $this->assertDatabaseHas('contents', [
-        'title' => 'Meu Conteúdo',
-        'content' => 'Texto do conteúdo aqui',
+            'title' => 'Meu Conteúdo',
+            'content' => 'Texto do conteúdo aqui',
         ]);
     }
 
@@ -91,8 +91,8 @@ class ContentTest extends TestCase
         $response->assertStatus(201);
 
         $this->assertDatabaseHas('contents', [
-        'title' => 'Meu Conteúdo',
-        'content' => 'Texto do conteúdo aqui',
+            'title' => 'Meu Conteúdo',
+            'content' => 'Texto do conteúdo aqui',
         ]);
     }
 
@@ -129,8 +129,8 @@ class ContentTest extends TestCase
         $response->assertStatus(201);
 
         $this->assertDatabaseHas('contents', [
-        'title' => 'Meu Conteúdo',
-        'content' => 'Texto do conteúdo aqui',
+            'title' => 'Meu Conteúdo',
+            'content' => 'Texto do conteúdo aqui',
         ]);
     }
 
@@ -459,7 +459,6 @@ class ContentTest extends TestCase
             'published_at' => now(),
         ]);
 
-
         $response = $this->getJson('/api/conteudos');
 
         $response->assertStatus(200);
@@ -467,15 +466,14 @@ class ContentTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 'data' => [
-                    '*' => ['id', 'title', 'content', 'status', 'published_at']
+                    '*' => ['id', 'title', 'content', 'status', 'published_at'],
                 ],
                 'links',
-            ]
+            ],
         ]);
 
         $response->assertJsonCount(5, 'data.data');
     }
-
 
     public function test_can_view_content_show(): void
     {
@@ -623,5 +621,4 @@ class ContentTest extends TestCase
             'status' => 'Ativo',
         ]);
     }
-
 }
