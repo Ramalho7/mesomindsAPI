@@ -17,6 +17,7 @@ class ContentTest extends TestCase
     {
         parent::setUp();
         $this->artisan('migrate');
+        $this->artisan('passport:keys');
     }
 
     public function test_can_create_content(): void
