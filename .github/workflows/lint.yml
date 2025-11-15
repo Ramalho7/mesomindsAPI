@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -25,3 +25,8 @@ jobs:
 
       - name: Commit linted files
         uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          commit_message: Apply automatic changes - pint
+          commit_user_name: ramalho7
+          commit_user_email: adryelll85@gmail.com
+          token: ${{ secrets.GITHUB_TOKEN }}
