@@ -35,20 +35,20 @@ class LoginUserTest extends TestCase
     //     $response->assertJsonStructure(['token']);
     // }
 
-public function test_user_cannot_login_with_invalid_credentials(): void
-{
-    SystemUser::factory()->create([
-        'email' => 'test@example.com',
-        'password' => bcrypt('password123'),
-        'status' => 'Ativo',
-    ]);
+    public function test_user_cannot_login_with_invalid_credentials(): void
+    {
+        SystemUser::factory()->create([
+            'email' => 'test@example.com',
+            'password' => bcrypt('password123'),
+            'status' => 'Ativo',
+        ]);
 
-    $response = $this->postJson('/api/login', [
-        'email' => 'test@example.com',
-        'password' => 'wrongpassword',
-    ]);
+        $response = $this->postJson('/api/login', [
+            'email' => 'test@example.com',
+            'password' => 'wrongpassword',
+        ]);
 
-    $response->assertStatus(401);
-    $response->assertJson(['message' => 'Credenciais inválidas']);
-}
+        $response->assertStatus(401);
+        $response->assertJson(['message' => 'Credenciais inválidas']);
+    }
 }
