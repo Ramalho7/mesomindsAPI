@@ -2,6 +2,9 @@ name: Fix Code Style
 
 on: [push]
 
+permissions:
+  contents: write
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -12,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -23,5 +26,14 @@ jobs:
       - name: Run Pint
         run: pint
 
+      - name: Configure Git
+        run: |
+          git config user.name "ramalho7"
+          git config user.email "adryelll85@gmail.com"
+
       - name: Commit linted files
         uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          commit_message: Apply automatic changes - pint
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

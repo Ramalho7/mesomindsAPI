@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nome', 255);
             $table->string('email', 100)->unique();
             $table->string('password', 255);
-            $table->string('cpf', 11)->unique();
             $table->enum('tipo', ['Professor', 'Aluno', 'ADM', 'Moderador', 'Operador'])->default('Aluno');
             $table->unsignedBigInteger('criador')->nullable();
             $table->unsignedBigInteger('ultimo_editor')->nullable();
