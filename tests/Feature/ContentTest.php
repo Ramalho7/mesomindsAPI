@@ -624,7 +624,7 @@ class ContentTest extends TestCase
 
     public function test_index_supports_search_and_filters(): void
     {
-        $user = SystemUser::factory()->create(['status' => 'Ativo','tipo' => 'ADM']);
+        $user = SystemUser::factory()->create(['status' => 'Ativo', 'tipo' => 'ADM']);
         Passport::actingAs($user);
 
         $typeA = ContentType::factory()->create(['title' => 'Type A']);
