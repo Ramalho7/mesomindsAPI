@@ -621,4 +621,36 @@ class ContentTest extends TestCase
             'status' => 'Ativo',
         ]);
     }
+
+    public function test_index_supports_search_and_filters(): void
+    {
+        $user = SystemUser::factory()->create(['status' => 'Ativo','tipo' => 'ADM']);
+        Passport::actingAs($user);
+
+        $typeA = ContentType::factory()->create(['title' => 'Type A']);
+        $typeB = ContentType::factory()->create(['title' => 'Type B']);
+
+        $tag = \App\Models\ContentTag::factory()->create(['tag_name' => 'mytag']);
+
+        Content::factory()->create([
+            'title' => 'Searchable Title',
+            'content_types_id' => $typeA->id,
+            'status' => 'Ativo',
+        ])->contentTags()->attach($tag->id);
+
+        Content::factory()->create([
+            'title' => 'Other Content',
+            'content_types_id' => $typeB->id,
+            'status' => 'Ativo',
+        ]);
+
+        $resSearch = $this->getJson('/api/conteudos?search=Searchable');
+        $resSearch->assertStatus(200)->assertJsonCount(1, 'data.data');
+
+        $resType = $this->getJson('/api/conteudos?content_type=Type A');
+        $resType->assertStatus(200)->assertJsonCount(1, 'data.data');
+
+        $resTag = $this->getJson('/api/conteudos?content_tag=mytag');
+        $resTag->assertStatus(200)->assertJsonCount(1, 'data.data');
+    }
 }

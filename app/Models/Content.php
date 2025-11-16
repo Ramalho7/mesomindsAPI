@@ -57,4 +57,9 @@ class Content extends Model
     {
         return $this->belongsTo(SystemUser::class, 'ultimo_editor');
     }
+
+    public function scopeAtivo($query)
+    {
+        return $query->where('status', 'Ativo');
+    }
 }
