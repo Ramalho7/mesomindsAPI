@@ -27,20 +27,13 @@ class QuestionController extends Controller
         $query = Question::with(['creator', 'lastEditor', 'alternatives', 'materia']);
 
         if ($request->has('status')) {
-            $query->where('status', $request->input('status'));
+            $query->status($request->input('status'));
         }
 
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where(function ($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                    ->orWhere('content', 'like', "%{$search}%");
-            });
-        }
+        $query->search($request->input('search'));
 
         if ($request->has('type')) {
-            $type = $request->input('type');
-            $query->where('type', $type);
+            $query->type($request->input('type'));
         }
 
         if ($request->has('materia')) {

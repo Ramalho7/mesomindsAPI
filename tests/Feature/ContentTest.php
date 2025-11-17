@@ -673,20 +673,20 @@ class ContentTest extends TestCase
 
     public function test_content_belongs_to_creator(): void
     {
-        $creator = \App\Models\SystemUser::factory()->create();
+        $creator = SystemUser::factory()->create();
         $content = Content::factory()->create(['criador' => $creator->id]);
 
         $this->assertEquals($creator->id, $content->creator->id);
-        $this->assertInstanceOf(\App\Models\SystemUser::class, $content->creator);
+        $this->assertInstanceOf(SystemUser::class, $content->creator);
     }
 
     public function test_content_belongs_to_last_editor(): void
     {
-        $editor = \App\Models\SystemUser::factory()->create();
+        $editor = SystemUser::factory()->create();
         $content = Content::factory()->create(['ultimo_editor' => $editor->id]);
 
         $this->assertEquals($editor->id, $content->lastEditor->id);
-        $this->assertInstanceOf(\App\Models\SystemUser::class, $content->lastEditor);
+        $this->assertInstanceOf(SystemUser::class, $content->lastEditor);
     }
 
     public function test_scope_ativo_returns_only_active_contents(): void
