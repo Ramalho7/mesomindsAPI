@@ -55,28 +55,29 @@ class Question extends Model
         return $this->hasMany(StudentAnswer::class);
     }
 
-    public function scopeStatus($query, string $status){
+    public function scopeStatus($query, string $status)
+    {
         return $query->where('status', $status);
     }
 
-    public function scopeSearch($query, string $search = null)
+    public function scopeSearch($query, ?string $search = null)
     {
-        if (!empty($search)) {
+        if (! empty($search)) {
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                ->orWhere('content', 'like', "%{$search}%");
+                    ->orWhere('content', 'like', "%{$search}%");
             });
         }
 
         return $query;
     }
 
-    public function scopeType($query, ?string $type){
-        if (!empty($type)) {
-        return $query->where('type', $type);
+    public function scopeType($query, ?string $type)
+    {
+        if (! empty($type)) {
+            return $query->where('type', $type);
         }
 
         return $query;
     }
-
 }

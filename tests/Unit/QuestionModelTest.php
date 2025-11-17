@@ -2,18 +2,17 @@
 
 namespace Tests\Unit;
 
+use App\Models\Alternative;
+use App\Models\Question;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Tests\TestCase;
-use App\Models\Question;
-use App\Models\Alternative;
 
 class QuestionModelTest extends TestCase
 {
-
     public function test_question_has_many_alternatives()
     {
-        $question = new Question();
+        $question = new Question;
 
         $this->assertInstanceOf(HasMany::class, $question->alternatives());
     }
@@ -52,7 +51,7 @@ class QuestionModelTest extends TestCase
 
     public function test_alternatives_relationship_returns_correct_model()
     {
-        $question = new Question();
+        $question = new Question;
 
         $relation = $question->alternatives();
 
@@ -60,7 +59,8 @@ class QuestionModelTest extends TestCase
         $this->assertEquals(Alternative::class, $relation->getRelated()::class);
     }
 
-    public function test_scope_status_filters_by_status_active(){
+    public function test_scope_status_filters_by_status_active()
+    {
         $query = \Mockery::mock(Builder::class);
 
         $query->shouldReceive('where')
@@ -68,12 +68,13 @@ class QuestionModelTest extends TestCase
             ->with('status', 'Active')
             ->andReturnSelf();
 
-        $result = (new Question())->scopeStatus($query, 'Active');
+        $result = (new Question)->scopeStatus($query, 'Active');
 
         $this->assertSame($query, $result);
     }
 
-    public function test_scope_status_filters_by_status_inactive(){
+    public function test_scope_status_filters_by_status_inactive()
+    {
         $query = \Mockery::mock(Builder::class);
 
         $query->shouldReceive('where')
@@ -81,7 +82,7 @@ class QuestionModelTest extends TestCase
             ->with('status', 'Inactive')
             ->andReturnSelf();
 
-        $result = (new Question())->scopeStatus($query, 'Inactive');
+        $result = (new Question)->scopeStatus($query, 'Inactive');
 
         $this->assertSame($query, $result);
     }
@@ -95,12 +96,13 @@ class QuestionModelTest extends TestCase
             ->with('status', 'InvalidStatus')
             ->andReturnSelf();
 
-        $result = (new Question())->scopeStatus($query, 'InvalidStatus');
+        $result = (new Question)->scopeStatus($query, 'InvalidStatus');
 
         $this->assertSame($query, $result);
     }
 
-    public function test_scope_type_filters_by_type(){
+    public function test_scope_type_filters_by_type()
+    {
         $query = \Mockery::mock(Builder::class);
 
         $query->shouldReceive('where')
@@ -108,7 +110,7 @@ class QuestionModelTest extends TestCase
             ->with('type', 'Multipla')
             ->andReturnSelf();
 
-        $result = (new Question())->scopeType($query, 'Multipla');
+        $result = (new Question)->scopeType($query, 'Multipla');
 
         $this->assertSame($query, $result);
     }
@@ -119,7 +121,7 @@ class QuestionModelTest extends TestCase
 
         $query->shouldNotReceive('where');
 
-        $result = (new Question())->scopeType($query, null);
+        $result = (new Question)->scopeType($query, null);
 
         $this->assertSame($query, $result);
     }
@@ -130,12 +132,13 @@ class QuestionModelTest extends TestCase
 
         $query->shouldNotReceive('where');
 
-        $result = (new Question())->scopeType($query, '');
+        $result = (new Question)->scopeType($query, '');
 
         $this->assertSame($query, $result);
     }
 
-    public function test_scope_search_filters_by_search(){
+    public function test_scope_search_filters_by_search()
+    {
         $query = \Mockery::mock(Builder::class);
 
         $query->shouldReceive('where')
@@ -157,7 +160,7 @@ class QuestionModelTest extends TestCase
             }))
             ->andReturnSelf();
 
-        $result = (new Question())->scopeSearch($query, 'example');
+        $result = (new Question)->scopeSearch($query, 'example');
 
         $this->assertSame($query, $result);
     }
@@ -168,7 +171,7 @@ class QuestionModelTest extends TestCase
 
         $query->shouldNotReceive('where');
 
-        $result = (new Question())->scopeSearch($query, '');
+        $result = (new Question)->scopeSearch($query, '');
 
         $this->assertSame($query, $result);
     }
