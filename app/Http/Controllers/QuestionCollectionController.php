@@ -27,19 +27,13 @@ class QuestionCollectionController extends Controller
         $query = QuestionCollection::with(['createdBy', 'updatedBy', 'questions']);
 
         if ($request->has('status')) {
-            $query->where('status', $request->input('status'));
+            $query->status($request->input('status'));
         }
 
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where(function ($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                    ->orWhere('description', 'like', "%{$search}%");
-            });
-        }
+        $query->search($request->input('search'));
 
         if ($request->has('type')) {
-            $query->where('type', $request->input('type'));
+            $query->type($request->input('type'));
         }
 
         $collections = $query->paginate($request->get('per_page', 10));
