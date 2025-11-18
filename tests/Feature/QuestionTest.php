@@ -216,6 +216,64 @@ class QuestionTest extends TestCase
         ]);
     }
 
+    public function test_updating_question_replaces_alternatives()
+    {
+        $user = SystemUser::factory()->create();
+
+        $question = Question::factory()->create();
+
+        $question->alternatives()->create([
+            'content' => 'Alt 1',
+            'correct' => true,
+            'criador' => $user->id,
+            'ultimo_editor' => $user->id,
+        ]);
+        $question->alternatives()->create([
+            'content' => 'Alt 2',
+            'correct' => false,
+            'criador' => $user->id,
+            'ultimo_editor' => $user->id,
+        ]);
+
+        $this->assertCount(2, $question->alternatives);
+
+        $question->alternatives()->delete();
+        $question->alternatives()->createMany([
+            [
+                'content' => 'Nova Alt 1',
+                'correct' => false,
+                'criador' => $user->id,
+                'ultimo_editor' => $user->id,
+            ],
+            [
+                'content' => 'Nova Alt 2',
+                'correct' => true,
+                'criador' => $user->id,
+                'ultimo_editor' => $user->id,
+            ],
+        ]);
+
+        $question->refresh();
+
+        $this->assertDatabaseMissing('alternatives', [
+            'question_id' => $question->id,
+            'content' => 'Alt 1',
+        ]);
+        $this->assertDatabaseMissing('alternatives', [
+            'question_id' => $question->id,
+            'content' => 'Alt 2',
+        ]);
+
+        $this->assertDatabaseHas('alternatives', [
+            'question_id' => $question->id,
+            'content' => 'Nova Alt 1',
+        ]);
+        $this->assertDatabaseHas('alternatives', [
+            'question_id' => $question->id,
+            'content' => 'Nova Alt 2',
+        ]);
+    }
+
     public function test_admin_can_delete_question()
     {
         $user = SystemUser::factory()->create(['tipo' => 'ADM', 'status' => 'Ativo']);
