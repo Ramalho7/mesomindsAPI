@@ -1,10 +1,6 @@
 name: Fix Code Style
 
-on:
-  push:
-    branches:
-      - main
-      - development
+on: [push]
 
 permissions:
   contents: write
