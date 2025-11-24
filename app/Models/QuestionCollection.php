@@ -64,4 +64,30 @@ class QuestionCollection extends Model
             ->where('questions.status', 'Active')
             ->orderBy('question_colletion_pivot.order');
     }
+
+    public function scopeStatus($query, string $status)
+    {
+        return $query->where('status', $status);
+    }
+
+    public function scopeSearch($query, ?string $search = null)
+    {
+        if (! empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        return $query;
+    }
+
+    public function scopeType($query, ?string $type)
+    {
+        if (! empty($type)) {
+            return $query->where('type', $type);
+        }
+
+        return $query;
+    }
 }

@@ -40,6 +40,11 @@ class QuestionCollectionFactory extends Factory
         return $this->afterCreating(function ($collection) use ($count) {
             $questions = Question::factory()
                 ->count($count)
+                ->state(function () use ($collection) {
+                    return [
+                        'materia' => $collection->subject_id,
+                    ];
+                })
                 ->withAlternatives(4)
                 ->create();
 
