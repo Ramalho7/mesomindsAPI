@@ -5,17 +5,14 @@ namespace Tests\Unit;
 use App\Models\Question;
 use App\Models\QuestionCollection;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Tests\TestCase;
 
 class QuestionCollectionModelTest extends TestCase
 {
-
     public function test_questions_relationship_returns_correct_model()
     {
-        $questionCollection = new QuestionCollection();
+        $questionCollection = new QuestionCollection;
 
         $relation = $questionCollection->questions();
 
@@ -44,7 +41,6 @@ class QuestionCollectionModelTest extends TestCase
         $this->assertTrue($collection->questions->contains('mock-question'));
         $this->assertEquals(2, $collection->questions->count());
     }
-
 
     public function test_question_collection_creation_fails_without_required_fields()
     {
@@ -93,7 +89,7 @@ class QuestionCollectionModelTest extends TestCase
             ->with('status', 'InvalidStatus')
             ->andReturnSelf();
 
-        $result = (new QuestionCollection())->scopeStatus($query, 'InvalidStatus');
+        $result = (new QuestionCollection)->scopeStatus($query, 'InvalidStatus');
 
         $this->assertSame($query, $result);
     }
@@ -129,7 +125,7 @@ class QuestionCollectionModelTest extends TestCase
             ->with('type', 'Exam')
             ->andReturnSelf();
 
-        $result = (new QuestionCollection())->scopeType($query, 'Exam');
+        $result = (new QuestionCollection)->scopeType($query, 'Exam');
 
         $this->assertSame($query, $result);
     }
@@ -143,7 +139,7 @@ class QuestionCollectionModelTest extends TestCase
             ->with('type', 'Simulation')
             ->andReturnSelf();
 
-        $result = (new QuestionCollection())->scopeType($query, 'Simulation');
+        $result = (new QuestionCollection)->scopeType($query, 'Simulation');
 
         $this->assertSame($query, $result);
     }

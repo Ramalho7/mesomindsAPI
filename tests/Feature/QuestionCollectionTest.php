@@ -220,8 +220,8 @@ class QuestionCollectionTest extends TestCase
 
         $question = $collection->questions()->first();
 
-        if (!$question) {
-        $this->fail('Collection does not have questions');
+        if (! $question) {
+            $this->fail('Collection does not have questions');
         }
 
         $updateData = [
@@ -287,8 +287,8 @@ class QuestionCollectionTest extends TestCase
 
         $question = $collection->questions()->first();
 
-        if (!$question) {
-        $this->fail('Collection does not have questions');
+        if (! $question) {
+            $this->fail('Collection does not have questions');
         }
 
         $updateData = [
@@ -354,8 +354,8 @@ class QuestionCollectionTest extends TestCase
 
         $question = $collection->questions()->first();
 
-        if (!$question) {
-        $this->fail('Collection does not have questions');
+        if (! $question) {
+            $this->fail('Collection does not have questions');
         }
 
         $updateData = [
