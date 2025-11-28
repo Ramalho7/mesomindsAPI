@@ -23,12 +23,24 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: 8.3
-        extensions: mbstring, pdo, bcmath, intl, pcntl
+        extensions: mbstring, pdo, bcmath, intl, pcntl, zip
         ini-values: post_max_size=256M, upload_max_filesize=256M, memory_limit=512M
         coverage: xdebug
 
+    - name: Debug PHP & Composer
+      run: |
+        php -v
+        composer self-update --stable
+        composer diagnose || true
+
+    - name: Show lock/platform info
+      run: |
+        php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION.PHP_EOL;'
+        composer show symfony/filesystem --no-interaction || true
+        git --no-pager show -s --format="%h %ci %an" composer.lock || true
+
     - name: Install Composer dependencies
-      run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+      run: composer install --no-progress --prefer-dist --optimize-autoloader --no-interaction
 
     - name: Set up environment
       run: cp .env.testing .env

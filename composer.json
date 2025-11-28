@@ -80,8 +80,8 @@
             "php-http/discovery": true
         },
         "platform": {
-            "php": "^8.3"
-    }
+            "php": "8.3.28"
+        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true
