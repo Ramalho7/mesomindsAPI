@@ -10,6 +10,39 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    /**
+     * Self-register de usuários na plataforma.
+     *
+     * @group Autenticação
+     *
+     * @response 201 {
+     *  "success": true,
+     *  "message": "Cadastro realizado com sucesso",
+     *  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+     *  "user": {
+     *    "id": 4,
+     *    "nome": "Jessica Jones",
+     *    "email": "jessica@example.com",
+     *    "tipo": "admin",
+     *    "status": "Ativo",
+     *    "criador": null,
+     *    "created_at": "2025-11-28T12:34:56.000000Z",
+     *    "updated_at": "2025-11-28T12:34:56.000000Z"
+     *  }
+     * }
+     *
+     * @response 403 {
+     *  "success": false,
+     *  "message": "Usuários autenticados devem usar a rota /api/users para criar novos usuários"
+     * }
+     *
+     * @response 500 {
+     *  "success": false,
+     *  "message": "Erro ao realizar cadastro",
+     *  "error": "mensagem da exceção"
+     * }
+     */
+
     public function register(RegisterUserRequest $request)
     {
         try {
@@ -49,6 +82,49 @@ class AuthController extends Controller
         }
     }
 
+
+    /**
+     * Login usuários de usuários na plataforma.
+     *
+     * @group Autenticação
+     *
+     * @response 200 {
+     *  "success": true,
+     *  "message": "Login realizado com sucesso",
+     *  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+     *  "user": {
+     *    "id": 4,
+     *    "nome": "Jessica Jones",
+     *    "email": "jessica@example.com",
+     *    "tipo": "admin",
+     *    "status": "Ativo",
+     *    "criador": null,
+     *    "created_at": "2025-11-28T12:34:56.000000Z",
+     *    "updated_at": "2025-11-28T12:34:56.000000Z"
+     *  }
+     * }
+     *
+     * @response 401 {
+     *  "success": false,
+     *  "message": "Credenciais inválidas"
+     * }
+     *
+     * @response 403 {
+     *  "success": false,
+     *  "message": "Usuário inativo"
+     * }
+     *
+     * @response 403 {
+     *  "success": false,
+     *  "message": "Usuário bloqueado"
+     * }
+     *
+     * @response 500 {
+     *  "success": false,
+     *  "message": "Erro ao realizar login",
+     *  "error": "mensagem da exceção"
+     * }
+     */
     public function login(LoginUserRequest $request)
     {
         try {

@@ -37,4 +37,40 @@ class RegisterUserRequest extends FormRequest
             'tipo.in' => 'Tipo de usário inválido. Escolha entre Aluno e Professor.',
         ];
     }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'nome' => [
+                'description' => 'Nome completo do usuário. (Poderá ser usado como username)',
+                'example' => 'Jessica Jones',
+                'type' => 'string',
+                'required' => true,
+            ],
+            'email' => [
+                'description' => 'Email válido do usuário.',
+                'example' => 'jessica@example.com',
+                'type' => 'string',
+                'required' => true,
+            ],
+            'password' => [
+                'description' => 'Senha (mínimo 8 caracteres).',
+                'example' => 'secret123',
+                'type' => 'string',
+                'required' => true,
+            ],
+            'password_confirmation' => [
+                'description' => 'Confirmação da senha (deve ser igual a password).',
+                'example' => 'secret123',
+                'type' => 'string',
+                'required' => true,
+            ],
+            'tipo' => [
+                'description' => 'Tipo/role do usuário. Valores: Aluno ou Professor.',
+                'example' => 'Aluno',
+                'type' => 'string',
+                'required' => true,
+            ],
+        ];
+    }
 }
