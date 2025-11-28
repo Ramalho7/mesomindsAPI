@@ -26,7 +26,7 @@ class ContentTypeController extends Controller
             });
         }
 
-        $contentType = $query->paginate(($request->get('per_page', 10)));
+        $contentType = $query->paginate($request->get('per_page', 10));
 
         return response()->json([
             'success' => true,

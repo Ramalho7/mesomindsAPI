@@ -72,7 +72,7 @@ class QuestionCollection extends Model
 
     public function scopeSearch($query, ?string $search = null)
     {
-        if (! empty($search)) {
+        if ($search !== null && $search !== '') {
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
                     ->orWhere('description', 'like', "%{$search}%");
@@ -84,7 +84,7 @@ class QuestionCollection extends Model
 
     public function scopeType($query, ?string $type)
     {
-        if (! empty($type)) {
+        if ($type !== null && $type !== '') {
             return $query->where('type', $type);
         }
 

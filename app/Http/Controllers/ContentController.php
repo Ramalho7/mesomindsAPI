@@ -49,7 +49,7 @@ class ContentController extends Controller
             });
         }
 
-        $contents = $query->paginate(($request->get('per_page', 10)));
+        $contents = $query->paginate($request->get('per_page', 10));
 
         return response()->json([
             'success' => true,
@@ -160,7 +160,6 @@ class ContentController extends Controller
         try {
             $validated = $request->validated();
 
-            $user = Auth::user();
             $validated['ultimo_editor'] = Auth::id();
 
             $content->update($validated);

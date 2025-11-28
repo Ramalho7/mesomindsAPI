@@ -74,7 +74,7 @@ class Question extends Model
 
     public function scopeType($query, ?string $type)
     {
-        if (! empty($type)) {
+        if ($type !== null && $type !== '') {
             return $query->where('type', $type);
         }
 
