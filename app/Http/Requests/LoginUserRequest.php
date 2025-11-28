@@ -37,4 +37,22 @@ class LoginUserRequest extends FormRequest
             'password.min' => 'Senha deve ter no mínimo 6 caracteres',
         ];
     }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'email' => [
+                'description' => 'Email do usuário cadastrado.',
+                'type' => 'string',
+                'required' => true,
+                'example' => 'usuario@exemplo.com',
+            ],
+            'password' => [
+                'description' => 'Senha do usuário.',
+                'type' => 'string',
+                'required' => true,
+                'example' => 'senha123',
+            ],
+        ];
+    }
 }
