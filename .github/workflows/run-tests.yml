@@ -33,12 +33,6 @@ jobs:
         composer self-update --stable
         composer diagnose || true
 
-    - name: Show lock/platform info
-      run: |
-        php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION.PHP_EOL;'
-        composer show symfony/filesystem --no-interaction || true
-        git --no-pager show -s --format="%h %ci %an" composer.lock || true
-
     - name: Install Composer dependencies
       run: composer install --no-progress --prefer-dist --optimize-autoloader --no-interaction
 
