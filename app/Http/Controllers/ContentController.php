@@ -27,27 +27,15 @@ class ContentController extends Controller
             $query->where('status', $request->input('status'));
         }
 
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where(function ($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                    ->orWhere('content', 'like', "%{$search}%");
-            });
+        if ($request->has('status')) {
+            $query->status($request->input('status'));
         }
 
-        if ($request->has('content_type')) {
-            $contentType = $request->input('content_type');
-            $query->whereHas('contentType', function ($q) use ($contentType) {
-                $q->where('title', 'like', "%{$contentType}%");
-            });
-        }
+        $query->search($request->input('search'));
 
-        if ($request->has('content_tag')) {
-            $contenTag = $request->input('content_tag');
-            $query->whereHas('contentTags', function ($q) use ($contenTag) {
-                $q->where('tag_name', 'like', "%{$contenTag}%");
-            });
-        }
+        $query->contentType($request->input('content_type'));
+
+        $query->contentTag($request->input('content_tag'));
 
         $contents = $query->paginate($request->get('per_page', 10));
 

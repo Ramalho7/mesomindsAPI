@@ -58,8 +58,41 @@ class Content extends Model
         return $this->belongsTo(SystemUser::class, 'ultimo_editor');
     }
 
-    public function scopeAtivo($query)
+    public function scopeStatus($query, string $status)
     {
-        return $query->where('status', 'Ativo');
+        return $query->where('status', $status);
+    }
+
+    public function scopeSearch($query, ?string $search = null)
+    {
+        if (! empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('content', 'like', "%{$search}%");
+            });
+        }
+
+        return $query;
+    }
+
+    public function scopeContentType($query, ?string $contentType)
+    {
+        if ($contentType !== null && $contentType !== '') {
+            return $query->whereHas('contentType', function ($q) use ($contentType) {
+                $q->where('title', 'like', "%{$contentType}%");
+            });
+        }
+
+        return $query;
+    }
+
+    public function scopeContentTag($query, ?string $contentTag)
+    {
+        if ($contentTag !== null && $contentTag !== '') {
+            return $query->whereHas('contentTags', function ($q) use ($contentTag) {
+                $q->where('tag_name', 'like', "%{$contentTag}%");
+            });
+        }
+        return $query;
     }
 }
