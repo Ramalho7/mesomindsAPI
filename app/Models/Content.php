@@ -93,6 +93,7 @@ class Content extends Model
                 $q->where('tag_name', 'like', "%{$contentTag}%");
             });
         }
+
         return $query;
     }
 }
