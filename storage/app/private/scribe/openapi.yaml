@@ -386,7 +386,11 @@ paths:
                 published_at:
                   type: string
                   description: 'Must be a valid date.'
+<<<<<<< HEAD
                   example: '2025-12-15T03:14:59'
+=======
+                  example: '2025-12-14T21:56:08'
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
                   nullable: true
                 is_moderator_only:
                   type: boolean
@@ -2455,7 +2459,7 @@ paths:
                 is_moderator_only:
                   type: boolean
                   description: ''
-                  example: false
+                  example: true
                 count:
                   type: integer
                   description: ''
@@ -4483,7 +4487,7 @@ paths:
                 type:
                   type: string
                   description: ''
-                  example: Multipla
+                  example: Aberta
                   enum:
                     - Multipla
                     - VerdadeiroFalso
@@ -8284,7 +8288,11 @@ paths:
                 status:
                   type: string
                   description: ''
+<<<<<<< HEAD
                   example: Inativo
+=======
+                  example: Rascunho
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
                   enum:
                     - Ativo
                     - Inativo
@@ -8359,7 +8367,11 @@ paths:
                 published_at:
                   type: string
                   description: 'Must be a valid date.'
+<<<<<<< HEAD
                   example: '2025-12-15T03:14:59'
+=======
+                  example: '2025-12-14T21:56:08'
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
                   nullable: true
                 is_moderator_only:
                   type: boolean
@@ -9085,6 +9097,7 @@ paths:
         required: true
         schema:
           type: integer
+<<<<<<< HEAD
   /api/me:
     get:
       summary: 'Retorna as informações do usuário autenticado junto com suas habilidades.'
@@ -9187,6 +9200,8 @@ paths:
       tags:
         - Usuários
       security: []
+=======
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
   '/api/users/{user_id}/password':
     put:
       summary: 'updatePassword: Atualiza a senha de um usuário do sistema.'
@@ -9215,7 +9230,11 @@ paths:
         in: path
         name: user_id
         description: 'The ID of the user.'
+<<<<<<< HEAD
         example: 01kcfr2vb4qb8b4kjtfxb3pv7b
+=======
+        example: 1
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
         required: true
         schema:
           type: string
@@ -9266,7 +9285,11 @@ paths:
                   example: b
                 email:
                   type: string
+<<<<<<< HEAD
                   description: 'Must be a valid email address.'
+=======
+                  description: 'Must be a valid email address. Must not be greater than 100 characters.'
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
                   example: zbailey@example.net
                 password:
                   type: string
@@ -9275,7 +9298,11 @@ paths:
                 role:
                   type: string
                   description: ''
+<<<<<<< HEAD
                   example: student
+=======
+                  example: admin
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
                   enum:
                     - teacher
                     - student
@@ -9335,12 +9362,20 @@ paths:
                   example: b
                 email:
                   type: string
+<<<<<<< HEAD
                   description: 'Must be a valid email address.'
+=======
+                  description: 'Must be a valid email address. Must not be greater than 100 characters.'
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
                   example: zbailey@example.net
                 tipo:
                   type: string
                   description: ''
+<<<<<<< HEAD
                   example: Aluno
+=======
+                  example: Professor
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
                   enum:
                     - Professor
                     - Aluno
@@ -9350,7 +9385,11 @@ paths:
                 status:
                   type: string
                   description: ''
+<<<<<<< HEAD
                   example: Ativo
+=======
+                  example: Inativo
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
                   enum:
                     - Ativo
                     - Inativo
@@ -9370,7 +9409,11 @@ paths:
         in: path
         name: id
         description: 'The ID of the user.'
+<<<<<<< HEAD
         example: 01kcfr2vb4qb8b4kjtfxb3pv7b
+=======
+        example: 1
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
         required: true
         schema:
           type: string
@@ -9393,7 +9436,11 @@ paths:
                 status:
                   type: string
                   description: ''
+<<<<<<< HEAD
                   example: inactive
+=======
+                  example: active
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
                   enum:
                     - active
                     - inactive
@@ -9406,7 +9453,11 @@ paths:
         in: path
         name: user_id
         description: 'The ID of the user.'
+<<<<<<< HEAD
         example: 01kcfr2vb4qb8b4kjtfxb3pv7b
+=======
+        example: 1
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
         required: true
         schema:
           type: string

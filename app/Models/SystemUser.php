@@ -11,7 +11,11 @@ use Laravel\Passport\HasApiTokens;
 
 class SystemUser extends Authenticatable
 {
+<<<<<<< HEAD
     use HasApiTokens, HasFactory, HasUlids, Notifiable, SoftDeletes;
+=======
+    use HasApiTokens, HasFactory, HasUlids, Notifiable;
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
 
     protected $table = 'system_users';
 

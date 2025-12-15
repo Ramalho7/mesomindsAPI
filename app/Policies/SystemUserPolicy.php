@@ -27,7 +27,11 @@ class SystemUserPolicy
      */
     public function viewAny(SystemUser $user): bool
     {
+<<<<<<< HEAD
         return $user->role === 'admin';
+=======
+        return $user->tipo === 'admin';
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
     }
 
     /**
@@ -39,7 +43,11 @@ class SystemUserPolicy
      */
     public function view(SystemUser $user, ?SystemUser $systemUser = null): bool
     {
+<<<<<<< HEAD
         if ($user->role === 'admin') {
+=======
+        if ($user->tipo === 'admin') {
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
             return true;
         }
 
@@ -58,7 +66,11 @@ class SystemUserPolicy
      */
     public function create(SystemUser $user): bool
     {
+<<<<<<< HEAD
         return $user->role === 'admin';
+=======
+        return $user->tipo === 'admin';
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
     }
 
     /**
@@ -70,7 +82,11 @@ class SystemUserPolicy
      */
     public function update(SystemUser $user, ?SystemUser $systemUser = null): bool
     {
+<<<<<<< HEAD
         if ($user->role === 'admin') {
+=======
+        if ($user->tipo === 'admin') {
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
             return true;
         }
 
@@ -88,6 +104,7 @@ class SystemUserPolicy
      * @param  SystemUser  $systemUser  Usuário cuja senha será atualizada.
      * @return bool Retorna `true` se o usuário for administrador ou se estiver atualizando sua própria senha.
      */
+<<<<<<< HEAD
     public function updatePassword(SystemUser $user, ?SystemUser $systemUser): bool
     {
         if ($user->role === 'admin') {
@@ -106,6 +123,17 @@ class SystemUserPolicy
         return $user->role === 'admin';
     }
 
+=======
+    public function updatePassword(SystemUser $user, SystemUser $systemUser): bool
+    {
+        if ($user->tipo === 'admin') {
+            return true;
+        }
+
+        return $user->id === $systemUser->id;
+    }
+
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
     /**
      * Determina se o usuário pode excluir um usuário específico.
      *
@@ -115,7 +143,11 @@ class SystemUserPolicy
      */
     public function delete(SystemUser $user, SystemUser $systemUser): bool
     {
+<<<<<<< HEAD
         if ($user->role === 'admin') {
+=======
+        if ($user->tipo === 'admin') {
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
             return true;
         }
 
@@ -148,7 +180,11 @@ class SystemUserPolicy
      */
     public function forceDelete(SystemUser $user, ?SystemUser $systemUser = null): bool
     {
+<<<<<<< HEAD
         if ($user->role === 'admin') {
+=======
+        if ($user->tipo === 'admin') {
+>>>>>>> f4d92fb (Adicionado ULID para user (#100))
             return true;
         }
 
