@@ -12,18 +12,27 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('system_users', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome', 255);
-            $table->string('email', 100)->unique();
+            $table->ulid('id')->primary();
+            $table->string('name', 255);
+            $table->string('email', 255)->unique();
             $table->string('password', 255);
-            $table->enum('tipo', ['Professor', 'Aluno', 'ADM', 'Moderador', 'Operador'])->default('Aluno');
-            $table->unsignedBigInteger('criador')->nullable();
-            $table->unsignedBigInteger('ultimo_editor')->nullable();
-            $table->enum('status', ['Ativo', 'Inativo', 'Bloqueado'])->default('Ativo');
+            $table->enum('role', ['teacher', 'student', 'admin', 'moderator', 'operator'])->default('student');
+            $table->ulid('created_by')->nullable();
+            $table->ulid('updated_by')->nullable();
+            $table->enum('status', ['active', 'inactive', 'banned', 'pending'])->default('active');
+            $table->softDeletes();
+
             $table->timestamps();
 
-            $table->foreign('criador')->references('id')->on('system_users')->onDelete('set null');
-            $table->foreign('ultimo_editor')->references('id')->on('system_users')->onDelete('set null');
+            $table->fullText('name');
+            $table->index('created_at');
+            $table->index('updated_at');
+            $table->index('deleted_at');
+            $table->fullText('email');
+            $table->index('status');
+
+            $table->foreign('created_by')->references('id')->on('system_users')->onDelete('set null');
+            $table->foreign('updated_by')->references('id')->on('system_users')->onDelete('set null');
         });
     }
 

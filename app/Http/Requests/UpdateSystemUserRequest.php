@@ -30,11 +30,25 @@ class UpdateSystemUserRequest extends FormRequest
                 'sometimes',
                 'required',
                 'email',
-                'max:100',
                 Rule::unique('system_users')->ignore($userId),
             ],
             'tipo' => 'sometimes|required|in:Professor,Aluno,ADM,Moderador,Operador',
             'status' => 'sometimes|in:Ativo,Inativo,Bloqueado',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'nome.required' => 'O campo nome é obrigatório.',
+            'nome.string' => 'O campo nome deve ser uma string.',
+            'nome.max' => 'O campo nome não pode exceder 255 caracteres.',
+            'email.required' => 'O campo email é obrigatório.',
+            'email.email' => 'O campo email deve ser um endereço de email válido.',
+            'email.unique' => 'O email informado já está em uso.',
+            'tipo.required' => 'O campo tipo é obrigatório.',
+            'tipo.in' => 'O tipo deve ser uma das seguintes opções: Professor, Aluno, ADM, Moderador, Operador.',
+            'status.in' => 'O status deve ser uma das seguintes opções: Ativo, Inativo, Bloqueado.',
         ];
     }
 }

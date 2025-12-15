@@ -26,9 +26,9 @@ class QuestionFactory extends Factory
             'title' => $this->faker->sentence(),
             'content' => $this->faker->paragraph(),
             'correction' => $this->faker->paragraph(),
-            'materia' => Materias::factory(),
-            'ultimo_editor' => SystemUser::factory()->create()->id,
-            'criador' => SystemUser::factory()->create()->id,
+            'materia_id' => Materias::factory(),
+            'updated_by' => SystemUser::factory()->create()->id,
+            'created_by' => SystemUser::factory()->create()->id,
             'type' => $this->faker->randomElement($types),
             'status' => $this->faker->randomElement($status),
         ];

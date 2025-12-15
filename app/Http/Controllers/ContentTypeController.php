@@ -44,9 +44,9 @@ class ContentTypeController extends Controller
 
             $user = Auth::user();
 
-            $validated['criador'] = $user->id;
+            $validated['created_by'] = $user->id;
 
-            $validated['ultimo_editor'] = $user->id;
+            $validated['updated_by'] = $user->id;
 
             $contentType = ContentType::create($validated);
 
@@ -72,7 +72,7 @@ class ContentTypeController extends Controller
     {
         return response()->json([
             'success' => true,
-            'data' => $contentType->load(['creator', 'lastEditor']),
+            'data' => $contentType->load(['creator', 'updater']),
         ]);
     }
 
@@ -87,9 +87,9 @@ class ContentTypeController extends Controller
 
             $user = Auth::user();
 
-            $validated['criador'] = $user->id;
+            $validated['created_by'] = $user->id;
 
-            $validated['ultimo_editor'] = $user->id;
+            $validated['updated_by'] = $user->id;
 
             $contentType->update($validated);
 
@@ -115,7 +115,7 @@ class ContentTypeController extends Controller
         try {
             $user = Auth::user();
 
-            if (! ($user && $user->tipo === 'ADM')) {
+            if (! ($user && $user->tipo === 'admin')) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Acesso negado',
@@ -145,7 +145,7 @@ class ContentTypeController extends Controller
 
             $contentType->update([
                 'status' => $validated['status'],
-                'ultimo_editor' => $user->id,
+                'updated_by' => $user->id,
             ]);
 
             $contentType->refresh();

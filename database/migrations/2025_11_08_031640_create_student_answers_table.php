@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('student_answers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
+            $table->ulid('student_id');
             $table->unsignedBigInteger('question_id');
             $table->unsignedBigInteger('collection_id')->nullable();
             $table->longText('answer')->nullable();
             $table->decimal('score', 5, 2)->nullable()->comment('Nota dada pelo professor');
             $table->longText('feedback')->nullable()->comment('Feedback do professor');
-            $table->unsignedBigInteger('corrected_by')->nullable();
+            $table->ulid('corrected_by')->nullable();
             $table->dateTime('submitted_at')->nullable();
             $table->dateTime('corrected_at')->nullable();
             $table->enum('status', ['Pending', 'Submitted', 'Corrected'])->default('Pending');

@@ -21,8 +21,8 @@ class AlternativeFactory extends Factory
             'question_id' => Question::factory(),
             'content' => $this->faker->sentence(),
             'correct' => $this->faker->boolean(),
-            'criador' => \App\Models\SystemUser::factory()->create()->id,
-            'ultimo_editor' => \App\Models\SystemUser::factory()->create()->id,
+            'created_by' => \App\Models\SystemUser::factory()->create()->id,
+            'updated_by' => \App\Models\SystemUser::factory()->create()->id,
         ];
     }
 }

@@ -28,7 +28,7 @@ class AlternativePolicy
      */
     public function create(SystemUser $systemUser): bool
     {
-        return in_array($systemUser->tipo, ['ADM', 'Moderador', 'Operador']);
+        return in_array($systemUser->role, ['admin', 'moderator', 'operator']);
     }
 
     /**
@@ -36,7 +36,7 @@ class AlternativePolicy
      */
     public function update(SystemUser $systemUser, Alternative $alternative): bool
     {
-        return in_array($systemUser->tipo, ['ADM', 'Moderador', 'Operador']);
+        return in_array($systemUser->role, ['admin', 'moderator', 'operator']);
     }
 
     /**
@@ -44,7 +44,7 @@ class AlternativePolicy
      */
     public function delete(SystemUser $systemUser, Alternative $alternative): bool
     {
-        return $systemUser->tipo === 'ADM';
+        return $systemUser->role === 'admin';
     }
 
     /**
@@ -60,6 +60,6 @@ class AlternativePolicy
      */
     public function forceDelete(SystemUser $systemUser, Alternative $alternative): bool
     {
-        return $systemUser->tipo === 'ADM';
+        return $systemUser->role === 'admin';
     }
 }

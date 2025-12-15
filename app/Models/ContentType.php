@@ -15,9 +15,9 @@ class ContentType extends Model
     protected $fillable = [
         'title',
         'description',
-        'criador',
+        'created_by',
         'status',
-        'ultimo_editor',
+        'updated_by',
     ];
 
     public function content()
@@ -27,11 +27,11 @@ class ContentType extends Model
 
     public function creator()
     {
-        return $this->belongsTo(SystemUser::class, 'criador');
+        return $this->belongsTo(SystemUser::class, 'created_by');
     }
 
     public function lastEditor()
     {
-        return $this->belongsTo(SystemUser::class, 'ultimo_editor');
+        return $this->belongsTo(SystemUser::class, 'updated_by');
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ContentTagController;
 use App\Http\Controllers\ContentTypeController;
 use App\Http\Controllers\MateriasController;
+use App\Http\Controllers\MeController;
 use App\Http\Controllers\QuestionCollectionController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\StudentAnswerController;
@@ -41,6 +42,8 @@ Route::get('questoes', [QuestionController::class, 'index']);
 
 Route::get('questoescolecao', [QuestionCollectionController::class, 'index']);
 Route::get('questoescolecao/{questoescolecao}', [QuestionCollectionController::class, 'show']);
+
+Route::middleware('auth:api')->get('/me', [MeController::class, 'me']);
 
 Route::middleware('auth:api')->group(function () {
 

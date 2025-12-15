@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('collection_id');
             $table->unsignedBigInteger('question_id');
-            $table->unsignedBigInteger('created_by');
-            $table->unsignedBigInteger('updated_by');
+            $table->ulid('created_by');
+            $table->ulid('updated_by');
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->integer('order')->nullable()->comment('Question order within collection');
             $table->timestamps();

@@ -42,12 +42,12 @@ class Question extends Model
 
     public function creator(): BelongsTo
     {
-        return $this->belongsTo(SystemUser::class, 'criador');
+        return $this->belongsTo(SystemUser::class, 'created_by');
     }
 
     public function lastEditor(): BelongsTo
     {
-        return $this->belongsTo(SystemUser::class, 'ultimo_editor');
+        return $this->belongsTo(SystemUser::class, 'updated_by');
     }
 
     public function studentAnswers(): HasMany

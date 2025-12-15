@@ -16,13 +16,22 @@ return new class extends Migration
             $table->string('title', 255)->unique();
             $table->string('description');
 
-            $table->foreignId('criador')
-                ->constrained('system_users')
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->string('slug')->nullable();
+            $table->longText('icon')->nullable();
+            $table->string('color', 50)->nullable();
+
+            $table->ulid('created_by');
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('system_users')
                 ->cascadeOnDelete();
 
-            $table->foreignId('ultimo_editor')
-                ->nullable()
-                ->constrained('system_users')
+            $table->ulid('updated_by')
+                ->nullable();
+            $table->foreign('updated_by')
+                ->references('id')
+                ->on('system_users')
                 ->nullOnDelete();
 
             $table->timestamps();
@@ -34,6 +43,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_content_type');
+        Schema::dropIfExists('content_types');
     }
 };

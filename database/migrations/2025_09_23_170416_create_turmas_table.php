@@ -16,14 +16,14 @@ return new class extends Migration
             $table->string('nome', 255);
             $table->integer('limite');
             $table->enum('status', ['Ativo', 'Inativo'])->default('Ativo');
-            $table->unsignedBigInteger('responsavel');
-            $table->unsignedBigInteger('criador');
-            $table->unsignedBigInteger('ultimo_editor');
+            $table->ulid('responsavel');
+            $table->ulid('created_by');
+            $table->ulid('updated_by');
             $table->timestamps();
 
             $table->foreign('responsavel')->references('id')->on('system_users')->onDelete('cascade');
-            $table->foreign('criador')->references('id')->on('system_users')->onDelete('cascade');
-            $table->foreign('ultimo_editor')->references('id')->on('system_users')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('system_users')->onDelete('cascade');
+            $table->foreign('updated_by')->references('id')->on('system_users')->onDelete('cascade');
         });
     }
 

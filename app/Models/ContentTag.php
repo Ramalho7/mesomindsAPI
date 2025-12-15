@@ -16,9 +16,10 @@ class ContentTag extends Model
         'tag_name',
         'is_moderator_only',
         'count',
-        'criador',
+        'slug',
         'description',
-        'ultimo_editor',
+        'created_by',
+        'updated_by',
         'status',
     ];
 
@@ -29,11 +30,11 @@ class ContentTag extends Model
 
     public function creator()
     {
-        return $this->belongsTo(SystemUser::class, 'criador');
+        return $this->belongsTo(SystemUser::class, 'created_by');
     }
 
     public function lastEditor()
     {
-        return $this->belongsTo(SystemUser::class, 'ultimo_editor');
+        return $this->belongsTo(SystemUser::class, 'updated_by');
     }
 }

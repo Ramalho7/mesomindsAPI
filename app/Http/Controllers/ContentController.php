@@ -56,18 +56,18 @@ class ContentController extends Controller
                 ['title' => $validated['content_type']],
                 [
                     'description' => $validated['content_type_description'] ?? '',
-                    'criador' => $user->id,
+                    'created_by' => $user->id,
                 ]
             );
 
             $conteudo = Content::create([
                 'title' => $validated['title'],
-                'content' => $validated['content'],
+                'body' => $validated['body'],
                 'content_types_id' => $contentType->id,
                 'id_materia' => null,
                 'status' => $validated['status'],
                 'published_at' => $validated['published_at'],
-                'criador' => $user->id,
+                'created_by' => $user->id,
             ]);
 
             if (! empty($validated['content_tags'])) {
@@ -148,7 +148,7 @@ class ContentController extends Controller
         try {
             $validated = $request->validated();
 
-            $validated['ultimo_editor'] = Auth::id();
+            $validated['updated_by'] = Auth::id();
 
             $content->update($validated);
 
@@ -215,11 +215,11 @@ class ContentController extends Controller
         try {
 
             $validated = $request->validated();
-            $validated['ultimo_editor'] = Auth::id();
+            $validated['updated_by'] = Auth::id();
 
             $content->update([
                 'status' => $validated['status'],
-                'ultimo_editor' => $validated['ultimo_editor'],
+                'updated_by' => $validated['updated_by'],
             ]);
 
             return response()->json([

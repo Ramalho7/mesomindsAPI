@@ -15,7 +15,7 @@ class StoreContent extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'body' => 'required|string',
             'content_type' => 'required|string|max:255',
             'content_type_description' => 'nullable|string',
             'content_tags' => 'required|array',

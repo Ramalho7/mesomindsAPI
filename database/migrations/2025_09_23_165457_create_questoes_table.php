@@ -16,15 +16,15 @@ return new class extends Migration
             $table->string('title');
             $table->longText('content');
             $table->longText('correction');
-            $table->unsignedBigInteger('materia');
-            $table->unsignedBigInteger('ultimo_editor')->nullable();
-            $table->unsignedBigInteger('criador');
+            $table->unsignedBigInteger('materia_id');
+            $table->ulid('created_by');
+            $table->ulid('updated_by')->nullable();
             $table->enum('type', ['Multipla', 'VerdadeiroFalso', 'Aberta'])->default('Multipla');
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
 
-            $table->foreign('criador')->references('id')->on('system_users')->onDelete('cascade');
-            $table->foreign('ultimo_editor')->references('id')->on('system_users')->onDelete('set null');
+            $table->foreign('created_by')->references('id')->on('system_users')->onDelete('cascade');
+            $table->foreign('updated_by')->references('id')->on('system_users')->onDelete('set null');
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('questoes');
+        Schema::dropIfExists('questions');
     }
 };

@@ -42,7 +42,7 @@ class QuestionCollectionFactory extends Factory
                 ->count($count)
                 ->state(function () use ($collection) {
                     return [
-                        'materia' => $collection->subject_id,
+                        'materia_id' => $collection->subject_id,
                     ];
                 })
                 ->withAlternatives(4)

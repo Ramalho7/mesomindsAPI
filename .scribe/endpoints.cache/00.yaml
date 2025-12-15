@@ -26,12 +26,12 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      nome:
+      name:
         custom: []
-        name: nome
-        description: 'Nome completo do usuário. (Poderá ser usado como username).'
+        name: name
+        description: ''
         required: true
-        example: 'Jessica Jones'
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -59,24 +59,24 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      tipo:
+      role:
         custom: []
-        name: tipo
-        description: 'Tipo/role do usuário. Valores: Aluno ou Professor.'
+        name: role
+        description: ''
         required: true
-        example: Aluno
+        example: teacher
         type: string
         enumValues:
-          - Aluno
-          - Professor
+          - student
+          - teacher
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      nome: 'Jessica Jones'
+      name: architecto
       email: jessica@example.com
       password: secret123
-      tipo: Aluno
+      role: teacher
     fileParameters: []
     responses:
       -

@@ -22,8 +22,8 @@ class MateriasFactory extends Factory
             'nome' => $this->faker->name(),
             'descricao' => $this->faker->sentence(),
             'status' => $this->faker->randomElement($status),
-            'criador' => \App\Models\SystemUser::factory()->create()->id,
-            'ultimo_editor' => \App\Models\SystemUser::factory()->create()->id,
+            'created_by' => \App\Models\SystemUser::factory()->create()->id,
+            'updated_by' => \App\Models\SystemUser::factory()->create()->id,
         ];
     }
 }

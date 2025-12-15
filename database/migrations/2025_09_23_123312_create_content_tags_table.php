@@ -17,14 +17,24 @@ return new class extends Migration
             $table->boolean('is_moderator_only')->default(false);
             $table->integer('count')->default(0);
             $table->string('description', 255);
-            $table->foreignId('criador')
-                ->constrained('system_users')
+            $table->string('slug', 50)->nullable();
+            $table->string('color', 50)->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
+
+            $table->softDeletes();
+
+            $table->ulid('created_by');
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('system_users')
                 ->cascadeOnDelete();
 
-            $table->foreignId('ultimo_editor')
-                ->nullable()
-                ->constrained('system_users')
+            $table->ulid('updated_by')->nullable();
+            $table->foreign('updated_by')
+                ->references('id')
+                ->on('system_users')
                 ->nullOnDelete();
+
             $table->timestamps();
         });
     }
