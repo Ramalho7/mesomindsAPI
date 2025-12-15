@@ -117,7 +117,7 @@ class SystemUserController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Usuário criado com sucesso',
-                'data' => $newUser->fresh()->load(['creator', 'updater']),
+                'data' => $newUser,
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
@@ -139,8 +139,8 @@ class SystemUserController extends Controller
         $this->authorize('view', $user);
 
         return response()->json([
-            'sucess' => true,
-            'data' => $user->load(['creator', 'updater']),
+            'success' => true,
+            'data' => $user,
         ]);
     }
 
@@ -169,7 +169,7 @@ class SystemUserController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Usuário atualizado com sucesso',
-                'data' => $user->fresh()->load(['creator', 'updater']),
+                'data' => $user,
             ]);
 
         } catch (\Exception $e) {
