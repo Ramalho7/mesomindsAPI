@@ -41,7 +41,7 @@ class RegisterUserRequest extends FormRequest
     public function bodyParameters(): array
     {
         return [
-            'nome' => [
+            'name' => [
                 'description' => 'Nome completo do usuário. (Poderá ser usado como username)',
                 'example' => 'Jessica Jones',
                 'type' => 'string',
