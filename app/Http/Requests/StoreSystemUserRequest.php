@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSystemUserRequest extends FormRequest
 {
+
     public function authorize(): bool
     {
         return auth()->check();
@@ -36,6 +36,7 @@ class StoreSystemUserRequest extends FormRequest
             'password.confirmed' => 'A confirmação da senha não corresponde.',
             'role.required' => 'O campo função é obrigatório.',
             'role.in' => 'A função deve ser uma das seguintes: teacher, student, admin, moderator, operator.',
+            'role' => 'required|in:teacher,student,admin,moderator,operator',
         ];
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Policies;
 
 use App\Models\SystemUser;
@@ -22,7 +21,11 @@ class SystemUserPolicy
     /**
      * Determina se o usuário pode visualizar a lista de usuários.
      *
+<<<<<<< HEAD
      * @param  SystemUser  $user  Usuário autenticado.
+=======
+     * @param SystemUser $user Usuário autenticado.
+>>>>>>> fef381f (Adicionado ULID para user)
      * @return bool Retorna `true` se o usuário for um administrador.
      */
     public function viewAny(SystemUser $user): bool
@@ -37,8 +40,13 @@ class SystemUserPolicy
     /**
      * Determina se o usuário pode visualizar um usuário específico.
      *
+<<<<<<< HEAD
      * @param  SystemUser  $user  Usuário autenticado.
      * @param  SystemUser  $systemUser  Usuário a ser visualizado.
+=======
+     * @param SystemUser $user Usuário autenticado.
+     * @param SystemUser $systemUser Usuário a ser visualizado.
+>>>>>>> fef381f (Adicionado ULID para user)
      * @return bool Retorna `true` se o usuário for administrador ou se estiver visualizando seu próprio registro.
      */
     public function view(SystemUser $user, ?SystemUser $systemUser = null): bool
@@ -61,7 +69,11 @@ class SystemUserPolicy
     /**
      * Determina se o usuário pode criar novos usuários.
      *
+<<<<<<< HEAD
      * @param  SystemUser  $user  Usuário autenticado.
+=======
+     * @param SystemUser $user Usuário autenticado.
+>>>>>>> fef381f (Adicionado ULID para user)
      * @return bool Retorna `true` se o usuário for administrador.
      */
     public function create(SystemUser $user): bool
@@ -76,8 +88,13 @@ class SystemUserPolicy
     /**
      * Determina se o usuário pode atualizar um usuário específico.
      *
+<<<<<<< HEAD
      * @param  SystemUser  $user  Usuário autenticado.
      * @param  SystemUser  $systemUser  Usuário a ser atualizado.
+=======
+     * @param SystemUser $user Usuário autenticado.
+     * @param SystemUser $systemUser Usuário a ser atualizado.
+>>>>>>> fef381f (Adicionado ULID para user)
      * @return bool Retorna `true` se o usuário for administrador ou se estiver atualizando seu próprio registro.
      */
     public function update(SystemUser $user, ?SystemUser $systemUser = null): bool
@@ -100,8 +117,13 @@ class SystemUserPolicy
     /**
      * Determina se o usuário pode atualizar a senha de um usuário específico.
      *
+<<<<<<< HEAD
      * @param  SystemUser  $user  Usuário autenticado.
      * @param  SystemUser  $systemUser  Usuário cuja senha será atualizada.
+=======
+     * @param SystemUser $user Usuário autenticado.
+     * @param SystemUser $systemUser Usuário cuja senha será atualizada.
+>>>>>>> fef381f (Adicionado ULID para user)
      * @return bool Retorna `true` se o usuário for administrador ou se estiver atualizando sua própria senha.
      */
 <<<<<<< HEAD
@@ -137,8 +159,13 @@ class SystemUserPolicy
     /**
      * Determina se o usuário pode excluir um usuário específico.
      *
+<<<<<<< HEAD
      * @param  SystemUser  $user  Usuário autenticado.
      * @param  SystemUser  $systemUser  Usuário a ser excluído.
+=======
+     * @param SystemUser $user Usuário autenticado.
+     * @param SystemUser $systemUser Usuário a ser excluído.
+>>>>>>> fef381f (Adicionado ULID para user)
      * @return bool Retorna `true` se o usuário for administrador ou se estiver excluindo seu próprio registro.
      */
     public function delete(SystemUser $user, SystemUser $systemUser): bool
@@ -162,8 +189,13 @@ class SystemUserPolicy
     /**
      * Determina se o usuário pode restaurar um usuário excluído.
      *
+<<<<<<< HEAD
      * @param  SystemUser  $user  Usuário autenticado.
      * @param  SystemUser  $systemUser  Usuário a ser restaurado.
+=======
+     * @param SystemUser $user Usuário autenticado.
+     * @param SystemUser $systemUser Usuário a ser restaurado.
+>>>>>>> fef381f (Adicionado ULID para user)
      * @return bool Retorna `false` (não permitido).
      */
     public function restore(SystemUser $user, SystemUser $systemUser): bool
@@ -174,8 +206,13 @@ class SystemUserPolicy
     /**
      * Determina se o usuário pode excluir permanentemente um usuário.
      *
+<<<<<<< HEAD
      * @param  SystemUser  $user  Usuário autenticado.
      * @param  SystemUser  $systemUser  Usuário a ser excluído permanentemente.
+=======
+     * @param SystemUser $user Usuário autenticado.
+     * @param SystemUser $systemUser Usuário a ser excluído permanentemente.
+>>>>>>> fef381f (Adicionado ULID para user)
      * @return bool Retorna `true` se o usuário for administrador ou se estiver excluindo permanentemente seu próprio registro.
      */
     public function forceDelete(SystemUser $user, ?SystemUser $systemUser = null): bool

@@ -50,7 +50,7 @@ class Question extends Model
         return $this->belongsTo(SystemUser::class, 'updated_by');
     }
 
-    public function studentAnswers(): HasMany
+        public function studentAnswers(): HasMany
     {
         return $this->hasMany(StudentAnswer::class);
     }
