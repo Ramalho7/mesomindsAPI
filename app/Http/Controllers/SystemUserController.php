@@ -78,11 +78,7 @@ class SystemUserController extends Controller
             $search = $request->input('search');
             $query->where(function ($q) use ($search) {
                 $q->name($search)
-<<<<<<< HEAD
                     ->orWhereFullText('email', $search);
-=======
-                ->orWhereFullText('email', $search);
->>>>>>> fef381f (Adicionado ULID para user)
             });
         }
 
@@ -268,10 +264,6 @@ class SystemUserController extends Controller
         }
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> fef381f (Adicionado ULID para user)
     /**
      * changeStatus: Altera o status de um usuário do sistema.
      *
