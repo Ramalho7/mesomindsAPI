@@ -78,7 +78,7 @@ class SystemUserController extends Controller
             $search = $request->input('search');
             $query->where(function ($q) use ($search) {
                 $q->name($search)
-                ->orWhereFullText('email', $search);
+                    ->orWhereFullText('email', $search);
             });
         }
 
@@ -238,7 +238,6 @@ class SystemUserController extends Controller
             ], 500);
         }
     }
-
 
     /**
      * changeStatus: Altera o status de um usuário do sistema.
