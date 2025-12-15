@@ -28,7 +28,7 @@ class QuestionCollectionPolicy
      */
     public function create(SystemUser $systemUser): bool
     {
-        return in_array($systemUser->tipo, ['ADM', 'Moderador', 'Operador']);
+        return in_array($systemUser->role, ['ADM', 'Moderador', 'Operador']);
     }
 
     /**
@@ -36,7 +36,7 @@ class QuestionCollectionPolicy
      */
     public function update(SystemUser $systemUser, QuestionCollection $questionCollection): bool
     {
-        return in_array($systemUser->tipo, ['ADM', 'Moderador', 'Operador']);
+        return in_array($systemUser->role, ['ADM', 'Moderador', 'Operador']);
     }
 
     /**
@@ -44,7 +44,7 @@ class QuestionCollectionPolicy
      */
     public function delete(SystemUser $systemUser, QuestionCollection $questionCollection): bool
     {
-        return $systemUser->tipo === 'ADM';
+        return $systemUser->role === 'ADM';
     }
 
     /**
@@ -60,11 +60,11 @@ class QuestionCollectionPolicy
      */
     public function forceDelete(SystemUser $systemUser, QuestionCollection $questionCollection): bool
     {
-        return $systemUser->tipo === 'ADM';
+        return $systemUser->role === 'ADM';
     }
 
     public function changeStatus(SystemUser $systemUser, QuestionCollection $questionCollection): bool
     {
-        return in_array($systemUser->tipo, ['ADM', 'Moderador']);
+        return in_array($systemUser->role, ['ADM', 'Moderador']);
     }
 }

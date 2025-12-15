@@ -226,7 +226,10 @@
                     <a href="#usuarios">Usuários</a>
                 </li>
                                     <ul id="tocify-subheader-usuarios" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="usuarios-PUTapi-users--user_id--password">
+                                                    <li class="tocify-item level-2" data-unique="usuarios-GETapi-me">
+                                <a href="#usuarios-GETapi-me">Retorna as informações do usuário autenticado junto com suas habilidades.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="usuarios-PUTapi-users--user_id--password">
                                 <a href="#usuarios-PUTapi-users--user_id--password">updatePassword: Atualiza a senha de um usuário do sistema.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="usuarios-GETapi-users">
@@ -258,7 +261,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: December 14, 2025</li>
+        <li>Last updated: December 15, 2025</li>
     </ul>
 </div>
 
@@ -298,10 +301,10 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"nome\": \"Jessica Jones\",
+    \"name\": \"architecto\",
     \"email\": \"jessica@example.com\",
     \"password\": \"secret123\",
-    \"tipo\": \"Aluno\"
+    \"role\": \"teacher\"
 }"
 </code></pre></div>
 
@@ -317,10 +320,10 @@ const headers = {
 };
 
 let body = {
-    "nome": "Jessica Jones",
+    "name": "architecto",
     "email": "jessica@example.com",
     "password": "secret123",
-    "tipo": "Aluno"
+    "role": "teacher"
 };
 
 fetch(url, {
@@ -448,16 +451,16 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                                 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>nome</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="nome"                data-endpoint="POSTapi-register"
-               value="Jessica Jones"
+                              name="name"                data-endpoint="POSTapi-register"
+               value="architecto"
                data-component="body">
     <br>
-<p>Nome completo do usuário. (Poderá ser usado como username). Example: <code>Jessica Jones</code></p>
+<p>Example: <code>architecto</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -484,18 +487,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Senha (mínimo 8 caracteres). Must be at least 8 characters. Example: <code>secret123</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>tipo</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>role</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="tipo"                data-endpoint="POSTapi-register"
-               value="Aluno"
+                              name="role"                data-endpoint="POSTapi-register"
+               value="teacher"
                data-component="body">
     <br>
-<p>Tipo/role do usuário. Valores: Aluno ou Professor. Example: <code>Aluno</code></p>
+<p>Example: <code>teacher</code></p>
 Must be one of:
-<ul style="list-style-type: square;"><li><code>Aluno</code></li> <li><code>Professor</code></li></ul>
+<ul style="list-style-type: square;"><li><code>student</code></li> <li><code>teacher</code></li></ul>
         </div>
         </form>
 
@@ -748,7 +751,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-conteudos">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (500):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -760,524 +763,7 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;data&quot;: {
-        &quot;current_page&quot;: 1,
-        &quot;data&quot;: [
-            {
-                &quot;id&quot;: 2,
-                &quot;title&quot;: &quot;Quos tenetur sapiente et sint commodi rerum.&quot;,
-                &quot;content&quot;: &quot;Suscipit animi ipsam eos voluptas velit totam temporibus. Voluptatum doloribus minima quasi iusto veniam temporibus iusto. Earum ea illum ex iste aliquam.&quot;,
-                &quot;id_materia&quot;: null,
-                &quot;content_types_id&quot;: 22,
-                &quot;criador&quot;: 133,
-                &quot;ultimo_editor&quot;: 134,
-                &quot;status&quot;: &quot;Rascunho&quot;,
-                &quot;published_at&quot;: null,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;creator&quot;: {
-                    &quot;id&quot;: 133,
-                    &quot;nome&quot;: &quot;Oral Roob&quot;,
-                    &quot;email&quot;: &quot;heath.walter@example.com&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:53.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:53.000000Z&quot;
-                },
-                &quot;content_type&quot;: {
-                    &quot;id&quot;: 22,
-                    &quot;title&quot;: &quot;Prof. Napoleon Walker I&quot;,
-                    &quot;description&quot;: &quot;Tempore nihil itaque hic qui nihil.&quot;,
-                    &quot;criador&quot;: 135,
-                    &quot;ultimo_editor&quot;: 136,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:53.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:53.000000Z&quot;,
-                    &quot;status&quot;: &quot;Ativo&quot;
-                },
-                &quot;content_tags&quot;: [],
-                &quot;images&quot;: [],
-                &quot;last_editor&quot;: {
-                    &quot;id&quot;: 134,
-                    &quot;nome&quot;: &quot;Mrs. Kelli Kerluke&quot;,
-                    &quot;email&quot;: &quot;bzemlak@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:53.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:53.000000Z&quot;
-                }
-            },
-            {
-                &quot;id&quot;: 3,
-                &quot;title&quot;: &quot;Numquam illum et nulla quaerat rerum quae nobis.&quot;,
-                &quot;content&quot;: &quot;Laboriosam sed nihil quo mollitia rerum explicabo fugit aut. Tempore ab delectus error repellat aut fuga. Et ea voluptatem incidunt ad non culpa id provident. Id velit et maiores.&quot;,
-                &quot;id_materia&quot;: null,
-                &quot;content_types_id&quot;: 23,
-                &quot;criador&quot;: 137,
-                &quot;ultimo_editor&quot;: 138,
-                &quot;status&quot;: &quot;Inativo&quot;,
-                &quot;published_at&quot;: null,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;creator&quot;: {
-                    &quot;id&quot;: 137,
-                    &quot;nome&quot;: &quot;Ms. Keara Huel DDS&quot;,
-                    &quot;email&quot;: &quot;lillie.kihn@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:53.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:53.000000Z&quot;
-                },
-                &quot;content_type&quot;: {
-                    &quot;id&quot;: 23,
-                    &quot;title&quot;: &quot;Dr. Uriel Dooley MD&quot;,
-                    &quot;description&quot;: &quot;Assumenda qui dolor ut a voluptatem.&quot;,
-                    &quot;criador&quot;: 139,
-                    &quot;ultimo_editor&quot;: 140,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:54.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:54.000000Z&quot;,
-                    &quot;status&quot;: &quot;Ativo&quot;
-                },
-                &quot;content_tags&quot;: [],
-                &quot;images&quot;: [],
-                &quot;last_editor&quot;: {
-                    &quot;id&quot;: 138,
-                    &quot;nome&quot;: &quot;Frederick Wilkinson&quot;,
-                    &quot;email&quot;: &quot;trey.schultz@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:54.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:54.000000Z&quot;
-                }
-            },
-            {
-                &quot;id&quot;: 5,
-                &quot;title&quot;: &quot;Labore quaerat sapiente inventore illo aperiam.&quot;,
-                &quot;content&quot;: &quot;Dolorum alias excepturi eligendi expedita ullam ut. Iste earum nulla enim delectus eum sed provident. Maiores quisquam similique odio commodi at. Ab odit distinctio est repellat eligendi.&quot;,
-                &quot;id_materia&quot;: null,
-                &quot;content_types_id&quot;: 25,
-                &quot;criador&quot;: 145,
-                &quot;ultimo_editor&quot;: 146,
-                &quot;status&quot;: &quot;Inativo&quot;,
-                &quot;published_at&quot;: null,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;creator&quot;: {
-                    &quot;id&quot;: 145,
-                    &quot;nome&quot;: &quot;Mr. Chris Baumbach Jr.&quot;,
-                    &quot;email&quot;: &quot;mattie.dooley@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:55.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:55.000000Z&quot;
-                },
-                &quot;content_type&quot;: {
-                    &quot;id&quot;: 25,
-                    &quot;title&quot;: &quot;Muhammad Shanahan DVM&quot;,
-                    &quot;description&quot;: &quot;Et dolore ex quis.&quot;,
-                    &quot;criador&quot;: 147,
-                    &quot;ultimo_editor&quot;: 148,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:55.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:55.000000Z&quot;,
-                    &quot;status&quot;: &quot;Inativo&quot;
-                },
-                &quot;content_tags&quot;: [],
-                &quot;images&quot;: [],
-                &quot;last_editor&quot;: {
-                    &quot;id&quot;: 146,
-                    &quot;nome&quot;: &quot;Dr. Natasha Boyer&quot;,
-                    &quot;email&quot;: &quot;shields.lessie@example.org&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:55.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:55.000000Z&quot;
-                }
-            },
-            {
-                &quot;id&quot;: 6,
-                &quot;title&quot;: &quot;Aspernatur dolore nostrum odit temporibus.&quot;,
-                &quot;content&quot;: &quot;Commodi ut aut aut perferendis voluptatem. Dolores ea repellat voluptas non aliquid est consectetur. Suscipit est blanditiis dolorem commodi fuga ratione qui. Sed impedit tenetur corporis quas assumenda.&quot;,
-                &quot;id_materia&quot;: null,
-                &quot;content_types_id&quot;: 26,
-                &quot;criador&quot;: 149,
-                &quot;ultimo_editor&quot;: 150,
-                &quot;status&quot;: &quot;Ativo&quot;,
-                &quot;published_at&quot;: null,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;creator&quot;: {
-                    &quot;id&quot;: 149,
-                    &quot;nome&quot;: &quot;Prof. Eino Waelchi III&quot;,
-                    &quot;email&quot;: &quot;skeeling@example.net&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:56.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:56.000000Z&quot;
-                },
-                &quot;content_type&quot;: {
-                    &quot;id&quot;: 26,
-                    &quot;title&quot;: &quot;Ms. Retta Upton&quot;,
-                    &quot;description&quot;: &quot;Sed aut perspiciatis voluptates et quae error neque.&quot;,
-                    &quot;criador&quot;: 151,
-                    &quot;ultimo_editor&quot;: 152,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:56.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:56.000000Z&quot;,
-                    &quot;status&quot;: &quot;Inativo&quot;
-                },
-                &quot;content_tags&quot;: [],
-                &quot;images&quot;: [],
-                &quot;last_editor&quot;: {
-                    &quot;id&quot;: 150,
-                    &quot;nome&quot;: &quot;Dr. Joelle Conn DVM&quot;,
-                    &quot;email&quot;: &quot;iokon@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:56.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:56.000000Z&quot;
-                }
-            },
-            {
-                &quot;id&quot;: 7,
-                &quot;title&quot;: &quot;Et ut numquam provident error.&quot;,
-                &quot;content&quot;: &quot;Dolor ut et nam aut vel ducimus. Rerum tempora tenetur repellat voluptatem quasi. Ut architecto velit autem sunt. Sit aperiam dolorum et nam qui eveniet aperiam.&quot;,
-                &quot;id_materia&quot;: null,
-                &quot;content_types_id&quot;: 27,
-                &quot;criador&quot;: 153,
-                &quot;ultimo_editor&quot;: 154,
-                &quot;status&quot;: &quot;Ativo&quot;,
-                &quot;published_at&quot;: null,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;creator&quot;: {
-                    &quot;id&quot;: 153,
-                    &quot;nome&quot;: &quot;Dr. Kathryn Welch MD&quot;,
-                    &quot;email&quot;: &quot;onolan@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:56.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:56.000000Z&quot;
-                },
-                &quot;content_type&quot;: {
-                    &quot;id&quot;: 27,
-                    &quot;title&quot;: &quot;Dr. Jerry Crist DVM&quot;,
-                    &quot;description&quot;: &quot;Hic voluptatem aut praesentium rerum.&quot;,
-                    &quot;criador&quot;: 155,
-                    &quot;ultimo_editor&quot;: 156,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:57.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:57.000000Z&quot;,
-                    &quot;status&quot;: &quot;Inativo&quot;
-                },
-                &quot;content_tags&quot;: [],
-                &quot;images&quot;: [],
-                &quot;last_editor&quot;: {
-                    &quot;id&quot;: 154,
-                    &quot;nome&quot;: &quot;Bobby Dicki&quot;,
-                    &quot;email&quot;: &quot;hank93@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:57.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:57.000000Z&quot;
-                }
-            },
-            {
-                &quot;id&quot;: 8,
-                &quot;title&quot;: &quot;Voluptatem maiores sequi qui totam harum.&quot;,
-                &quot;content&quot;: &quot;Voluptatem esse recusandae optio. Numquam qui ut ea eos animi tenetur voluptatum.&quot;,
-                &quot;id_materia&quot;: null,
-                &quot;content_types_id&quot;: 28,
-                &quot;criador&quot;: 157,
-                &quot;ultimo_editor&quot;: 158,
-                &quot;status&quot;: &quot;Inativo&quot;,
-                &quot;published_at&quot;: null,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;creator&quot;: {
-                    &quot;id&quot;: 157,
-                    &quot;nome&quot;: &quot;Sierra Orn&quot;,
-                    &quot;email&quot;: &quot;boyle.aliyah@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:57.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:57.000000Z&quot;
-                },
-                &quot;content_type&quot;: {
-                    &quot;id&quot;: 28,
-                    &quot;title&quot;: &quot;Una Langosh&quot;,
-                    &quot;description&quot;: &quot;Laborum ut iusto omnis corrupti aliquam.&quot;,
-                    &quot;criador&quot;: 159,
-                    &quot;ultimo_editor&quot;: 160,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:58.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:58.000000Z&quot;,
-                    &quot;status&quot;: &quot;Inativo&quot;
-                },
-                &quot;content_tags&quot;: [],
-                &quot;images&quot;: [],
-                &quot;last_editor&quot;: {
-                    &quot;id&quot;: 158,
-                    &quot;nome&quot;: &quot;Patsy Swaniawski&quot;,
-                    &quot;email&quot;: &quot;obie.towne@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:57.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:57.000000Z&quot;
-                }
-            },
-            {
-                &quot;id&quot;: 9,
-                &quot;title&quot;: &quot;Vel vel doloribus nihil qui.&quot;,
-                &quot;content&quot;: &quot;Non harum rerum corrupti maxime. Quos cum voluptates voluptatum qui. Voluptas delectus ipsam quibusdam tenetur sint non sed.&quot;,
-                &quot;id_materia&quot;: null,
-                &quot;content_types_id&quot;: 29,
-                &quot;criador&quot;: 161,
-                &quot;ultimo_editor&quot;: 162,
-                &quot;status&quot;: &quot;Ativo&quot;,
-                &quot;published_at&quot;: null,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;creator&quot;: {
-                    &quot;id&quot;: 161,
-                    &quot;nome&quot;: &quot;Randal Kub&quot;,
-                    &quot;email&quot;: &quot;hoppe.aileen@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:58.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:58.000000Z&quot;
-                },
-                &quot;content_type&quot;: {
-                    &quot;id&quot;: 29,
-                    &quot;title&quot;: &quot;Antoinette Kassulke&quot;,
-                    &quot;description&quot;: &quot;Officiis nisi deserunt dolores quis.&quot;,
-                    &quot;criador&quot;: 163,
-                    &quot;ultimo_editor&quot;: 164,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:58.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:58.000000Z&quot;,
-                    &quot;status&quot;: &quot;Inativo&quot;
-                },
-                &quot;content_tags&quot;: [],
-                &quot;images&quot;: [],
-                &quot;last_editor&quot;: {
-                    &quot;id&quot;: 162,
-                    &quot;nome&quot;: &quot;Roy Abbott&quot;,
-                    &quot;email&quot;: &quot;ehyatt@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:58.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:58.000000Z&quot;
-                }
-            },
-            {
-                &quot;id&quot;: 10,
-                &quot;title&quot;: &quot;Atque et est voluptates saepe suscipit.&quot;,
-                &quot;content&quot;: &quot;Amet alias molestiae quibusdam est. Tempore voluptatem architecto similique. Eum aut omnis est deserunt. Nisi in animi non omnis et.&quot;,
-                &quot;id_materia&quot;: null,
-                &quot;content_types_id&quot;: 30,
-                &quot;criador&quot;: 165,
-                &quot;ultimo_editor&quot;: 166,
-                &quot;status&quot;: &quot;Ativo&quot;,
-                &quot;published_at&quot;: null,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;creator&quot;: {
-                    &quot;id&quot;: 165,
-                    &quot;nome&quot;: &quot;Adan Larson&quot;,
-                    &quot;email&quot;: &quot;otha.becker@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:59.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:59.000000Z&quot;
-                },
-                &quot;content_type&quot;: {
-                    &quot;id&quot;: 30,
-                    &quot;title&quot;: &quot;Amparo Goldner&quot;,
-                    &quot;description&quot;: &quot;Quia delectus sit eveniet explicabo voluptas quo voluptatum accusamus.&quot;,
-                    &quot;criador&quot;: 167,
-                    &quot;ultimo_editor&quot;: 168,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:59.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:59.000000Z&quot;,
-                    &quot;status&quot;: &quot;Inativo&quot;
-                },
-                &quot;content_tags&quot;: [],
-                &quot;images&quot;: [],
-                &quot;last_editor&quot;: {
-                    &quot;id&quot;: 166,
-                    &quot;nome&quot;: &quot;Lola Stracke&quot;,
-                    &quot;email&quot;: &quot;joy00@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:59.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:59.000000Z&quot;
-                }
-            },
-            {
-                &quot;id&quot;: 11,
-                &quot;title&quot;: &quot;Sed et illum odio provident nemo.&quot;,
-                &quot;content&quot;: &quot;In ad sapiente soluta neque impedit. Iure natus quo vero ad aut. Similique nobis eaque ea et autem ipsam.&quot;,
-                &quot;id_materia&quot;: null,
-                &quot;content_types_id&quot;: 31,
-                &quot;criador&quot;: 169,
-                &quot;ultimo_editor&quot;: 170,
-                &quot;status&quot;: &quot;Rascunho&quot;,
-                &quot;published_at&quot;: null,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;creator&quot;: {
-                    &quot;id&quot;: 169,
-                    &quot;nome&quot;: &quot;Mrs. Marguerite Gerlach III&quot;,
-                    &quot;email&quot;: &quot;thuel@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:59.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:59.000000Z&quot;
-                },
-                &quot;content_type&quot;: {
-                    &quot;id&quot;: 31,
-                    &quot;title&quot;: &quot;Mr. Hilario O&#039;Keefe&quot;,
-                    &quot;description&quot;: &quot;Praesentium quis mollitia sequi magnam est iure tempora.&quot;,
-                    &quot;criador&quot;: 171,
-                    &quot;ultimo_editor&quot;: 172,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:00.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:00.000000Z&quot;,
-                    &quot;status&quot;: &quot;Inativo&quot;
-                },
-                &quot;content_tags&quot;: [],
-                &quot;images&quot;: [],
-                &quot;last_editor&quot;: {
-                    &quot;id&quot;: 170,
-                    &quot;nome&quot;: &quot;Dave Kuhn&quot;,
-                    &quot;email&quot;: &quot;rice.beatrice@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:59.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:59.000000Z&quot;
-                }
-            },
-            {
-                &quot;id&quot;: 12,
-                &quot;title&quot;: &quot;Voluptate nihil veniam qui.&quot;,
-                &quot;content&quot;: &quot;Aspernatur voluptas asperiores optio pariatur nobis. Quis et impedit dolorem quae aut ea est. A rem sapiente modi recusandae.&quot;,
-                &quot;id_materia&quot;: null,
-                &quot;content_types_id&quot;: 32,
-                &quot;criador&quot;: 173,
-                &quot;ultimo_editor&quot;: 174,
-                &quot;status&quot;: &quot;Ativo&quot;,
-                &quot;published_at&quot;: null,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-                &quot;creator&quot;: {
-                    &quot;id&quot;: 173,
-                    &quot;nome&quot;: &quot;Arvid Champlin&quot;,
-                    &quot;email&quot;: &quot;von.chanel@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:00.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:00.000000Z&quot;
-                },
-                &quot;content_type&quot;: {
-                    &quot;id&quot;: 32,
-                    &quot;title&quot;: &quot;Ronny Wiza&quot;,
-                    &quot;description&quot;: &quot;Illo quia inventore qui fuga et sit.&quot;,
-                    &quot;criador&quot;: 175,
-                    &quot;ultimo_editor&quot;: 176,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:01.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:01.000000Z&quot;,
-                    &quot;status&quot;: &quot;Inativo&quot;
-                },
-                &quot;content_tags&quot;: [],
-                &quot;images&quot;: [],
-                &quot;last_editor&quot;: {
-                    &quot;id&quot;: 174,
-                    &quot;nome&quot;: &quot;Ahmad Durgan&quot;,
-                    &quot;email&quot;: &quot;vbalistreri@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:00.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:00.000000Z&quot;
-                }
-            }
-        ],
-        &quot;first_page_url&quot;: &quot;http://localhost:8000/api/conteudos?page=1&quot;,
-        &quot;from&quot;: 1,
-        &quot;last_page&quot;: 3,
-        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/conteudos?page=3&quot;,
-        &quot;links&quot;: [
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
-                &quot;page&quot;: null,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/conteudos?page=1&quot;,
-                &quot;label&quot;: &quot;1&quot;,
-                &quot;page&quot;: 1,
-                &quot;active&quot;: true
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/conteudos?page=2&quot;,
-                &quot;label&quot;: &quot;2&quot;,
-                &quot;page&quot;: 2,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/conteudos?page=3&quot;,
-                &quot;label&quot;: &quot;3&quot;,
-                &quot;page&quot;: 3,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/conteudos?page=2&quot;,
-                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
-                &quot;page&quot;: 2,
-                &quot;active&quot;: false
-            }
-        ],
-        &quot;next_page_url&quot;: &quot;http://localhost:8000/api/conteudos?page=2&quot;,
-        &quot;path&quot;: &quot;http://localhost:8000/api/conteudos&quot;,
-        &quot;per_page&quot;: 10,
-        &quot;prev_page_url&quot;: null,
-        &quot;to&quot;: 10,
-        &quot;total&quot;: 23
-    }
+    &quot;message&quot;: &quot;Server Error&quot;
 }</code>
  </pre>
     </span>
@@ -1367,14 +853,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/conteudos/2" \
+    --get "http://localhost:8000/api/conteudos/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/conteudos/2"
+    "http://localhost:8000/api/conteudos/1"
 );
 
 const headers = {
@@ -1405,37 +891,42 @@ access-control-allow-origin: *
 <code class="language-json" style="max-height: 300px;">{
     &quot;success&quot;: true,
     &quot;data&quot;: {
-        &quot;id&quot;: 2,
-        &quot;title&quot;: &quot;Quos tenetur sapiente et sint commodi rerum.&quot;,
-        &quot;content&quot;: &quot;Suscipit animi ipsam eos voluptas velit totam temporibus. Voluptatum doloribus minima quasi iusto veniam temporibus iusto. Earum ea illum ex iste aliquam.&quot;,
+        &quot;id&quot;: 1,
+        &quot;title&quot;: &quot;Qui blanditiis quia natus quia ea et ducimus.&quot;,
+        &quot;body&quot;: &quot;Ea et est hic nulla est eum. At voluptatem quod ut dolore. Dolorum ducimus in voluptatem quia. Alias ut a possimus officiis est est.&quot;,
+        &quot;duration_minutes&quot;: null,
         &quot;id_materia&quot;: null,
-        &quot;content_types_id&quot;: 22,
-        &quot;criador&quot;: 133,
-        &quot;ultimo_editor&quot;: 134,
-        &quot;status&quot;: &quot;Rascunho&quot;,
+        &quot;content_types_id&quot;: 21,
+        &quot;created_by&quot;: &quot;01kcfr3jdbhwrag9dd2ymqyw8f&quot;,
+        &quot;updated_by&quot;: &quot;01kcfr3jjy7yymrawdjh51sgrv&quot;,
+        &quot;status&quot;: &quot;published&quot;,
+        &quot;deleted_at&quot;: null,
         &quot;published_at&quot;: null,
-        &quot;created_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-11-11T23:34:06.000000Z&quot;,
+        &quot;created_at&quot;: &quot;2025-12-15T00:56:12.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2025-12-15T00:56:12.000000Z&quot;,
         &quot;creator&quot;: {
-            &quot;id&quot;: 133,
-            &quot;nome&quot;: &quot;Oral Roob&quot;,
-            &quot;email&quot;: &quot;heath.walter@example.com&quot;,
-            &quot;tipo&quot;: &quot;ADM&quot;,
-            &quot;criador&quot;: null,
-            &quot;ultimo_editor&quot;: null,
-            &quot;status&quot;: &quot;Inativo&quot;,
-            &quot;created_at&quot;: &quot;2025-11-11T23:33:53.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2025-11-11T23:33:53.000000Z&quot;
+            &quot;id&quot;: &quot;01kcfr3jdbhwrag9dd2ymqyw8f&quot;,
+            &quot;name&quot;: &quot;Prof. Martine Goodwin&quot;,
+            &quot;email&quot;: &quot;vdonnelly@example.net&quot;,
+            &quot;created_by&quot;: null,
+            &quot;updated_by&quot;: null,
+            &quot;status&quot;: &quot;inactive&quot;,
+            &quot;deleted_at&quot;: null,
+            &quot;created_at&quot;: &quot;2025-12-15T00:55:58.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2025-12-15T00:55:58.000000Z&quot;
         },
         &quot;content_type&quot;: {
-            &quot;id&quot;: 22,
-            &quot;title&quot;: &quot;Prof. Napoleon Walker I&quot;,
-            &quot;description&quot;: &quot;Tempore nihil itaque hic qui nihil.&quot;,
-            &quot;criador&quot;: 135,
-            &quot;ultimo_editor&quot;: 136,
-            &quot;created_at&quot;: &quot;2025-11-11T23:33:53.000000Z&quot;,
-            &quot;updated_at&quot;: &quot;2025-11-11T23:33:53.000000Z&quot;,
-            &quot;status&quot;: &quot;Ativo&quot;
+            &quot;id&quot;: 21,
+            &quot;title&quot;: &quot;Ines Reynolds&quot;,
+            &quot;description&quot;: &quot;Aut assumenda sunt dolores voluptates.&quot;,
+            &quot;status&quot;: &quot;active&quot;,
+            &quot;slug&quot;: null,
+            &quot;icon&quot;: null,
+            &quot;color&quot;: null,
+            &quot;created_by&quot;: &quot;01kcfr3jrjg90jzm2g1r92babg&quot;,
+            &quot;updated_by&quot;: &quot;01kcfr3jy9dphkecwym2stbq51&quot;,
+            &quot;created_at&quot;: &quot;2025-12-15T00:55:58.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2025-12-15T00:55:58.000000Z&quot;
         },
         &quot;content_tags&quot;: [],
         &quot;images&quot;: []
@@ -1522,10 +1013,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="conteudo_id"                data-endpoint="GETapi-conteudos--conteudo_id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the conteudo. Example: <code>2</code></p>
+<p>The ID of the conteudo. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -1584,329 +1075,359 @@ access-control-allow-origin: *
         &quot;data&quot;: [
             {
                 &quot;id&quot;: 1,
-                &quot;title&quot;: &quot;Miss Adella Pfannerstill&quot;,
-                &quot;description&quot;: &quot;Nisi quaerat non consectetur.&quot;,
-                &quot;criador&quot;: 89,
-                &quot;ultimo_editor&quot;: 90,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;status&quot;: &quot;Inativo&quot;,
+                &quot;title&quot;: &quot;Dr. Nat Cormier Jr.&quot;,
+                &quot;description&quot;: &quot;Nulla ad illo modi aut et sunt.&quot;,
+                &quot;status&quot;: &quot;active&quot;,
+                &quot;slug&quot;: null,
+                &quot;icon&quot;: null,
+                &quot;color&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr3b6jyg9n1h6wv6d5gbg4&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr3bc63fz1m6vzygbaww2z&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 89,
-                    &quot;nome&quot;: &quot;Zola Koch&quot;,
-                    &quot;email&quot;: &quot;schiller.ethan@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3b6jyg9n1h6wv6d5gbg4&quot;,
+                    &quot;name&quot;: &quot;Nels Blanda DDS&quot;,
+                    &quot;email&quot;: &quot;dell59@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 90,
-                    &quot;nome&quot;: &quot;Dr. Estella Will I&quot;,
-                    &quot;email&quot;: &quot;bgaylord@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3bc63fz1m6vzygbaww2z&quot;,
+                    &quot;name&quot;: &quot;Prof. Jamal Koelpin&quot;,
+                    &quot;email&quot;: &quot;judson.hilpert@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 2,
-                &quot;title&quot;: &quot;Chloe Turner&quot;,
-                &quot;description&quot;: &quot;Qui suscipit vitae et maiores id.&quot;,
-                &quot;criador&quot;: 91,
-                &quot;ultimo_editor&quot;: 92,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;status&quot;: &quot;Ativo&quot;,
+                &quot;title&quot;: &quot;Dr. Jennyfer Thiel&quot;,
+                &quot;description&quot;: &quot;Dolore numquam aut unde omnis facere ipsam vel.&quot;,
+                &quot;status&quot;: &quot;inactive&quot;,
+                &quot;slug&quot;: null,
+                &quot;icon&quot;: null,
+                &quot;color&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr3bhr7b1j0fdzh5yjr24q&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr3bqa7969xys46jj9ww2p&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 91,
-                    &quot;nome&quot;: &quot;Mr. Jess Murazik Jr.&quot;,
-                    &quot;email&quot;: &quot;maurine.nolan@example.com&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3bhr7b1j0fdzh5yjr24q&quot;,
+                    &quot;name&quot;: &quot;Domenica Wehner&quot;,
+                    &quot;email&quot;: &quot;xgorczany@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:51.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:51.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 92,
-                    &quot;nome&quot;: &quot;Prof. Prudence Wolff&quot;,
-                    &quot;email&quot;: &quot;dooley.lenore@example.net&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3bqa7969xys46jj9ww2p&quot;,
+                    &quot;name&quot;: &quot;Dr. Sabrina Wilkinson&quot;,
+                    &quot;email&quot;: &quot;lacy.huels@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:51.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:51.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 3,
-                &quot;title&quot;: &quot;Dr. Marlin Lakin&quot;,
-                &quot;description&quot;: &quot;Architecto repudiandae ab quia possimus.&quot;,
-                &quot;criador&quot;: 93,
-                &quot;ultimo_editor&quot;: 94,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;status&quot;: &quot;Inativo&quot;,
+                &quot;title&quot;: &quot;Marianne Grimes&quot;,
+                &quot;description&quot;: &quot;Doloremque et suscipit velit.&quot;,
+                &quot;status&quot;: &quot;inactive&quot;,
+                &quot;slug&quot;: null,
+                &quot;icon&quot;: null,
+                &quot;color&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr3bwykt9mhwcw75rztgky&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr3c2nrsr5b59cebh31saj&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 93,
-                    &quot;nome&quot;: &quot;Cheyenne Berge&quot;,
-                    &quot;email&quot;: &quot;bauch.floyd@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3bwykt9mhwcw75rztgky&quot;,
+                    &quot;name&quot;: &quot;Edward Swaniawski&quot;,
+                    &quot;email&quot;: &quot;jordi75@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:51.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:51.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 94,
-                    &quot;nome&quot;: &quot;Alexandrine Kling&quot;,
-                    &quot;email&quot;: &quot;lottie41@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:46.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:46.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3c2nrsr5b59cebh31saj&quot;,
+                    &quot;name&quot;: &quot;Loy Dickens&quot;,
+                    &quot;email&quot;: &quot;uwalter@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:51.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:51.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 4,
-                &quot;title&quot;: &quot;Prof. Eli Erdman DDS&quot;,
-                &quot;description&quot;: &quot;Eveniet est consequatur aut.&quot;,
-                &quot;criador&quot;: 95,
-                &quot;ultimo_editor&quot;: 96,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;status&quot;: &quot;Inativo&quot;,
+                &quot;title&quot;: &quot;Elbert Hodkiewicz&quot;,
+                &quot;description&quot;: &quot;Excepturi ut quo rerum et cum.&quot;,
+                &quot;status&quot;: &quot;inactive&quot;,
+                &quot;slug&quot;: null,
+                &quot;icon&quot;: null,
+                &quot;color&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr3c8bj80w43ntjfty3r6p&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr3ce03vwb5k69eyrd7ds9&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 95,
-                    &quot;nome&quot;: &quot;Horace Ryan&quot;,
-                    &quot;email&quot;: &quot;mariana75@example.net&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:46.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:46.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3c8bj80w43ntjfty3r6p&quot;,
+                    &quot;name&quot;: &quot;Dr. Kaden Yost PhD&quot;,
+                    &quot;email&quot;: &quot;qpagac@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:51.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:51.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 96,
-                    &quot;nome&quot;: &quot;Shyanne Stanton DVM&quot;,
-                    &quot;email&quot;: &quot;walsh.edna@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:46.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:46.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3ce03vwb5k69eyrd7ds9&quot;,
+                    &quot;name&quot;: &quot;Mr. Mitchell Hansen DVM&quot;,
+                    &quot;email&quot;: &quot;roscoe00@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:52.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:52.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 5,
-                &quot;title&quot;: &quot;Lorna Casper&quot;,
-                &quot;description&quot;: &quot;Autem tempore deleniti sed maxime.&quot;,
-                &quot;criador&quot;: 97,
-                &quot;ultimo_editor&quot;: 98,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;status&quot;: &quot;Ativo&quot;,
+                &quot;title&quot;: &quot;Ms. Daisha Bogisich DVM&quot;,
+                &quot;description&quot;: &quot;Sint reiciendis adipisci illo reiciendis ut.&quot;,
+                &quot;status&quot;: &quot;inactive&quot;,
+                &quot;slug&quot;: null,
+                &quot;icon&quot;: null,
+                &quot;color&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr3ckrfyqgqy54tbxdjznd&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr3cse0tca6d6tvdepm8c1&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 97,
-                    &quot;nome&quot;: &quot;Aron Bechtelar I&quot;,
-                    &quot;email&quot;: &quot;lowe.jerod@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:46.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:46.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3ckrfyqgqy54tbxdjznd&quot;,
+                    &quot;name&quot;: &quot;Haylee Bogan III&quot;,
+                    &quot;email&quot;: &quot;oharber@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:52.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:52.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 98,
-                    &quot;nome&quot;: &quot;Amelia Spinka&quot;,
-                    &quot;email&quot;: &quot;ymonahan@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:46.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:46.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3cse0tca6d6tvdepm8c1&quot;,
+                    &quot;name&quot;: &quot;Halie Littel&quot;,
+                    &quot;email&quot;: &quot;vaughn.volkman@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:52.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:52.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 6,
-                &quot;title&quot;: &quot;Lucile Pacocha&quot;,
-                &quot;description&quot;: &quot;Sed voluptates vitae est reprehenderit cupiditate unde nemo.&quot;,
-                &quot;criador&quot;: 99,
-                &quot;ultimo_editor&quot;: 100,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;status&quot;: &quot;Ativo&quot;,
+                &quot;title&quot;: &quot;Elsie Eichmann&quot;,
+                &quot;description&quot;: &quot;Rerum mollitia atque iure dignissimos distinctio non dignissimos voluptas.&quot;,
+                &quot;status&quot;: &quot;active&quot;,
+                &quot;slug&quot;: null,
+                &quot;icon&quot;: null,
+                &quot;color&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr3cz76aegve73cp6nw3x2&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr3d4yf4wwbjwzz16d6h9j&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 99,
-                    &quot;nome&quot;: &quot;Florida Hand III&quot;,
-                    &quot;email&quot;: &quot;zlueilwitz@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:47.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:47.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3cz76aegve73cp6nw3x2&quot;,
+                    &quot;name&quot;: &quot;Wellington Sawayn&quot;,
+                    &quot;email&quot;: &quot;swilkinson@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:52.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:52.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 100,
-                    &quot;nome&quot;: &quot;Merritt Bayer&quot;,
-                    &quot;email&quot;: &quot;eriberto10@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:47.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:47.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3d4yf4wwbjwzz16d6h9j&quot;,
+                    &quot;name&quot;: &quot;Mrs. Natalia Kling IV&quot;,
+                    &quot;email&quot;: &quot;emmanuel.feeney@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:52.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:52.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 7,
-                &quot;title&quot;: &quot;Elmore Kuvalis&quot;,
-                &quot;description&quot;: &quot;Hic inventore repellendus sunt porro.&quot;,
-                &quot;criador&quot;: 101,
-                &quot;ultimo_editor&quot;: 102,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;status&quot;: &quot;Inativo&quot;,
+                &quot;title&quot;: &quot;Avis Harris I&quot;,
+                &quot;description&quot;: &quot;Rerum praesentium ut sunt excepturi officiis et optio perspiciatis.&quot;,
+                &quot;status&quot;: &quot;active&quot;,
+                &quot;slug&quot;: null,
+                &quot;icon&quot;: null,
+                &quot;color&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr3danps823pbs9mdcaj96&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr3dg8afc163tw0rxkq6kn&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 101,
-                    &quot;nome&quot;: &quot;Fabiola Block&quot;,
-                    &quot;email&quot;: &quot;adams.lisette@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:47.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:47.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3danps823pbs9mdcaj96&quot;,
+                    &quot;name&quot;: &quot;Dr. Fritz Anderson Jr.&quot;,
+                    &quot;email&quot;: &quot;eric52@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:52.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:52.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 102,
-                    &quot;nome&quot;: &quot;Aditya Conroy&quot;,
-                    &quot;email&quot;: &quot;bertram.bernier@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:47.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:47.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3dg8afc163tw0rxkq6kn&quot;,
+                    &quot;name&quot;: &quot;Ruthie Pfannerstill&quot;,
+                    &quot;email&quot;: &quot;akihn@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:53.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:53.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 8,
-                &quot;title&quot;: &quot;Mrs. Natalia Rice V&quot;,
-                &quot;description&quot;: &quot;A fugit atque quisquam maiores.&quot;,
-                &quot;criador&quot;: 103,
-                &quot;ultimo_editor&quot;: 104,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;status&quot;: &quot;Inativo&quot;,
+                &quot;title&quot;: &quot;Yoshiko Shields V&quot;,
+                &quot;description&quot;: &quot;Enim modi dolores eius nobis natus nemo odit.&quot;,
+                &quot;status&quot;: &quot;active&quot;,
+                &quot;slug&quot;: null,
+                &quot;icon&quot;: null,
+                &quot;color&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr3dnxk8wx3g4ns3strbrp&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr3dvj7ssx4syag0ve567k&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 103,
-                    &quot;nome&quot;: &quot;Mr. Dameon Feest V&quot;,
-                    &quot;email&quot;: &quot;ward.desiree@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:47.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:47.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3dnxk8wx3g4ns3strbrp&quot;,
+                    &quot;name&quot;: &quot;Keenan Stracke&quot;,
+                    &quot;email&quot;: &quot;ivah94@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:53.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:53.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 104,
-                    &quot;nome&quot;: &quot;Geovanni Schiller&quot;,
-                    &quot;email&quot;: &quot;valentin77@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:47.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:47.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3dvj7ssx4syag0ve567k&quot;,
+                    &quot;name&quot;: &quot;Dr. Abdul Koepp DVM&quot;,
+                    &quot;email&quot;: &quot;nikita.kunze@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:53.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:53.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 9,
-                &quot;title&quot;: &quot;Savanna Casper&quot;,
-                &quot;description&quot;: &quot;Iste non voluptas pariatur iste laborum et.&quot;,
-                &quot;criador&quot;: 105,
-                &quot;ultimo_editor&quot;: 106,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;status&quot;: &quot;Inativo&quot;,
+                &quot;title&quot;: &quot;Ms. Crystal Simonis&quot;,
+                &quot;description&quot;: &quot;Enim fugit et sequi repellendus est reprehenderit numquam.&quot;,
+                &quot;status&quot;: &quot;inactive&quot;,
+                &quot;slug&quot;: null,
+                &quot;icon&quot;: null,
+                &quot;color&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr3e194d65z0a08yv3k62g&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr3e6y8d4ctjy6k5as0x2d&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 105,
-                    &quot;nome&quot;: &quot;Caroline Dicki&quot;,
-                    &quot;email&quot;: &quot;malcolm.langworth@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:48.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:48.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3e194d65z0a08yv3k62g&quot;,
+                    &quot;name&quot;: &quot;Emily Stehr&quot;,
+                    &quot;email&quot;: &quot;turcotte.christophe@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:53.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:53.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 106,
-                    &quot;nome&quot;: &quot;Hillard Gutmann Jr.&quot;,
-                    &quot;email&quot;: &quot;jaiden63@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:48.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:48.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3e6y8d4ctjy6k5as0x2d&quot;,
+                    &quot;name&quot;: &quot;Dr. Kennedy Jerde&quot;,
+                    &quot;email&quot;: &quot;torp.luther@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:53.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:53.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 10,
-                &quot;title&quot;: &quot;Weston Romaguera&quot;,
-                &quot;description&quot;: &quot;Aliquid dolore natus error voluptas.&quot;,
-                &quot;criador&quot;: 107,
-                &quot;ultimo_editor&quot;: 108,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:52.000000Z&quot;,
-                &quot;status&quot;: &quot;Inativo&quot;,
+                &quot;title&quot;: &quot;Miss Nona Stamm Sr.&quot;,
+                &quot;description&quot;: &quot;Error reprehenderit qui excepturi tenetur omnis accusantium nobis dolor.&quot;,
+                &quot;status&quot;: &quot;inactive&quot;,
+                &quot;slug&quot;: null,
+                &quot;icon&quot;: null,
+                &quot;color&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr3ecpfzs1kgdwv7r9efj5&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr3ejbzzwc2nh4fq5en0me&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:57.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 107,
-                    &quot;nome&quot;: &quot;Melyna Lockman&quot;,
-                    &quot;email&quot;: &quot;fdavis@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:48.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:48.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3ecpfzs1kgdwv7r9efj5&quot;,
+                    &quot;name&quot;: &quot;Jared Schowalter&quot;,
+                    &quot;email&quot;: &quot;margarete97@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:54.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:54.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 108,
-                    &quot;nome&quot;: &quot;Ms. Raphaelle Cummerata DVM&quot;,
-                    &quot;email&quot;: &quot;ywilliamson@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:48.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:48.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr3ejbzzwc2nh4fq5en0me&quot;,
+                    &quot;name&quot;: &quot;Ben Brakus&quot;,
+                    &quot;email&quot;: &quot;pwill@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:54.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:54.000000Z&quot;
                 }
             }
         ],
         &quot;first_page_url&quot;: &quot;http://localhost:8000/api/tiposconteudo?page=1&quot;,
         &quot;from&quot;: 1,
-        &quot;last_page&quot;: 5,
-        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/tiposconteudo?page=5&quot;,
+        &quot;last_page&quot;: 4,
+        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/tiposconteudo?page=4&quot;,
         &quot;links&quot;: [
             {
                 &quot;url&quot;: null,
@@ -1939,12 +1460,6 @@ access-control-allow-origin: *
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/tiposconteudo?page=5&quot;,
-                &quot;label&quot;: &quot;5&quot;,
-                &quot;page&quot;: 5,
-                &quot;active&quot;: false
-            },
-            {
                 &quot;url&quot;: &quot;http://localhost:8000/api/tiposconteudo?page=2&quot;,
                 &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
                 &quot;page&quot;: 2,
@@ -1956,7 +1471,7 @@ access-control-allow-origin: *
         &quot;per_page&quot;: 10,
         &quot;prev_page_url&quot;: null,
         &quot;to&quot;: 10,
-        &quot;total&quot;: 41
+        &quot;total&quot;: 40
     }
 }</code>
  </pre>
@@ -2089,349 +1604,379 @@ access-control-allow-origin: *
         &quot;data&quot;: [
             {
                 &quot;id&quot;: 1,
-                &quot;tag_name&quot;: &quot;illo&quot;,
-                &quot;is_moderator_only&quot;: 0,
-                &quot;count&quot;: 24002676,
-                &quot;description&quot;: &quot;Officia rerum quis deserunt eum est sequi numquam.&quot;,
-                &quot;criador&quot;: 49,
-                &quot;ultimo_editor&quot;: 50,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:44.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:44.000000Z&quot;,
-                &quot;status&quot;: &quot;Ativo&quot;,
+                &quot;tag_name&quot;: &quot;aut&quot;,
+                &quot;is_moderator_only&quot;: 1,
+                &quot;count&quot;: 5858,
+                &quot;description&quot;: &quot;Ipsa minima dolores alias aut.&quot;,
+                &quot;slug&quot;: null,
+                &quot;color&quot;: null,
+                &quot;status&quot;: &quot;active&quot;,
+                &quot;deleted_at&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr33ypkvpsh0crxgbzc5rk&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr344apcnvz3vwm4w93b8t&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 49,
-                    &quot;nome&quot;: &quot;Dashawn Kohler MD&quot;,
-                    &quot;email&quot;: &quot;fkertzmann@example.com&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:37.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:37.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr33ypkvpsh0crxgbzc5rk&quot;,
+                    &quot;name&quot;: &quot;Prof. Demario Hessel MD&quot;,
+                    &quot;email&quot;: &quot;christophe.cormier@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:43.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:43.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 50,
-                    &quot;nome&quot;: &quot;Isom Bailey&quot;,
-                    &quot;email&quot;: &quot;fmurphy@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:38.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:38.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr344apcnvz3vwm4w93b8t&quot;,
+                    &quot;name&quot;: &quot;Prof. Greta Koss Sr.&quot;,
+                    &quot;email&quot;: &quot;tledner@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:43.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:43.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 2,
-                &quot;tag_name&quot;: &quot;sint&quot;,
-                &quot;is_moderator_only&quot;: 1,
-                &quot;count&quot;: 9,
-                &quot;description&quot;: &quot;Quia non et consectetur ipsam magni corrupti nihil.&quot;,
-                &quot;criador&quot;: 51,
-                &quot;ultimo_editor&quot;: 52,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:44.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:44.000000Z&quot;,
-                &quot;status&quot;: &quot;Inativo&quot;,
+                &quot;tag_name&quot;: &quot;animi&quot;,
+                &quot;is_moderator_only&quot;: 0,
+                &quot;count&quot;: 9026,
+                &quot;description&quot;: &quot;Maxime perspiciatis aut sit officia id ut magni.&quot;,
+                &quot;slug&quot;: null,
+                &quot;color&quot;: null,
+                &quot;status&quot;: &quot;inactive&quot;,
+                &quot;deleted_at&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr34bssskq8yfnt50wxvjw&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr34hgf1b9m5kzs9thccvm&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 51,
-                    &quot;nome&quot;: &quot;Augustus Larson&quot;,
-                    &quot;email&quot;: &quot;vkoss@example.org&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:38.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:38.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr34bssskq8yfnt50wxvjw&quot;,
+                    &quot;name&quot;: &quot;Dr. Blaze Bruen&quot;,
+                    &quot;email&quot;: &quot;hardy.bechtelar@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:43.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:43.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 52,
-                    &quot;nome&quot;: &quot;Murphy Sawayn&quot;,
-                    &quot;email&quot;: &quot;ekertzmann@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:38.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:38.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr34hgf1b9m5kzs9thccvm&quot;,
+                    &quot;name&quot;: &quot;Christy Ankunding&quot;,
+                    &quot;email&quot;: &quot;ziemann.gregoria@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:43.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:43.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 3,
-                &quot;tag_name&quot;: &quot;quia&quot;,
+                &quot;tag_name&quot;: &quot;quas&quot;,
                 &quot;is_moderator_only&quot;: 0,
-                &quot;count&quot;: 9,
-                &quot;description&quot;: &quot;Rerum sapiente vero quasi omnis doloremque quia quo.&quot;,
-                &quot;criador&quot;: 53,
-                &quot;ultimo_editor&quot;: 54,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:44.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:44.000000Z&quot;,
-                &quot;status&quot;: &quot;Ativo&quot;,
+                &quot;count&quot;: 6577,
+                &quot;description&quot;: &quot;Adipisci repellat omnis officia quos exercitationem perspiciatis.&quot;,
+                &quot;slug&quot;: null,
+                &quot;color&quot;: null,
+                &quot;status&quot;: &quot;inactive&quot;,
+                &quot;deleted_at&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr34q93dyq0tmc0sfrrt9w&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr34x31pk93fdxmdchvzg0&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 53,
-                    &quot;nome&quot;: &quot;Vernon Mertz&quot;,
-                    &quot;email&quot;: &quot;ghyatt@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:38.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:38.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr34q93dyq0tmc0sfrrt9w&quot;,
+                    &quot;name&quot;: &quot;Dr. Lyric Trantow DVM&quot;,
+                    &quot;email&quot;: &quot;madisyn53@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:44.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:44.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 54,
-                    &quot;nome&quot;: &quot;Viviane Cormier MD&quot;,
-                    &quot;email&quot;: &quot;lorenza.bahringer@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:38.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:38.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr34x31pk93fdxmdchvzg0&quot;,
+                    &quot;name&quot;: &quot;Bria Schamberger&quot;,
+                    &quot;email&quot;: &quot;vinnie00@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:44.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:44.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 4,
-                &quot;tag_name&quot;: &quot;odio&quot;,
-                &quot;is_moderator_only&quot;: 0,
-                &quot;count&quot;: 51532,
-                &quot;description&quot;: &quot;Dolores beatae debitis ut optio aliquam.&quot;,
-                &quot;criador&quot;: 55,
-                &quot;ultimo_editor&quot;: 56,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:44.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:44.000000Z&quot;,
-                &quot;status&quot;: &quot;Inativo&quot;,
+                &quot;tag_name&quot;: &quot;et&quot;,
+                &quot;is_moderator_only&quot;: 1,
+                &quot;count&quot;: 5521400,
+                &quot;description&quot;: &quot;Dolorem in fuga inventore animi optio.&quot;,
+                &quot;slug&quot;: null,
+                &quot;color&quot;: null,
+                &quot;status&quot;: &quot;active&quot;,
+                &quot;deleted_at&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr352qwgvrd7tfp87p0rdn&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr358b53cwtr7ctg32rsdh&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 55,
-                    &quot;nome&quot;: &quot;Mona Yundt DDS&quot;,
-                    &quot;email&quot;: &quot;charity.trantow@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:39.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:39.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr352qwgvrd7tfp87p0rdn&quot;,
+                    &quot;name&quot;: &quot;Dr. Monique Mante&quot;,
+                    &quot;email&quot;: &quot;oaltenwerth@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:44.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:44.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 56,
-                    &quot;nome&quot;: &quot;Dean Weissnat&quot;,
-                    &quot;email&quot;: &quot;rosie.sawayn@example.net&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:39.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:39.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr358b53cwtr7ctg32rsdh&quot;,
+                    &quot;name&quot;: &quot;Mozelle Gorczany&quot;,
+                    &quot;email&quot;: &quot;kcrona@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:44.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:44.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 5,
-                &quot;tag_name&quot;: &quot;aut&quot;,
-                &quot;is_moderator_only&quot;: 0,
-                &quot;count&quot;: 54,
-                &quot;description&quot;: &quot;Eum dolorem ut autem quis excepturi.&quot;,
-                &quot;criador&quot;: 57,
-                &quot;ultimo_editor&quot;: 58,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:44.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:44.000000Z&quot;,
-                &quot;status&quot;: &quot;Ativo&quot;,
+                &quot;tag_name&quot;: &quot;quaerat&quot;,
+                &quot;is_moderator_only&quot;: 1,
+                &quot;count&quot;: 5408,
+                &quot;description&quot;: &quot;At voluptates id corporis.&quot;,
+                &quot;slug&quot;: null,
+                &quot;color&quot;: null,
+                &quot;status&quot;: &quot;active&quot;,
+                &quot;deleted_at&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr35dzhnhs08255qf0yp6d&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr35kmssfxrz8mham6vf9t&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 57,
-                    &quot;nome&quot;: &quot;Dr. Jensen Carter IV&quot;,
-                    &quot;email&quot;: &quot;mauricio.upton@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:39.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:39.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr35dzhnhs08255qf0yp6d&quot;,
+                    &quot;name&quot;: &quot;Ms. Nora Goldner&quot;,
+                    &quot;email&quot;: &quot;orie.pagac@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:44.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:44.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 58,
-                    &quot;nome&quot;: &quot;Kallie Will Jr.&quot;,
-                    &quot;email&quot;: &quot;tschinner@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:39.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:39.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr35kmssfxrz8mham6vf9t&quot;,
+                    &quot;name&quot;: &quot;Francis Rath&quot;,
+                    &quot;email&quot;: &quot;casper05@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:45.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:45.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 6,
-                &quot;tag_name&quot;: &quot;nobis&quot;,
-                &quot;is_moderator_only&quot;: 0,
-                &quot;count&quot;: 12,
-                &quot;description&quot;: &quot;Reprehenderit beatae est voluptatem eos est.&quot;,
-                &quot;criador&quot;: 59,
-                &quot;ultimo_editor&quot;: 60,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                &quot;status&quot;: &quot;Ativo&quot;,
+                &quot;tag_name&quot;: &quot;nesciunt&quot;,
+                &quot;is_moderator_only&quot;: 1,
+                &quot;count&quot;: 40,
+                &quot;description&quot;: &quot;Doloribus repellendus perspiciatis et illum.&quot;,
+                &quot;slug&quot;: null,
+                &quot;color&quot;: null,
+                &quot;status&quot;: &quot;active&quot;,
+                &quot;deleted_at&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr35s9ahg5spc8ksvzjbet&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr35z0b41608071q46pj9f&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 59,
-                    &quot;nome&quot;: &quot;Zakary Boehm&quot;,
-                    &quot;email&quot;: &quot;tressie.hansen@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:39.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:39.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr35s9ahg5spc8ksvzjbet&quot;,
+                    &quot;name&quot;: &quot;Marcel Leannon V&quot;,
+                    &quot;email&quot;: &quot;renee.johns@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:45.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:45.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 60,
-                    &quot;nome&quot;: &quot;Alvena Rau II&quot;,
-                    &quot;email&quot;: &quot;brice33@example.com&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:39.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:39.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr35z0b41608071q46pj9f&quot;,
+                    &quot;name&quot;: &quot;Kevon Reichel&quot;,
+                    &quot;email&quot;: &quot;nicolas.brayan@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:45.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:45.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 7,
-                &quot;tag_name&quot;: &quot;corporis&quot;,
+                &quot;tag_name&quot;: &quot;deserunt&quot;,
                 &quot;is_moderator_only&quot;: 0,
-                &quot;count&quot;: 37756,
-                &quot;description&quot;: &quot;Eveniet vitae amet doloremque explicabo explicabo at.&quot;,
-                &quot;criador&quot;: 61,
-                &quot;ultimo_editor&quot;: 62,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                &quot;status&quot;: &quot;Ativo&quot;,
+                &quot;count&quot;: 512145,
+                &quot;description&quot;: &quot;Autem quasi quo voluptates ea harum aut.&quot;,
+                &quot;slug&quot;: null,
+                &quot;color&quot;: null,
+                &quot;status&quot;: &quot;inactive&quot;,
+                &quot;deleted_at&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr364p98va6z26y23t20f7&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr36aaj7mv2geznsj22n3g&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 61,
-                    &quot;nome&quot;: &quot;Lori Runolfsson&quot;,
-                    &quot;email&quot;: &quot;erobel@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:40.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:40.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr364p98va6z26y23t20f7&quot;,
+                    &quot;name&quot;: &quot;Myrl Littel&quot;,
+                    &quot;email&quot;: &quot;sabrina88@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:45.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:45.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 62,
-                    &quot;nome&quot;: &quot;Vladimir McLaughlin III&quot;,
-                    &quot;email&quot;: &quot;okon.chelsea@example.net&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:40.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:40.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr36aaj7mv2geznsj22n3g&quot;,
+                    &quot;name&quot;: &quot;Prof. Destiny Smitham&quot;,
+                    &quot;email&quot;: &quot;wehner.aisha@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:45.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:45.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 8,
-                &quot;tag_name&quot;: &quot;id&quot;,
+                &quot;tag_name&quot;: &quot;eos&quot;,
                 &quot;is_moderator_only&quot;: 1,
-                &quot;count&quot;: 294040,
-                &quot;description&quot;: &quot;Tempore quaerat qui exercitationem maxime.&quot;,
-                &quot;criador&quot;: 63,
-                &quot;ultimo_editor&quot;: 64,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                &quot;status&quot;: &quot;Ativo&quot;,
+                &quot;count&quot;: 522,
+                &quot;description&quot;: &quot;Impedit aut sit ullam aut deserunt fugit neque.&quot;,
+                &quot;slug&quot;: null,
+                &quot;color&quot;: null,
+                &quot;status&quot;: &quot;inactive&quot;,
+                &quot;deleted_at&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr36fy8jfeczjqa99mrvyg&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr36nk3c18sfat0qk858wt&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 63,
-                    &quot;nome&quot;: &quot;Bartholome Kihn&quot;,
-                    &quot;email&quot;: &quot;watsica.timmy@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:40.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:40.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr36fy8jfeczjqa99mrvyg&quot;,
+                    &quot;name&quot;: &quot;Waylon Block&quot;,
+                    &quot;email&quot;: &quot;kayleigh.effertz@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:45.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:45.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 64,
-                    &quot;nome&quot;: &quot;Larry Stark&quot;,
-                    &quot;email&quot;: &quot;ebahringer@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:40.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:40.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr36nk3c18sfat0qk858wt&quot;,
+                    &quot;name&quot;: &quot;Percy Emmerich&quot;,
+                    &quot;email&quot;: &quot;vrowe@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:46.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:46.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 9,
-                &quot;tag_name&quot;: &quot;repellat&quot;,
-                &quot;is_moderator_only&quot;: 1,
-                &quot;count&quot;: 4540,
-                &quot;description&quot;: &quot;Laboriosam saepe quo ipsam dolore nulla.&quot;,
-                &quot;criador&quot;: 65,
-                &quot;ultimo_editor&quot;: 66,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                &quot;status&quot;: &quot;Ativo&quot;,
+                &quot;tag_name&quot;: &quot;quis&quot;,
+                &quot;is_moderator_only&quot;: 0,
+                &quot;count&quot;: 20992,
+                &quot;description&quot;: &quot;Molestias cum adipisci qui enim beatae sed.&quot;,
+                &quot;slug&quot;: null,
+                &quot;color&quot;: null,
+                &quot;status&quot;: &quot;active&quot;,
+                &quot;deleted_at&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr36v6zz6ernvg5hvpyaj6&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr370s5je80st417xhw5ms&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 65,
-                    &quot;nome&quot;: &quot;Gloria Friesen&quot;,
-                    &quot;email&quot;: &quot;istokes@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:40.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:40.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr36v6zz6ernvg5hvpyaj6&quot;,
+                    &quot;name&quot;: &quot;Jackie Cartwright&quot;,
+                    &quot;email&quot;: &quot;amelia.davis@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:46.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:46.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 66,
-                    &quot;nome&quot;: &quot;Mrs. Kelsi Daugherty DDS&quot;,
-                    &quot;email&quot;: &quot;jasen91@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:41.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:41.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr370s5je80st417xhw5ms&quot;,
+                    &quot;name&quot;: &quot;Estevan Abshire IV&quot;,
+                    &quot;email&quot;: &quot;oboyer@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:46.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:46.000000Z&quot;
                 }
             },
             {
                 &quot;id&quot;: 10,
-                &quot;tag_name&quot;: &quot;dicta&quot;,
+                &quot;tag_name&quot;: &quot;voluptas&quot;,
                 &quot;is_moderator_only&quot;: 0,
-                &quot;count&quot;: 36,
-                &quot;description&quot;: &quot;Cum aliquid tempora amet.&quot;,
-                &quot;criador&quot;: 67,
-                &quot;ultimo_editor&quot;: 68,
-                &quot;created_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:33:45.000000Z&quot;,
-                &quot;status&quot;: &quot;Inativo&quot;,
+                &quot;count&quot;: 5419,
+                &quot;description&quot;: &quot;Expedita ex ut tempora voluptates sunt.&quot;,
+                &quot;slug&quot;: null,
+                &quot;color&quot;: null,
+                &quot;status&quot;: &quot;active&quot;,
+                &quot;deleted_at&quot;: null,
+                &quot;created_by&quot;: &quot;01kcfr376e6sq0nw9dgwrwzj9y&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr37c4y1fjy0afznqkbmyc&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:55:50.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 67,
-                    &quot;nome&quot;: &quot;Prof. Lazaro Hyatt&quot;,
-                    &quot;email&quot;: &quot;wisoky.alva@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:41.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:41.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr376e6sq0nw9dgwrwzj9y&quot;,
+                    &quot;name&quot;: &quot;Jairo Grady&quot;,
+                    &quot;email&quot;: &quot;amira.armstrong@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:46.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:46.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 68,
-                    &quot;nome&quot;: &quot;Hope Purdy&quot;,
-                    &quot;email&quot;: &quot;kiana.breitenberg@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:41.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:41.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr37c4y1fjy0afznqkbmyc&quot;,
+                    &quot;name&quot;: &quot;Wilburn Parisian IV&quot;,
+                    &quot;email&quot;: &quot;vpollich@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:55:46.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:55:46.000000Z&quot;
                 }
             }
         ],
         &quot;first_page_url&quot;: &quot;http://localhost:8000/api/tagsconteudo?page=1&quot;,
         &quot;from&quot;: 1,
-        &quot;last_page&quot;: 3,
-        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/tagsconteudo?page=3&quot;,
+        &quot;last_page&quot;: 2,
+        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/tagsconteudo?page=2&quot;,
         &quot;links&quot;: [
             {
                 &quot;url&quot;: null,
@@ -2452,12 +1997,6 @@ access-control-allow-origin: *
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/tagsconteudo?page=3&quot;,
-                &quot;label&quot;: &quot;3&quot;,
-                &quot;page&quot;: 3,
-                &quot;active&quot;: false
-            },
-            {
                 &quot;url&quot;: &quot;http://localhost:8000/api/tagsconteudo?page=2&quot;,
                 &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
                 &quot;page&quot;: 2,
@@ -2469,7 +2008,7 @@ access-control-allow-origin: *
         &quot;per_page&quot;: 10,
         &quot;prev_page_url&quot;: null,
         &quot;to&quot;: 10,
-        &quot;total&quot;: 23
+        &quot;total&quot;: 20
     }
 }</code>
  </pre>
@@ -2601,780 +2140,880 @@ access-control-allow-origin: *
         &quot;current_page&quot;: 1,
         &quot;data&quot;: [
             {
-                &quot;id&quot;: 5,
-                &quot;title&quot;: &quot;Quis totam quis non et.&quot;,
-                &quot;content&quot;: &quot;Commodi sapiente ut dolorem voluptatibus qui nostrum. Sed nobis aut aut ducimus deserunt sequi rerum. Eveniet molestias fugit expedita facilis explicabo sunt molestiae.&quot;,
-                &quot;correction&quot;: &quot;Sint sed voluptatibus quod praesentium aut molestiae rem. Enim et optio magnam provident vel iure voluptas. Porro in itaque quod veniam est non. Ea id optio consequatur ad.&quot;,
-                &quot;materia&quot;: null,
-                &quot;ultimo_editor&quot;: 225,
-                &quot;criador&quot;: 226,
+                &quot;id&quot;: 1,
+                &quot;title&quot;: &quot;Illo nulla ratione adipisci dignissimos incidunt et nihil.&quot;,
+                &quot;content&quot;: &quot;Aliquam mollitia mollitia qui aut pariatur ex. Optio hic dolore quisquam doloribus. Voluptatibus voluptas assumenda consequatur et quas.&quot;,
+                &quot;correction&quot;: &quot;Sunt ut sit vel corporis officia in fugiat. Dicta consequuntur voluptatum minus. Cum exercitationem quod illo voluptate. Sed hic voluptate omnis amet est rerum et.&quot;,
+                &quot;materia_id&quot;: 21,
+                &quot;created_by&quot;: &quot;01kcfr40zsmcj163bet3410rh1&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr40t1av738rwbk7ex7t26&quot;,
                 &quot;type&quot;: &quot;Aberta&quot;,
                 &quot;status&quot;: &quot;Inactive&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:14.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:14.000000Z&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 226,
-                    &quot;nome&quot;: &quot;Kyleigh Hahn&quot;,
-                    &quot;email&quot;: &quot;anya.hintz@example.com&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:10.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:10.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr40zsmcj163bet3410rh1&quot;,
+                    &quot;name&quot;: &quot;Mable Tromp&quot;,
+                    &quot;email&quot;: &quot;kaia.klein@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:13.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:13.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 225,
-                    &quot;nome&quot;: &quot;Dr. Kayleigh Green IV&quot;,
-                    &quot;email&quot;: &quot;joyce.mohr@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:10.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:10.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr40t1av738rwbk7ex7t26&quot;,
+                    &quot;name&quot;: &quot;Jacey Mills&quot;,
+                    &quot;email&quot;: &quot;larson.jo@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:12.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:12.000000Z&quot;
+                },
+                &quot;alternatives&quot;: [
+                    {
+                        &quot;id&quot;: 1,
+                        &quot;question_id&quot;: 1,
+                        &quot;content&quot;: &quot;Necessitatibus quae esse sed deleniti consequatur nihil.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr4854wd2wnehyapjc45ae&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr48avzfk6yqv1vw8gfzd6&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:21.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:21.000000Z&quot;
+                    },
+                    {
+                        &quot;id&quot;: 2,
+                        &quot;question_id&quot;: 1,
+                        &quot;content&quot;: &quot;Atque natus non dignissimos quis.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr48ggwxyzwdthrx6gm8cf&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr48p46bnkwsdnmw991vry&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:21.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:21.000000Z&quot;
+                    },
+                    {
+                        &quot;id&quot;: 3,
+                        &quot;question_id&quot;: 1,
+                        &quot;content&quot;: &quot;Et molestiae ad sit velit cum.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr48vqkgy851gng2jhxydh&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr491avg4nwshsk0f36wx4&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:21.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:21.000000Z&quot;
+                    },
+                    {
+                        &quot;id&quot;: 4,
+                        &quot;question_id&quot;: 1,
+                        &quot;content&quot;: &quot;Alias modi animi quas nisi vitae sunt incidunt.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr4971xze71hfn27qfxzj6&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr49crvtnfe03zrbg1qa4j&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:21.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:21.000000Z&quot;
+                    }
+                ],
+                &quot;materia&quot;: {
+                    &quot;id&quot;: 21,
+                    &quot;nome&quot;: &quot;Citlalli Gusikowski&quot;,
+                    &quot;descricao&quot;: &quot;Rerum veritatis et dolorem aut ut praesentium.&quot;,
+                    &quot;status&quot;: &quot;Ativo&quot;,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:13.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:13.000000Z&quot;,
+                    &quot;created_by&quot;: &quot;01kcfr415k8k0qybacxvdct1mc&quot;,
+                    &quot;updated_by&quot;: &quot;01kcfr41bbgbst3eeje2df7hjj&quot;
+                }
+            },
+            {
+                &quot;id&quot;: 2,
+                &quot;title&quot;: &quot;Atque eaque eum sit illum porro aliquid inventore eius.&quot;,
+                &quot;content&quot;: &quot;Molestiae sed cupiditate sint illo dolores. Nihil provident autem corporis laboriosam numquam. Vitae aut eveniet temporibus placeat rerum veritatis similique. Voluptatem aut sed qui sint.&quot;,
+                &quot;correction&quot;: &quot;Harum qui libero voluptate minima. Eos necessitatibus unde id. Dicta libero iure minus voluptatem.&quot;,
+                &quot;materia_id&quot;: 22,
+                &quot;created_by&quot;: &quot;01kcfr41q35n4htcke4qnwqqtw&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr41hbph157h47hrmqp52k&quot;,
+                &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                &quot;status&quot;: &quot;Inactive&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                &quot;creator&quot;: {
+                    &quot;id&quot;: &quot;01kcfr41q35n4htcke4qnwqqtw&quot;,
+                    &quot;name&quot;: &quot;Prof. Eli O&#039;Conner DDS&quot;,
+                    &quot;email&quot;: &quot;steuber.cyrus@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:13.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:13.000000Z&quot;
+                },
+                &quot;last_editor&quot;: {
+                    &quot;id&quot;: &quot;01kcfr41hbph157h47hrmqp52k&quot;,
+                    &quot;name&quot;: &quot;Alysha Rath&quot;,
+                    &quot;email&quot;: &quot;adela.ruecker@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:13.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:13.000000Z&quot;
+                },
+                &quot;alternatives&quot;: [
+                    {
+                        &quot;id&quot;: 5,
+                        &quot;question_id&quot;: 2,
+                        &quot;content&quot;: &quot;Maxime nesciunt distinctio natus omnis.&quot;,
+                        &quot;correct&quot;: 1,
+                        &quot;created_by&quot;: &quot;01kcfr49kddvym5rwmb3198jgy&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr49s4b46wn9yd9ecbw4qy&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:23.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:23.000000Z&quot;
+                    },
+                    {
+                        &quot;id&quot;: 6,
+                        &quot;question_id&quot;: 2,
+                        &quot;content&quot;: &quot;Aliquid vel ad quis voluptate corporis aperiam non.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr49yrsc1e93e3h8epqyyw&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4a4b9e7qyxwa5nc1t6bv&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:23.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:23.000000Z&quot;
+                    },
+                    {
+                        &quot;id&quot;: 7,
+                        &quot;question_id&quot;: 2,
+                        &quot;content&quot;: &quot;Non voluptatem sit aut voluptates voluptates voluptatem ex.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr4aa2zm6f0ev9xzdvtmq5&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4afrp8n2cxxj1hktegdz&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:23.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:23.000000Z&quot;
+                    },
+                    {
+                        &quot;id&quot;: 8,
+                        &quot;question_id&quot;: 2,
+                        &quot;content&quot;: &quot;Non aut qui fugiat nisi.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr4anfnpw7seeerw7swqr7&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4av319n25xncztgvsqw9&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:23.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:23.000000Z&quot;
+                    }
+                ],
+                &quot;materia&quot;: {
+                    &quot;id&quot;: 22,
+                    &quot;nome&quot;: &quot;Dr. Jerod Von MD&quot;,
+                    &quot;descricao&quot;: &quot;Ut cum dolorem voluptatum dignissimos.&quot;,
+                    &quot;status&quot;: &quot;Ativo&quot;,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:14.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:14.000000Z&quot;,
+                    &quot;created_by&quot;: &quot;01kcfr41wtfmhzr3q1smzytzdw&quot;,
+                    &quot;updated_by&quot;: &quot;01kcfr422k57syct36hyzhh98a&quot;
+                }
+            },
+            {
+                &quot;id&quot;: 3,
+                &quot;title&quot;: &quot;Ducimus exercitationem distinctio aut qui.&quot;,
+                &quot;content&quot;: &quot;Officia error deleniti minima qui eveniet. Facere ab hic omnis molestias veniam beatae. Impedit repudiandae voluptates et explicabo quis non fugit.&quot;,
+                &quot;correction&quot;: &quot;Quaerat quis adipisci ut est tempora est a. Eius ullam est nulla. Incidunt nam velit maiores facere quibusdam. Ad expedita et cumque.&quot;,
+                &quot;materia_id&quot;: 23,
+                &quot;created_by&quot;: &quot;01kcfr42hfpg8hnsryrs2z5hfy&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr42bd0ddjg4q2syqge760&quot;,
+                &quot;type&quot;: &quot;Multipla&quot;,
+                &quot;status&quot;: &quot;Active&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                &quot;creator&quot;: {
+                    &quot;id&quot;: &quot;01kcfr42hfpg8hnsryrs2z5hfy&quot;,
+                    &quot;name&quot;: &quot;Orie Johnson&quot;,
+                    &quot;email&quot;: &quot;rozella.oconnell@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:14.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:14.000000Z&quot;
+                },
+                &quot;last_editor&quot;: {
+                    &quot;id&quot;: &quot;01kcfr42bd0ddjg4q2syqge760&quot;,
+                    &quot;name&quot;: &quot;Howell Jakubowski&quot;,
+                    &quot;email&quot;: &quot;tthompson@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:14.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:14.000000Z&quot;
+                },
+                &quot;alternatives&quot;: [
+                    {
+                        &quot;id&quot;: 9,
+                        &quot;question_id&quot;: 3,
+                        &quot;content&quot;: &quot;Repudiandae totam neque animi ut.&quot;,
+                        &quot;correct&quot;: 1,
+                        &quot;created_by&quot;: &quot;01kcfr4b1e0x5hmwpyvjmb5p25&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4b75z5q205n4we31x9zq&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:24.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:24.000000Z&quot;
+                    },
+                    {
+                        &quot;id&quot;: 10,
+                        &quot;question_id&quot;: 3,
+                        &quot;content&quot;: &quot;Velit rerum unde at id.&quot;,
+                        &quot;correct&quot;: 1,
+                        &quot;created_by&quot;: &quot;01kcfr4bcsabw74kef1nbn775a&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4bjgc4r4bskysvt6m8xr&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:24.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:24.000000Z&quot;
+                    },
+                    {
+                        &quot;id&quot;: 11,
+                        &quot;question_id&quot;: 3,
+                        &quot;content&quot;: &quot;Non quidem maiores ut veritatis perferendis dolor rem.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr4br57mh5hgwv14hn1p3k&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4bxsx8ym0bdeywyazyae&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:24.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:24.000000Z&quot;
+                    },
+                    {
+                        &quot;id&quot;: 12,
+                        &quot;question_id&quot;: 3,
+                        &quot;content&quot;: &quot;Dolor quo ad est qui commodi.&quot;,
+                        &quot;correct&quot;: 1,
+                        &quot;created_by&quot;: &quot;01kcfr4c3fvcktdg7qs0th5sez&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4c9b19wtv4qjjshmrfv3&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:24.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:24.000000Z&quot;
+                    }
+                ],
+                &quot;materia&quot;: {
+                    &quot;id&quot;: 23,
+                    &quot;nome&quot;: &quot;Laila Herzog&quot;,
+                    &quot;descricao&quot;: &quot;Cupiditate dicta repudiandae et libero eius voluptatem.&quot;,
+                    &quot;status&quot;: &quot;Inativo&quot;,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:15.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:15.000000Z&quot;,
+                    &quot;created_by&quot;: &quot;01kcfr42q5jffsbw5m5pcxw9h4&quot;,
+                    &quot;updated_by&quot;: &quot;01kcfr42wxfrtkdxjr30rr1sfk&quot;
+                }
+            },
+            {
+                &quot;id&quot;: 4,
+                &quot;title&quot;: &quot;In quia voluptas sed tempora minus quia ut totam.&quot;,
+                &quot;content&quot;: &quot;Assumenda ipsum dolore omnis laborum repellat. Voluptatem rerum facere quia officiis ullam. Nostrum modi est eos rem.&quot;,
+                &quot;correction&quot;: &quot;Et tempora sit minima eligendi sit aspernatur tenetur. Vitae autem error ratione rem. Nam quia voluptatum dicta repellat exercitationem labore.&quot;,
+                &quot;materia_id&quot;: 24,
+                &quot;created_by&quot;: &quot;01kcfr438ht8k1z9zyywg7nn6w&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr432t55nnk1zkgt5s18yc&quot;,
+                &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                &quot;status&quot;: &quot;Active&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                &quot;creator&quot;: {
+                    &quot;id&quot;: &quot;01kcfr438ht8k1z9zyywg7nn6w&quot;,
+                    &quot;name&quot;: &quot;Caroline Orn&quot;,
+                    &quot;email&quot;: &quot;xchristiansen@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:15.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:15.000000Z&quot;
+                },
+                &quot;last_editor&quot;: {
+                    &quot;id&quot;: &quot;01kcfr432t55nnk1zkgt5s18yc&quot;,
+                    &quot;name&quot;: &quot;Gregoria Kris&quot;,
+                    &quot;email&quot;: &quot;armando30@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:15.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:15.000000Z&quot;
+                },
+                &quot;alternatives&quot;: [
+                    {
+                        &quot;id&quot;: 13,
+                        &quot;question_id&quot;: 4,
+                        &quot;content&quot;: &quot;Rerum voluptates non eius sed et eveniet.&quot;,
+                        &quot;correct&quot;: 1,
+                        &quot;created_by&quot;: &quot;01kcfr4cfrqz76wv7dgssdxtwv&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4cnb3r4aj5c08d01hjq0&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:26.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:26.000000Z&quot;
+                    },
+                    {
+                        &quot;id&quot;: 14,
+                        &quot;question_id&quot;: 4,
+                        &quot;content&quot;: &quot;Placeat aut dolores dicta consequatur.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr4cv1jbncyzqjqw8hjc6f&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4d0pmc9mptbwwgqmf8e8&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:26.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:26.000000Z&quot;
+                    },
+                    {
+                        &quot;id&quot;: 15,
+                        &quot;question_id&quot;: 4,
+                        &quot;content&quot;: &quot;Quia voluptas eum reiciendis sint quia id placeat.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr4d6aqwd6c0qgtwwfzjq3&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4dbz1e1n5c5t6s28kv85&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:26.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:26.000000Z&quot;
+                    },
+                    {
+                        &quot;id&quot;: 16,
+                        &quot;question_id&quot;: 4,
+                        &quot;content&quot;: &quot;Qui rerum nisi soluta aut ea corrupti nemo.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr4dhpygyvn94xcdhf9dwq&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4dqg4wy229yxxdcxr03v&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:26.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:26.000000Z&quot;
+                    }
+                ],
+                &quot;materia&quot;: {
+                    &quot;id&quot;: 24,
+                    &quot;nome&quot;: &quot;Jessica Pfannerstill&quot;,
+                    &quot;descricao&quot;: &quot;Necessitatibus nam eius facilis voluptates tempore non est doloribus.&quot;,
+                    &quot;status&quot;: &quot;Inativo&quot;,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:15.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:15.000000Z&quot;,
+                    &quot;created_by&quot;: &quot;01kcfr43e5s76hfsvv1avd9bq8&quot;,
+                    &quot;updated_by&quot;: &quot;01kcfr43kv2gqngsc9ys8eeke1&quot;
+                }
+            },
+            {
+                &quot;id&quot;: 5,
+                &quot;title&quot;: &quot;Ipsum tempora consequatur quis repellendus.&quot;,
+                &quot;content&quot;: &quot;Consectetur corrupti inventore qui et nam architecto consequuntur. Consequuntur laudantium voluptatum rerum quisquam. Deserunt maxime illo aperiam. Nesciunt facere culpa et et.&quot;,
+                &quot;correction&quot;: &quot;Ut vel sed accusamus error qui qui. Sit libero recusandae sint quisquam. Consequatur dolorem sunt aut consequuntur alias maiores veniam omnis.&quot;,
+                &quot;materia_id&quot;: 25,
+                &quot;created_by&quot;: &quot;01kcfr43ze18k7fxk0d6sff1qt&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr43ss4b60ccavdr40dyaq&quot;,
+                &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                &quot;status&quot;: &quot;Active&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                &quot;creator&quot;: {
+                    &quot;id&quot;: &quot;01kcfr43ze18k7fxk0d6sff1qt&quot;,
+                    &quot;name&quot;: &quot;Mr. Jan Gulgowski&quot;,
+                    &quot;email&quot;: &quot;caden.deckow@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:16.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:16.000000Z&quot;
+                },
+                &quot;last_editor&quot;: {
+                    &quot;id&quot;: &quot;01kcfr43ss4b60ccavdr40dyaq&quot;,
+                    &quot;name&quot;: &quot;Prof. Kenyatta Gislason&quot;,
+                    &quot;email&quot;: &quot;reichert.pietro@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:15.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:15.000000Z&quot;
                 },
                 &quot;alternatives&quot;: [
                     {
                         &quot;id&quot;: 17,
                         &quot;question_id&quot;: 5,
-                        &quot;content&quot;: &quot;Consectetur provident modi quo voluptatum.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 281,
-                        &quot;ultimo_editor&quot;: 282,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:21.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:21.000000Z&quot;
+                        &quot;content&quot;: &quot;Quia alias deleniti ea id.&quot;,
+                        &quot;correct&quot;: 1,
+                        &quot;created_by&quot;: &quot;01kcfr4dy0d97b5b5g9tmgd0wa&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4e3pzzdnqs2b65fryaf1&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:27.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:27.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 18,
                         &quot;question_id&quot;: 5,
-                        &quot;content&quot;: &quot;Eaque aut consequatur a est sit dolor.&quot;,
+                        &quot;content&quot;: &quot;Corrupti atque sequi exercitationem ipsum.&quot;,
                         &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 283,
-                        &quot;ultimo_editor&quot;: 284,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:21.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:21.000000Z&quot;
+                        &quot;created_by&quot;: &quot;01kcfr4e9fbx9mxxfk3yahb98z&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4ef6sr8b3317fsjcm8ey&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:27.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:27.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 19,
                         &quot;question_id&quot;: 5,
-                        &quot;content&quot;: &quot;Ut qui doloribus officiis quia quia error ab sed.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 285,
-                        &quot;ultimo_editor&quot;: 286,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:21.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:21.000000Z&quot;
+                        &quot;content&quot;: &quot;Non delectus quo vitae aut nostrum autem eius.&quot;,
+                        &quot;correct&quot;: 1,
+                        &quot;created_by&quot;: &quot;01kcfr4emwdnqfnwq7bkse9sme&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4etg2vbbjhn0bqfpht6r&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:27.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:27.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 20,
                         &quot;question_id&quot;: 5,
-                        &quot;content&quot;: &quot;Temporibus sed et quis.&quot;,
+                        &quot;content&quot;: &quot;Vel quasi voluptatem blanditiis nobis.&quot;,
                         &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 287,
-                        &quot;ultimo_editor&quot;: 288,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:21.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:21.000000Z&quot;
+                        &quot;created_by&quot;: &quot;01kcfr4f04vk2qwdazwvw84msw&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4f5pzz4wncyk45rtaq9f&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:27.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:27.000000Z&quot;
                     }
-                ]
+                ],
+                &quot;materia&quot;: {
+                    &quot;id&quot;: 25,
+                    &quot;nome&quot;: &quot;Montana Batz&quot;,
+                    &quot;descricao&quot;: &quot;Aliquid ut dignissimos et.&quot;,
+                    &quot;status&quot;: &quot;Ativo&quot;,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:16.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:16.000000Z&quot;,
+                    &quot;created_by&quot;: &quot;01kcfr4452nzwmv2hkhnswkv9k&quot;,
+                    &quot;updated_by&quot;: &quot;01kcfr44anq2b004h7tmd3rf92&quot;
+                }
             },
             {
                 &quot;id&quot;: 6,
-                &quot;title&quot;: &quot;Est velit rerum ut quo.&quot;,
-                &quot;content&quot;: &quot;Aliquam iste quia explicabo at. Corporis nesciunt quia ut fuga id atque id. Molestiae nemo explicabo cumque voluptate deserunt voluptatem. Reiciendis velit nobis in sit.&quot;,
-                &quot;correction&quot;: &quot;Non ducimus est velit voluptas veritatis. Voluptatum illum iusto incidunt numquam.&quot;,
-                &quot;materia&quot;: null,
-                &quot;ultimo_editor&quot;: 229,
-                &quot;criador&quot;: 230,
-                &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                &quot;title&quot;: &quot;Voluptatem delectus rerum rem sunt minus qui sed saepe.&quot;,
+                &quot;content&quot;: &quot;Quis vel temporibus perspiciatis voluptatem iste omnis. Soluta aut ipsum consequatur nobis delectus autem eum. Voluptate enim quasi nobis quos voluptatum.&quot;,
+                &quot;correction&quot;: &quot;Est et mollitia expedita recusandae velit beatae nesciunt. Inventore hic et architecto corrupti labore. Sint vero provident voluptatem architecto autem dolore quisquam.&quot;,
+                &quot;materia_id&quot;: 26,
+                &quot;created_by&quot;: &quot;01kcfr44pbqfdq94rcf67p78hx&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr44gkww9fkzt6mz08vecf&quot;,
+                &quot;type&quot;: &quot;Aberta&quot;,
                 &quot;status&quot;: &quot;Active&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:14.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:14.000000Z&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 230,
-                    &quot;nome&quot;: &quot;Webster Bogan&quot;,
-                    &quot;email&quot;: &quot;emard.maurine@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:10.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:10.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr44pbqfdq94rcf67p78hx&quot;,
+                    &quot;name&quot;: &quot;Jaime Brown&quot;,
+                    &quot;email&quot;: &quot;elinor32@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:16.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:16.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 229,
-                    &quot;nome&quot;: &quot;Prof. Kirk Klocko&quot;,
-                    &quot;email&quot;: &quot;vsipes@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:10.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:10.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr44gkww9fkzt6mz08vecf&quot;,
+                    &quot;name&quot;: &quot;Antone Auer&quot;,
+                    &quot;email&quot;: &quot;ucremin@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:16.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:16.000000Z&quot;
                 },
                 &quot;alternatives&quot;: [
                     {
                         &quot;id&quot;: 21,
                         &quot;question_id&quot;: 6,
-                        &quot;content&quot;: &quot;Incidunt adipisci ratione est saepe culpa repellendus.&quot;,
+                        &quot;content&quot;: &quot;Assumenda error quia rem veritatis sequi.&quot;,
                         &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 289,
-                        &quot;ultimo_editor&quot;: 290,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:22.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:22.000000Z&quot;
+                        &quot;created_by&quot;: &quot;01kcfr4fbxxeaganyq013edf2n&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4fhh9vczc24q7cqxvtdr&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:29.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:29.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 22,
                         &quot;question_id&quot;: 6,
-                        &quot;content&quot;: &quot;Totam architecto mollitia explicabo hic.&quot;,
+                        &quot;content&quot;: &quot;Debitis optio consequatur ipsam ratione temporibus et.&quot;,
                         &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 291,
-                        &quot;ultimo_editor&quot;: 292,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:22.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:22.000000Z&quot;
+                        &quot;created_by&quot;: &quot;01kcfr4fqbgzge30z68c46zeyh&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4fwyke6ndr13gtzzw1f6&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:29.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:29.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 23,
                         &quot;question_id&quot;: 6,
-                        &quot;content&quot;: &quot;Illum cum dolor ab perspiciatis dolores sit quo.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 293,
-                        &quot;ultimo_editor&quot;: 294,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:23.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:23.000000Z&quot;
+                        &quot;content&quot;: &quot;Accusantium adipisci tenetur est aliquid modi.&quot;,
+                        &quot;correct&quot;: 1,
+                        &quot;created_by&quot;: &quot;01kcfr4g2k9sempsdb8jh61ws3&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4g86ratkwy8640jwpafy&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:29.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:29.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 24,
                         &quot;question_id&quot;: 6,
-                        &quot;content&quot;: &quot;Aut molestias soluta fugiat maiores iste.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 295,
-                        &quot;ultimo_editor&quot;: 296,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:23.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:23.000000Z&quot;
+                        &quot;content&quot;: &quot;Sequi dolorem expedita aut eius consequatur consequatur cum.&quot;,
+                        &quot;correct&quot;: 1,
+                        &quot;created_by&quot;: &quot;01kcfr4gdtzfxz0ckjj624j736&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4gkf5m4n3fn4rggmdx79&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:29.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:29.000000Z&quot;
                     }
-                ]
+                ],
+                &quot;materia&quot;: {
+                    &quot;id&quot;: 26,
+                    &quot;nome&quot;: &quot;Ernie Fahey&quot;,
+                    &quot;descricao&quot;: &quot;In nihil ab quia praesentium.&quot;,
+                    &quot;status&quot;: &quot;Inativo&quot;,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:17.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:17.000000Z&quot;,
+                    &quot;created_by&quot;: &quot;01kcfr44w1g5aqzeg9wqph4v8y&quot;,
+                    &quot;updated_by&quot;: &quot;01kcfr451r7xmr3472y7713hts&quot;
+                }
             },
             {
                 &quot;id&quot;: 7,
-                &quot;title&quot;: &quot;Veritatis quia enim at suscipit.&quot;,
-                &quot;content&quot;: &quot;Similique enim quaerat optio molestiae nam fugiat qui accusamus. Voluptas reiciendis fugiat pariatur cupiditate id. Expedita aperiam rem aut. Tempore voluptas quaerat cumque voluptas qui.&quot;,
-                &quot;correction&quot;: &quot;Eum eum possimus corporis cupiditate impedit. Minus aspernatur commodi impedit voluptatibus deleniti adipisci. Dolorum doloribus corporis aliquid fugiat officia dolorem. Recusandae magnam aliquam quam inventore.&quot;,
-                &quot;materia&quot;: null,
-                &quot;ultimo_editor&quot;: 233,
-                &quot;criador&quot;: 234,
-                &quot;type&quot;: &quot;Aberta&quot;,
-                &quot;status&quot;: &quot;Active&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:14.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:14.000000Z&quot;,
+                &quot;title&quot;: &quot;Architecto ad aliquid maxime quod ipsum.&quot;,
+                &quot;content&quot;: &quot;A et accusamus ea debitis rerum quibusdam. Nemo voluptates et sint reiciendis. Et necessitatibus velit libero non architecto. Nostrum non sint quod.&quot;,
+                &quot;correction&quot;: &quot;Rerum in in pariatur assumenda sit tempore sed exercitationem. Consequatur voluptas aliquam officia reprehenderit aut. Et officiis dolore consequatur voluptatem magnam. Autem consequatur perferendis tempore. Earum fuga qui aliquid.&quot;,
+                &quot;materia_id&quot;: 27,
+                &quot;created_by&quot;: &quot;01kcfr45d9tsgkvzn4f8x2xxgg&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr457hexkh636vwg00p0hj&quot;,
+                &quot;type&quot;: &quot;Multipla&quot;,
+                &quot;status&quot;: &quot;Inactive&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 234,
-                    &quot;nome&quot;: &quot;Maymie Mante&quot;,
-                    &quot;email&quot;: &quot;goyette.hildegard@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:11.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:11.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr45d9tsgkvzn4f8x2xxgg&quot;,
+                    &quot;name&quot;: &quot;Angela Casper&quot;,
+                    &quot;email&quot;: &quot;kunde.christopher@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:17.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:17.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 233,
-                    &quot;nome&quot;: &quot;Dr. Roberto Ferry&quot;,
-                    &quot;email&quot;: &quot;michelle.schaefer@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:11.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:11.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr457hexkh636vwg00p0hj&quot;,
+                    &quot;name&quot;: &quot;Dr. Guido Haley&quot;,
+                    &quot;email&quot;: &quot;jschoen@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:17.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:17.000000Z&quot;
                 },
                 &quot;alternatives&quot;: [
                     {
                         &quot;id&quot;: 25,
                         &quot;question_id&quot;: 7,
-                        &quot;content&quot;: &quot;Aut at distinctio libero mollitia aut eaque aut accusamus.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 297,
-                        &quot;ultimo_editor&quot;: 298,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:24.000000Z&quot;
+                        &quot;content&quot;: &quot;Sunt error veritatis facere placeat aliquam recusandae.&quot;,
+                        &quot;correct&quot;: 1,
+                        &quot;created_by&quot;: &quot;01kcfr4gspgd80f6ws75rfknqx&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4gzcntps8yfggbzjcdte&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:30.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:30.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 26,
                         &quot;question_id&quot;: 7,
-                        &quot;content&quot;: &quot;Distinctio provident earum ut consectetur aut voluptatum maiores.&quot;,
+                        &quot;content&quot;: &quot;Velit illum eos voluptatem quia.&quot;,
                         &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 299,
-                        &quot;ultimo_editor&quot;: 300,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:24.000000Z&quot;
+                        &quot;created_by&quot;: &quot;01kcfr4h510db6n5q9pgqk9j8r&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4haqbgbsam8vtb2g5gmp&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:30.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:30.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 27,
                         &quot;question_id&quot;: 7,
-                        &quot;content&quot;: &quot;Et dicta aliquid provident veritatis maiores similique.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 301,
-                        &quot;ultimo_editor&quot;: 302,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:24.000000Z&quot;
+                        &quot;content&quot;: &quot;Blanditiis voluptatem at iure voluptatum.&quot;,
+                        &quot;correct&quot;: 1,
+                        &quot;created_by&quot;: &quot;01kcfr4hggzfx4q2erbtt4ew28&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4hp7zpxas48fpd8qjffz&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:30.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:30.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 28,
                         &quot;question_id&quot;: 7,
-                        &quot;content&quot;: &quot;Fugit impedit repellendus repellendus vel totam repudiandae ut molestias.&quot;,
-                        &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 303,
-                        &quot;ultimo_editor&quot;: 304,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:24.000000Z&quot;
+                        &quot;content&quot;: &quot;Qui minima inventore est error repudiandae harum ut.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr4hvtcjs8qd64ct2hjvjf&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4j1dpme1rmwy09hbzpxs&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:30.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:30.000000Z&quot;
                     }
-                ]
+                ],
+                &quot;materia&quot;: {
+                    &quot;id&quot;: 27,
+                    &quot;nome&quot;: &quot;Dr. Tad Thiel&quot;,
+                    &quot;descricao&quot;: &quot;Nulla beatae eum voluptatem saepe.&quot;,
+                    &quot;status&quot;: &quot;Ativo&quot;,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:17.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:17.000000Z&quot;,
+                    &quot;created_by&quot;: &quot;01kcfr45k5fm2effwgs7gq259h&quot;,
+                    &quot;updated_by&quot;: &quot;01kcfr45ryksx53fhac81fvt5x&quot;
+                }
             },
             {
                 &quot;id&quot;: 8,
-                &quot;title&quot;: &quot;Expedita soluta ut numquam.&quot;,
-                &quot;content&quot;: &quot;Placeat error sed minus doloribus perferendis sunt cum. Praesentium et ducimus sequi recusandae temporibus aut.&quot;,
-                &quot;correction&quot;: &quot;Iste sequi modi eum nostrum occaecati dolorum vel aut. Magnam et et aut aut reprehenderit. Quia unde est placeat consectetur qui recusandae quo sint.&quot;,
-                &quot;materia&quot;: null,
-                &quot;ultimo_editor&quot;: 237,
-                &quot;criador&quot;: 238,
+                &quot;title&quot;: &quot;Exercitationem non perspiciatis fugit et et reprehenderit enim.&quot;,
+                &quot;content&quot;: &quot;Et rerum et est sit. Voluptas ab voluptatem excepturi eum consequatur dolor. Facere recusandae qui autem reiciendis.&quot;,
+                &quot;correction&quot;: &quot;Aperiam fugiat dignissimos doloribus. Quia ut ad natus id. Nostrum fugiat dicta quisquam facilis sunt sed. Est placeat maiores excepturi commodi unde.&quot;,
+                &quot;materia_id&quot;: 28,
+                &quot;created_by&quot;: &quot;01kcfr464qxjsd49tnkak9cmap&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr45z38ynfwtk7ww219kaf&quot;,
                 &quot;type&quot;: &quot;Multipla&quot;,
                 &quot;status&quot;: &quot;Inactive&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:14.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:14.000000Z&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 238,
-                    &quot;nome&quot;: &quot;Kaley Hamill&quot;,
-                    &quot;email&quot;: &quot;crist.warren@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:12.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:12.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr464qxjsd49tnkak9cmap&quot;,
+                    &quot;name&quot;: &quot;Vince Gutkowski&quot;,
+                    &quot;email&quot;: &quot;marilyne21@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:18.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:18.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 237,
-                    &quot;nome&quot;: &quot;Jevon Batz&quot;,
-                    &quot;email&quot;: &quot;johathan.wehner@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:12.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:12.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr45z38ynfwtk7ww219kaf&quot;,
+                    &quot;name&quot;: &quot;Ebba Halvorson&quot;,
+                    &quot;email&quot;: &quot;keeling.samantha@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:18.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:18.000000Z&quot;
                 },
                 &quot;alternatives&quot;: [
                     {
                         &quot;id&quot;: 29,
                         &quot;question_id&quot;: 8,
-                        &quot;content&quot;: &quot;Nihil et adipisci quae libero eum sunt.&quot;,
+                        &quot;content&quot;: &quot;Nam enim culpa nostrum est.&quot;,
                         &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 305,
-                        &quot;ultimo_editor&quot;: 306,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:25.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:25.000000Z&quot;
+                        &quot;created_by&quot;: &quot;01kcfr4j7nccasf4g9y4x67969&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4jd81j1s6rzqwprxxbfs&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:31.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:31.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 30,
                         &quot;question_id&quot;: 8,
-                        &quot;content&quot;: &quot;Tempora veritatis nam explicabo ex porro suscipit velit iure.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 307,
-                        &quot;ultimo_editor&quot;: 308,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:25.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:25.000000Z&quot;
+                        &quot;content&quot;: &quot;Voluptatem qui amet asperiores magni et et sequi.&quot;,
+                        &quot;correct&quot;: 1,
+                        &quot;created_by&quot;: &quot;01kcfr4jjvm9v48qmx5jwgms1v&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4jrgzqn9k5tvysyr03nt&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:31.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:31.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 31,
                         &quot;question_id&quot;: 8,
-                        &quot;content&quot;: &quot;In qui ducimus sunt qui.&quot;,
+                        &quot;content&quot;: &quot;Maxime eum odit est illum.&quot;,
                         &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 309,
-                        &quot;ultimo_editor&quot;: 310,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:25.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:25.000000Z&quot;
+                        &quot;created_by&quot;: &quot;01kcfr4jy44gks0z3jbb8eennn&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4k3qrcndzg0vdv5ag2tv&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:31.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:31.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 32,
                         &quot;question_id&quot;: 8,
-                        &quot;content&quot;: &quot;Porro dolore iste quidem recusandae quas ducimus voluptatem.&quot;,
-                        &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 311,
-                        &quot;ultimo_editor&quot;: 312,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:25.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:25.000000Z&quot;
+                        &quot;content&quot;: &quot;Et nisi aut voluptatum nulla est omnis.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr4k9bp6ekwestgfxzvcr7&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4kf0xbps5mhjvh7chz0s&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:31.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:31.000000Z&quot;
                     }
-                ]
+                ],
+                &quot;materia&quot;: {
+                    &quot;id&quot;: 28,
+                    &quot;nome&quot;: &quot;Prof. Jordi Schimmel&quot;,
+                    &quot;descricao&quot;: &quot;Omnis dignissimos voluptatibus ut qui corrupti est cupiditate.&quot;,
+                    &quot;status&quot;: &quot;Inativo&quot;,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:18.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:18.000000Z&quot;,
+                    &quot;created_by&quot;: &quot;01kcfr46ab04tcf0pk7b4x8tp6&quot;,
+                    &quot;updated_by&quot;: &quot;01kcfr46g3g1c3zkdg3m3k2b4y&quot;
+                }
             },
             {
                 &quot;id&quot;: 9,
-                &quot;title&quot;: &quot;Magni placeat qui deserunt aut velit.&quot;,
-                &quot;content&quot;: &quot;Corrupti doloribus eum explicabo labore eos officiis. Eius suscipit est fugit suscipit illum delectus eos.&quot;,
-                &quot;correction&quot;: &quot;Molestiae nostrum aut fugiat id non non. Quo rerum vero voluptatem nihil voluptas ad. Unde voluptas dolorem facere. Commodi quia reprehenderit qui ex aliquam officiis.&quot;,
-                &quot;materia&quot;: null,
-                &quot;ultimo_editor&quot;: 241,
-                &quot;criador&quot;: 242,
-                &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
-                &quot;status&quot;: &quot;Inactive&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:14.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:14.000000Z&quot;,
+                &quot;title&quot;: &quot;Odio quo labore explicabo consequuntur aut.&quot;,
+                &quot;content&quot;: &quot;Ut molestiae officia ea. Est repudiandae quis ea velit voluptatem dolor laboriosam illum. Nam ab est est ad ut qui numquam.&quot;,
+                &quot;correction&quot;: &quot;Et eum saepe nisi ullam aliquam. Blanditiis hic reiciendis quis maiores harum velit assumenda. Aut quas qui sed inventore. Ipsa velit ut minima et sint facilis.&quot;,
+                &quot;materia_id&quot;: 29,
+                &quot;created_by&quot;: &quot;01kcfr46vr32ryzavnvbg84hja&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr46p20zhwn93fvdntdjmk&quot;,
+                &quot;type&quot;: &quot;Multipla&quot;,
+                &quot;status&quot;: &quot;Active&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 242,
-                    &quot;nome&quot;: &quot;Thea Pollich Jr.&quot;,
-                    &quot;email&quot;: &quot;shanie97@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:13.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:13.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr46vr32ryzavnvbg84hja&quot;,
+                    &quot;name&quot;: &quot;Mrs. Alexandria Marks I&quot;,
+                    &quot;email&quot;: &quot;celine.pollich@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:19.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:19.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 241,
-                    &quot;nome&quot;: &quot;Miss Dominique Hamill DVM&quot;,
-                    &quot;email&quot;: &quot;reynolds.gustave@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:12.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:12.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr46p20zhwn93fvdntdjmk&quot;,
+                    &quot;name&quot;: &quot;Javier Hamill&quot;,
+                    &quot;email&quot;: &quot;kip.aufderhar@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:18.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:18.000000Z&quot;
                 },
                 &quot;alternatives&quot;: [
                     {
                         &quot;id&quot;: 33,
                         &quot;question_id&quot;: 9,
-                        &quot;content&quot;: &quot;Quisquam impedit qui laboriosam repudiandae.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 313,
-                        &quot;ultimo_editor&quot;: 314,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:27.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:27.000000Z&quot;
+                        &quot;content&quot;: &quot;Consectetur iusto unde cupiditate voluptate rem expedita dignissimos.&quot;,
+                        &quot;correct&quot;: 1,
+                        &quot;created_by&quot;: &quot;01kcfr4kng11k5fbhrsdjxjesr&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4kv5w82y2x7zty8v2e65&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:33.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:33.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 34,
                         &quot;question_id&quot;: 9,
-                        &quot;content&quot;: &quot;Corrupti nostrum ut quis ex.&quot;,
+                        &quot;content&quot;: &quot;Soluta accusamus blanditiis facilis.&quot;,
                         &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 315,
-                        &quot;ultimo_editor&quot;: 316,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:27.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:27.000000Z&quot;
+                        &quot;created_by&quot;: &quot;01kcfr4m0tqxmn3b4aknrca1c4&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4m6dxkx8c2tb8jbcjjsk&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:33.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:33.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 35,
                         &quot;question_id&quot;: 9,
-                        &quot;content&quot;: &quot;Enim consectetur qui laborum excepturi ducimus.&quot;,
+                        &quot;content&quot;: &quot;Impedit voluptatibus suscipit iusto excepturi est.&quot;,
                         &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 317,
-                        &quot;ultimo_editor&quot;: 318,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:27.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:27.000000Z&quot;
+                        &quot;created_by&quot;: &quot;01kcfr4mc247b2rv53a729tds2&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4mhrejwzgywm10r4mq6j&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:33.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:33.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 36,
                         &quot;question_id&quot;: 9,
-                        &quot;content&quot;: &quot;Dolorem sit dicta officia qui molestias.&quot;,
-                        &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 319,
-                        &quot;ultimo_editor&quot;: 320,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:27.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:27.000000Z&quot;
+                        &quot;content&quot;: &quot;Est ad rerum totam et mollitia recusandae quia.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr4mqdaxceyx9axgc32m21&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4mx1tasr41cr9607bhfr&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:33.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:33.000000Z&quot;
                     }
-                ]
+                ],
+                &quot;materia&quot;: {
+                    &quot;id&quot;: 29,
+                    &quot;nome&quot;: &quot;Cecile Herzog&quot;,
+                    &quot;descricao&quot;: &quot;Asperiores corrupti ratione quo ducimus ipsum in.&quot;,
+                    &quot;status&quot;: &quot;Inativo&quot;,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:19.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:19.000000Z&quot;,
+                    &quot;created_by&quot;: &quot;01kcfr471c4kc09j7j9pg4m6b1&quot;,
+                    &quot;updated_by&quot;: &quot;01kcfr476z1yq3qxeqrb5rpd2v&quot;
+                }
             },
             {
                 &quot;id&quot;: 10,
-                &quot;title&quot;: &quot;Quo qui dolorem nihil ullam.&quot;,
-                &quot;content&quot;: &quot;Porro soluta et dolore voluptatum sapiente. Consequatur dolorum cumque omnis esse. Aliquid modi voluptatibus vero non nihil ut sunt. Praesentium quisquam dolores sapiente nesciunt in est sed.&quot;,
-                &quot;correction&quot;: &quot;Voluptas et dignissimos quia doloribus voluptas dolor provident. Culpa qui nihil vel numquam libero. Voluptatem vel saepe soluta modi laboriosam.&quot;,
-                &quot;materia&quot;: null,
-                &quot;ultimo_editor&quot;: 245,
-                &quot;criador&quot;: 246,
-                &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
-                &quot;status&quot;: &quot;Inactive&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:14.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:14.000000Z&quot;,
+                &quot;title&quot;: &quot;Optio qui fuga repellendus veniam illo doloribus ullam aliquam.&quot;,
+                &quot;content&quot;: &quot;Cum provident dolorem soluta. Pariatur voluptatem aut in nesciunt rem impedit. Aut nisi ipsa ea repudiandae sunt beatae molestiae omnis. Impedit sint et qui vel itaque soluta.&quot;,
+                &quot;correction&quot;: &quot;Et a facilis eius veritatis doloremque hic laborum. Fugiat error rerum illo provident qui ratione quasi. Et ratione vel ea aliquam. Dolore quae distinctio non id voluptatibus nemo. Consectetur placeat magnam eos tenetur.&quot;,
+                &quot;materia_id&quot;: 30,
+                &quot;created_by&quot;: &quot;01kcfr47jacsxj8m00j249m1n3&quot;,
+                &quot;updated_by&quot;: &quot;01kcfr47cpka773q920vbvd6sg&quot;,
+                &quot;type&quot;: &quot;Aberta&quot;,
+                &quot;status&quot;: &quot;Active&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
                 &quot;creator&quot;: {
-                    &quot;id&quot;: 246,
-                    &quot;nome&quot;: &quot;Prof. Joany Gibson Sr.&quot;,
-                    &quot;email&quot;: &quot;melvin.gaylord@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:13.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:13.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr47jacsxj8m00j249m1n3&quot;,
+                    &quot;name&quot;: &quot;Tierra Jaskolski&quot;,
+                    &quot;email&quot;: &quot;frida.beier@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:19.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:19.000000Z&quot;
                 },
                 &quot;last_editor&quot;: {
-                    &quot;id&quot;: 245,
-                    &quot;nome&quot;: &quot;Anissa King&quot;,
-                    &quot;email&quot;: &quot;zschmeler@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:13.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:13.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr47cpka773q920vbvd6sg&quot;,
+                    &quot;name&quot;: &quot;Hosea Strosin&quot;,
+                    &quot;email&quot;: &quot;raina62@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:19.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:19.000000Z&quot;
                 },
                 &quot;alternatives&quot;: [
                     {
                         &quot;id&quot;: 37,
                         &quot;question_id&quot;: 10,
-                        &quot;content&quot;: &quot;Sequi molestias eveniet voluptatibus iure est in mollitia.&quot;,
+                        &quot;content&quot;: &quot;Aliquam veniam dolorem nisi quos aperiam.&quot;,
                         &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 321,
-                        &quot;ultimo_editor&quot;: 322,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:28.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:28.000000Z&quot;
+                        &quot;created_by&quot;: &quot;01kcfr4n3bxzaqh4at1zs8wda2&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4n8ywy7gv5nfam8ypeg3&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:34.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 38,
                         &quot;question_id&quot;: 10,
-                        &quot;content&quot;: &quot;Libero est praesentium ratione asperiores.&quot;,
+                        &quot;content&quot;: &quot;Eos possimus aut inventore.&quot;,
                         &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 323,
-                        &quot;ultimo_editor&quot;: 324,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:28.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:28.000000Z&quot;
+                        &quot;created_by&quot;: &quot;01kcfr4nej112n7sechptx1k6e&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4nm5zzh1gfpb75cm5mfz&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:34.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 39,
                         &quot;question_id&quot;: 10,
-                        &quot;content&quot;: &quot;Autem corporis vero vel sunt optio et aut.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 325,
-                        &quot;ultimo_editor&quot;: 326,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:28.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:28.000000Z&quot;
+                        &quot;content&quot;: &quot;Facilis enim aut saepe nesciunt.&quot;,
+                        &quot;correct&quot;: 1,
+                        &quot;created_by&quot;: &quot;01kcfr4nssb583gmfkzvkwb5q8&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4nzh814ean4v4njx9pn3&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:34.000000Z&quot;
                     },
                     {
                         &quot;id&quot;: 40,
                         &quot;question_id&quot;: 10,
-                        &quot;content&quot;: &quot;Consequatur ut facilis enim minus aspernatur.&quot;,
-                        &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 327,
-                        &quot;ultimo_editor&quot;: 328,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:28.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:28.000000Z&quot;
+                        &quot;content&quot;: &quot;Temporibus quia quod molestias ut minima.&quot;,
+                        &quot;correct&quot;: 0,
+                        &quot;created_by&quot;: &quot;01kcfr4p57ckk2bpwtntgeqrqs&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4paw8bv2z6rjwn082ftk&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:34.000000Z&quot;
                     }
-                ]
-            },
-            {
-                &quot;id&quot;: 11,
-                &quot;title&quot;: &quot;Non qui in pariatur aliquid modi.&quot;,
-                &quot;content&quot;: &quot;Est vitae qui quis dignissimos maiores. Sit laboriosam natus quo accusamus harum. Quia aspernatur dicta quia iste non soluta et. Sapiente quaerat nostrum et et veritatis impedit quis.&quot;,
-                &quot;correction&quot;: &quot;Repellat autem eos autem quos qui fugit. Fuga omnis rem similique. Quidem ad et temporibus eum recusandae laudantium. Eos soluta quos fuga itaque.&quot;,
-                &quot;materia&quot;: null,
-                &quot;ultimo_editor&quot;: 338,
-                &quot;criador&quot;: 339,
-                &quot;type&quot;: &quot;Multipla&quot;,
-                &quot;status&quot;: &quot;Inactive&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:36.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:36.000000Z&quot;,
-                &quot;creator&quot;: {
-                    &quot;id&quot;: 339,
-                    &quot;nome&quot;: &quot;Era Hegmann&quot;,
-                    &quot;email&quot;: &quot;gaylord.zemlak@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:30.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:30.000000Z&quot;
-                },
-                &quot;last_editor&quot;: {
-                    &quot;id&quot;: 338,
-                    &quot;nome&quot;: &quot;Alysa Feil III&quot;,
-                    &quot;email&quot;: &quot;beier.andreane@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
+                ],
+                &quot;materia&quot;: {
+                    &quot;id&quot;: 30,
+                    &quot;nome&quot;: &quot;Lola Keeling&quot;,
+                    &quot;descricao&quot;: &quot;Explicabo dolor nobis voluptatem voluptas aut corporis in.&quot;,
                     &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:30.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:30.000000Z&quot;
-                },
-                &quot;alternatives&quot;: [
-                    {
-                        &quot;id&quot;: 41,
-                        &quot;question_id&quot;: 11,
-                        &quot;content&quot;: &quot;Adipisci pariatur alias exercitationem.&quot;,
-                        &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 374,
-                        &quot;ultimo_editor&quot;: 375,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:38.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:38.000000Z&quot;
-                    },
-                    {
-                        &quot;id&quot;: 42,
-                        &quot;question_id&quot;: 11,
-                        &quot;content&quot;: &quot;Consequatur quam id voluptatum.&quot;,
-                        &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 376,
-                        &quot;ultimo_editor&quot;: 377,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:38.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:38.000000Z&quot;
-                    },
-                    {
-                        &quot;id&quot;: 43,
-                        &quot;question_id&quot;: 11,
-                        &quot;content&quot;: &quot;Aut ut dolores dolorem dolorum laboriosam.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 378,
-                        &quot;ultimo_editor&quot;: 379,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:38.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:38.000000Z&quot;
-                    },
-                    {
-                        &quot;id&quot;: 44,
-                        &quot;question_id&quot;: 11,
-                        &quot;content&quot;: &quot;Minima numquam dolore sint veritatis perspiciatis explicabo.&quot;,
-                        &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 380,
-                        &quot;ultimo_editor&quot;: 381,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:38.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:38.000000Z&quot;
-                    }
-                ]
-            },
-            {
-                &quot;id&quot;: 12,
-                &quot;title&quot;: &quot;Rerum libero omnis sit et enim fugiat.&quot;,
-                &quot;content&quot;: &quot;Ea id et iusto tempore. Vitae maxime dolore exercitationem ex eum.&quot;,
-                &quot;correction&quot;: &quot;Ut amet rerum accusantium placeat aut et minus. Hic facere recusandae numquam sed et aut numquam quisquam. Sed laudantium commodi aut aut.&quot;,
-                &quot;materia&quot;: null,
-                &quot;ultimo_editor&quot;: 342,
-                &quot;criador&quot;: 343,
-                &quot;type&quot;: &quot;Multipla&quot;,
-                &quot;status&quot;: &quot;Inactive&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:36.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:36.000000Z&quot;,
-                &quot;creator&quot;: {
-                    &quot;id&quot;: 343,
-                    &quot;nome&quot;: &quot;Joel Gleichner&quot;,
-                    &quot;email&quot;: &quot;collins.frank@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:31.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:31.000000Z&quot;
-                },
-                &quot;last_editor&quot;: {
-                    &quot;id&quot;: 342,
-                    &quot;nome&quot;: &quot;Therese Macejkovic&quot;,
-                    &quot;email&quot;: &quot;joaquin68@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Aluno&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:31.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:31.000000Z&quot;
-                },
-                &quot;alternatives&quot;: [
-                    {
-                        &quot;id&quot;: 45,
-                        &quot;question_id&quot;: 12,
-                        &quot;content&quot;: &quot;Et odit quod eum quo.&quot;,
-                        &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 382,
-                        &quot;ultimo_editor&quot;: 383,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:39.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:39.000000Z&quot;
-                    },
-                    {
-                        &quot;id&quot;: 46,
-                        &quot;question_id&quot;: 12,
-                        &quot;content&quot;: &quot;Deserunt qui est excepturi non aut.&quot;,
-                        &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 384,
-                        &quot;ultimo_editor&quot;: 385,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:39.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:39.000000Z&quot;
-                    },
-                    {
-                        &quot;id&quot;: 47,
-                        &quot;question_id&quot;: 12,
-                        &quot;content&quot;: &quot;Nihil sint iure soluta consequatur maxime.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 386,
-                        &quot;ultimo_editor&quot;: 387,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:39.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:39.000000Z&quot;
-                    },
-                    {
-                        &quot;id&quot;: 48,
-                        &quot;question_id&quot;: 12,
-                        &quot;content&quot;: &quot;Quidem quia voluptatem nam ullam dolores nihil facilis.&quot;,
-                        &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 388,
-                        &quot;ultimo_editor&quot;: 389,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:39.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:39.000000Z&quot;
-                    }
-                ]
-            },
-            {
-                &quot;id&quot;: 13,
-                &quot;title&quot;: &quot;Aut quo ea debitis est ipsam perferendis itaque.&quot;,
-                &quot;content&quot;: &quot;Quasi enim doloribus quaerat iure aut omnis similique a. Enim impedit odit totam omnis in. Enim fugit id rerum sequi expedita suscipit. Eos laboriosam porro quos similique ut aut ipsam.&quot;,
-                &quot;correction&quot;: &quot;Accusantium fugit possimus quas. Ratione incidunt occaecati quo sit. Eum et eveniet quidem odio ducimus distinctio non. Non vel aut ratione cumque rem.&quot;,
-                &quot;materia&quot;: null,
-                &quot;ultimo_editor&quot;: 346,
-                &quot;criador&quot;: 347,
-                &quot;type&quot;: &quot;Aberta&quot;,
-                &quot;status&quot;: &quot;Inactive&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:36.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:36.000000Z&quot;,
-                &quot;creator&quot;: {
-                    &quot;id&quot;: 347,
-                    &quot;nome&quot;: &quot;Morton Schinner III&quot;,
-                    &quot;email&quot;: &quot;barrows.marques@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:32.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:32.000000Z&quot;
-                },
-                &quot;last_editor&quot;: {
-                    &quot;id&quot;: 346,
-                    &quot;nome&quot;: &quot;Gwendolyn Wisoky&quot;,
-                    &quot;email&quot;: &quot;adams.abdul@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:32.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:32.000000Z&quot;
-                },
-                &quot;alternatives&quot;: [
-                    {
-                        &quot;id&quot;: 49,
-                        &quot;question_id&quot;: 13,
-                        &quot;content&quot;: &quot;Itaque nesciunt amet modi.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 390,
-                        &quot;ultimo_editor&quot;: 391,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:41.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:41.000000Z&quot;
-                    },
-                    {
-                        &quot;id&quot;: 50,
-                        &quot;question_id&quot;: 13,
-                        &quot;content&quot;: &quot;Sit animi eligendi doloremque dolore qui autem.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 392,
-                        &quot;ultimo_editor&quot;: 393,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:41.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:41.000000Z&quot;
-                    },
-                    {
-                        &quot;id&quot;: 51,
-                        &quot;question_id&quot;: 13,
-                        &quot;content&quot;: &quot;Eius ipsum quisquam possimus sit enim saepe.&quot;,
-                        &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 394,
-                        &quot;ultimo_editor&quot;: 395,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:41.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:41.000000Z&quot;
-                    },
-                    {
-                        &quot;id&quot;: 52,
-                        &quot;question_id&quot;: 13,
-                        &quot;content&quot;: &quot;Ut error aliquid laborum necessitatibus doloribus voluptates.&quot;,
-                        &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 396,
-                        &quot;ultimo_editor&quot;: 397,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:41.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:41.000000Z&quot;
-                    }
-                ]
-            },
-            {
-                &quot;id&quot;: 14,
-                &quot;title&quot;: &quot;Incidunt quia non illo dolores omnis et.&quot;,
-                &quot;content&quot;: &quot;Et dolores necessitatibus ducimus iste accusantium. Nesciunt et itaque eveniet quia consequatur optio. Aut nostrum architecto libero eaque atque.&quot;,
-                &quot;correction&quot;: &quot;Odit vitae neque qui repudiandae sunt tenetur. Ullam eveniet rerum aut aut. Cumque voluptas autem qui amet porro eligendi.&quot;,
-                &quot;materia&quot;: null,
-                &quot;ultimo_editor&quot;: 350,
-                &quot;criador&quot;: 351,
-                &quot;type&quot;: &quot;Multipla&quot;,
-                &quot;status&quot;: &quot;Active&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:37.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:37.000000Z&quot;,
-                &quot;creator&quot;: {
-                    &quot;id&quot;: 351,
-                    &quot;nome&quot;: &quot;Mikayla Berge&quot;,
-                    &quot;email&quot;: &quot;schumm.bradley@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:32.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:32.000000Z&quot;
-                },
-                &quot;last_editor&quot;: {
-                    &quot;id&quot;: 350,
-                    &quot;nome&quot;: &quot;Miss Maryse Lesch Jr.&quot;,
-                    &quot;email&quot;: &quot;rgreen@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:32.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:32.000000Z&quot;
-                },
-                &quot;alternatives&quot;: [
-                    {
-                        &quot;id&quot;: 53,
-                        &quot;question_id&quot;: 14,
-                        &quot;content&quot;: &quot;Dolores omnis blanditiis aperiam quibusdam corporis.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 398,
-                        &quot;ultimo_editor&quot;: 399,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:42.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:42.000000Z&quot;
-                    },
-                    {
-                        &quot;id&quot;: 54,
-                        &quot;question_id&quot;: 14,
-                        &quot;content&quot;: &quot;Est eligendi eius alias temporibus sint ducimus et est.&quot;,
-                        &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 400,
-                        &quot;ultimo_editor&quot;: 401,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:42.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:42.000000Z&quot;
-                    },
-                    {
-                        &quot;id&quot;: 55,
-                        &quot;question_id&quot;: 14,
-                        &quot;content&quot;: &quot;Voluptates ut et dicta sit.&quot;,
-                        &quot;correct&quot;: 0,
-                        &quot;criador&quot;: 402,
-                        &quot;ultimo_editor&quot;: 403,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:42.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:42.000000Z&quot;
-                    },
-                    {
-                        &quot;id&quot;: 56,
-                        &quot;question_id&quot;: 14,
-                        &quot;content&quot;: &quot;Autem nemo qui architecto veritatis alias nam et nobis.&quot;,
-                        &quot;correct&quot;: 1,
-                        &quot;criador&quot;: 404,
-                        &quot;ultimo_editor&quot;: 405,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:42.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:34:42.000000Z&quot;
-                    }
-                ]
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:20.000000Z&quot;,
+                    &quot;created_by&quot;: &quot;01kcfr47r0yhx5g8r2rqwwdhqq&quot;,
+                    &quot;updated_by&quot;: &quot;01kcfr47xnr2hvzfjsks97zw8q&quot;
+                }
             }
         ],
         &quot;first_page_url&quot;: &quot;http://localhost:8000/api/questoes?page=1&quot;,
         &quot;from&quot;: 1,
-        &quot;last_page&quot;: 14,
-        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/questoes?page=14&quot;,
+        &quot;last_page&quot;: 12,
+        &quot;last_page_url&quot;: &quot;http://localhost:8000/api/questoes?page=12&quot;,
         &quot;links&quot;: [
             {
                 &quot;url&quot;: null,
@@ -3443,20 +3082,15 @@ access-control-allow-origin: *
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;...&quot;,
+                &quot;url&quot;: &quot;http://localhost:8000/api/questoes?page=11&quot;,
+                &quot;label&quot;: &quot;11&quot;,
+                &quot;page&quot;: 11,
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/questoes?page=13&quot;,
-                &quot;label&quot;: &quot;13&quot;,
-                &quot;page&quot;: 13,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/questoes?page=14&quot;,
-                &quot;label&quot;: &quot;14&quot;,
-                &quot;page&quot;: 14,
+                &quot;url&quot;: &quot;http://localhost:8000/api/questoes?page=12&quot;,
+                &quot;label&quot;: &quot;12&quot;,
+                &quot;page&quot;: 12,
                 &quot;active&quot;: false
             },
             {
@@ -3471,7 +3105,7 @@ access-control-allow-origin: *
         &quot;per_page&quot;: 10,
         &quot;prev_page_url&quot;: null,
         &quot;to&quot;: 10,
-        &quot;total&quot;: 138
+        &quot;total&quot;: 119
     }
 }</code>
  </pre>
@@ -3604,1361 +3238,1639 @@ access-control-allow-origin: *
         &quot;current_page&quot;: 1,
         &quot;data&quot;: [
             {
-                &quot;id&quot;: 2,
-                &quot;title&quot;: &quot;Simulado - Fisica&quot;,
-                &quot;description&quot;: &quot;&lt;p&gt;Aut repellat iure nemo vel beatae. Non aut mollitia officiis nobis reprehenderit natus. Quasi voluptatem cupiditate tempore fugiat est hic.&lt;/p&gt;&quot;,
-                &quot;subject_id&quot;: 32,
+                &quot;id&quot;: 1,
+                &quot;title&quot;: &quot;Simulado - ut&quot;,
+                &quot;description&quot;: &quot;Fugiat dignissimos ut et quaerat voluptatibus. Incidunt ut et ea consectetur facilis.&quot;,
+                &quot;subject_id&quot;: 31,
                 &quot;type&quot;: &quot;Simulation&quot;,
-                &quot;due_date&quot;: &quot;2025-12-08T00:00:00.000000Z&quot;,
+                &quot;due_date&quot;: &quot;2025-12-21T15:26:22.000000Z&quot;,
                 &quot;created_by&quot;: {
-                    &quot;id&quot;: 332,
-                    &quot;nome&quot;: &quot;Dr. Daryl Schroeder&quot;,
-                    &quot;email&quot;: &quot;schamberger.maximillian@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:29.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:29.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                    &quot;name&quot;: &quot;Wilbert Feest&quot;,
+                    &quot;email&quot;: &quot;marjory75@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:35.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:35.000000Z&quot;
                 },
                 &quot;updated_by&quot;: {
-                    &quot;id&quot;: 1,
-                    &quot;nome&quot;: &quot;Administrador&quot;,
-                    &quot;email&quot;: &quot;admin@mesominds.com&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:33:29.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:33:29.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                    &quot;name&quot;: &quot;Wilbert Feest&quot;,
+                    &quot;email&quot;: &quot;marjory75@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:35.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:35.000000Z&quot;
+                },
+                &quot;status&quot;: &quot;Inactive&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:56:36.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:56:36.000000Z&quot;,
+                &quot;questions&quot;: [
+                    {
+                        &quot;id&quot;: 11,
+                        &quot;title&quot;: &quot;Soluta odio aut deserunt ipsa veniam culpa tenetur.&quot;,
+                        &quot;content&quot;: &quot;Iure labore temporibus nostrum voluptatem vel. Quibusdam praesentium incidunt itaque est ut. Rerum recusandae ipsam natus libero velit consequatur earum. Odio voluptas minus qui pariatur accusantium ad minus dignissimos.&quot;,
+                        &quot;correction&quot;: &quot;Quod eos nobis possimus officia blanditiis. Reiciendis aut dicta ut veniam nobis voluptatem. Fuga distinctio provident quis. Est quo dolores dolorem et.&quot;,
+                        &quot;materia_id&quot;: 31,
+                        &quot;created_by&quot;: &quot;01kcfr4rb8x67pgbmvc6ck4e9b&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4r5ja9v10dhb688jb9mm&quot;,
+                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:39.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:39.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 1,
+                            &quot;question_id&quot;: 11,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 1,
+                            &quot;created_by&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:56:53.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:56:53.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 12,
+                        &quot;title&quot;: &quot;Ipsa eos ut qui sequi atque.&quot;,
+                        &quot;content&quot;: &quot;Aliquid consequatur porro qui cum. Earum esse voluptatum minima exercitationem eos. Blanditiis accusantium quisquam praesentium ipsa. Et sapiente qui aut est. Doloremque commodi sunt odit voluptates sed.&quot;,
+                        &quot;correction&quot;: &quot;Excepturi consequatur laborum architecto unde. Iste delectus necessitatibus quidem repellat vel sunt. Nesciunt at est dolorum aut sint architecto qui. Pariatur adipisci sint et quod ducimus fugiat qui doloribus.&quot;,
+                        &quot;materia_id&quot;: 31,
+                        &quot;created_by&quot;: &quot;01kcfr4rpq17fwf76bmmywegdk&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4rh0f37ywwb3yk0m6zrc&quot;,
+                        &quot;type&quot;: &quot;Multipla&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:39.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:39.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 1,
+                            &quot;question_id&quot;: 12,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 2,
+                            &quot;created_by&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:56:53.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:56:53.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 14,
+                        &quot;title&quot;: &quot;Dolor et sapiente nesciunt qui delectus autem quas.&quot;,
+                        &quot;content&quot;: &quot;Laboriosam deserunt cumque quam qui ipsam. Consequatur dolor qui ipsa adipisci. Nesciunt laudantium sit accusantium ut. Et deleniti aut optio voluptatum nobis iusto. Voluptas autem quia totam sit laudantium.&quot;,
+                        &quot;correction&quot;: &quot;Nesciunt molestiae aperiam possimus nobis consequatur. Minima quis aut neque suscipit. Soluta at aut consectetur sequi ipsum est dolor.&quot;,
+                        &quot;materia_id&quot;: 31,
+                        &quot;created_by&quot;: &quot;01kcfr4sdkcsj7zdbrgjy4zy88&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4s80xjzk9k6s1j6hk7ej&quot;,
+                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:39.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:39.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 1,
+                            &quot;question_id&quot;: 14,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 4,
+                            &quot;created_by&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:56:53.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:56:53.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 15,
+                        &quot;title&quot;: &quot;Numquam voluptates quas voluptas temporibus.&quot;,
+                        &quot;content&quot;: &quot;Dolores sunt minus eaque veritatis aut enim qui. Voluptatem ratione sed sapiente eum tenetur ratione praesentium sint. Culpa voluptates nisi laborum illo quasi quisquam cum autem.&quot;,
+                        &quot;correction&quot;: &quot;Repudiandae quis quia cupiditate earum inventore facilis et ab. Ex blanditiis consequatur minus qui porro est sapiente. Sed eos est labore vitae sunt.&quot;,
+                        &quot;materia_id&quot;: 31,
+                        &quot;created_by&quot;: &quot;01kcfr4srxxdwtp5wam5m7g3zr&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4sk8jqthtfcpfzc1z6fa&quot;,
+                        &quot;type&quot;: &quot;Multipla&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:39.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:39.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 1,
+                            &quot;question_id&quot;: 15,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 5,
+                            &quot;created_by&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:56:53.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:56:53.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 16,
+                        &quot;title&quot;: &quot;Animi esse itaque aperiam labore asperiores.&quot;,
+                        &quot;content&quot;: &quot;Sed est aut doloremque qui. Aliquam odio voluptate porro.&quot;,
+                        &quot;correction&quot;: &quot;Impedit doloribus voluptatum et. Id iste in nisi et et aspernatur. Eius minus maxime aperiam qui.&quot;,
+                        &quot;materia_id&quot;: 31,
+                        &quot;created_by&quot;: &quot;01kcfr4t47c0qncchc0z88y5b3&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4syj03wkcnqpy4a0kz9h&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:39.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:39.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 1,
+                            &quot;question_id&quot;: 16,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 6,
+                            &quot;created_by&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:56:53.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:56:53.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 18,
+                        &quot;title&quot;: &quot;Beatae laboriosam aut commodi hic odio.&quot;,
+                        &quot;content&quot;: &quot;Eaque voluptatem dolorum ipsum magnam qui aut quisquam. Quaerat aut fuga cupiditate sit. Optio esse consequatur et placeat mollitia. Eaque doloremque dolor dolorem tenetur unde velit eum occaecati.&quot;,
+                        &quot;correction&quot;: &quot;Aliquam quis iure ut. Cum ex earum amet dolorem dignissimos iure. Eum itaque odio eveniet sapiente repudiandae quam. Quis sit officia voluptatem.&quot;,
+                        &quot;materia_id&quot;: 31,
+                        &quot;created_by&quot;: &quot;01kcfr4tty1xy4b9dj9rb8mjat&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4tn8y37bm39xv3xxc6n3&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:39.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:39.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 1,
+                            &quot;question_id&quot;: 18,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 8,
+                            &quot;created_by&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:56:53.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:56:53.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 19,
+                        &quot;title&quot;: &quot;Id debitis voluptatum nisi veniam labore.&quot;,
+                        &quot;content&quot;: &quot;Veritatis nihil ut voluptate omnis rem qui aspernatur. Sunt architecto molestiae earum inventore aut soluta odio.&quot;,
+                        &quot;correction&quot;: &quot;In incidunt deserunt repudiandae rerum omnis a provident sint. Qui iusto ipsam quam tempore voluptas assumenda. Quo quidem veritatis qui doloremque aut ipsum. Totam ea veritatis velit ut unde quo eum.&quot;,
+                        &quot;materia_id&quot;: 31,
+                        &quot;created_by&quot;: &quot;01kcfr4v6brj5jt355sr633wy5&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr4v0njv42rkttm5c0yw1b&quot;,
+                        &quot;type&quot;: &quot;Multipla&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:39.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:39.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 1,
+                            &quot;question_id&quot;: 19,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 9,
+                            &quot;created_by&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4ph7wfeq18gz9k9qjhpz&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:56:53.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:56:53.000000Z&quot;
+                        }
+                    }
+                ]
+            },
+            {
+                &quot;id&quot;: 2,
+                &quot;title&quot;: &quot;Simulado - dolores&quot;,
+                &quot;description&quot;: &quot;In aliquam et voluptas veniam. Voluptate vero praesentium itaque voluptas. Laudantium cum aspernatur aperiam aperiam assumenda aut quia esse.&quot;,
+                &quot;subject_id&quot;: 32,
+                &quot;type&quot;: &quot;Simulation&quot;,
+                &quot;due_date&quot;: &quot;2025-12-19T19:41:07.000000Z&quot;,
+                &quot;created_by&quot;: {
+                    &quot;id&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                    &quot;name&quot;: &quot;Eliezer Farrell&quot;,
+                    &quot;email&quot;: &quot;rsauer@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:35.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:35.000000Z&quot;
+                },
+                &quot;updated_by&quot;: {
+                    &quot;id&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                    &quot;name&quot;: &quot;Eliezer Farrell&quot;,
+                    &quot;email&quot;: &quot;rsauer@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:35.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:35.000000Z&quot;
                 },
                 &quot;status&quot;: &quot;Active&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:30.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-12T03:10:01.000000Z&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:56:36.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:56:36.000000Z&quot;,
                 &quot;questions&quot;: [
                     {
                         &quot;id&quot;: 20,
-                        &quot;title&quot;: &quot;Nostrum perferendis repudiandae debitis consequuntur quam possimus.&quot;,
-                        &quot;content&quot;: &quot;Fugiat qui asperiores tempore magni sunt ut. Voluptas qui molestiae asperiores nam omnis id doloremque. Aut fugiat quam quis est excepturi. Ut ratione sed qui cumque et est.&quot;,
-                        &quot;correction&quot;: &quot;Natus aperiam est sint minima consequatur aperiam dolores. Animi suscipit quia sit. Distinctio architecto corporis quidem. Minus excepturi repellat odit et id ratione et.&quot;,
-                        &quot;materia&quot;: 43,
-                        &quot;ultimo_editor&quot;: 1,
-                        &quot;criador&quot;: 447,
+                        &quot;title&quot;: &quot;Esse quia eligendi et consequatur.&quot;,
+                        &quot;content&quot;: &quot;Temporibus officia modi dolorem ab quaerat quidem. Eveniet vitae accusamus quia inventore. Voluptatibus voluptatem deserunt autem officiis et dolores possimus. Est quidem ratione sapiente fugit. Quae ex nulla autem quos impedit.&quot;,
+                        &quot;correction&quot;: &quot;Eligendi totam quo quia officiis odit cum. Ea sit in quia debitis illo. Repudiandae sit est sit similique.&quot;,
+                        &quot;materia_id&quot;: 32,
+                        &quot;created_by&quot;: &quot;01kcfr58nf6ysajsxdcg5q67n8&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr58fr3jecfzwq7f2wzp1e&quot;,
                         &quot;type&quot;: &quot;Aberta&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:56.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-12T03:10:01.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:56.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:56.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 2,
                             &quot;question_id&quot;: 20,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 1,
-                            &quot;created_by&quot;: 1,
-                            &quot;updated_by&quot;: 1,
-                            &quot;created_at&quot;: &quot;2025-11-12T03:10:01.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-12T03:10:01.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:57:10.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:57:10.000000Z&quot;
                         }
                     },
                     {
                         &quot;id&quot;: 21,
-                        &quot;title&quot;: &quot;Suscipit reprehenderit quam ut iste.&quot;,
-                        &quot;content&quot;: &quot;Ab rerum voluptates velit incidunt. Eaque numquam veritatis aspernatur eius quasi assumenda aut ipsa. Neque enim asperiores eos omnis pariatur.&quot;,
-                        &quot;correction&quot;: &quot;Qui veritatis est quo dignissimos laudantium voluptate ex. Beatae minima qui suscipit qui vel temporibus minus. In quisquam necessitatibus qui voluptatem delectus omnis.&quot;,
-                        &quot;materia&quot;: 44,
-                        &quot;ultimo_editor&quot;: 1,
-                        &quot;criador&quot;: 451,
+                        &quot;title&quot;: &quot;Ea ut quae qui libero et et.&quot;,
+                        &quot;content&quot;: &quot;Odio eos saepe asperiores natus. Tempora animi velit facere unde vel itaque. Doloremque in et est non. Quisquam temporibus ut optio officia sapiente impedit totam.&quot;,
+                        &quot;correction&quot;: &quot;Et omnis dolores rerum exercitationem et labore. Ut placeat nam sed dignissimos. Cupiditate magni labore deleniti iste ut et cumque.&quot;,
+                        &quot;materia_id&quot;: 32,
+                        &quot;created_by&quot;: &quot;01kcfr590r9hhggtk8ebtvnevj&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr58v50276btphr8exckp4&quot;,
                         &quot;type&quot;: &quot;Multipla&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:34:56.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-12T03:10:01.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:56.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:56.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 2,
                             &quot;question_id&quot;: 21,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 2,
-                            &quot;created_by&quot;: 1,
-                            &quot;updated_by&quot;: 1,
-                            &quot;created_at&quot;: &quot;2025-11-12T03:10:01.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-12T03:10:01.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:57:10.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:57:10.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 22,
+                        &quot;title&quot;: &quot;Amet consequatur tempora et sed qui suscipit quia.&quot;,
+                        &quot;content&quot;: &quot;Quia modi exercitationem beatae itaque hic laborum. Sit ea ipsum exercitationem quia. Amet optio blanditiis ad laboriosam dolore. Maxime est officia assumenda voluptas esse delectus.&quot;,
+                        &quot;correction&quot;: &quot;Possimus eius eveniet impedit animi non occaecati et sit. Enim odit maxime sequi laboriosam ut cum. Est aut asperiores repudiandae atque molestiae esse.&quot;,
+                        &quot;materia_id&quot;: 32,
+                        &quot;created_by&quot;: &quot;01kcfr59c3rbekvksbej4r21aj&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr596gpt8bgsmfdgbt0yp5&quot;,
+                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:56.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:56.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 2,
+                            &quot;question_id&quot;: 22,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 3,
+                            &quot;created_by&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:57:10.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:57:10.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 23,
+                        &quot;title&quot;: &quot;Non labore enim possimus illum nam quia qui.&quot;,
+                        &quot;content&quot;: &quot;Et eveniet beatae voluptatibus praesentium dolor et. Odit excepturi fugit voluptatibus neque aut corporis. Beatae eveniet dignissimos voluptatem nobis facere ipsam deserunt ex. Qui ipsum alias ut asperiores.&quot;,
+                        &quot;correction&quot;: &quot;Fugiat amet eveniet quibusdam nemo quo. Enim ex natus deserunt. Quis qui et et labore.&quot;,
+                        &quot;materia_id&quot;: 32,
+                        &quot;created_by&quot;: &quot;01kcfr59rdja7q6zhrdkvh3e5z&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr59j4j7t3f26yxy7810kd&quot;,
+                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:56.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:56.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 2,
+                            &quot;question_id&quot;: 23,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 4,
+                            &quot;created_by&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:57:10.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:57:10.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 24,
+                        &quot;title&quot;: &quot;Dolor et quo voluptatem quos commodi quia.&quot;,
+                        &quot;content&quot;: &quot;Aut est rerum aperiam totam soluta voluptatem. Sed numquam tempora eos voluptatum. Sunt ut harum eos est et qui quia. Sit et qui non et adipisci vero.&quot;,
+                        &quot;correction&quot;: &quot;Quasi quidem labore est. Pariatur itaque officiis nihil eveniet nihil rerum voluptates incidunt. Dicta omnis doloribus quisquam aut odio autem sit ad. Error omnis cum cumque minima quasi suscipit facere.&quot;,
+                        &quot;materia_id&quot;: 32,
+                        &quot;created_by&quot;: &quot;01kcfr5a3w31eyktb56wh3jnvj&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr59y8ssbevk6fvb4gfbbp&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:56.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:56.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 2,
+                            &quot;question_id&quot;: 24,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 5,
+                            &quot;created_by&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:57:10.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:57:10.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 26,
+                        &quot;title&quot;: &quot;Et occaecati et quam.&quot;,
+                        &quot;content&quot;: &quot;Animi quae in earum vel dolor voluptatem magni. Architecto similique facilis et quod dolorem.&quot;,
+                        &quot;correction&quot;: &quot;Animi aut voluptatum est reprehenderit. Autem tempora eius facilis delectus. Praesentium voluptas porro nihil at. Qui aspernatur dolore eum non qui hic qui.&quot;,
+                        &quot;materia_id&quot;: 32,
+                        &quot;created_by&quot;: &quot;01kcfr5atvrvjgjrvg2d8nktr7&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr5an0n5sxg1q84qm76zmp&quot;,
+                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:56.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:56.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 2,
+                            &quot;question_id&quot;: 26,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 7,
+                            &quot;created_by&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:57:10.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:57:10.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 27,
+                        &quot;title&quot;: &quot;Totam aut voluptatem placeat.&quot;,
+                        &quot;content&quot;: &quot;Earum nisi cupiditate dolorum sit quod non ratione tempore. Minus vero dicta exercitationem.&quot;,
+                        &quot;correction&quot;: &quot;Unde et facilis optio ea id ipsam quaerat. Animi sit sit ut aliquid rerum assumenda et nihil. Ut et neque quisquam. Rerum doloribus rerum at ducimus esse.&quot;,
+                        &quot;materia_id&quot;: 32,
+                        &quot;created_by&quot;: &quot;01kcfr5b6a7xfqqzgb5artmtr5&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr5b0jykzfsmch8fjnacfs&quot;,
+                        &quot;type&quot;: &quot;Multipla&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:56:56.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:56:56.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 2,
+                            &quot;question_id&quot;: 27,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 8,
+                            &quot;created_by&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4q2fv3g9r92d9d178e3x&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:57:10.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:57:10.000000Z&quot;
                         }
                     }
                 ]
             },
             {
                 &quot;id&quot;: 3,
-                &quot;title&quot;: &quot;Simulado - illo&quot;,
-                &quot;description&quot;: &quot;Autem ad rerum voluptates excepturi. Molestias voluptatum fugiat et molestiae et ipsam. Unde neque voluptatem odit temporibus.&quot;,
+                &quot;title&quot;: &quot;Simulado - ipsa&quot;,
+                &quot;description&quot;: &quot;Eum dolorem at vel totam dolor excepturi. Eum alias dolor dignissimos sequi provident est. Quod et debitis numquam mollitia.&quot;,
                 &quot;subject_id&quot;: 33,
                 &quot;type&quot;: &quot;Simulation&quot;,
-                &quot;due_date&quot;: &quot;2025-12-04T19:48:07.000000Z&quot;,
+                &quot;due_date&quot;: &quot;2025-12-20T11:40:23.000000Z&quot;,
                 &quot;created_by&quot;: {
-                    &quot;id&quot;: 335,
-                    &quot;nome&quot;: &quot;Alejandra Brekke&quot;,
-                    &quot;email&quot;: &quot;ulynch@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:30.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:30.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr4qkm6929gqg1kmshew0g&quot;,
+                    &quot;name&quot;: &quot;Marcelino Langosh&quot;,
+                    &quot;email&quot;: &quot;bernice.carter@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:36.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:36.000000Z&quot;
                 },
                 &quot;updated_by&quot;: {
-                    &quot;id&quot;: 335,
-                    &quot;nome&quot;: &quot;Alejandra Brekke&quot;,
-                    &quot;email&quot;: &quot;ulynch@example.net&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:34:30.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:34:30.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr4qkm6929gqg1kmshew0g&quot;,
+                    &quot;name&quot;: &quot;Marcelino Langosh&quot;,
+                    &quot;email&quot;: &quot;bernice.carter@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;inactive&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:56:36.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:56:36.000000Z&quot;
                 },
                 &quot;status&quot;: &quot;Inactive&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:34:30.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:34:30.000000Z&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:56:36.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:56:36.000000Z&quot;,
                 &quot;questions&quot;: [
                     {
-                        &quot;id&quot;: 33,
-                        &quot;title&quot;: &quot;Saepe voluptas ex voluptas vel dolorem.&quot;,
-                        &quot;content&quot;: &quot;Mollitia quo ipsam ea ut sed. Possimus aliquid est ipsa impedit. Omnis velit provident nam consectetur. Illo fugiat consequatur quo et.&quot;,
-                        &quot;correction&quot;: &quot;Ut itaque sed mollitia minima suscipit explicabo atque qui. Aut est eaque architecto necessitatibus facere et. Delectus voluptate nisi labore quod porro quod voluptatem vel.&quot;,
-                        &quot;materia&quot;: 56,
-                        &quot;ultimo_editor&quot;: 570,
-                        &quot;criador&quot;: 571,
-                        &quot;type&quot;: &quot;Aberta&quot;,
+                        &quot;id&quot;: 30,
+                        &quot;title&quot;: &quot;Incidunt consequuntur dolor sunt sit molestiae voluptatem architecto eos.&quot;,
+                        &quot;content&quot;: &quot;Et deleniti et qui neque autem aut ipsam officia. Voluptatem dolor consequatur explicabo ut accusantium fuga voluptates harum. Eos est est sunt. Nulla tempore ea voluptas qui deleniti quaerat odit.&quot;,
+                        &quot;correction&quot;: &quot;Nesciunt possimus exercitationem ipsam voluptatem. Nobis inventore quod et rerum rem voluptatem quam. Facilis voluptas rerum nostrum harum quam eum.&quot;,
+                        &quot;materia_id&quot;: 33,
+                        &quot;created_by&quot;: &quot;01kcfr5sftszwpgwjg3nrnq8rq&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr5sa5g4q5erjc2x58813d&quot;,
+                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:35:16.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:35:16.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:13.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:13.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 3,
+                            &quot;question_id&quot;: 30,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 2,
+                            &quot;created_by&quot;: &quot;01kcfr4qkm6929gqg1kmshew0g&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4qkm6929gqg1kmshew0g&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 31,
+                        &quot;title&quot;: &quot;At dolor voluptas eveniet sequi quo voluptas.&quot;,
+                        &quot;content&quot;: &quot;Nobis molestiae eaque dolorem sed maiores quam omnis. Enim ipsum ex nobis aliquam. Harum sit et est odit rerum.&quot;,
+                        &quot;correction&quot;: &quot;Officia quia consequatur id molestiae deleniti aut unde animi. Modi repellat error sed. Ullam earum reiciendis porro reprehenderit quisquam blanditiis harum. Ab illum nulla qui iure ea accusamus voluptatem.&quot;,
+                        &quot;materia_id&quot;: 33,
+                        &quot;created_by&quot;: &quot;01kcfr5sv65zcdpskcnx2k5rsr&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr5snew94a3wfjj882402w&quot;,
+                        &quot;type&quot;: &quot;Multipla&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:13.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:13.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 3,
+                            &quot;question_id&quot;: 31,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 3,
+                            &quot;created_by&quot;: &quot;01kcfr4qkm6929gqg1kmshew0g&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4qkm6929gqg1kmshew0g&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 32,
+                        &quot;title&quot;: &quot;Tempore sit quam repudiandae sunt provident voluptatem est velit.&quot;,
+                        &quot;content&quot;: &quot;Dolorum ullam sit dolor quo voluptas eligendi labore. Quam incidunt excepturi ad sit nisi sunt. At officiis nihil et rerum iure rerum velit.&quot;,
+                        &quot;correction&quot;: &quot;Fuga ullam magni dolorem quod ut consequatur. Blanditiis accusamus aperiam voluptatibus vero unde voluptatum sint commodi. Et sunt optio vel itaque in. Non et sint sed enim tenetur sunt qui itaque.&quot;,
+                        &quot;materia_id&quot;: 33,
+                        &quot;created_by&quot;: &quot;01kcfr5t6gqksha5mtd1c7kydr&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr5t0tv2108k9j3aajtnre&quot;,
+                        &quot;type&quot;: &quot;Multipla&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:13.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:13.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 3,
+                            &quot;question_id&quot;: 32,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 4,
+                            &quot;created_by&quot;: &quot;01kcfr4qkm6929gqg1kmshew0g&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4qkm6929gqg1kmshew0g&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 33,
+                        &quot;title&quot;: &quot;Ipsam sit non nemo voluptatem nesciunt similique temporibus.&quot;,
+                        &quot;content&quot;: &quot;Quae recusandae maxime adipisci quia repudiandae. Nobis assumenda repellat sit voluptates totam occaecati accusamus. Est recusandae eos blanditiis facere quia. Dolorem eum neque pariatur sed.&quot;,
+                        &quot;correction&quot;: &quot;Optio ea qui officia et aut vel. Totam dolor iste distinctio inventore inventore. Omnis doloremque quia quos itaque perspiciatis similique et hic. Nihil corporis dolore eligendi id aspernatur.&quot;,
+                        &quot;materia_id&quot;: 33,
+                        &quot;created_by&quot;: &quot;01kcfr5thswtd7g41ar30r9dvt&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr5tc5js32aaare8ssh0qd&quot;,
+                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:13.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:13.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 3,
                             &quot;question_id&quot;: 33,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 5,
-                            &quot;created_by&quot;: 335,
-                            &quot;updated_by&quot;: 335,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:35:29.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:35:29.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr4qkm6929gqg1kmshew0g&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4qkm6929gqg1kmshew0g&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 34,
+                        &quot;title&quot;: &quot;Et nihil rerum quae et est dolores.&quot;,
+                        &quot;content&quot;: &quot;Et et ex dolor quaerat rerum velit labore. Harum magnam et aut voluptate rerum officia est. Qui numquam eligendi esse. Amet porro dolore pariatur eaque minima.&quot;,
+                        &quot;correction&quot;: &quot;Eos illum qui eos dolor. Quis quia porro enim reiciendis blanditiis odit enim. Omnis aut quia est qui odit doloremque dolor.&quot;,
+                        &quot;materia_id&quot;: 33,
+                        &quot;created_by&quot;: &quot;01kcfr5twzjg31kajrrsmpa0p3&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr5tqdsbv1pktevsvsyq0n&quot;,
+                        &quot;type&quot;: &quot;Multipla&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:13.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:13.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 3,
+                            &quot;question_id&quot;: 34,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 6,
+                            &quot;created_by&quot;: &quot;01kcfr4qkm6929gqg1kmshew0g&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4qkm6929gqg1kmshew0g&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;
                         }
                     },
                     {
                         &quot;id&quot;: 36,
-                        &quot;title&quot;: &quot;Blanditiis dolorem ipsum ex qui ut dolorum quia.&quot;,
-                        &quot;content&quot;: &quot;Voluptatem corrupti exercitationem rerum. Debitis quisquam ut eum quibusdam a. Non consequatur vel perferendis. Corporis quod provident minus esse eligendi.&quot;,
-                        &quot;correction&quot;: &quot;Quis omnis voluptatem ipsum necessitatibus eligendi. Id ex nam est. Distinctio nemo quia facere ea animi maxime veritatis ea. Voluptates voluptate expedita similique officia odio.&quot;,
-                        &quot;materia&quot;: 59,
-                        &quot;ultimo_editor&quot;: 582,
-                        &quot;criador&quot;: 583,
-                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;title&quot;: &quot;Asperiores quibusdam pariatur molestiae ipsum iusto porro a.&quot;,
+                        &quot;content&quot;: &quot;Debitis nihil commodi ad dignissimos voluptatum rerum qui non. Id quam enim soluta tenetur totam et distinctio. Voluptatem facere ut eligendi inventore quos.&quot;,
+                        &quot;correction&quot;: &quot;Natus quo rerum pariatur maiores aut voluptatem. Eos ratione tempora placeat occaecati minus est.&quot;,
+                        &quot;materia_id&quot;: 33,
+                        &quot;created_by&quot;: &quot;01kcfr5vkr79g3yzn556404qnb&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr5vdzf7dcanmkcwq82qjr&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:35:16.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:35:16.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:13.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:13.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 3,
                             &quot;question_id&quot;: 36,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 8,
-                            &quot;created_by&quot;: 335,
-                            &quot;updated_by&quot;: 335,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:35:29.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:35:29.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 37,
-                        &quot;title&quot;: &quot;Exercitationem voluptate quos facere deleniti perspiciatis quibusdam quod dolor.&quot;,
-                        &quot;content&quot;: &quot;Natus sint consequatur temporibus. Odio ut facere iure. Aut aut odio et dolorem repellendus est inventore dignissimos. Consequuntur est quibusdam sint occaecati. Sit officiis sequi qui at.&quot;,
-                        &quot;correction&quot;: &quot;Et id aut qui omnis assumenda quam dolores. Quae odit voluptas quas ea. Dolor aperiam culpa odit facilis at.&quot;,
-                        &quot;materia&quot;: 60,
-                        &quot;ultimo_editor&quot;: 586,
-                        &quot;criador&quot;: 587,
-                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:35:16.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:35:16.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 3,
-                            &quot;question_id&quot;: 37,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 9,
-                            &quot;created_by&quot;: 335,
-                            &quot;updated_by&quot;: 335,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:35:29.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:35:29.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr4qkm6929gqg1kmshew0g&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr4qkm6929gqg1kmshew0g&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;
                         }
                     }
                 ]
             },
             {
                 &quot;id&quot;: 4,
-                &quot;title&quot;: &quot;Prova - dolores&quot;,
-                &quot;description&quot;: &quot;Cum libero nulla eligendi quidem necessitatibus voluptas temporibus et. Provident a impedit voluptatem voluptas. Quia et expedita minus et.&quot;,
-                &quot;subject_id&quot;: 61,
+                &quot;title&quot;: &quot;Prova - quia&quot;,
+                &quot;description&quot;: &quot;Debitis fugiat dolore natus quia. Dicta ipsum eligendi consequatur qui laudantium et.&quot;,
+                &quot;subject_id&quot;: 34,
                 &quot;type&quot;: &quot;Exam&quot;,
-                &quot;due_date&quot;: &quot;2025-11-21T14:27:46.000000Z&quot;,
+                &quot;due_date&quot;: &quot;2025-12-28T21:42:52.000000Z&quot;,
                 &quot;created_by&quot;: {
-                    &quot;id&quot;: 662,
-                    &quot;nome&quot;: &quot;Roel Watsica&quot;,
-                    &quot;email&quot;: &quot;asia70@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:35:29.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:35:29.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                    &quot;name&quot;: &quot;Ernestine Mohr III&quot;,
+                    &quot;email&quot;: &quot;paula.bailey@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;
                 },
                 &quot;updated_by&quot;: {
-                    &quot;id&quot;: 662,
-                    &quot;nome&quot;: &quot;Roel Watsica&quot;,
-                    &quot;email&quot;: &quot;asia70@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:35:29.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:35:29.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                    &quot;name&quot;: &quot;Ernestine Mohr III&quot;,
+                    &quot;email&quot;: &quot;paula.bailey@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:57:26.000000Z&quot;
                 },
-                &quot;status&quot;: &quot;Inactive&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:35:30.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:35:30.000000Z&quot;,
+                &quot;status&quot;: &quot;Active&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:57:27.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:57:27.000000Z&quot;,
                 &quot;questions&quot;: [
                     {
-                        &quot;id&quot;: 39,
-                        &quot;title&quot;: &quot;Magni maxime dolores non ad voluptatem neque.&quot;,
-                        &quot;content&quot;: &quot;Consequatur aut molestias impedit aliquid non similique qui. Commodi porro velit eveniet atque consequatur. Sit cumque et rem est pariatur placeat rem.&quot;,
-                        &quot;correction&quot;: &quot;Porro facilis suscipit non ex. Et cupiditate facere expedita. Consequatur omnis necessitatibus id non aliquid perspiciatis asperiores et.&quot;,
-                        &quot;materia&quot;: 64,
-                        &quot;ultimo_editor&quot;: 672,
-                        &quot;criador&quot;: 673,
+                        &quot;id&quot;: 38,
+                        &quot;title&quot;: &quot;Itaque dolor rem quia ut.&quot;,
+                        &quot;content&quot;: &quot;Officiis sapiente aspernatur officiis fugit quasi assumenda cumque dolor. Earum nulla assumenda vel odit dolor. Odit id dolore ipsum.&quot;,
+                        &quot;correction&quot;: &quot;Velit et laborum voluptas nostrum. Eum et voluptas perspiciatis aut magnam cum nulla. Et ut est veritatis ut odio qui. Repellat eum et quia dignissimos dicta sed.&quot;,
+                        &quot;materia_id&quot;: 34,
+                        &quot;created_by&quot;: &quot;01kcfr6aef0cqbjrgvr5ky4p0a&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr6a8wt05z1n7d3bzhanay&quot;,
                         &quot;type&quot;: &quot;Aberta&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 4,
+                            &quot;question_id&quot;: 38,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 1,
+                            &quot;created_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 39,
+                        &quot;title&quot;: &quot;Distinctio et et voluptatem rerum debitis non animi porro.&quot;,
+                        &quot;content&quot;: &quot;Vel fugiat ratione cupiditate porro dolores. Numquam repellendus accusamus non. Tempora enim tempora veritatis suscipit occaecati.&quot;,
+                        &quot;correction&quot;: &quot;Quo assumenda quo ipsam qui. Necessitatibus cupiditate porro voluptatum voluptatem qui. Tempore consectetur sed eos aut.&quot;,
+                        &quot;materia_id&quot;: 34,
+                        &quot;created_by&quot;: &quot;01kcfr6ass0p6nsvjnkk44zx2v&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr6am5bck1sjgrz00vkedv&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 4,
                             &quot;question_id&quot;: 39,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 2,
-                            &quot;created_by&quot;: 662,
-                            &quot;updated_by&quot;: 662,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 40,
-                        &quot;title&quot;: &quot;Eos id autem molestias provident ut odio.&quot;,
-                        &quot;content&quot;: &quot;Quo nulla iusto deserunt pariatur quia doloremque deserunt. Dolorem expedita et cum aperiam molestiae. Ut est repudiandae sunt. Aut rem et nostrum labore in quae. Consequuntur consectetur aut aut id vel tempore et id.&quot;,
-                        &quot;correction&quot;: &quot;Modi ut voluptas velit cumque. Repudiandae est necessitatibus qui dolor molestiae.&quot;,
-                        &quot;materia&quot;: 65,
-                        &quot;ultimo_editor&quot;: 676,
-                        &quot;criador&quot;: 677,
-                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 4,
-                            &quot;question_id&quot;: 40,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 3,
-                            &quot;created_by&quot;: 662,
-                            &quot;updated_by&quot;: 662,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;
                         }
                     },
                     {
                         &quot;id&quot;: 41,
-                        &quot;title&quot;: &quot;Quia dolorem aut natus et sequi et unde.&quot;,
-                        &quot;content&quot;: &quot;Vel eaque voluptas et aut dolorem beatae dolor. Saepe ducimus et iusto aliquam. Tenetur minus odit ut maiores consequatur quia. Beatae ut dolores quisquam et omnis autem aut. Doloribus delectus omnis similique.&quot;,
-                        &quot;correction&quot;: &quot;Officia quam voluptas officia vel. Aut reiciendis ea veniam similique. Vitae voluptatum autem tempore omnis ipsam sequi vitae aut. Et aperiam deleniti nostrum aut porro.&quot;,
-                        &quot;materia&quot;: 66,
-                        &quot;ultimo_editor&quot;: 680,
-                        &quot;criador&quot;: 681,
+                        &quot;title&quot;: &quot;Molestiae nostrum aut maxime.&quot;,
+                        &quot;content&quot;: &quot;Consequatur sapiente illo eaque repudiandae fugiat placeat. Et et tempora delectus et sed. Esse minima et velit.&quot;,
+                        &quot;correction&quot;: &quot;Sint facilis excepturi facilis et rerum consequatur non quae. Earum quia voluptate deserunt fugiat. Aliquid suscipit iure dolorem ut aut ut.&quot;,
+                        &quot;materia_id&quot;: 34,
+                        &quot;created_by&quot;: &quot;01kcfr6bgb2y7at2hb46dpwff5&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr6baqpz9xvs68beam07ms&quot;,
                         &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 4,
                             &quot;question_id&quot;: 41,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 4,
-                            &quot;created_by&quot;: 662,
-                            &quot;updated_by&quot;: 662,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;
                         }
                     },
                     {
                         &quot;id&quot;: 42,
-                        &quot;title&quot;: &quot;Tempora nobis deleniti non.&quot;,
-                        &quot;content&quot;: &quot;Necessitatibus modi qui alias. Sint aut voluptate laborum dolores. Eos aut amet quisquam et repellendus quae veritatis. Aut saepe ullam iste quod.&quot;,
-                        &quot;correction&quot;: &quot;Sit non velit in est aspernatur delectus quas suscipit. Aut autem maiores minima dolorum et doloremque eligendi. Natus at numquam earum molestiae nihil. Alias cupiditate repellendus eos perspiciatis sint vel aut.&quot;,
-                        &quot;materia&quot;: 67,
-                        &quot;ultimo_editor&quot;: 684,
-                        &quot;criador&quot;: 685,
+                        &quot;title&quot;: &quot;Aut dolorum velit officiis iusto sed debitis.&quot;,
+                        &quot;content&quot;: &quot;Ut perferendis iure aperiam voluptatem molestias. Explicabo maiores ea repudiandae sint et commodi. Est explicabo et aperiam fuga cupiditate ex. Voluptatum earum et tempora earum.&quot;,
+                        &quot;correction&quot;: &quot;Repellat voluptatem et velit dignissimos eligendi eum. Sapiente eveniet omnis ea veritatis. Assumenda rem sed harum natus magni est.&quot;,
+                        &quot;materia_id&quot;: 34,
+                        &quot;created_by&quot;: &quot;01kcfr6bvrn40z6w11g83zythj&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr6bp1w7cqew9ykznv58r9&quot;,
                         &quot;type&quot;: &quot;Aberta&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 4,
                             &quot;question_id&quot;: 42,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 5,
-                            &quot;created_by&quot;: 662,
-                            &quot;updated_by&quot;: 662,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;
                         }
                     },
                     {
                         &quot;id&quot;: 43,
-                        &quot;title&quot;: &quot;Et labore molestiae nulla culpa facilis provident repellat.&quot;,
-                        &quot;content&quot;: &quot;Cupiditate quibusdam alias culpa ullam eaque dicta. Unde corrupti vel accusantium et quam fugiat eum. Neque quam tenetur repudiandae non. Dolores totam dignissimos aut.&quot;,
-                        &quot;correction&quot;: &quot;Repudiandae aperiam placeat architecto quibusdam dolor. Harum voluptatibus quis similique ipsam ut. Beatae qui voluptatem consequuntur ut. Impedit eveniet quo inventore repellat.&quot;,
-                        &quot;materia&quot;: 68,
-                        &quot;ultimo_editor&quot;: 688,
-                        &quot;criador&quot;: 689,
+                        &quot;title&quot;: &quot;Inventore aut consectetur est est ratione enim.&quot;,
+                        &quot;content&quot;: &quot;Tempore asperiores eos autem sed nisi deleniti corporis. In accusantium quis qui recusandae autem. Iste numquam et enim debitis facere.&quot;,
+                        &quot;correction&quot;: &quot;Et impedit et est ab id sit rerum. Suscipit quae blanditiis in. Odio dignissimos qui neque qui. Dicta earum dolores qui temporibus repudiandae voluptatem eveniet. Qui eaque deleniti rerum rerum dicta soluta facere.&quot;,
+                        &quot;materia_id&quot;: 34,
+                        &quot;created_by&quot;: &quot;01kcfr6c71kvbzgcg3qafkmyem&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr6c1d4kb8r160y3c7kajs&quot;,
                         &quot;type&quot;: &quot;Aberta&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 4,
                             &quot;question_id&quot;: 43,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 6,
-                            &quot;created_by&quot;: 662,
-                            &quot;updated_by&quot;: 662,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 44,
-                        &quot;title&quot;: &quot;Ut quia porro eligendi maiores ipsa tenetur repellat.&quot;,
-                        &quot;content&quot;: &quot;Autem cumque cupiditate enim. Maiores ea reprehenderit aspernatur provident odio repellendus. Non nihil quos vero corporis. Voluptatem est autem et nesciunt nemo occaecati nisi.&quot;,
-                        &quot;correction&quot;: &quot;Neque ut sunt dolorem. Et in iste animi consectetur velit. Quasi nihil ipsum quia tenetur nesciunt error exercitationem. Sint dignissimos consequuntur in ratione autem aspernatur molestiae.&quot;,
-                        &quot;materia&quot;: 69,
-                        &quot;ultimo_editor&quot;: 692,
-                        &quot;criador&quot;: 693,
-                        &quot;type&quot;: &quot;Multipla&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 4,
-                            &quot;question_id&quot;: 44,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 7,
-                            &quot;created_by&quot;: 662,
-                            &quot;updated_by&quot;: 662,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;
                         }
                     },
                     {
                         &quot;id&quot;: 45,
-                        &quot;title&quot;: &quot;Quia quidem nihil qui error aut.&quot;,
-                        &quot;content&quot;: &quot;Laborum accusamus qui nobis rerum quo qui deserunt facere. Iure impedit dolore quia ipsa. Illum ratione voluptas sed nihil sint mollitia. Qui suscipit voluptas quasi dignissimos ut.&quot;,
-                        &quot;correction&quot;: &quot;Et nesciunt qui odio. Officiis aut laborum ut quasi occaecati voluptatem quas delectus. Ab fuga delectus est pariatur. Quasi est explicabo consectetur ut et.&quot;,
-                        &quot;materia&quot;: 70,
-                        &quot;ultimo_editor&quot;: 696,
-                        &quot;criador&quot;: 697,
-                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;title&quot;: &quot;Earum autem dolore quisquam.&quot;,
+                        &quot;content&quot;: &quot;Asperiores beatae autem voluptas ut sed illo asperiores. Non occaecati et minus commodi sit eaque ut. Architecto voluptatem quidem similique placeat.&quot;,
+                        &quot;correction&quot;: &quot;Distinctio quod deserunt quam officiis et occaecati. Nesciunt tempore soluta magnam beatae assumenda. Totam molestiae unde exercitationem quo consequatur qui.&quot;,
+                        &quot;materia_id&quot;: 34,
+                        &quot;created_by&quot;: &quot;01kcfr6cxpyqch4ezfx6dcta30&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr6cqyk867ftz301a49gp4&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 4,
                             &quot;question_id&quot;: 45,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 8,
-                            &quot;created_by&quot;: 662,
-                            &quot;updated_by&quot;: 662,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 46,
+                        &quot;title&quot;: &quot;Ea impedit quisquam ut molestiae aut dolorem sit nostrum.&quot;,
+                        &quot;content&quot;: &quot;Suscipit a quis aut sed qui. Vel dolorem odio eos provident quidem perferendis corporis. Eos omnis et ipsum est ad.&quot;,
+                        &quot;correction&quot;: &quot;Non laborum deleniti quia repellat quia minima voluptatem. Error dolorem quibusdam itaque quisquam neque aspernatur consequatur. Voluptatem ut ut vitae aliquid natus quis ipsam.&quot;,
+                        &quot;materia_id&quot;: 34,
+                        &quot;created_by&quot;: &quot;01kcfr6d8y8476mparhxe6sf9m&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr6d3aeg84zaz52k30x3f3&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 4,
+                            &quot;question_id&quot;: 46,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 9,
+                            &quot;created_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 49,
+                        &quot;title&quot;: &quot;Facere magni neque ex provident libero magnam.&quot;,
+                        &quot;content&quot;: &quot;Id dolor consequatur asperiores id at itaque. Doloremque occaecati omnis voluptate nam dolor voluptas. Facere culpa veniam est aut temporibus nulla. Beatae dicta asperiores est laboriosam.&quot;,
+                        &quot;correction&quot;: &quot;Assumenda quisquam iusto explicabo dolorem quis quisquam. Doloribus neque est aut vel aut nesciunt beatae. Laboriosam omnis enim eveniet.&quot;,
+                        &quot;materia_id&quot;: 34,
+                        &quot;created_by&quot;: &quot;01kcfr6eaxmvdddbddq122p1j2&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr6e58kf93xnjwqnstd7zh&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 4,
+                            &quot;question_id&quot;: 49,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 12,
+                            &quot;created_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:00.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 50,
+                        &quot;title&quot;: &quot;Perspiciatis iste dolores officiis ipsa.&quot;,
+                        &quot;content&quot;: &quot;Pariatur nihil quibusdam repudiandae et. Voluptatibus asperiores quos quae maxime et. Beatae reprehenderit cum quaerat est enim mollitia vero.&quot;,
+                        &quot;correction&quot;: &quot;Minima esse facere exercitationem provident aperiam iste. Tenetur possimus esse sit et magni quidem aut. Adipisci ut id exercitationem. Expedita qui cupiditate fugiat.&quot;,
+                        &quot;materia_id&quot;: 34,
+                        &quot;created_by&quot;: &quot;01kcfr6ep6hv0dbebbb0msk0xk&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr6egj2c6qbp8kzf43ypy6&quot;,
+                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 4,
+                            &quot;question_id&quot;: 50,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 13,
+                            &quot;created_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:01.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:01.000000Z&quot;
                         }
                     },
                     {
                         &quot;id&quot;: 52,
-                        &quot;title&quot;: &quot;Voluptatem voluptas cum est quibusdam provident.&quot;,
-                        &quot;content&quot;: &quot;Sit earum eos cum ut sapiente nesciunt vel. Ut minus ut consequatur quibusdam excepturi dolores et. Quo beatae nesciunt qui vero molestiae.&quot;,
-                        &quot;correction&quot;: &quot;Rerum qui quis ea illum sit a dolore ut. Impedit ducimus autem illo dolores quaerat eos sunt architecto. Sunt doloremque vero rerum nihil temporibus non. Illo eligendi enim inventore impedit et.&quot;,
-                        &quot;materia&quot;: 77,
-                        &quot;ultimo_editor&quot;: 724,
-                        &quot;criador&quot;: 725,
-                        &quot;type&quot;: &quot;Aberta&quot;,
+                        &quot;title&quot;: &quot;Velit qui sit a nobis quia velit.&quot;,
+                        &quot;content&quot;: &quot;Aut quae ut animi amet est aut. Earum dolores explicabo voluptates molestiae. Dolor consequatur impedit consequatur.&quot;,
+                        &quot;correction&quot;: &quot;Deleniti temporibus doloremque sint incidunt. Veritatis et corporis ipsa minima mollitia. Et rerum et fuga praesentium magni ab.&quot;,
+                        &quot;materia_id&quot;: 34,
+                        &quot;created_by&quot;: &quot;01kcfr6fcqf3zh3g8w62g1g5a9&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr6f733a0rwt54x4s2wx1s&quot;,
+                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:35:43.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 4,
                             &quot;question_id&quot;: 52,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 15,
-                            &quot;created_by&quot;: 662,
-                            &quot;updated_by&quot;: 662,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:10.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:01.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:01.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 53,
+                        &quot;title&quot;: &quot;Voluptatem quas occaecati eum quia.&quot;,
+                        &quot;content&quot;: &quot;Labore esse velit aliquid quia at pariatur excepturi. Aut sunt nobis alias laborum. Nemo impedit reprehenderit sint iusto repellat quaerat. Quae qui ea ea ipsam deleniti.&quot;,
+                        &quot;correction&quot;: &quot;Sit autem cumque debitis neque quo. Ex accusamus facere soluta qui quas architecto natus minima. Aut facilis et ut saepe.&quot;,
+                        &quot;materia_id&quot;: 34,
+                        &quot;created_by&quot;: &quot;01kcfr6fr15500pxbzvcwz9yny&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr6fjc3af4jwbygpqcezhb&quot;,
+                        &quot;type&quot;: &quot;Multipla&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 4,
+                            &quot;question_id&quot;: 53,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 16,
+                            &quot;created_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:01.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:01.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 54,
+                        &quot;title&quot;: &quot;Est quia dolores qui accusantium quibusdam magnam et quia.&quot;,
+                        &quot;content&quot;: &quot;Nulla dolorum voluptatibus architecto consectetur vel explicabo. Voluptatem et labore quam sint atque. Aspernatur consequatur incidunt culpa veritatis quam dignissimos alias. Iusto nihil esse qui ut enim numquam.&quot;,
+                        &quot;correction&quot;: &quot;Sint autem autem incidunt temporibus libero sed. Eum deleniti est hic et sed nostrum consequatur. Voluptatem rerum deserunt praesentium. Est non quasi ea qui soluta quo. Incidunt aut non quia aut ut omnis molestiae.&quot;,
+                        &quot;materia_id&quot;: 34,
+                        &quot;created_by&quot;: &quot;01kcfr6g3dt9zet57wtdtxbck2&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr6fxrh48f06vcethwdyxz&quot;,
+                        &quot;type&quot;: &quot;Multipla&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 4,
+                            &quot;question_id&quot;: 54,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 17,
+                            &quot;created_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:01.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:01.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 55,
+                        &quot;title&quot;: &quot;Perferendis perferendis deserunt sit ut.&quot;,
+                        &quot;content&quot;: &quot;Deserunt explicabo expedita ad. Suscipit eum alias repellat qui quia sit. Qui voluptas quas ab. Cupiditate quisquam et vel repellat omnis ad. Non commodi qui sit et quod qui.&quot;,
+                        &quot;correction&quot;: &quot;Eaque ut molestiae sed reprehenderit. Deserunt incidunt optio amet.&quot;,
+                        &quot;materia_id&quot;: 34,
+                        &quot;created_by&quot;: &quot;01kcfr6gepp2qvgb5phnyr3bc3&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr6g92c6tgj7t6svzq10nm&quot;,
+                        &quot;type&quot;: &quot;Multipla&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:57:34.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 4,
+                            &quot;question_id&quot;: 55,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 18,
+                            &quot;created_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr6966cj5dxva9r4nr2yjq&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:01.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:01.000000Z&quot;
                         }
                     }
                 ]
             },
             {
                 &quot;id&quot;: 5,
-                &quot;title&quot;: &quot;Prova - quas&quot;,
-                &quot;description&quot;: &quot;Dolorum dolor modi sapiente eos. Et dolor molestiae dolorem quia et similique. In eos occaecati ullam ex modi quod vel.&quot;,
-                &quot;subject_id&quot;: 62,
+                &quot;title&quot;: &quot;Prova - omnis&quot;,
+                &quot;description&quot;: &quot;Eveniet doloremque ipsa qui sint aut. Amet et consequatur sit consequatur. Et quas quisquam fugiat molestias non.&quot;,
+                &quot;subject_id&quot;: 35,
                 &quot;type&quot;: &quot;Exam&quot;,
-                &quot;due_date&quot;: &quot;2025-11-23T17:29:21.000000Z&quot;,
+                &quot;due_date&quot;: &quot;2025-12-20T06:40:00.000000Z&quot;,
                 &quot;created_by&quot;: {
-                    &quot;id&quot;: 665,
-                    &quot;nome&quot;: &quot;Miss Camila Becker&quot;,
-                    &quot;email&quot;: &quot;amraz@example.com&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:35:30.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:35:30.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                    &quot;name&quot;: &quot;Jeanne Heaney MD&quot;,
+                    &quot;email&quot;: &quot;sandy.kovacek@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:57:27.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:57:27.000000Z&quot;
                 },
                 &quot;updated_by&quot;: {
-                    &quot;id&quot;: 665,
-                    &quot;nome&quot;: &quot;Miss Camila Becker&quot;,
-                    &quot;email&quot;: &quot;amraz@example.com&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Inativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:35:30.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:35:30.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                    &quot;name&quot;: &quot;Jeanne Heaney MD&quot;,
+                    &quot;email&quot;: &quot;sandy.kovacek@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:57:27.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:57:27.000000Z&quot;
                 },
                 &quot;status&quot;: &quot;Active&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:35:30.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:35:30.000000Z&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:57:27.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:57:27.000000Z&quot;,
                 &quot;questions&quot;: [
                     {
-                        &quot;id&quot;: 56,
-                        &quot;title&quot;: &quot;Quo exercitationem architecto et cumque maiores dolores ut molestiae.&quot;,
-                        &quot;content&quot;: &quot;Voluptatum ut vero aut rerum fugiat. Voluptatem aut et dolore magni sit perspiciatis necessitatibus. Tempore ex non quasi debitis quas. Soluta facere quia itaque.&quot;,
-                        &quot;correction&quot;: &quot;Laboriosam recusandae distinctio est esse ducimus quos possimus aperiam. Ex asperiores in dignissimos dolore dolore. Vero nobis quidem corrupti et. Cumque quos assumenda maiores est rerum.&quot;,
-                        &quot;materia&quot;: 81,
-                        &quot;ultimo_editor&quot;: 884,
-                        &quot;criador&quot;: 885,
-                        &quot;type&quot;: &quot;Aberta&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 5,
-                            &quot;question_id&quot;: 56,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 1,
-                            &quot;created_by&quot;: 665,
-                            &quot;updated_by&quot;: 665,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
-                        }
-                    },
-                    {
                         &quot;id&quot;: 57,
-                        &quot;title&quot;: &quot;Repellendus quisquam saepe totam.&quot;,
-                        &quot;content&quot;: &quot;Itaque facere cupiditate sit et debitis dolorem ex. Voluptatem libero et qui repudiandae velit.&quot;,
-                        &quot;correction&quot;: &quot;Neque soluta deserunt ipsum repellat ut. Fuga quia est illo et.&quot;,
-                        &quot;materia&quot;: 82,
-                        &quot;ultimo_editor&quot;: 888,
-                        &quot;criador&quot;: 889,
+                        &quot;title&quot;: &quot;Rerum aliquam consequuntur minus magnam veniam.&quot;,
+                        &quot;content&quot;: &quot;Maiores odit culpa beatae quo mollitia harum. Non cupiditate voluptatem perspiciatis eius. Omnis harum sint eum modi repudiandae aut ipsam.&quot;,
+                        &quot;correction&quot;: &quot;Cum fugit et cupiditate laboriosam cumque. Et quia rerum et ut laudantium molestiae consequatur. Dolores impedit ab fugiat doloribus molestiae error.&quot;,
+                        &quot;materia_id&quot;: 35,
+                        &quot;created_by&quot;: &quot;01kcfr7b4rhb34cfcb4bpm039w&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr7az3ytm5zswsae14ew3c&quot;,
                         &quot;type&quot;: &quot;Multipla&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 5,
                             &quot;question_id&quot;: 57,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 2,
-                            &quot;created_by&quot;: 665,
-                            &quot;updated_by&quot;: 665,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 58,
-                        &quot;title&quot;: &quot;Nulla sed asperiores quaerat nam quo officiis voluptatem.&quot;,
-                        &quot;content&quot;: &quot;Cum hic dicta at illo. Labore consectetur doloribus corrupti exercitationem distinctio rem velit. Recusandae nihil est inventore officia corrupti non. Cumque nisi vel est illum quos explicabo. Ullam pariatur omnis aut quasi cumque perferendis culpa inventore.&quot;,
-                        &quot;correction&quot;: &quot;Ad voluptatem voluptatem culpa. Nam ratione repudiandae repudiandae est sint a cum nulla. Et tempore labore minus voluptas neque maiores numquam. Voluptate molestiae quia enim voluptatem. Numquam nulla eum eos sed eaque.&quot;,
-                        &quot;materia&quot;: 83,
-                        &quot;ultimo_editor&quot;: 892,
-                        &quot;criador&quot;: 893,
-                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 5,
-                            &quot;question_id&quot;: 58,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 3,
-                            &quot;created_by&quot;: 665,
-                            &quot;updated_by&quot;: 665,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;
                         }
                     },
                     {
                         &quot;id&quot;: 59,
-                        &quot;title&quot;: &quot;Voluptas expedita at quae et non blanditiis.&quot;,
-                        &quot;content&quot;: &quot;Veritatis temporibus expedita accusantium ut consequatur. Quia ea omnis accusamus dolorum quisquam pariatur et. Nihil eveniet quos voluptatem alias. Et quo est quibusdam molestias recusandae fugit doloremque.&quot;,
-                        &quot;correction&quot;: &quot;Aut aliquam temporibus eaque nam. Quo quia aut laboriosam voluptatem modi natus est. Quo eligendi corrupti sequi enim vel iusto cupiditate.&quot;,
-                        &quot;materia&quot;: 84,
-                        &quot;ultimo_editor&quot;: 896,
-                        &quot;criador&quot;: 897,
-                        &quot;type&quot;: &quot;Multipla&quot;,
+                        &quot;title&quot;: &quot;Repellat iusto quaerat necessitatibus illum alias quaerat ut.&quot;,
+                        &quot;content&quot;: &quot;Sint eos porro iure aperiam ea quas ducimus. Voluptatem quia perspiciatis aut commodi eius. Enim repellat blanditiis consequuntur quos eius.&quot;,
+                        &quot;correction&quot;: &quot;Sit voluptatem at voluptatem id. Exercitationem aut quibusdam eum. Rerum dolores rerum unde temporibus rerum facilis. Voluptas autem sit fugit molestiae.&quot;,
+                        &quot;materia_id&quot;: 35,
+                        &quot;created_by&quot;: &quot;01kcfr7bvrwz2f4q70xd4sckvz&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr7bp0d29613ep0vmgmjb9&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 5,
                             &quot;question_id&quot;: 59,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 4,
-                            &quot;created_by&quot;: 665,
-                            &quot;updated_by&quot;: 665,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;
                         }
                     },
                     {
                         &quot;id&quot;: 60,
-                        &quot;title&quot;: &quot;Placeat magni consequuntur eum odit.&quot;,
-                        &quot;content&quot;: &quot;Et quis cum ut dolorem maiores aperiam iure. Aspernatur cum beatae et quaerat molestiae. Et quo ipsum quos tenetur occaecati consequatur cum. Eos quia quos nam sint aut recusandae. Quia qui assumenda rerum voluptas consequuntur quaerat alias.&quot;,
-                        &quot;correction&quot;: &quot;Sunt deserunt ut quo. Id voluptas officia quo est non. Consectetur quia voluptas provident officia sint.&quot;,
-                        &quot;materia&quot;: 85,
-                        &quot;ultimo_editor&quot;: 900,
-                        &quot;criador&quot;: 901,
-                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;title&quot;: &quot;Sit officiis recusandae fugiat.&quot;,
+                        &quot;content&quot;: &quot;Aut est distinctio quod odio. Facilis non ut minus atque. Repudiandae at consectetur dicta placeat.&quot;,
+                        &quot;correction&quot;: &quot;Aut in ipsa nisi sapiente. Corporis quis tempore aut similique. Inventore quia velit magnam hic officia qui.&quot;,
+                        &quot;materia_id&quot;: 35,
+                        &quot;created_by&quot;: &quot;01kcfr7c75m9har5qtns7ksbf9&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr7c1dypc5s6d9y3vrnvaw&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 5,
                             &quot;question_id&quot;: 60,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 5,
-                            &quot;created_by&quot;: 665,
-                            &quot;updated_by&quot;: 665,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;
                         }
                     },
                     {
                         &quot;id&quot;: 61,
-                        &quot;title&quot;: &quot;Ut expedita hic alias suscipit pariatur.&quot;,
-                        &quot;content&quot;: &quot;Maxime est ducimus consequatur voluptas harum sint. Sit ab error ex debitis vero quidem consequuntur perferendis. Voluptas facilis maxime architecto et voluptatem occaecati.&quot;,
-                        &quot;correction&quot;: &quot;Maiores id odit explicabo et incidunt. Ut nesciunt inventore quisquam enim. Quibusdam dolor a est vitae. Praesentium deleniti non incidunt voluptatem et officiis.&quot;,
-                        &quot;materia&quot;: 86,
-                        &quot;ultimo_editor&quot;: 904,
-                        &quot;criador&quot;: 905,
-                        &quot;type&quot;: &quot;Aberta&quot;,
+                        &quot;title&quot;: &quot;Et cupiditate distinctio corporis quia ut iure vel.&quot;,
+                        &quot;content&quot;: &quot;Ab voluptas et quos sit labore sed. Qui nesciunt libero rem esse vel dolor. Minima voluptatem est accusamus voluptatem nihil voluptatem.&quot;,
+                        &quot;correction&quot;: &quot;Voluptatem consequatur nihil error. Molestiae quae id officiis et. Sapiente eos itaque quos est sit voluptas. Esse qui molestiae quae molestiae.&quot;,
+                        &quot;materia_id&quot;: 35,
+                        &quot;created_by&quot;: &quot;01kcfr7cjpb0k1nx6nk6jzecy9&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr7ccwaptnnvzy5xqs3tb9&quot;,
+                        &quot;type&quot;: &quot;Multipla&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 5,
                             &quot;question_id&quot;: 61,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 6,
-                            &quot;created_by&quot;: 665,
-                            &quot;updated_by&quot;: 665,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;
                         }
                     },
                     {
-                        &quot;id&quot;: 62,
-                        &quot;title&quot;: &quot;Fugit voluptatem aut sunt soluta deserunt et nemo voluptas.&quot;,
-                        &quot;content&quot;: &quot;Molestiae eaque facere quas iste nemo sint. Numquam laudantium reprehenderit ab velit ut deserunt omnis. Et et voluptatibus iusto fugiat expedita id voluptatem. Voluptatum molestias sit perspiciatis rerum ipsum perferendis.&quot;,
-                        &quot;correction&quot;: &quot;Rem repellat sed qui tempora quod qui culpa. Modi quaerat harum voluptatem quibusdam dolores delectus. Rerum sunt cumque consequatur non. Quia molestias voluptas soluta.&quot;,
-                        &quot;materia&quot;: 87,
-                        &quot;ultimo_editor&quot;: 908,
-                        &quot;criador&quot;: 909,
-                        &quot;type&quot;: &quot;Multipla&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 5,
-                            &quot;question_id&quot;: 62,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 7,
-                            &quot;created_by&quot;: 665,
-                            &quot;updated_by&quot;: 665,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 65,
-                        &quot;title&quot;: &quot;Asperiores et ut necessitatibus numquam laudantium a.&quot;,
-                        &quot;content&quot;: &quot;Impedit ab dolores quos rem tempore quidem. Asperiores et eaque et aut expedita vitae. Porro perferendis nemo eos.&quot;,
-                        &quot;correction&quot;: &quot;Libero aut et accusamus quaerat voluptatem nostrum suscipit sequi. Voluptas voluptatem sint quasi quis deleniti. Sit quia beatae aliquam voluptatem tempore. Beatae fugit id voluptas optio voluptatem quibusdam possimus.&quot;,
-                        &quot;materia&quot;: 90,
-                        &quot;ultimo_editor&quot;: 920,
-                        &quot;criador&quot;: 921,
+                        &quot;id&quot;: 63,
+                        &quot;title&quot;: &quot;Tenetur dolor consequatur blanditiis.&quot;,
+                        &quot;content&quot;: &quot;Est error possimus velit et. Voluptatum minus deleniti qui repudiandae culpa eum quae. Tempore commodi enim magnam aspernatur natus debitis.&quot;,
+                        &quot;correction&quot;: &quot;Earum blanditiis magni dicta ex accusantium velit voluptas. Deserunt consequuntur assumenda et aperiam nostrum ut. Illo accusantium aut aut deserunt aperiam. Quidem tempore corporis et.&quot;,
+                        &quot;materia_id&quot;: 35,
+                        &quot;created_by&quot;: &quot;01kcfr7d9nbhr6jyqkkn9agzar&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr7d3zdqhykxd3qfqp11vt&quot;,
                         &quot;type&quot;: &quot;Aberta&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 5,
-                            &quot;question_id&quot;: 65,
+                            &quot;question_id&quot;: 63,
                             &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 10,
-                            &quot;created_by&quot;: 665,
-                            &quot;updated_by&quot;: 665,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
+                            &quot;order&quot;: 8,
+                            &quot;created_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;
                         }
                     },
                     {
                         &quot;id&quot;: 66,
-                        &quot;title&quot;: &quot;Quis quae porro et sed voluptates in iure.&quot;,
-                        &quot;content&quot;: &quot;Voluptatem aperiam ea fuga aliquid labore ut. Aperiam ullam fugit omnis sunt non. Quis fugit vitae nihil voluptatem vero. Rerum enim natus ut vero deserunt odit.&quot;,
-                        &quot;correction&quot;: &quot;Sunt impedit nisi quod veritatis dolor non. Sequi quidem dicta blanditiis nam enim. Eligendi maiores sit sint cumque voluptatum molestias est.&quot;,
-                        &quot;materia&quot;: 91,
-                        &quot;ultimo_editor&quot;: 924,
-                        &quot;criador&quot;: 925,
+                        &quot;title&quot;: &quot;Dolorum optio ut occaecati aut suscipit nulla accusamus.&quot;,
+                        &quot;content&quot;: &quot;Id harum et quis id. Accusantium rerum saepe error molestiae est laudantium tenetur. Aperiam doloribus consequatur inventore.&quot;,
+                        &quot;correction&quot;: &quot;Quas molestiae rerum recusandae ea ut inventore. Quia vel perspiciatis reiciendis impedit. Ipsa sunt incidunt dolorem earum maiores velit.&quot;,
+                        &quot;materia_id&quot;: 35,
+                        &quot;created_by&quot;: &quot;01kcfr7ecfze880263pn89jzf4&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr7e6rddqrrjd5tb09zqsn&quot;,
                         &quot;type&quot;: &quot;Aberta&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 5,
                             &quot;question_id&quot;: 66,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 11,
-                            &quot;created_by&quot;: 665,
-                            &quot;updated_by&quot;: 665,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;
                         }
                     },
                     {
-                        &quot;id&quot;: 69,
-                        &quot;title&quot;: &quot;Mollitia et odio et ut perferendis ut quidem.&quot;,
-                        &quot;content&quot;: &quot;Est repellat qui ipsam voluptatum incidunt. Voluptatem vero numquam nisi. Saepe facilis itaque porro amet esse commodi non.&quot;,
-                        &quot;correction&quot;: &quot;Ratione vero est et minus. Numquam delectus eaque atque qui quidem. Expedita perspiciatis reprehenderit omnis aspernatur voluptas facilis. Fugiat omnis ad nesciunt.&quot;,
-                        &quot;materia&quot;: 94,
-                        &quot;ultimo_editor&quot;: 936,
-                        &quot;criador&quot;: 937,
-                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;id&quot;: 70,
+                        &quot;title&quot;: &quot;Nesciunt modi excepturi ducimus.&quot;,
+                        &quot;content&quot;: &quot;Quo et commodi autem occaecati ipsa qui. Placeat explicabo fugit qui provident.&quot;,
+                        &quot;correction&quot;: &quot;Ut officiis laboriosam nemo in maiores. Et repudiandae numquam dolorem blanditiis debitis. Ea error quo quia possimus accusantium.&quot;,
+                        &quot;materia_id&quot;: 35,
+                        &quot;created_by&quot;: &quot;01kcfr7fsycbh81vckc2qetnby&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr7fma7sfbvvv81xrmyv4g&quot;,
+                        &quot;type&quot;: &quot;Multipla&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 5,
-                            &quot;question_id&quot;: 69,
+                            &quot;question_id&quot;: 70,
                             &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 14,
-                            &quot;created_by&quot;: 665,
-                            &quot;updated_by&quot;: 665,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
+                            &quot;order&quot;: 15,
+                            &quot;created_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;
                         }
                     },
                     {
                         &quot;id&quot;: 71,
-                        &quot;title&quot;: &quot;Mollitia in repellat fuga voluptate dignissimos.&quot;,
-                        &quot;content&quot;: &quot;Dolor illo numquam minus sint non. Laborum ea exercitationem odio velit totam architecto ut. Architecto quos voluptatem fugiat beatae adipisci.&quot;,
-                        &quot;correction&quot;: &quot;Officiis maxime eligendi dolores amet non. Pariatur et nihil in aut. Doloremque voluptates non nisi aliquam sequi sit quod dolore. Soluta voluptas quo ut non molestiae id quia.&quot;,
-                        &quot;materia&quot;: 96,
-                        &quot;ultimo_editor&quot;: 944,
-                        &quot;criador&quot;: 945,
-                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;title&quot;: &quot;Quia aut dolores perspiciatis consectetur.&quot;,
+                        &quot;content&quot;: &quot;Voluptatem neque voluptas provident cupiditate aut eius. Maiores nihil sapiente qui. Et iste ex delectus quod commodi dolorem. Non nihil necessitatibus voluptas impedit.&quot;,
+                        &quot;correction&quot;: &quot;Nihil id voluptatem nihil. Esse nesciunt accusantium ut quaerat similique minima qui. Expedita sunt numquam voluptas et quae at nostrum. Est nisi blanditiis dolores repellendus velit ut molestias.&quot;,
+                        &quot;materia_id&quot;: 35,
+                        &quot;created_by&quot;: &quot;01kcfr7g5bw53yj3k2rw7j68w5&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr7fzk5bbrw3t8sjzs9m32&quot;,
+                        &quot;type&quot;: &quot;Multipla&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 5,
                             &quot;question_id&quot;: 71,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 16,
-                            &quot;created_by&quot;: 665,
-                            &quot;updated_by&quot;: 665,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;
                         }
                     },
                     {
-                        &quot;id&quot;: 73,
-                        &quot;title&quot;: &quot;Blanditiis culpa velit quia est aut.&quot;,
-                        &quot;content&quot;: &quot;Sed quidem officia pariatur ratione. Laborum soluta odio omnis dolorem. Rerum voluptas aliquid et. Molestiae natus est vel facilis ut et. Aliquam id dolor eligendi unde est possimus.&quot;,
-                        &quot;correction&quot;: &quot;Sunt quo praesentium non aut sit voluptatem ut. Facere ut culpa voluptatem error laudantium maiores.&quot;,
-                        &quot;materia&quot;: 98,
-                        &quot;ultimo_editor&quot;: 952,
-                        &quot;criador&quot;: 953,
-                        &quot;type&quot;: &quot;Multipla&quot;,
+                        &quot;id&quot;: 72,
+                        &quot;title&quot;: &quot;In velit iste tempore similique aliquam.&quot;,
+                        &quot;content&quot;: &quot;Repellat sequi et enim tempore voluptatum odio. Qui qui aut asperiores consequatur nulla vitae excepturi. Quas voluptate iusto nesciunt voluptatum iusto qui. Quia occaecati fuga exercitationem reprehenderit deserunt vel.&quot;,
+                        &quot;correction&quot;: &quot;Reprehenderit sed repudiandae qui aliquid ut eum earum qui. Repellendus ex dicta ad nisi dicta.&quot;,
+                        &quot;materia_id&quot;: 35,
+                        &quot;created_by&quot;: &quot;01kcfr7ggsqnfz7prm7b2sckwh&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr7gb1dhwvczcbynd421vh&quot;,
+                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:36:24.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:07.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 5,
-                            &quot;question_id&quot;: 73,
+                            &quot;question_id&quot;: 72,
                             &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 18,
-                            &quot;created_by&quot;: 665,
-                            &quot;updated_by&quot;: 665,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
+                            &quot;order&quot;: 17,
+                            &quot;created_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr69qbg32ktkq6ncm9hct2&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;
                         }
                     }
                 ]
             },
             {
                 &quot;id&quot;: 6,
-                &quot;title&quot;: &quot;Atividade - magni&quot;,
-                &quot;description&quot;: &quot;Aliquid nesciunt voluptas et provident est. Aspernatur qui accusamus alias vel ipsa dicta. Iure culpa aspernatur dolorem dolores.&quot;,
-                &quot;subject_id&quot;: 99,
+                &quot;title&quot;: &quot;Atividade - dolorem&quot;,
+                &quot;description&quot;: &quot;Dicta tempore voluptates totam minus aut dignissimos. Distinctio sit est quae facilis. Cum velit nesciunt et libero commodi ea incidunt.&quot;,
+                &quot;subject_id&quot;: 36,
                 &quot;type&quot;: &quot;Activity&quot;,
-                &quot;due_date&quot;: &quot;2025-11-19T22:16:12.000000Z&quot;,
+                &quot;due_date&quot;: &quot;2026-01-12T20:16:08.000000Z&quot;,
                 &quot;created_by&quot;: {
-                    &quot;id&quot;: 1100,
-                    &quot;nome&quot;: &quot;Maya Nicolas&quot;,
-                    &quot;email&quot;: &quot;qgreen@example.net&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr8axn1nk5tba9yzzeq3g5&quot;,
+                    &quot;name&quot;: &quot;Leopold Kilback&quot;,
+                    &quot;email&quot;: &quot;mcdermott.chet@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;
                 },
                 &quot;updated_by&quot;: {
-                    &quot;id&quot;: 1100,
-                    &quot;nome&quot;: &quot;Maya Nicolas&quot;,
-                    &quot;email&quot;: &quot;qgreen@example.net&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr8axn1nk5tba9yzzeq3g5&quot;,
+                    &quot;name&quot;: &quot;Leopold Kilback&quot;,
+                    &quot;email&quot;: &quot;mcdermott.chet@example.net&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;
                 },
                 &quot;status&quot;: &quot;Active&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:36:54.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:36:54.000000Z&quot;,
-                &quot;questions&quot;: []
+                &quot;created_at&quot;: &quot;2025-12-15T00:58:36.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:58:36.000000Z&quot;,
+                &quot;questions&quot;: [
+                    {
+                        &quot;id&quot;: 74,
+                        &quot;title&quot;: &quot;Molestiae enim molestiae et repellendus.&quot;,
+                        &quot;content&quot;: &quot;Aut ut et dolor. Quisquam est ex corporis non.&quot;,
+                        &quot;correction&quot;: &quot;Incidunt aperiam veniam doloribus quia quia reprehenderit. Facilis voluptatem non tenetur tempora. Placeat et quaerat voluptatem harum occaecati delectus. Quidem magnam et labore vitae.&quot;,
+                        &quot;materia_id&quot;: 36,
+                        &quot;created_by&quot;: &quot;01kcfr8d7x746hrm5tkmdb0hsf&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr8d28kd0zvdjy6hz1xe5m&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:37.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:37.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 6,
+                            &quot;question_id&quot;: 74,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 1,
+                            &quot;created_by&quot;: &quot;01kcfr8axn1nk5tba9yzzeq3g5&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr8axn1nk5tba9yzzeq3g5&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:43.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:43.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 76,
+                        &quot;title&quot;: &quot;Officiis doloremque perspiciatis quidem.&quot;,
+                        &quot;content&quot;: &quot;Nesciunt qui minus qui minima in officia enim. Omnis consequuntur ut ab. Suscipit sunt repudiandae beatae adipisci. Vel officia numquam culpa officia enim sit ad.&quot;,
+                        &quot;correction&quot;: &quot;Laboriosam quisquam eius eos. Fugiat unde incidunt consequuntur voluptates. Accusamus quod itaque nostrum recusandae pariatur. Et voluptate laboriosam ullam tempora qui.&quot;,
+                        &quot;materia_id&quot;: 36,
+                        &quot;created_by&quot;: &quot;01kcfr8dyeg7chpgzwph2dvt4n&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr8drtc6s1h1znxb39px14&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:37.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:37.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 6,
+                            &quot;question_id&quot;: 76,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 3,
+                            &quot;created_by&quot;: &quot;01kcfr8axn1nk5tba9yzzeq3g5&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr8axn1nk5tba9yzzeq3g5&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:43.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:43.000000Z&quot;
+                        }
+                    }
+                ]
             },
             {
                 &quot;id&quot;: 7,
-                &quot;title&quot;: &quot;Atividade - aliquam&quot;,
-                &quot;description&quot;: &quot;Voluptatum totam in sed. Et nihil porro quia ducimus. Dignissimos enim ea aut.&quot;,
-                &quot;subject_id&quot;: 100,
+                &quot;title&quot;: &quot;Atividade - repellat&quot;,
+                &quot;description&quot;: &quot;Exercitationem provident nobis libero nesciunt aut impedit. Est quia et vel qui. Ullam doloremque iste sunt quo blanditiis.&quot;,
+                &quot;subject_id&quot;: 37,
                 &quot;type&quot;: &quot;Activity&quot;,
-                &quot;due_date&quot;: &quot;2025-12-10T08:35:22.000000Z&quot;,
+                &quot;due_date&quot;: &quot;2026-01-03T12:06:42.000000Z&quot;,
                 &quot;created_by&quot;: {
-                    &quot;id&quot;: 1103,
-                    &quot;nome&quot;: &quot;Jerel Predovic&quot;,
-                    &quot;email&quot;: &quot;merritt.huel@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr8beh35w1gyah3pspfh97&quot;,
+                    &quot;name&quot;: &quot;Therese Fahey&quot;,
+                    &quot;email&quot;: &quot;steuber.harry@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;
                 },
                 &quot;updated_by&quot;: {
-                    &quot;id&quot;: 1103,
-                    &quot;nome&quot;: &quot;Jerel Predovic&quot;,
-                    &quot;email&quot;: &quot;merritt.huel@example.org&quot;,
-                    &quot;tipo&quot;: &quot;Operador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:36:52.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr8beh35w1gyah3pspfh97&quot;,
+                    &quot;name&quot;: &quot;Therese Fahey&quot;,
+                    &quot;email&quot;: &quot;steuber.harry@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:58:34.000000Z&quot;
                 },
-                &quot;status&quot;: &quot;Active&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:36:54.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:36:54.000000Z&quot;,
+                &quot;status&quot;: &quot;Inactive&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:58:36.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:58:36.000000Z&quot;,
                 &quot;questions&quot;: [
                     {
-                        &quot;id&quot;: 77,
-                        &quot;title&quot;: &quot;Perferendis error et doloremque explicabo.&quot;,
-                        &quot;content&quot;: &quot;Doloremque voluptas vel sed ratione harum molestiae et. Minus dolor non soluta corrupti repellat itaque. Non nemo in et nam nulla neque.&quot;,
-                        &quot;correction&quot;: &quot;Cumque beatae nam debitis esse sit. Iure sint architecto omnis voluptatem est totam qui. Illo dicta vel nam tenetur reiciendis est.&quot;,
-                        &quot;materia&quot;: 106,
-                        &quot;ultimo_editor&quot;: 1148,
-                        &quot;criador&quot;: 1149,
+                        &quot;id&quot;: 78,
+                        &quot;title&quot;: &quot;Quo aut quae aut dicta omnis.&quot;,
+                        &quot;content&quot;: &quot;Ea labore ut doloremque et. Adipisci voluptatem et quo ut. Quo hic cum doloribus.&quot;,
+                        &quot;correction&quot;: &quot;Molestiae accusantium sequi sit dolorem animi nulla eligendi. Ut rerum ad aperiam est sed in. Nulla sed sed nesciunt ut. Excepturi temporibus qui et veniam qui id.&quot;,
+                        &quot;materia_id&quot;: 37,
+                        &quot;created_by&quot;: &quot;01kcfr8mcwtpapgharg37syqvx&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr8m78q7egr138g3z481ww&quot;,
                         &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:37:03.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:37:03.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:45.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:45.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 7,
-                            &quot;question_id&quot;: 77,
+                            &quot;question_id&quot;: 78,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 1,
-                            &quot;created_by&quot;: 1103,
-                            &quot;updated_by&quot;: 1103,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:37:07.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:37:07.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr8beh35w1gyah3pspfh97&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr8beh35w1gyah3pspfh97&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:50.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:50.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 79,
+                        &quot;title&quot;: &quot;Qui consequatur natus minima.&quot;,
+                        &quot;content&quot;: &quot;Doloribus eum incidunt ea. Aut autem ducimus aut. Dolor aspernatur repellendus est placeat voluptatum. Omnis non nobis exercitationem eos odit.&quot;,
+                        &quot;correction&quot;: &quot;Doloribus eos vel aut id atque. Consequuntur quas rerum reprehenderit sit nulla sit. Quia ducimus aut adipisci ipsam molestias aliquam rerum tempore. Laudantium dolor repudiandae sed nihil dignissimos soluta. Corporis reiciendis ut velit ab.&quot;,
+                        &quot;materia_id&quot;: 37,
+                        &quot;created_by&quot;: &quot;01kcfr8mr4mqe9vkgahh2wa65b&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr8mjf0grqx2c0zevyd2ev&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:45.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:45.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 7,
+                            &quot;question_id&quot;: 79,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 2,
+                            &quot;created_by&quot;: &quot;01kcfr8beh35w1gyah3pspfh97&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr8beh35w1gyah3pspfh97&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:50.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:50.000000Z&quot;
                         }
                     }
                 ]
             },
             {
                 &quot;id&quot;: 8,
-                &quot;title&quot;: &quot;Atividade - ipsam&quot;,
-                &quot;description&quot;: &quot;Inventore sit et eos iusto sequi sed. Sequi suscipit eligendi tempore eum et id est consequatur. Aut voluptatum dolor atque qui.&quot;,
-                &quot;subject_id&quot;: 101,
+                &quot;title&quot;: &quot;Atividade - asperiores&quot;,
+                &quot;description&quot;: &quot;Est aut similique aut beatae amet excepturi sed. Voluptatem numquam maiores aut nobis.&quot;,
+                &quot;subject_id&quot;: 38,
                 &quot;type&quot;: &quot;Activity&quot;,
-                &quot;due_date&quot;: &quot;2025-12-08T03:16:05.000000Z&quot;,
+                &quot;due_date&quot;: &quot;2025-12-29T10:47:34.000000Z&quot;,
                 &quot;created_by&quot;: {
-                    &quot;id&quot;: 1106,
-                    &quot;nome&quot;: &quot;Mr. Justice Farrell&quot;,
-                    &quot;email&quot;: &quot;vivien80@example.net&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:36:53.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:36:53.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr8bzgt3ajzgdxg5jj32zc&quot;,
+                    &quot;name&quot;: &quot;Samantha Fisher&quot;,
+                    &quot;email&quot;: &quot;ochristiansen@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:58:35.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:58:35.000000Z&quot;
                 },
                 &quot;updated_by&quot;: {
-                    &quot;id&quot;: 1106,
-                    &quot;nome&quot;: &quot;Mr. Justice Farrell&quot;,
-                    &quot;email&quot;: &quot;vivien80@example.net&quot;,
-                    &quot;tipo&quot;: &quot;ADM&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:36:53.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:36:53.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr8bzgt3ajzgdxg5jj32zc&quot;,
+                    &quot;name&quot;: &quot;Samantha Fisher&quot;,
+                    &quot;email&quot;: &quot;ochristiansen@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;active&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:58:35.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:58:35.000000Z&quot;
                 },
                 &quot;status&quot;: &quot;Active&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:36:54.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:36:54.000000Z&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:58:36.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:58:36.000000Z&quot;,
                 &quot;questions&quot;: [
                     {
                         &quot;id&quot;: 82,
-                        &quot;title&quot;: &quot;Est nihil facilis modi molestiae quibusdam.&quot;,
-                        &quot;content&quot;: &quot;Necessitatibus quisquam delectus rerum quis est repudiandae eaque. Recusandae vitae quam enim. Ut in eius fugiat rerum. Expedita reprehenderit et ea voluptatem illo.&quot;,
-                        &quot;correction&quot;: &quot;Optio eligendi labore sequi aut soluta ab maiores. Eum quasi perferendis quia molestias ut non. Eos quidem quo eius voluptatem in. Fugiat reiciendis aut atque corrupti quis.&quot;,
-                        &quot;materia&quot;: 111,
-                        &quot;ultimo_editor&quot;: 1192,
-                        &quot;criador&quot;: 1193,
-                        &quot;type&quot;: &quot;Multipla&quot;,
+                        &quot;title&quot;: &quot;Voluptatem aspernatur in reiciendis similique rerum labore magnam.&quot;,
+                        &quot;content&quot;: &quot;Sit odit blanditiis ut quam est. Ipsam illum molestiae nulla omnis qui id. Cupiditate unde expedita blanditiis est autem nesciunt. Aut minima odio ex corporis quia.&quot;,
+                        &quot;correction&quot;: &quot;Repellendus minus officia est facere neque vitae saepe. Qui explicabo cupiditate laborum quaerat. Ipsum est velit nostrum suscipit. Delectus consequatur qui sit explicabo ea repudiandae nesciunt.&quot;,
+                        &quot;materia_id&quot;: 38,
+                        &quot;created_by&quot;: &quot;01kcfr8vhn4axttxbp4n3ezcvk&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr8vc1gk0dzypt60rf5vp5&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:37:10.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:37:10.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:52.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:52.000000Z&quot;,
                         &quot;pivot&quot;: {
                             &quot;collection_id&quot;: 8,
                             &quot;question_id&quot;: 82,
                             &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 1,
+                            &quot;created_by&quot;: &quot;01kcfr8bzgt3ajzgdxg5jj32zc&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr8bzgt3ajzgdxg5jj32zc&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:58.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:58.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 83,
+                        &quot;title&quot;: &quot;Eius libero sit ut aut ut exercitationem tempora qui.&quot;,
+                        &quot;content&quot;: &quot;Magnam veritatis repellat harum quia ratione accusamus quia. Ad doloremque adipisci aut iusto ea voluptas. Et consequatur laborum voluptas autem alias ipsam. Et nostrum aut quidem dolorem est architecto quia.&quot;,
+                        &quot;correction&quot;: &quot;Sed voluptas laborum voluptatum eos quasi. Eligendi voluptate ratione reiciendis voluptatibus quae. Explicabo rerum ipsum fugit vitae animi. Officiis itaque ut ratione ex nihil. Optio voluptas necessitatibus voluptatem repellendus in.&quot;,
+                        &quot;materia_id&quot;: 38,
+                        &quot;created_by&quot;: &quot;01kcfr8vwzjgxmzk417626hhra&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr8vqadcw64arsrngff4bk&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:52.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:52.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 8,
+                            &quot;question_id&quot;: 83,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 2,
+                            &quot;created_by&quot;: &quot;01kcfr8bzgt3ajzgdxg5jj32zc&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr8bzgt3ajzgdxg5jj32zc&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:58.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:58.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 84,
+                        &quot;title&quot;: &quot;Accusantium neque necessitatibus pariatur minima doloremque.&quot;,
+                        &quot;content&quot;: &quot;Aperiam accusamus aut et. Est non est minima ducimus. Corporis repudiandae vero nemo ut ut laudantium quisquam.&quot;,
+                        &quot;correction&quot;: &quot;Dicta excepturi ex omnis autem dolorem voluptatum iste qui. Eum ea mollitia laboriosam dolores repudiandae ad impedit et. Rem perspiciatis neque voluptas non. Qui consequatur eos aut ipsum et autem sint.&quot;,
+                        &quot;materia_id&quot;: 38,
+                        &quot;created_by&quot;: &quot;01kcfr8w88vrm2a6stdzrpmmnr&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr8w2jfjw7vkrpj59b0mzs&quot;,
+                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:52.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:52.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 8,
+                            &quot;question_id&quot;: 84,
+                            &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 3,
-                            &quot;created_by&quot;: 1106,
-                            &quot;updated_by&quot;: 1106,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:37:14.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:37:14.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr8bzgt3ajzgdxg5jj32zc&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr8bzgt3ajzgdxg5jj32zc&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:58.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:58.000000Z&quot;
+                        }
+                    },
+                    {
+                        &quot;id&quot;: 85,
+                        &quot;title&quot;: &quot;Ut explicabo rem quod nihil qui.&quot;,
+                        &quot;content&quot;: &quot;Doloribus et necessitatibus ex maiores. Quasi assumenda et et animi inventore dolore qui. Adipisci numquam recusandae excepturi nesciunt sapiente non et ut. Rerum perspiciatis necessitatibus repellat tempore optio sed.&quot;,
+                        &quot;correction&quot;: &quot;Quibusdam numquam rerum tenetur sint exercitationem et facilis. Debitis doloribus cumque officiis est nisi sit nisi. Quisquam sit fuga est quis autem mollitia sit. Ut nihil facere iusto et magnam aspernatur. Voluptatem voluptate perspiciatis natus omnis fugiat est.&quot;,
+                        &quot;materia_id&quot;: 38,
+                        &quot;created_by&quot;: &quot;01kcfr8wkk74nqbw2yq7fseqf0&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr8wdxk9ebw28m1ec1htq0&quot;,
+                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;status&quot;: &quot;Active&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:52.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:52.000000Z&quot;,
+                        &quot;pivot&quot;: {
+                            &quot;collection_id&quot;: 8,
+                            &quot;question_id&quot;: 85,
+                            &quot;status&quot;: &quot;Active&quot;,
+                            &quot;order&quot;: 4,
+                            &quot;created_by&quot;: &quot;01kcfr8bzgt3ajzgdxg5jj32zc&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr8bzgt3ajzgdxg5jj32zc&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:58:58.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:58:58.000000Z&quot;
                         }
                     }
                 ]
             },
             {
                 &quot;id&quot;: 9,
-                &quot;title&quot;: &quot;Atividade - autem&quot;,
-                &quot;description&quot;: &quot;Reiciendis quo consectetur autem officiis voluptatum commodi. Officia explicabo optio magnam architecto nesciunt omnis.&quot;,
-                &quot;subject_id&quot;: 102,
+                &quot;title&quot;: &quot;Atividade - dolor&quot;,
+                &quot;description&quot;: &quot;Et ab sit aut repellat dicta eum. Aut eum maxime dignissimos adipisci. In voluptatem non et velit.&quot;,
+                &quot;subject_id&quot;: 39,
                 &quot;type&quot;: &quot;Activity&quot;,
-                &quot;due_date&quot;: &quot;2025-11-25T01:56:37.000000Z&quot;,
+                &quot;due_date&quot;: &quot;2025-12-22T07:59:45.000000Z&quot;,
                 &quot;created_by&quot;: {
-                    &quot;id&quot;: 1109,
-                    &quot;nome&quot;: &quot;Ibrahim Berge&quot;,
-                    &quot;email&quot;: &quot;shayne77@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:36:53.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:36:53.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr8cghxd5xjmyxhz5apddk&quot;,
+                    &quot;name&quot;: &quot;Khalil Schmeler&quot;,
+                    &quot;email&quot;: &quot;otorphy@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:58:35.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:58:35.000000Z&quot;
                 },
                 &quot;updated_by&quot;: {
-                    &quot;id&quot;: 1109,
-                    &quot;nome&quot;: &quot;Ibrahim Berge&quot;,
-                    &quot;email&quot;: &quot;shayne77@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Moderador&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:36:53.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:36:53.000000Z&quot;
-                },
-                &quot;status&quot;: &quot;Active&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:36:54.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:36:54.000000Z&quot;,
-                &quot;questions&quot;: []
-            },
-            {
-                &quot;id&quot;: 10,
-                &quot;title&quot;: &quot;Exerc&iacute;cio - nemo&quot;,
-                &quot;description&quot;: &quot;Eligendi voluptas culpa omnis. Aut blanditiis animi illum dolorem. Debitis tempora ut quo qui. Illo nihil minus illo saepe velit sed.&quot;,
-                &quot;subject_id&quot;: 115,
-                &quot;type&quot;: &quot;Exercise&quot;,
-                &quot;due_date&quot;: &quot;2025-12-11T04:53:59.000000Z&quot;,
-                &quot;created_by&quot;: {
-                    &quot;id&quot;: 1256,
-                    &quot;nome&quot;: &quot;Mr. Earl Krajcik&quot;,
-                    &quot;email&quot;: &quot;gaetano42@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:37:21.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:37:21.000000Z&quot;
-                },
-                &quot;updated_by&quot;: {
-                    &quot;id&quot;: 1256,
-                    &quot;nome&quot;: &quot;Mr. Earl Krajcik&quot;,
-                    &quot;email&quot;: &quot;gaetano42@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Bloqueado&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:37:21.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:37:21.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr8cghxd5xjmyxhz5apddk&quot;,
+                    &quot;name&quot;: &quot;Khalil Schmeler&quot;,
+                    &quot;email&quot;: &quot;otorphy@example.org&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:58:35.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:58:35.000000Z&quot;
                 },
                 &quot;status&quot;: &quot;Inactive&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:37:23.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:37:23.000000Z&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:58:36.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:58:36.000000Z&quot;,
                 &quot;questions&quot;: [
                     {
-                        &quot;id&quot;: 87,
-                        &quot;title&quot;: &quot;Officiis repudiandae amet harum a sit velit.&quot;,
-                        &quot;content&quot;: &quot;Sit explicabo voluptatem ut cumque delectus distinctio. Molestias voluptates veritatis iusto reiciendis ullam blanditiis velit. Rerum aperiam vitae aut officia animi provident distinctio enim. Aperiam quo necessitatibus id dolore.&quot;,
-                        &quot;correction&quot;: &quot;Ut velit itaque optio delectus sed odio quia ut. Consequatur dolore nemo aliquid culpa architecto ut voluptatem. Modi quo quia consectetur odio cumque.&quot;,
-                        &quot;materia&quot;: 119,
-                        &quot;ultimo_editor&quot;: 1269,
-                        &quot;criador&quot;: 1270,
-                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:37:34.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:37:34.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 10,
-                            &quot;question_id&quot;: 87,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 2,
-                            &quot;created_by&quot;: 1256,
-                            &quot;updated_by&quot;: 1256,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:37:56.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:37:56.000000Z&quot;
-                        }
-                    },
-                    {
                         &quot;id&quot;: 89,
-                        &quot;title&quot;: &quot;Itaque voluptatem sed nemo in repellendus dolor.&quot;,
-                        &quot;content&quot;: &quot;Ipsam nulla eum dolorem nisi accusantium reiciendis voluptas. Iste qui ut a qui corporis. Voluptatem dignissimos quaerat voluptate doloribus qui aut. Molestiae vero distinctio soluta optio aliquam eos dolorem nisi.&quot;,
-                        &quot;correction&quot;: &quot;Dolores voluptas qui possimus qui in aperiam aliquam. Facilis maxime qui id est neque veniam delectus quam. Quia porro dicta fugiat odio. Dolorem perspiciatis exercitationem harum consequuntur similique est ex.&quot;,
-                        &quot;materia&quot;: 121,
-                        &quot;ultimo_editor&quot;: 1277,
-                        &quot;criador&quot;: 1278,
-                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;title&quot;: &quot;Officia soluta corrupti optio quidem.&quot;,
+                        &quot;content&quot;: &quot;Labore dolores fugit et aut odio. Accusantium tempore non velit doloribus eaque rerum. Excepturi inventore eius qui modi.&quot;,
+                        &quot;correction&quot;: &quot;Itaque omnis maxime quia illo. Iure voluptatem recusandae saepe laudantium consequatur. Qui vitae illo minima quia. Consectetur laudantium saepe ex omnis labore ratione.&quot;,
+                        &quot;materia_id&quot;: 39,
+                        &quot;created_by&quot;: &quot;01kcfr93rntny7vx2tqdy3cjg5&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr93k37t9w0p8r98pxdkft&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:37:34.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:37:34.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:58:59.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:58:59.000000Z&quot;,
                         &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 10,
+                            &quot;collection_id&quot;: 9,
                             &quot;question_id&quot;: 89,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 4,
-                            &quot;created_by&quot;: 1256,
-                            &quot;updated_by&quot;: 1256,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:37:56.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:37:56.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 91,
-                        &quot;title&quot;: &quot;At id sed ut.&quot;,
-                        &quot;content&quot;: &quot;Sit officiis voluptate expedita vel consectetur ipsum ea saepe. Non nesciunt magnam qui sapiente molestias. Magnam officia quod eos at vel. Qui nostrum provident excepturi sunt deleniti blanditiis.&quot;,
-                        &quot;correction&quot;: &quot;Dolorem eveniet reiciendis fuga nihil quia. Ut expedita repellat excepturi aspernatur excepturi repudiandae. Excepturi cum optio ut ex eveniet aut. Ratione in accusamus quisquam provident explicabo veniam aut veniam.&quot;,
-                        &quot;materia&quot;: 123,
-                        &quot;ultimo_editor&quot;: 1285,
-                        &quot;criador&quot;: 1286,
-                        &quot;type&quot;: &quot;Aberta&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:37:34.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:37:34.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 10,
-                            &quot;question_id&quot;: 91,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 6,
-                            &quot;created_by&quot;: 1256,
-                            &quot;updated_by&quot;: 1256,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:37:56.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:37:56.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 92,
-                        &quot;title&quot;: &quot;Et dolores fugiat vitae inventore.&quot;,
-                        &quot;content&quot;: &quot;Voluptatibus tempore amet voluptate voluptatem. Est blanditiis provident aut et aut. Iusto ut quo impedit ipsum placeat exercitationem perspiciatis. Labore explicabo alias corporis perspiciatis delectus occaecati minima.&quot;,
-                        &quot;correction&quot;: &quot;Eum eligendi et ipsa iure. Totam sit eveniet adipisci voluptatum est cum deserunt autem. Quae laboriosam vel ut ratione iusto explicabo eius saepe. Minus sed animi excepturi modi in quibusdam ut.&quot;,
-                        &quot;materia&quot;: 124,
-                        &quot;ultimo_editor&quot;: 1289,
-                        &quot;criador&quot;: 1290,
-                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:37:34.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:37:34.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 10,
-                            &quot;question_id&quot;: 92,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 7,
-                            &quot;created_by&quot;: 1256,
-                            &quot;updated_by&quot;: 1256,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:37:56.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:37:56.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 93,
-                        &quot;title&quot;: &quot;Est repellat aliquid id repellendus et.&quot;,
-                        &quot;content&quot;: &quot;Tempore ex ad maxime laudantium quidem qui aut. Soluta sit itaque id commodi repellat et. Quidem fugiat perspiciatis ducimus odit ut beatae dolores id. Possimus deleniti aut atque nobis corporis.&quot;,
-                        &quot;correction&quot;: &quot;Non earum veritatis soluta tempore autem. Natus provident deserunt voluptatibus itaque et officiis vitae. Animi sint deserunt porro in similique est repudiandae consequatur.&quot;,
-                        &quot;materia&quot;: 125,
-                        &quot;ultimo_editor&quot;: 1293,
-                        &quot;criador&quot;: 1294,
-                        &quot;type&quot;: &quot;Multipla&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:37:34.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:37:34.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 10,
-                            &quot;question_id&quot;: 93,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 8,
-                            &quot;created_by&quot;: 1256,
-                            &quot;updated_by&quot;: 1256,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:37:56.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:37:56.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 94,
-                        &quot;title&quot;: &quot;Aliquid mollitia alias porro illum alias at et sed.&quot;,
-                        &quot;content&quot;: &quot;Recusandae quaerat suscipit harum natus voluptatem magnam. Laborum cum voluptates perspiciatis neque. Itaque omnis iste et. Repellat necessitatibus eaque autem officiis distinctio.&quot;,
-                        &quot;correction&quot;: &quot;Velit beatae sit et eos ipsa quibusdam incidunt quidem. Perspiciatis at ut expedita rerum quis. Minus similique perferendis enim rerum iusto dignissimos necessitatibus ea.&quot;,
-                        &quot;materia&quot;: 126,
-                        &quot;ultimo_editor&quot;: 1297,
-                        &quot;criador&quot;: 1298,
-                        &quot;type&quot;: &quot;Aberta&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:37:34.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:37:34.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 10,
-                            &quot;question_id&quot;: 94,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 9,
-                            &quot;created_by&quot;: 1256,
-                            &quot;updated_by&quot;: 1256,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:37:56.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:37:56.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 95,
-                        &quot;title&quot;: &quot;Nisi laborum temporibus dolorum aut atque quod.&quot;,
-                        &quot;content&quot;: &quot;Aspernatur velit rerum officiis voluptas illo. Aut quo voluptas id voluptatem. Officiis voluptatum tenetur in quis consequatur et quasi. Doloribus dicta quae veritatis placeat labore voluptatem ad.&quot;,
-                        &quot;correction&quot;: &quot;Autem laudantium voluptas quia modi vel beatae quia. Sit odio sapiente et molestiae. Dolorem molestiae dolor excepturi quod quasi.&quot;,
-                        &quot;materia&quot;: 127,
-                        &quot;ultimo_editor&quot;: 1301,
-                        &quot;criador&quot;: 1302,
-                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:37:34.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:37:34.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 10,
-                            &quot;question_id&quot;: 95,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 10,
-                            &quot;created_by&quot;: 1256,
-                            &quot;updated_by&quot;: 1256,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:37:56.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:37:56.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr8cghxd5xjmyxhz5apddk&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr8cghxd5xjmyxhz5apddk&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:59:05.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:59:05.000000Z&quot;
                         }
                     }
                 ]
             },
             {
-                &quot;id&quot;: 11,
-                &quot;title&quot;: &quot;Exerc&iacute;cio - sunt&quot;,
-                &quot;description&quot;: &quot;Minima laborum labore eligendi sed. Sint quam et nam. Culpa impedit in et rerum similique. Aut iste aut reiciendis in.&quot;,
-                &quot;subject_id&quot;: 116,
+                &quot;id&quot;: 10,
+                &quot;title&quot;: &quot;Exerc&iacute;cio - eum&quot;,
+                &quot;description&quot;: &quot;Illo vitae enim rem consectetur earum ut. Sapiente modi dolores qui pariatur. Corrupti laboriosam sequi a qui nihil nemo.&quot;,
+                &quot;subject_id&quot;: 40,
                 &quot;type&quot;: &quot;Exercise&quot;,
-                &quot;due_date&quot;: &quot;2025-11-15T06:17:06.000000Z&quot;,
+                &quot;due_date&quot;: &quot;2025-12-21T00:33:16.000000Z&quot;,
                 &quot;created_by&quot;: {
-                    &quot;id&quot;: 1259,
-                    &quot;nome&quot;: &quot;Hazel Wilderman IV&quot;,
-                    &quot;email&quot;: &quot;brent.borer@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:37:22.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:37:22.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr99nkgjyywpqan8xjvnjm&quot;,
+                    &quot;name&quot;: &quot;Joesph Ullrich&quot;,
+                    &quot;email&quot;: &quot;jvandervort@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:59:05.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:59:05.000000Z&quot;
                 },
                 &quot;updated_by&quot;: {
-                    &quot;id&quot;: 1259,
-                    &quot;nome&quot;: &quot;Hazel Wilderman IV&quot;,
-                    &quot;email&quot;: &quot;brent.borer@example.com&quot;,
-                    &quot;tipo&quot;: &quot;Professor&quot;,
-                    &quot;criador&quot;: null,
-                    &quot;ultimo_editor&quot;: null,
-                    &quot;status&quot;: &quot;Ativo&quot;,
-                    &quot;created_at&quot;: &quot;2025-11-11T23:37:22.000000Z&quot;,
-                    &quot;updated_at&quot;: &quot;2025-11-11T23:37:22.000000Z&quot;
+                    &quot;id&quot;: &quot;01kcfr99nkgjyywpqan8xjvnjm&quot;,
+                    &quot;name&quot;: &quot;Joesph Ullrich&quot;,
+                    &quot;email&quot;: &quot;jvandervort@example.com&quot;,
+                    &quot;created_by&quot;: null,
+                    &quot;updated_by&quot;: null,
+                    &quot;status&quot;: &quot;banned&quot;,
+                    &quot;deleted_at&quot;: null,
+                    &quot;created_at&quot;: &quot;2025-12-15T00:59:05.000000Z&quot;,
+                    &quot;updated_at&quot;: &quot;2025-12-15T00:59:05.000000Z&quot;
                 },
                 &quot;status&quot;: &quot;Inactive&quot;,
-                &quot;created_at&quot;: &quot;2025-11-11T23:37:23.000000Z&quot;,
-                &quot;updated_at&quot;: &quot;2025-11-11T23:37:23.000000Z&quot;,
+                &quot;created_at&quot;: &quot;2025-12-15T00:59:07.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2025-12-15T00:59:07.000000Z&quot;,
                 &quot;questions&quot;: [
                     {
-                        &quot;id&quot;: 101,
-                        &quot;title&quot;: &quot;Iure voluptate ab provident vel.&quot;,
-                        &quot;content&quot;: &quot;Aspernatur est odio aut enim animi. Ullam voluptatem non dolores aliquid. Porro aliquam sit et in culpa accusantium officia officiis.&quot;,
-                        &quot;correction&quot;: &quot;Ipsam eos quia explicabo tenetur. Pariatur corrupti optio enim accusantium temporibus porro aut alias.&quot;,
-                        &quot;materia&quot;: 133,
-                        &quot;ultimo_editor&quot;: 1445,
-                        &quot;criador&quot;: 1446,
-                        &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
+                        &quot;id&quot;: 90,
+                        &quot;title&quot;: &quot;Corrupti repellat quae sed tempora.&quot;,
+                        &quot;content&quot;: &quot;Fuga rerum voluptatem consequatur atque odit. Beatae non eum culpa veniam. Est consectetur iusto harum soluta sequi explicabo. Dolorum quia totam culpa dolorem.&quot;,
+                        &quot;correction&quot;: &quot;Aliquam dolor nulla amet voluptatem modi. Est sapiente odit tempore impedit aperiam. Id in pariatur rerum amet quo.&quot;,
+                        &quot;materia_id&quot;: 40,
+                        &quot;created_by&quot;: &quot;01kcfr9bf0hg96f68d4dv901sd&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr9b9b916f945dsewm8qhd&quot;,
+                        &quot;type&quot;: &quot;Aberta&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:59:10.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:59:10.000000Z&quot;,
                         &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 11,
-                            &quot;question_id&quot;: 101,
+                            &quot;collection_id&quot;: 10,
+                            &quot;question_id&quot;: 90,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 1,
-                            &quot;created_by&quot;: 1259,
-                            &quot;updated_by&quot;: 1259,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr99nkgjyywpqan8xjvnjm&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr99nkgjyywpqan8xjvnjm&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:59:25.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:59:25.000000Z&quot;
                         }
                     },
                     {
-                        &quot;id&quot;: 102,
-                        &quot;title&quot;: &quot;Est et est excepturi nam numquam et doloribus.&quot;,
-                        &quot;content&quot;: &quot;Et labore itaque amet eius. Ullam libero consectetur ducimus nobis repellat. Corporis modi consequatur inventore ducimus culpa molestias. Tenetur magnam est odio aut iste. Incidunt molestias est laboriosam esse mollitia.&quot;,
-                        &quot;correction&quot;: &quot;Est tempore temporibus architecto ut exercitationem id. Alias culpa totam quia soluta fugit sed veritatis. Fugiat aperiam commodi aut vel fugiat. Dolorum eum exercitationem nesciunt fugit ratione quia.&quot;,
-                        &quot;materia&quot;: 134,
-                        &quot;ultimo_editor&quot;: 1449,
-                        &quot;criador&quot;: 1450,
-                        &quot;type&quot;: &quot;Multipla&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 11,
-                            &quot;question_id&quot;: 102,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 2,
-                            &quot;created_by&quot;: 1259,
-                            &quot;updated_by&quot;: 1259,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 103,
-                        &quot;title&quot;: &quot;Ullam ut omnis modi quisquam iusto.&quot;,
-                        &quot;content&quot;: &quot;Consectetur quod sapiente blanditiis facilis ullam. Aliquid recusandae quod esse sed asperiores. Non dolorem vel earum voluptas quidem aliquam velit molestiae. Et earum amet quia voluptatem.&quot;,
-                        &quot;correction&quot;: &quot;Totam autem expedita eos aut ut explicabo omnis. Numquam voluptatem ut minima voluptas at quia tempora. Facilis sed ipsam id explicabo voluptatem minus saepe. Dolorum consequatur reprehenderit dicta adipisci.&quot;,
-                        &quot;materia&quot;: 135,
-                        &quot;ultimo_editor&quot;: 1453,
-                        &quot;criador&quot;: 1454,
-                        &quot;type&quot;: &quot;Multipla&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 11,
-                            &quot;question_id&quot;: 103,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 3,
-                            &quot;created_by&quot;: 1259,
-                            &quot;updated_by&quot;: 1259,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 106,
-                        &quot;title&quot;: &quot;Non illo mollitia beatae odio odit.&quot;,
-                        &quot;content&quot;: &quot;Dolorem dolores enim ut fuga sit excepturi quia. Atque quia cupiditate et unde. Est non doloribus ipsam odio. Minus temporibus est sit.&quot;,
-                        &quot;correction&quot;: &quot;Eaque omnis est officiis pariatur. Aut aperiam nam sint laborum maiores. Voluptatem esse neque quae et eos ut suscipit. Et iusto hic et tempore eligendi deserunt.&quot;,
-                        &quot;materia&quot;: 138,
-                        &quot;ultimo_editor&quot;: 1465,
-                        &quot;criador&quot;: 1466,
+                        &quot;id&quot;: 94,
+                        &quot;title&quot;: &quot;Quam ex ipsam earum pariatur dolorem dolorem inventore adipisci.&quot;,
+                        &quot;content&quot;: &quot;Ipsum laborum deserunt hic. Accusamus optio aperiam ex aut deserunt porro. Iure aut libero et odio.&quot;,
+                        &quot;correction&quot;: &quot;Cupiditate exercitationem provident consectetur rerum minus hic iure. Sit aut dolores voluptatibus quis sit error.&quot;,
+                        &quot;materia_id&quot;: 40,
+                        &quot;created_by&quot;: &quot;01kcfr9cvwgpfh54pds0gyrzw5&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr9cp9eqcbnfdd4kgct0r5&quot;,
                         &quot;type&quot;: &quot;Aberta&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:59:10.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:59:10.000000Z&quot;,
                         &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 11,
-                            &quot;question_id&quot;: 106,
+                            &quot;collection_id&quot;: 10,
+                            &quot;question_id&quot;: 94,
                             &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 6,
-                            &quot;created_by&quot;: 1259,
-                            &quot;updated_by&quot;: 1259,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;
+                            &quot;order&quot;: 5,
+                            &quot;created_by&quot;: &quot;01kcfr99nkgjyywpqan8xjvnjm&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr99nkgjyywpqan8xjvnjm&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:59:25.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:59:25.000000Z&quot;
                         }
                     },
                     {
-                        &quot;id&quot;: 107,
-                        &quot;title&quot;: &quot;Deleniti voluptatem voluptatem sunt reprehenderit unde autem.&quot;,
-                        &quot;content&quot;: &quot;Distinctio est eveniet similique dolor eos maiores deleniti. Et iure quasi similique quis incidunt aut voluptas atque. Quasi voluptates rerum commodi delectus reprehenderit voluptatibus. Numquam similique eaque in dolor autem placeat laudantium. Quo voluptatem temporibus quidem est iusto quia.&quot;,
-                        &quot;correction&quot;: &quot;Corporis explicabo facere officiis incidunt id iusto libero velit. Non tempora omnis laboriosam sint illo sed reprehenderit.&quot;,
-                        &quot;materia&quot;: 139,
-                        &quot;ultimo_editor&quot;: 1469,
-                        &quot;criador&quot;: 1470,
+                        &quot;id&quot;: 96,
+                        &quot;title&quot;: &quot;Porro fuga eligendi ipsam vitae.&quot;,
+                        &quot;content&quot;: &quot;Adipisci sunt dolorem perferendis. Suscipit veniam ut exercitationem in fugit. Dolores accusamus fuga qui quia sit. In quisquam est delectus consequatur voluptatum.&quot;,
+                        &quot;correction&quot;: &quot;Quos ut accusantium molestiae molestiae asperiores. Consectetur eum molestiae quis dolorem rerum itaque. Consequuntur neque pariatur voluptatem.&quot;,
+                        &quot;materia_id&quot;: 40,
+                        &quot;created_by&quot;: &quot;01kcfr9dj8m5jy16t3gmmnd3fm&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr9dcpm62y9dh9vsgnyvbr&quot;,
                         &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:59:10.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:59:10.000000Z&quot;,
                         &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 11,
-                            &quot;question_id&quot;: 107,
+                            &quot;collection_id&quot;: 10,
+                            &quot;question_id&quot;: 96,
                             &quot;status&quot;: &quot;Active&quot;,
                             &quot;order&quot;: 7,
-                            &quot;created_by&quot;: 1259,
-                            &quot;updated_by&quot;: 1259,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;
+                            &quot;created_by&quot;: &quot;01kcfr99nkgjyywpqan8xjvnjm&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr99nkgjyywpqan8xjvnjm&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:59:25.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:59:25.000000Z&quot;
                         }
                     },
                     {
-                        &quot;id&quot;: 109,
-                        &quot;title&quot;: &quot;Delectus necessitatibus voluptatem aut.&quot;,
-                        &quot;content&quot;: &quot;Est nemo sequi odit. Dicta ut incidunt cupiditate sunt sit. Quidem rerum ipsa itaque. Veniam qui quasi aut aut enim aut similique ipsa.&quot;,
-                        &quot;correction&quot;: &quot;Ipsam quam numquam molestiae voluptates quam. Molestiae illo quam adipisci repudiandae perspiciatis blanditiis aperiam. Qui totam quo est consequatur perferendis. Ut nihil labore fugit vero iusto.&quot;,
-                        &quot;materia&quot;: 141,
-                        &quot;ultimo_editor&quot;: 1477,
-                        &quot;criador&quot;: 1478,
-                        &quot;type&quot;: &quot;Multipla&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 11,
-                            &quot;question_id&quot;: 109,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 9,
-                            &quot;created_by&quot;: 1259,
-                            &quot;updated_by&quot;: 1259,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 110,
-                        &quot;title&quot;: &quot;Eos cumque consequatur est suscipit in harum corrupti.&quot;,
-                        &quot;content&quot;: &quot;Labore aspernatur deleniti est aut enim. Culpa magnam in quia aut. Laborum veritatis aperiam quis dolorum.&quot;,
-                        &quot;correction&quot;: &quot;Debitis vel ea numquam quisquam delectus. Atque odio voluptas et et voluptatem consectetur et. Rerum molestiae mollitia velit molestias accusamus incidunt aut nisi.&quot;,
-                        &quot;materia&quot;: 142,
-                        &quot;ultimo_editor&quot;: 1481,
-                        &quot;criador&quot;: 1482,
-                        &quot;type&quot;: &quot;Aberta&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 11,
-                            &quot;question_id&quot;: 110,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 10,
-                            &quot;created_by&quot;: 1259,
-                            &quot;updated_by&quot;: 1259,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 112,
-                        &quot;title&quot;: &quot;Qui fugiat et modi quia atque sint nisi.&quot;,
-                        &quot;content&quot;: &quot;Aspernatur laboriosam occaecati nihil ipsum tempora perspiciatis. Temporibus velit cupiditate ut accusantium sint et quam. Perferendis quia nobis impedit illo dicta maxime.&quot;,
-                        &quot;correction&quot;: &quot;Quia nesciunt veniam esse cupiditate explicabo voluptatem. Pariatur commodi a odio repellendus illum. Sint iusto reprehenderit cupiditate atque corrupti quia id dicta.&quot;,
-                        &quot;materia&quot;: 144,
-                        &quot;ultimo_editor&quot;: 1489,
-                        &quot;criador&quot;: 1490,
+                        &quot;id&quot;: 98,
+                        &quot;title&quot;: &quot;Eum cupiditate molestiae et ab quisquam ea.&quot;,
+                        &quot;content&quot;: &quot;Quo nihil perferendis ullam. Nemo assumenda et beatae voluptatem. Et excepturi molestias qui nihil dolor. In aut repellat atque tenetur consectetur id. Dignissimos harum repellat molestiae perferendis dolorem aut nihil.&quot;,
+                        &quot;correction&quot;: &quot;Aliquam hic et nostrum et quaerat ducimus. Laboriosam optio voluptatem dolorem atque distinctio. Est voluptas rerum explicabo quo dolores commodi. Labore id numquam vitae est itaque in est minus.&quot;,
+                        &quot;materia_id&quot;: 40,
+                        &quot;created_by&quot;: &quot;01kcfr9e8nnn1agy7gcv0dykre&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr9e32q5td4wgftpf4tbqk&quot;,
                         &quot;type&quot;: &quot;VerdadeiroFalso&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:59:10.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:59:10.000000Z&quot;,
                         &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 11,
-                            &quot;question_id&quot;: 112,
+                            &quot;collection_id&quot;: 10,
+                            &quot;question_id&quot;: 98,
                             &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 12,
-                            &quot;created_by&quot;: 1259,
-                            &quot;updated_by&quot;: 1259,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;
+                            &quot;order&quot;: 9,
+                            &quot;created_by&quot;: &quot;01kcfr99nkgjyywpqan8xjvnjm&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr99nkgjyywpqan8xjvnjm&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:59:25.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:59:25.000000Z&quot;
                         }
                     },
                     {
-                        &quot;id&quot;: 114,
-                        &quot;title&quot;: &quot;Asperiores nulla non ut beatae et.&quot;,
-                        &quot;content&quot;: &quot;In qui aperiam velit aut saepe facilis. Molestiae commodi vero magni sapiente et. Veritatis et voluptatum magnam quia. Ab ut harum nostrum placeat veniam est voluptatem.&quot;,
-                        &quot;correction&quot;: &quot;Magni maiores aspernatur dolor quis qui sed totam. Quia quia voluptatem perferendis porro. Id eaque voluptate ut rerum magni deleniti non.&quot;,
-                        &quot;materia&quot;: 146,
-                        &quot;ultimo_editor&quot;: 1497,
-                        &quot;criador&quot;: 1498,
-                        &quot;type&quot;: &quot;Aberta&quot;,
-                        &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 11,
-                            &quot;question_id&quot;: 114,
-                            &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 14,
-                            &quot;created_by&quot;: 1259,
-                            &quot;updated_by&quot;: 1259,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;
-                        }
-                    },
-                    {
-                        &quot;id&quot;: 115,
-                        &quot;title&quot;: &quot;Est dolorum reprehenderit iure non.&quot;,
-                        &quot;content&quot;: &quot;Dolorem vel voluptas non. Quae eum quia consequatur rem rerum. Doloremque consectetur et tenetur tempora molestias dolor magnam veniam. Non placeat possimus itaque corporis.&quot;,
-                        &quot;correction&quot;: &quot;Fugiat consequatur perspiciatis fugiat adipisci ea. Sunt et exercitationem iure fuga. Iure optio molestiae dolorem sequi maxime ut est. Ut et totam rerum et magnam molestiae autem sit.&quot;,
-                        &quot;materia&quot;: 147,
-                        &quot;ultimo_editor&quot;: 1501,
-                        &quot;criador&quot;: 1502,
+                        &quot;id&quot;: 99,
+                        &quot;title&quot;: &quot;Omnis culpa modi qui.&quot;,
+                        &quot;content&quot;: &quot;Sunt libero voluptatum minus dignissimos saepe dolor. Tempora aut impedit deserunt voluptatem ullam harum ut.&quot;,
+                        &quot;correction&quot;: &quot;Voluptas numquam soluta et. Placeat quia nobis quos dolor id. Et sed corporis ipsam ut tempore voluptatem quaerat. Laudantium debitis molestiae provident pariatur possimus accusamus. Ex quos tempore qui cumque.&quot;,
+                        &quot;materia_id&quot;: 40,
+                        &quot;created_by&quot;: &quot;01kcfr9em1csxtwjpgw77cd8we&quot;,
+                        &quot;updated_by&quot;: &quot;01kcfr9eebdfsvh6r2xy1rcbxn&quot;,
                         &quot;type&quot;: &quot;Multipla&quot;,
                         &quot;status&quot;: &quot;Active&quot;,
-                        &quot;created_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
-                        &quot;updated_at&quot;: &quot;2025-11-11T23:38:07.000000Z&quot;,
+                        &quot;created_at&quot;: &quot;2025-12-15T00:59:10.000000Z&quot;,
+                        &quot;updated_at&quot;: &quot;2025-12-15T00:59:10.000000Z&quot;,
                         &quot;pivot&quot;: {
-                            &quot;collection_id&quot;: 11,
-                            &quot;question_id&quot;: 115,
+                            &quot;collection_id&quot;: 10,
+                            &quot;question_id&quot;: 99,
                             &quot;status&quot;: &quot;Active&quot;,
-                            &quot;order&quot;: 15,
-                            &quot;created_by&quot;: 1259,
-                            &quot;updated_by&quot;: 1259,
-                            &quot;created_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;,
-                            &quot;updated_at&quot;: &quot;2025-11-11T23:38:29.000000Z&quot;
+                            &quot;order&quot;: 10,
+                            &quot;created_by&quot;: &quot;01kcfr99nkgjyywpqan8xjvnjm&quot;,
+                            &quot;updated_by&quot;: &quot;01kcfr99nkgjyywpqan8xjvnjm&quot;,
+                            &quot;created_at&quot;: &quot;2025-12-15T00:59:25.000000Z&quot;,
+                            &quot;updated_at&quot;: &quot;2025-12-15T00:59:25.000000Z&quot;
                         }
                     }
                 ]
@@ -4999,7 +4911,7 @@ access-control-allow-origin: *
         &quot;per_page&quot;: 10,
         &quot;prev_page_url&quot;: null,
         &quot;to&quot;: 10,
-        &quot;total&quot;: 14
+        &quot;total&quot;: 12
     }
 }</code>
  </pre>
@@ -6426,7 +6338,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"status\": \"Rascunho\"
+    \"status\": \"Inativo\"
 }"
 </code></pre></div>
 
@@ -6442,7 +6354,7 @@ const headers = {
 };
 
 let body = {
-    "status": "Rascunho"
+    "status": "Inativo"
 };
 
 fetch(url, {
@@ -6547,10 +6459,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PATCHapi-conteudos--conteudo--status"
-               value="Rascunho"
+               value="Inativo"
                data-component="body">
     <br>
-<p>Example: <code>Rascunho</code></p>
+<p>Example: <code>Inativo</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Ativo</code></li> <li><code>Inativo</code></li> <li><code>Rascunho</code></li></ul>
         </div>
@@ -6574,7 +6486,7 @@ Must be one of:
     --header "Accept: application/json" \
     --data "{
     \"title\": \"b\",
-    \"content\": \"architecto\",
+    \"body\": \"architecto\",
     \"content_type\": \"n\",
     \"content_type_description\": \"architecto\",
     \"content_tags\": [
@@ -6583,8 +6495,8 @@ Must be one of:
             \"description\": \"Quos velit et fugiat sunt nihil accusantium harum.\"
         }
     ],
-    \"status\": \"Rascunho\",
-    \"published_at\": \"2025-12-14T21:56:08\",
+    \"status\": \"Ativo\",
+    \"published_at\": \"2025-12-15T03:14:59\",
     \"is_moderator_only\": true,
     \"images\": [
         \"architecto\"
@@ -6608,7 +6520,7 @@ const headers = {
 
 let body = {
     "title": "b",
-    "content": "architecto",
+    "body": "architecto",
     "content_type": "n",
     "content_type_description": "architecto",
     "content_tags": [
@@ -6617,8 +6529,8 @@ let body = {
             "description": "Quos velit et fugiat sunt nihil accusantium harum."
         }
     ],
-    "status": "Rascunho",
-    "published_at": "2025-12-14T21:56:08",
+    "status": "Ativo",
+    "published_at": "2025-12-15T03:14:59",
     "is_moderator_only": true,
     "images": [
         "architecto"
@@ -6723,12 +6635,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Must not be greater than 255 characters. Example: <code>b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>content</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>body</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="content"                data-endpoint="POSTapi-conteudos"
+                              name="body"                data-endpoint="POSTapi-conteudos"
                value="architecto"
                data-component="body">
     <br>
@@ -6801,10 +6713,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="POSTapi-conteudos"
-               value="Rascunho"
+               value="Ativo"
                data-component="body">
     <br>
-<p>Example: <code>Rascunho</code></p>
+<p>Example: <code>Ativo</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Ativo</code></li> <li><code>Inativo</code></li> <li><code>Rascunho</code></li></ul>
         </div>
@@ -6815,10 +6727,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="published_at"                data-endpoint="POSTapi-conteudos"
-               value="2025-12-14T21:56:08"
+               value="2025-12-15T03:14:59"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-12-14T21:56:08</code></p>
+<p>Must be a valid date. Example: <code>2025-12-15T03:14:59</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>is_moderator_only</code></b>&nbsp;&nbsp;
@@ -6885,7 +6797,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/conteudos/2" \
+    "http://localhost:8000/api/conteudos/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -6896,8 +6808,8 @@ Must be one of:
     \"content_tag\": \"n\",
     \"content_tag_description\": \"architecto\",
     \"status\": \"Rascunho\",
-    \"published_at\": \"2025-12-14T21:56:08\",
-    \"is_moderator_only\": false,
+    \"published_at\": \"2025-12-15T03:14:59\",
+    \"is_moderator_only\": true,
     \"images\": [
         \"architecto\"
     ],
@@ -6910,7 +6822,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/conteudos/2"
+    "http://localhost:8000/api/conteudos/1"
 );
 
 const headers = {
@@ -6926,8 +6838,8 @@ let body = {
     "content_tag": "n",
     "content_tag_description": "architecto",
     "status": "Rascunho",
-    "published_at": "2025-12-14T21:56:08",
-    "is_moderator_only": false,
+    "published_at": "2025-12-15T03:14:59",
+    "is_moderator_only": true,
     "images": [
         "architecto"
     ],
@@ -7029,10 +6941,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-conteudos--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the conteudo. Example: <code>2</code></p>
+<p>The ID of the conteudo. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -7128,10 +7040,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="published_at"                data-endpoint="PUTapi-conteudos--id-"
-               value="2025-12-14T21:56:08"
+               value="2025-12-15T03:14:59"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-12-14T21:56:08</code></p>
+<p>Must be a valid date. Example: <code>2025-12-15T03:14:59</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>is_moderator_only</code></b>&nbsp;&nbsp;
@@ -7153,7 +7065,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>images</code></b>&nbsp;&nbsp;
@@ -7198,14 +7110,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/conteudos/2" \
+    "http://localhost:8000/api/conteudos/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/conteudos/2"
+    "http://localhost:8000/api/conteudos/1"
 );
 
 const headers = {
@@ -7301,10 +7213,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-conteudos--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the conteudo. Example: <code>2</code></p>
+<p>The ID of the conteudo. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -7325,7 +7237,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"status\": \"Ativo\"
+    \"status\": \"Inativo\"
 }"
 </code></pre></div>
 
@@ -7341,7 +7253,7 @@ const headers = {
 };
 
 let body = {
-    "status": "Ativo"
+    "status": "Inativo"
 };
 
 fetch(url, {
@@ -7446,10 +7358,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PATCHapi-tiposconteudo--tiposconteudo--status"
-               value="Ativo"
+               value="Inativo"
                data-component="body">
     <br>
-<p>Example: <code>Ativo</code></p>
+<p>Example: <code>Inativo</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Ativo</code></li> <li><code>Inativo</code></li></ul>
         </div>
@@ -8193,7 +8105,7 @@ Must be one of:
     --data "{
     \"tag_name\": \"b\",
     \"description\": \"Et animi quos velit et fugiat.\",
-    \"is_moderator_only\": true,
+    \"is_moderator_only\": false,
     \"count\": 16
 }"
 </code></pre></div>
@@ -8212,7 +8124,7 @@ const headers = {
 let body = {
     "tag_name": "b",
     "description": "Et animi quos velit et fugiat.",
-    "is_moderator_only": true,
+    "is_moderator_only": false,
     "count": 16
 };
 
@@ -8342,7 +8254,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>count</code></b>&nbsp;&nbsp;
@@ -8952,7 +8864,7 @@ Must be one of:
     \"content\": \"architecto\",
     \"correction\": \"architecto\",
     \"materia\": 16,
-    \"type\": \"Aberta\",
+    \"type\": \"Multipla\",
     \"alternatives\": [
         {
             \"content\": \"b\",
@@ -8978,7 +8890,7 @@ let body = {
     "content": "architecto",
     "correction": "architecto",
     "materia": 16,
-    "type": "Aberta",
+    "type": "Multipla",
     "alternatives": [
         {
             "content": "b",
@@ -9124,10 +9036,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-questoes"
-               value="Aberta"
+               value="Multipla"
                data-component="body">
     <br>
-<p>Example: <code>Aberta</code></p>
+<p>Example: <code>Multipla</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Multipla</code></li> <li><code>VerdadeiroFalso</code></li> <li><code>Aberta</code></li></ul>
         </div>
@@ -9192,14 +9104,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/questoes/5" \
+    --get "http://localhost:8000/api/questoes/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/questoes/5"
+    "http://localhost:8000/api/questoes/1"
 );
 
 const headers = {
@@ -9312,10 +9224,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-questoes--id-"
-               value="5"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the questo. Example: <code>5</code></p>
+<p>The ID of the questo. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -9332,7 +9244,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/questoes/5" \
+    "http://localhost:8000/api/questoes/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -9340,7 +9252,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"content\": \"architecto\",
     \"correction\": \"architecto\",
     \"materia\": 16,
-    \"type\": \"Aberta\",
+    \"type\": \"VerdadeiroFalso\",
     \"alternatives\": [
         {
             \"content\": \"n\",
@@ -9353,7 +9265,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/questoes/5"
+    "http://localhost:8000/api/questoes/1"
 );
 
 const headers = {
@@ -9366,7 +9278,7 @@ let body = {
     "content": "architecto",
     "correction": "architecto",
     "materia": 16,
-    "type": "Aberta",
+    "type": "VerdadeiroFalso",
     "alternatives": [
         {
             "content": "n",
@@ -9468,10 +9380,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-questoes--id-"
-               value="5"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the questo. Example: <code>5</code></p>
+<p>The ID of the questo. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -9529,10 +9441,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="PUTapi-questoes--id-"
-               value="Aberta"
+               value="VerdadeiroFalso"
                data-component="body">
     <br>
-<p>Example: <code>Aberta</code></p>
+<p>Example: <code>VerdadeiroFalso</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Multipla</code></li> <li><code>VerdadeiroFalso</code></li> <li><code>Aberta</code></li></ul>
         </div>
@@ -9609,14 +9521,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/questoes/5" \
+    "http://localhost:8000/api/questoes/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/questoes/5"
+    "http://localhost:8000/api/questoes/1"
 );
 
 const headers = {
@@ -9712,10 +9624,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-questoes--id-"
-               value="5"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the questo. Example: <code>5</code></p>
+<p>The ID of the questo. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -9886,17 +9798,17 @@ Must be one of:
     \"title\": \"b\",
     \"description\": \"Et animi quos velit et fugiat.\",
     \"subject_id\": \"architecto\",
-    \"type\": \"Simulation\",
+    \"type\": \"Activity\",
     \"due_date\": \"2052-01-08\",
-    \"status\": \"Active\",
+    \"status\": \"Inactive\",
     \"questions\": [
         {
             \"title\": \"b\",
             \"content\": \"architecto\",
             \"correction\": \"architecto\",
             \"materia\": 16,
-            \"type\": \"Multipla\",
-            \"status\": \"Active\",
+            \"type\": \"Aberta\",
+            \"status\": \"Inactive\",
             \"alternatives\": [
                 {
                     \"content\": \"architecto\",
@@ -9923,17 +9835,17 @@ let body = {
     "title": "b",
     "description": "Et animi quos velit et fugiat.",
     "subject_id": "architecto",
-    "type": "Simulation",
+    "type": "Activity",
     "due_date": "2052-01-08",
-    "status": "Active",
+    "status": "Inactive",
     "questions": [
         {
             "title": "b",
             "content": "architecto",
             "correction": "architecto",
             "materia": 16,
-            "type": "Multipla",
-            "status": "Active",
+            "type": "Aberta",
+            "status": "Inactive",
             "alternatives": [
                 {
                     "content": "architecto",
@@ -10069,10 +9981,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-questoescolecao"
-               value="Simulation"
+               value="Activity"
                data-component="body">
     <br>
-<p>Example: <code>Simulation</code></p>
+<p>Example: <code>Activity</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Exam</code></li> <li><code>Simulation</code></li> <li><code>Activity</code></li> <li><code>Exercise</code></li></ul>
         </div>
@@ -10095,10 +10007,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="POSTapi-questoescolecao"
-               value="Active"
+               value="Inactive"
                data-component="body">
     <br>
-<p>Example: <code>Active</code></p>
+<p>Example: <code>Inactive</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Active</code></li> <li><code>Inactive</code></li></ul>
         </div>
@@ -10167,10 +10079,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="questions.0.type"                data-endpoint="POSTapi-questoescolecao"
-               value="Multipla"
+               value="Aberta"
                data-component="body">
     <br>
-<p>Example: <code>Multipla</code></p>
+<p>Example: <code>Aberta</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Multipla</code></li> <li><code>VerdadeiroFalso</code></li> <li><code>Aberta</code></li></ul>
                     </div>
@@ -10181,10 +10093,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="questions.0.status"                data-endpoint="POSTapi-questoescolecao"
-               value="Active"
+               value="Inactive"
                data-component="body">
     <br>
-<p>Example: <code>Active</code></p>
+<p>Example: <code>Inactive</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Active</code></li> <li><code>Inactive</code></li></ul>
                     </div>
@@ -10251,7 +10163,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/questoescolecao/2" \
+    "http://localhost:8000/api/questoescolecao/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -10259,7 +10171,7 @@ Must be one of:
     \"description\": \"Et animi quos velit et fugiat.\",
     \"type\": \"Exam\",
     \"due_date\": \"2052-01-08\",
-    \"status\": \"Inactive\",
+    \"status\": \"Active\",
     \"questions\": [
         {
             \"id\": \"architecto\",
@@ -10282,7 +10194,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/questoescolecao/2"
+    "http://localhost:8000/api/questoescolecao/1"
 );
 
 const headers = {
@@ -10295,7 +10207,7 @@ let body = {
     "description": "Et animi quos velit et fugiat.",
     "type": "Exam",
     "due_date": "2052-01-08",
-    "status": "Inactive",
+    "status": "Active",
     "questions": [
         {
             "id": "architecto",
@@ -10407,10 +10319,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-questoescolecao--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the questoescolecao. Example: <code>2</code></p>
+<p>The ID of the questoescolecao. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -10482,10 +10394,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-questoescolecao--id-"
-               value="Inactive"
+               value="Active"
                data-component="body">
     <br>
-<p>Example: <code>Inactive</code></p>
+<p>Example: <code>Active</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Active</code></li> <li><code>Inactive</code></li></ul>
         </div>
@@ -10650,14 +10562,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/questoescolecao/2" \
+    "http://localhost:8000/api/questoescolecao/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/questoescolecao/2"
+    "http://localhost:8000/api/questoescolecao/1"
 );
 
 const headers = {
@@ -10753,10 +10665,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-questoescolecao--id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the questoescolecao. Example: <code>2</code></p>
+<p>The ID of the questoescolecao. Example: <code>1</code></p>
             </div>
                     </form>
 
@@ -11632,7 +11544,157 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <li>search: Busca geral em nome e email</li>
 </ul>
 
-                                <h2 id="usuarios-PUTapi-users--user_id--password">updatePassword: Atualiza a senha de um usuário do sistema.</h2>
+                                <h2 id="usuarios-GETapi-me">Retorna as informações do usuário autenticado junto com suas habilidades.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-me">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8000/api/me" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/me"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-me">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;id&quot;: 4,
+    &quot;name&quot;: &quot;Jessica Jones&quot;,
+    &quot;email&quot;: &quot;jessica.jones@example.com&quot;,
+    &quot;status&quot;: &quot;active&quot;,
+    &quot;abilities&quot;: {
+        &quot;users&quot;: {
+            &quot;view&quot;: {
+                &quot;self&quot;: true,
+                &quot;any&quot;: false
+            },
+            &quot;create&quot;: false,
+            &quot;update&quot;: {
+                &quot;self&quot;: true,
+                &quot;any&quot;: false
+            },
+            &quot;delete&quot;: {
+                &quot;self&quot;: false,
+                &quot;any&quot;: false
+            }
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;N&atilde;o autenticado. Token inv&aacute;lido ou ausente..&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-me" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-me"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-me"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-me" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-me">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-me" data-method="GET"
+      data-path="api/me"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-me', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-me"
+                    onclick="tryItOut('GETapi-me');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-me"
+                    onclick="cancelTryOut('GETapi-me');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-me"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/me</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-me"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-me"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="usuarios-PUTapi-users--user_id--password">updatePassword: Atualiza a senha de um usuário do sistema.</h2>
 
 <p>
 </p>
@@ -11645,7 +11707,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/users/1/password" \
+    "http://localhost:8000/api/users/01kcfr2vb4qb8b4kjtfxb3pv7b/password" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -11656,7 +11718,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/users/1/password"
+    "http://localhost:8000/api/users/01kcfr2vb4qb8b4kjtfxb3pv7b/password"
 );
 
 const headers = {
@@ -11757,10 +11819,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="user_id"                data-endpoint="PUTapi-users--user_id--password"
-               value="1"
+               value="01kcfr2vb4qb8b4kjtfxb3pv7b"
                data-component="url">
     <br>
-<p>The ID of the user. Example: <code>1</code></p>
+<p>The ID of the user. Example: <code>01kcfr2vb4qb8b4kjtfxb3pv7b</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -11924,7 +11986,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"name\": \"b\",
     \"email\": \"zbailey@example.net\",
     \"password\": \"-0pBNvYgxw\",
-    \"role\": \"admin\"
+    \"role\": \"student\"
 }"
 </code></pre></div>
 
@@ -11943,7 +12005,7 @@ let body = {
     "name": "b",
     "email": "zbailey@example.net",
     "password": "-0pBNvYgxw",
-    "role": "admin"
+    "role": "student"
 };
 
 fetch(url, {
@@ -12050,7 +12112,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="zbailey@example.net"
                data-component="body">
     <br>
-<p>Must be a valid email address. Must not be greater than 100 characters. Example: <code>zbailey@example.net</code></p>
+<p>Must be a valid email address. Example: <code>zbailey@example.net</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -12071,10 +12133,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="role"                data-endpoint="POSTapi-users"
-               value="admin"
+               value="student"
                data-component="body">
     <br>
-<p>Example: <code>admin</code></p>
+<p>Example: <code>student</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>teacher</code></li> <li><code>student</code></li> <li><code>admin</code></li> <li><code>moderator</code></li> <li><code>operator</code></li></ul>
         </div>
@@ -12093,14 +12155,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/users/1" \
+    --get "http://localhost:8000/api/users/01kcfr2vb4qb8b4kjtfxb3pv7b" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/users/1"
+    "http://localhost:8000/api/users/01kcfr2vb4qb8b4kjtfxb3pv7b"
 );
 
 const headers = {
@@ -12213,10 +12275,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-users--id-"
-               value="1"
+               value="01kcfr2vb4qb8b4kjtfxb3pv7b"
                data-component="url">
     <br>
-<p>The ID of the user. Example: <code>1</code></p>
+<p>The ID of the user. Example: <code>01kcfr2vb4qb8b4kjtfxb3pv7b</code></p>
             </div>
                     </form>
 
@@ -12233,21 +12295,21 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/users/1" \
+    "http://localhost:8000/api/users/01kcfr2vb4qb8b4kjtfxb3pv7b" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
     \"nome\": \"b\",
     \"email\": \"zbailey@example.net\",
-    \"tipo\": \"Professor\",
-    \"status\": \"Inativo\"
+    \"tipo\": \"Aluno\",
+    \"status\": \"Ativo\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/users/1"
+    "http://localhost:8000/api/users/01kcfr2vb4qb8b4kjtfxb3pv7b"
 );
 
 const headers = {
@@ -12258,8 +12320,8 @@ const headers = {
 let body = {
     "nome": "b",
     "email": "zbailey@example.net",
-    "tipo": "Professor",
-    "status": "Inativo"
+    "tipo": "Aluno",
+    "status": "Ativo"
 };
 
 fetch(url, {
@@ -12355,10 +12417,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PUTapi-users--id-"
-               value="1"
+               value="01kcfr2vb4qb8b4kjtfxb3pv7b"
                data-component="url">
     <br>
-<p>The ID of the user. Example: <code>1</code></p>
+<p>The ID of the user. Example: <code>01kcfr2vb4qb8b4kjtfxb3pv7b</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -12383,7 +12445,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="zbailey@example.net"
                data-component="body">
     <br>
-<p>Must be a valid email address. Must not be greater than 100 characters. Example: <code>zbailey@example.net</code></p>
+<p>Must be a valid email address. Example: <code>zbailey@example.net</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>tipo</code></b>&nbsp;&nbsp;
@@ -12392,10 +12454,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="tipo"                data-endpoint="PUTapi-users--id-"
-               value="Professor"
+               value="Aluno"
                data-component="body">
     <br>
-<p>Example: <code>Professor</code></p>
+<p>Example: <code>Aluno</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Professor</code></li> <li><code>Aluno</code></li> <li><code>ADM</code></li> <li><code>Moderador</code></li> <li><code>Operador</code></li></ul>
         </div>
@@ -12406,10 +12468,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-users--id-"
-               value="Inativo"
+               value="Ativo"
                data-component="body">
     <br>
-<p>Example: <code>Inativo</code></p>
+<p>Example: <code>Ativo</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Ativo</code></li> <li><code>Inativo</code></li> <li><code>Bloqueado</code></li></ul>
         </div>
@@ -12428,14 +12490,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/users/1" \
+    "http://localhost:8000/api/users/01kcfr2vb4qb8b4kjtfxb3pv7b" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/users/1"
+    "http://localhost:8000/api/users/01kcfr2vb4qb8b4kjtfxb3pv7b"
 );
 
 const headers = {
@@ -12531,10 +12593,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-users--id-"
-               value="1"
+               value="01kcfr2vb4qb8b4kjtfxb3pv7b"
                data-component="url">
     <br>
-<p>The ID of the user. Example: <code>1</code></p>
+<p>The ID of the user. Example: <code>01kcfr2vb4qb8b4kjtfxb3pv7b</code></p>
             </div>
                     </form>
 
@@ -12551,18 +12613,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://localhost:8000/api/users/1/status" \
+    "http://localhost:8000/api/users/01kcfr2vb4qb8b4kjtfxb3pv7b/status" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"status\": \"active\"
+    \"status\": \"inactive\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/users/1/status"
+    "http://localhost:8000/api/users/01kcfr2vb4qb8b4kjtfxb3pv7b/status"
 );
 
 const headers = {
@@ -12571,7 +12633,7 @@ const headers = {
 };
 
 let body = {
-    "status": "active"
+    "status": "inactive"
 };
 
 fetch(url, {
@@ -12663,10 +12725,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="user_id"                data-endpoint="PATCHapi-users--user_id--status"
-               value="1"
+               value="01kcfr2vb4qb8b4kjtfxb3pv7b"
                data-component="url">
     <br>
-<p>The ID of the user. Example: <code>1</code></p>
+<p>The ID of the user. Example: <code>01kcfr2vb4qb8b4kjtfxb3pv7b</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -12676,10 +12738,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PATCHapi-users--user_id--status"
-               value="active"
+               value="inactive"
                data-component="body">
     <br>
-<p>Example: <code>active</code></p>
+<p>Example: <code>inactive</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>active</code></li> <li><code>inactive</code></li> <li><code>blocked</code></li></ul>
         </div>

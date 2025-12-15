@@ -98,28 +98,26 @@ class SystemUserController extends Controller
      */
     public function store(StoreSystemUserRequest $request): JsonResponse
     {
-
         $this->authorize('create', SystemUser::class);
 
         try {
             $validated = $request->validated();
 
-            $user = Auth::user();
+            $authenticatedUser = Auth::user();
 
-            $validated['creator'] = $user->id;
-
-            $validated['updater'] = $user->id;
+            $validated['created_by'] = $authenticatedUser->id;
+            $validated['updated_by'] = $authenticatedUser->id;
 
             if (! empty($validated['password'])) {
                 $validated['password'] = bcrypt($validated['password']);
             }
 
-            $user = SystemUser::create($validated);
+            $newUser = SystemUser::create($validated);
 
             return response()->json([
                 'success' => true,
                 'message' => 'Usuário criado com sucesso',
-                'data' => $user->load(['creator', 'updater']),
+                'data' => $newUser->fresh()->load(['creator', 'updater']),
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
@@ -164,7 +162,7 @@ class SystemUserController extends Controller
                 ], 422);
             }
 
-            $validated['updater'] = auth()->id();
+            $validated['updated_by'] = auth()->id();
 
             $user->update($validated);
 
@@ -195,7 +193,7 @@ class SystemUserController extends Controller
         try {
             $user->update([
                 'password' => bcrypt($request->input('password')),
-                'updater' => auth()->id(),
+                'updated_by' => auth()->id(),
             ]);
 
             return response()->json([

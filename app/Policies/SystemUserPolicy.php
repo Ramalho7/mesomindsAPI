@@ -27,7 +27,7 @@ class SystemUserPolicy
      */
     public function viewAny(SystemUser $user): bool
     {
-        return $user->tipo === 'admin';
+        return $user->role === 'admin';
     }
 
     /**
@@ -37,10 +37,14 @@ class SystemUserPolicy
      * @param  SystemUser  $systemUser  Usuário a ser visualizado.
      * @return bool Retorna `true` se o usuário for administrador ou se estiver visualizando seu próprio registro.
      */
-    public function view(SystemUser $user, SystemUser $systemUser): bool
+    public function view(SystemUser $user, ?SystemUser $systemUser = null): bool
     {
-        if ($user->tipo === 'admin') {
+        if ($user->role === 'admin') {
             return true;
+        }
+
+        if ($systemUser === null) {
+            return false;
         }
 
         return $user->id === $systemUser->id;
@@ -54,7 +58,7 @@ class SystemUserPolicy
      */
     public function create(SystemUser $user): bool
     {
-        return $user->tipo === 'admin';
+        return $user->role === 'admin';
     }
 
     /**
@@ -64,10 +68,14 @@ class SystemUserPolicy
      * @param  SystemUser  $systemUser  Usuário a ser atualizado.
      * @return bool Retorna `true` se o usuário for administrador ou se estiver atualizando seu próprio registro.
      */
-    public function update(SystemUser $user, SystemUser $systemUser): bool
+    public function update(SystemUser $user, ?SystemUser $systemUser = null): bool
     {
-        if ($user->tipo === 'admin') {
+        if ($user->role === 'admin') {
             return true;
+        }
+
+        if ($systemUser === null) {
+            return false;
         }
 
         return $user->id === $systemUser->id;
@@ -80,13 +88,22 @@ class SystemUserPolicy
      * @param  SystemUser  $systemUser  Usuário cuja senha será atualizada.
      * @return bool Retorna `true` se o usuário for administrador ou se estiver atualizando sua própria senha.
      */
-    public function updatePassword(SystemUser $user, SystemUser $systemUser): bool
+    public function updatePassword(SystemUser $user, ?SystemUser $systemUser): bool
     {
-        if ($user->tipo === 'admin') {
+        if ($user->role === 'admin') {
             return true;
         }
 
+        if ($systemUser === null) {
+            return false;
+        }
+
         return $user->id === $systemUser->id;
+    }
+
+    public function updateAny(SystemUser $user): bool
+    {
+        return $user->role === 'admin';
     }
 
     /**
@@ -98,11 +115,16 @@ class SystemUserPolicy
      */
     public function delete(SystemUser $user, SystemUser $systemUser): bool
     {
-        if ($user->tipo === 'admin') {
+        if ($user->role === 'admin') {
             return true;
         }
 
         return $user->id === $systemUser->id;
+    }
+
+    public function deleteAny(SystemUser $user): bool
+    {
+        return $user->role === 'admin';
     }
 
     /**
@@ -124,10 +146,14 @@ class SystemUserPolicy
      * @param  SystemUser  $systemUser  Usuário a ser excluído permanentemente.
      * @return bool Retorna `true` se o usuário for administrador ou se estiver excluindo permanentemente seu próprio registro.
      */
-    public function forceDelete(SystemUser $user, SystemUser $systemUser): bool
+    public function forceDelete(SystemUser $user, ?SystemUser $systemUser = null): bool
     {
-        if ($user->tipo === 'admin') {
+        if ($user->role === 'admin') {
             return true;
+        }
+
+        if ($systemUser === null) {
+            return false;
         }
 
         return $user->id === $systemUser->id;

@@ -17,6 +17,77 @@ endpoints:
   -
     custom: []
     httpMethods:
+      - GET
+    uri: api/me
+    metadata:
+      custom: []
+      groupName: Usuários
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Retorna as informações do usuário autenticado junto com suas habilidades.'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+           "success": true,
+           "id": 4,
+           "name": "Jessica Jones",
+           "email": "jessica.jones@example.com",
+           "status": "active",
+           "abilities": {
+             "users": {
+               "view": {
+                 "self": true,
+                 "any": false
+               },
+               "create": false,
+               "update": {
+                 "self": true,
+                 "any": false
+               },
+               "delete": {
+                 "self": false,
+                 "any": false
+               }
+             }
+           }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+           "success": false,
+           "message": "Não autenticado. Token inválido ou ausente.."
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
       - PUT
     uri: 'api/users/{user_id}/password'
     metadata:
@@ -38,14 +109,14 @@ endpoints:
         name: user_id
         description: 'The ID of the user.'
         required: true
-        example: 1
+        example: 01kcfr2vb4qb8b4kjtfxb3pv7b
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      user_id: 1
+      user_id: 01kcfr2vb4qb8b4kjtfxb3pv7b
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -157,7 +228,7 @@ endpoints:
       email:
         custom: []
         name: email
-        description: 'Must be a valid email address. Must not be greater than 100 characters.'
+        description: 'Must be a valid email address.'
         required: true
         example: zbailey@example.net
         type: string
@@ -181,7 +252,7 @@ endpoints:
         name: role
         description: ''
         required: true
-        example: admin
+        example: student
         type: string
         enumValues:
           - teacher
@@ -196,7 +267,7 @@ endpoints:
       name: b
       email: zbailey@example.net
       password: '-0pBNvYgxw'
-      role: admin
+      role: student
     fileParameters: []
     responses: []
     responseFields: []
@@ -228,14 +299,14 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 1
+        example: 01kcfr2vb4qb8b4kjtfxb3pv7b
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 1
+      id: 01kcfr2vb4qb8b4kjtfxb3pv7b
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -281,14 +352,14 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 1
+        example: 01kcfr2vb4qb8b4kjtfxb3pv7b
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 1
+      id: 01kcfr2vb4qb8b4kjtfxb3pv7b
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -306,7 +377,7 @@ endpoints:
       email:
         custom: []
         name: email
-        description: 'Must be a valid email address. Must not be greater than 100 characters.'
+        description: 'Must be a valid email address.'
         required: false
         example: zbailey@example.net
         type: string
@@ -319,7 +390,7 @@ endpoints:
         name: tipo
         description: ''
         required: false
-        example: Professor
+        example: Aluno
         type: string
         enumValues:
           - Professor
@@ -335,7 +406,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: Inativo
+        example: Ativo
         type: string
         enumValues:
           - Ativo
@@ -347,8 +418,8 @@ endpoints:
     cleanBodyParameters:
       nome: b
       email: zbailey@example.net
-      tipo: Professor
-      status: Inativo
+      tipo: Aluno
+      status: Ativo
     fileParameters: []
     responses: []
     responseFields: []
@@ -380,14 +451,14 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 1
+        example: 01kcfr2vb4qb8b4kjtfxb3pv7b
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 1
+      id: 01kcfr2vb4qb8b4kjtfxb3pv7b
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -423,14 +494,14 @@ endpoints:
         name: user_id
         description: 'The ID of the user.'
         required: true
-        example: 1
+        example: 01kcfr2vb4qb8b4kjtfxb3pv7b
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      user_id: 1
+      user_id: 01kcfr2vb4qb8b4kjtfxb3pv7b
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -439,7 +510,7 @@ endpoints:
         name: status
         description: ''
         required: true
-        example: active
+        example: inactive
         type: string
         enumValues:
           - active
@@ -449,7 +520,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      status: active
+      status: inactive
     fileParameters: []
     responses: []
     responseFields: []
