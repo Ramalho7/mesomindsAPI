@@ -105,14 +105,8 @@ class SystemUserController extends Controller
 
             $authenticatedUser = Auth::user();
 
-<<<<<<< HEAD
             $validated['created_by'] = $authenticatedUser->id;
             $validated['updated_by'] = $authenticatedUser->id;
-=======
-            $validated['creator'] = $user->id;
-
-            $validated['updater'] = $user->id;
->>>>>>> f4d92fb (Adicionado ULID para user (#100))
 
             if (! empty($validated['password'])) {
                 $validated['password'] = bcrypt($validated['password']);
@@ -123,11 +117,7 @@ class SystemUserController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Usuário criado com sucesso',
-<<<<<<< HEAD
                 'data' => $newUser,
-=======
-                'data' => $user->load(['creator', 'updater']),
->>>>>>> f4d92fb (Adicionado ULID para user (#100))
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
@@ -149,13 +139,8 @@ class SystemUserController extends Controller
         $this->authorize('view', $user);
 
         return response()->json([
-<<<<<<< HEAD
             'success' => true,
             'data' => $user,
-=======
-            'sucess' => true,
-            'data' => $user->load(['creator', 'updater']),
->>>>>>> f4d92fb (Adicionado ULID para user (#100))
         ]);
     }
 
@@ -177,22 +162,14 @@ class SystemUserController extends Controller
                 ], 422);
             }
 
-<<<<<<< HEAD
             $validated['updated_by'] = auth()->id();
-=======
-            $validated['updater'] = auth()->id();
->>>>>>> f4d92fb (Adicionado ULID para user (#100))
 
             $user->update($validated);
 
             return response()->json([
                 'success' => true,
                 'message' => 'Usuário atualizado com sucesso',
-<<<<<<< HEAD
                 'data' => $user,
-=======
-                'data' => $user->fresh()->load(['creator', 'updater']),
->>>>>>> f4d92fb (Adicionado ULID para user (#100))
             ]);
 
         } catch (\Exception $e) {
@@ -216,11 +193,7 @@ class SystemUserController extends Controller
         try {
             $user->update([
                 'password' => bcrypt($request->input('password')),
-<<<<<<< HEAD
                 'updated_by' => auth()->id(),
-=======
-                'updater' => auth()->id(),
->>>>>>> f4d92fb (Adicionado ULID para user (#100))
             ]);
 
             return response()->json([

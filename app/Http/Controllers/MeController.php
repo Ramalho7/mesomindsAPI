@@ -36,10 +36,19 @@ class MeController extends Controller
      *    }
      *  }
      * }
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> 02bd85e (chore: merging)
      * @response 401 {
      *  "success": false,
      *  "message": "Não autenticado. Token inválido ou ausente.."
      * }
+<<<<<<< HEAD
+=======
+     *
+     *
+>>>>>>> 02bd85e (chore: merging)
      */
     public function me(Request $request)
     {

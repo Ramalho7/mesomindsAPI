@@ -387,10 +387,14 @@ paths:
                   type: string
                   description: 'Must be a valid date.'
 <<<<<<< HEAD
+<<<<<<< HEAD
                   example: '2025-12-15T03:14:59'
 =======
                   example: '2025-12-14T21:56:08'
 >>>>>>> f4d92fb (Adicionado ULID para user (#100))
+=======
+                  example: '2025-12-15T03:14:59'
+>>>>>>> 02bd85e (chore: merging)
                   nullable: true
                 is_moderator_only:
                   type: boolean
@@ -2459,7 +2463,7 @@ paths:
                 is_moderator_only:
                   type: boolean
                   description: ''
-                  example: true
+                  example: false
                 count:
                   type: integer
                   description: ''
@@ -4487,7 +4491,7 @@ paths:
                 type:
                   type: string
                   description: ''
-                  example: Aberta
+                  example: Multipla
                   enum:
                     - Multipla
                     - VerdadeiroFalso
@@ -8289,10 +8293,14 @@ paths:
                   type: string
                   description: ''
 <<<<<<< HEAD
+<<<<<<< HEAD
                   example: Inativo
 =======
                   example: Rascunho
 >>>>>>> f4d92fb (Adicionado ULID para user (#100))
+=======
+                  example: Inativo
+>>>>>>> 02bd85e (chore: merging)
                   enum:
                     - Ativo
                     - Inativo
@@ -8368,10 +8376,14 @@ paths:
                   type: string
                   description: 'Must be a valid date.'
 <<<<<<< HEAD
+<<<<<<< HEAD
                   example: '2025-12-15T03:14:59'
 =======
                   example: '2025-12-14T21:56:08'
 >>>>>>> f4d92fb (Adicionado ULID para user (#100))
+=======
+                  example: '2025-12-15T03:14:59'
+>>>>>>> 02bd85e (chore: merging)
                   nullable: true
                 is_moderator_only:
                   type: boolean
@@ -9098,6 +9110,9 @@ paths:
         schema:
           type: integer
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 02bd85e (chore: merging)
   /api/me:
     get:
       summary: 'Retorna as informações do usuário autenticado junto com suas habilidades.'
@@ -9200,8 +9215,11 @@ paths:
       tags:
         - Usuários
       security: []
+<<<<<<< HEAD
 =======
 >>>>>>> f4d92fb (Adicionado ULID para user (#100))
+=======
+>>>>>>> 02bd85e (chore: merging)
   '/api/users/{user_id}/password':
     put:
       summary: 'updatePassword: Atualiza a senha de um usuário do sistema.'
@@ -9231,10 +9249,14 @@ paths:
         name: user_id
         description: 'The ID of the user.'
 <<<<<<< HEAD
+<<<<<<< HEAD
         example: 01kcfr2vb4qb8b4kjtfxb3pv7b
 =======
         example: 1
 >>>>>>> f4d92fb (Adicionado ULID para user (#100))
+=======
+        example: 01kcfr2vb4qb8b4kjtfxb3pv7b
+>>>>>>> 02bd85e (chore: merging)
         required: true
         schema:
           type: string
@@ -9286,10 +9308,14 @@ paths:
                 email:
                   type: string
 <<<<<<< HEAD
+<<<<<<< HEAD
                   description: 'Must be a valid email address.'
 =======
                   description: 'Must be a valid email address. Must not be greater than 100 characters.'
 >>>>>>> f4d92fb (Adicionado ULID para user (#100))
+=======
+                  description: 'Must be a valid email address.'
+>>>>>>> 02bd85e (chore: merging)
                   example: zbailey@example.net
                 password:
                   type: string
@@ -9299,10 +9325,14 @@ paths:
                   type: string
                   description: ''
 <<<<<<< HEAD
+<<<<<<< HEAD
                   example: student
 =======
                   example: admin
 >>>>>>> f4d92fb (Adicionado ULID para user (#100))
+=======
+                  example: student
+>>>>>>> 02bd85e (chore: merging)
                   enum:
                     - teacher
                     - student
@@ -9363,19 +9393,27 @@ paths:
                 email:
                   type: string
 <<<<<<< HEAD
+<<<<<<< HEAD
                   description: 'Must be a valid email address.'
 =======
                   description: 'Must be a valid email address. Must not be greater than 100 characters.'
 >>>>>>> f4d92fb (Adicionado ULID para user (#100))
+=======
+                  description: 'Must be a valid email address.'
+>>>>>>> 02bd85e (chore: merging)
                   example: zbailey@example.net
                 tipo:
                   type: string
                   description: ''
 <<<<<<< HEAD
+<<<<<<< HEAD
                   example: Aluno
 =======
                   example: Professor
 >>>>>>> f4d92fb (Adicionado ULID para user (#100))
+=======
+                  example: Aluno
+>>>>>>> 02bd85e (chore: merging)
                   enum:
                     - Professor
                     - Aluno
@@ -9386,10 +9424,14 @@ paths:
                   type: string
                   description: ''
 <<<<<<< HEAD
+<<<<<<< HEAD
                   example: Ativo
 =======
                   example: Inativo
 >>>>>>> f4d92fb (Adicionado ULID para user (#100))
+=======
+                  example: Ativo
+>>>>>>> 02bd85e (chore: merging)
                   enum:
                     - Ativo
                     - Inativo
@@ -9410,10 +9452,14 @@ paths:
         name: id
         description: 'The ID of the user.'
 <<<<<<< HEAD
+<<<<<<< HEAD
         example: 01kcfr2vb4qb8b4kjtfxb3pv7b
 =======
         example: 1
 >>>>>>> f4d92fb (Adicionado ULID para user (#100))
+=======
+        example: 01kcfr2vb4qb8b4kjtfxb3pv7b
+>>>>>>> 02bd85e (chore: merging)
         required: true
         schema:
           type: string
@@ -9437,10 +9483,14 @@ paths:
                   type: string
                   description: ''
 <<<<<<< HEAD
+<<<<<<< HEAD
                   example: inactive
 =======
                   example: active
 >>>>>>> f4d92fb (Adicionado ULID para user (#100))
+=======
+                  example: inactive
+>>>>>>> 02bd85e (chore: merging)
                   enum:
                     - active
                     - inactive
@@ -9454,10 +9504,14 @@ paths:
         name: user_id
         description: 'The ID of the user.'
 <<<<<<< HEAD
+<<<<<<< HEAD
         example: 01kcfr2vb4qb8b4kjtfxb3pv7b
 =======
         example: 1
 >>>>>>> f4d92fb (Adicionado ULID para user (#100))
+=======
+        example: 01kcfr2vb4qb8b4kjtfxb3pv7b
+>>>>>>> 02bd85e (chore: merging)
         required: true
         schema:
           type: string
