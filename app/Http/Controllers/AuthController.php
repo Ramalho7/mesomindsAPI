@@ -54,11 +54,11 @@ class AuthController extends Controller
             $validated = $request->validated();
 
             $user = SystemUser::create([
-                'nome' => $validated['nome'],
+                'name' => $validated['name'],
                 'email' => $validated['email'],
                 'password' => bcrypt($validated['password']),
-                'tipo' => $validated['tipo'],
-                'status' => 'Ativo',
+                'role' => $validated['role'],
+                'status' => 'active',
                 'criador' => null,
             ]);
 
