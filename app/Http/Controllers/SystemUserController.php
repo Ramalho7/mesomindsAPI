@@ -92,7 +92,7 @@ class SystemUserController extends Controller
 
     /**
      * Store: Cria um novo usuário do sistema, criador por: ADMIN, moderador ou operador.
-     * OBS.: Não é self-registration.
+     * OBS.: Não é self-registration
      *
      * @group Usuários
      */
