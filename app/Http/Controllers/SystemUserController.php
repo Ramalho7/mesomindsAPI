@@ -6,6 +6,7 @@ use App\Http\Requests\StoreSystemUserRequest;
 use App\Http\Requests\UpdateSystemUserPassword;
 use App\Http\Requests\UpdateSystemUserRequest;
 use App\Models\SystemUser;
+use App\Services\SystemUserService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,6 +15,11 @@ use Illuminate\Support\Facades\Auth;
 class SystemUserController extends Controller
 {
     use AuthorizesRequests;
+
+    public function __construct(protected SystemUserService $systemUserService)
+    {
+
+    }
 
     /**
      * Index: Retorna uma lista paginada de usuários do sistema com filtros opcionais.

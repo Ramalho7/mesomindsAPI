@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\SystemUserDTOs\SystemUserCreateDTO;
+use App\Enums\SystemUserEnums\SystemUserRoleEnum;
+use App\Enums\SystemUserEnums\SystemUserStatusEnum;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Models\SystemUser;
+use App\Services\SystemUserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function __construct(protected SystemUserService $systemUserService) {}
+
     /**
      * Self-register de usuários na plataforma.
      *
@@ -53,14 +59,16 @@ class AuthController extends Controller
 
             $validated = $request->validated();
 
-            $user = SystemUser::create([
-                'name' => $validated['name'],
-                'email' => $validated['email'],
-                'password' => bcrypt($validated['password']),
-                'role' => $validated['role'],
-                'status' => 'active',
-                'criador' => null,
-            ]);
+            $dto = new SystemUserCreateDTO(
+                name: $validated['name'],
+                email: $validated['email'],
+                role: SystemUserRoleEnum::from($validated['role'] ?? 'student' || 'teacher'),
+                status: SystemUserStatusEnum::ACTIVE,
+            );
+
+            $dto->password = $validated['password'];
+
+            $user = $this->systemUserService->create($dto);
 
             $token = $user->generateToken();
 
