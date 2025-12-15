@@ -15,9 +15,9 @@ class Materias extends Model
     protected $fillable = [
         'nome',
         'descricao',
-        'criador',
+        'created_by',
         'status',
-        'ultimo_editor',
+        'updated_by',
     ];
 
     protected $casts = [
@@ -27,11 +27,11 @@ class Materias extends Model
 
     public function creator()
     {
-        return $this->belongsTo(SystemUser::class, 'criador');
+        return $this->belongsTo(SystemUser::class, 'created_by');
     }
 
     public function lastEditor()
     {
-        return $this->belongsTo(SystemUser::class, 'ultimo_editor');
+        return $this->belongsTo(SystemUser::class, 'updated_by');
     }
 }

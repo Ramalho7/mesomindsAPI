@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('subject_id');
             $table->enum('type', ['Exam', 'Simulation', 'Activity', 'Exercise'])->default('Activity');
             $table->dateTime('due_date')->nullable();
-            $table->unsignedBigInteger('created_by');
-            $table->unsignedBigInteger('updated_by');
+            $table->ulid('created_by');
+            $table->ulid('updated_by')->nullable();
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
 

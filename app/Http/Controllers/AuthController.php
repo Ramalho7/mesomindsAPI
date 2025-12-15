@@ -131,17 +131,17 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            if ($user->status !== 'Ativo') {
+            if ($user->status !== 'active') {
                 return response()->json([
                     'success' => false,
                     'message' => 'Usuário inativo',
                 ], 403);
             }
 
-            if ($user->status === 'Bloqueado') {
+            if ($user->status === 'banned') {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Usuário bloqueado',
+                    'message' => 'Usuário Banido',
                 ], 403);
             }
 

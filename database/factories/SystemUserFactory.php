@@ -16,14 +16,14 @@ class SystemUserFactory extends Factory
      */
     public function definition(): array
     {
-        $types = ['Professor', 'Aluno', 'ADM', 'Moderador', 'Operador'];
-        $statuses = ['Ativo', 'Inativo', 'Bloqueado'];
+        $types = ['teacher', 'student', 'admin', 'moderator', 'operator'];
+        $statuses = ['active', 'inactive', 'banned'];
 
         return [
-            'nome' => $this->faker->name(),
+            'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt('password'),
-            'tipo' => $this->faker->randomElement($types),
+            'role' => $this->faker->randomElement($types),
             'status' => $this->faker->randomElement($statuses),
         ];
     }

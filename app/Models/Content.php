@@ -14,21 +14,26 @@ class Content extends Model
 
     protected $fillable = [
         'title',
-        'content',
-        'criador',
+        'body',
+        'created_by',
+        'updated_by',
         'image_id',
         'content_types_id',
         'content_tags_id',
         'status',
         'id_materia',
-        'ultimo_editor',
         'content_tags_id',
         'content_types_id',
+        'published_at',
+        'duration_minutes',
+        'deleted_at',
     ];
 
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'published_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     public function contentType()
@@ -50,12 +55,12 @@ class Content extends Model
 
     public function creator()
     {
-        return $this->belongsTo(SystemUser::class, 'criador');
+        return $this->belongsTo(SystemUser::class, 'created_by');
     }
 
-    public function lastEditor()
+    public function updater()
     {
-        return $this->belongsTo(SystemUser::class, 'ultimo_editor');
+        return $this->belongsTo(SystemUser::class, 'updated_by');
     }
 
     public function scopeStatus($query, string $status)

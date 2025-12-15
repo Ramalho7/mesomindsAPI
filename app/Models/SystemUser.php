@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -9,18 +10,19 @@ use Laravel\Passport\HasApiTokens;
 
 class SystemUser extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasUlids;
 
     protected $table = 'system_users';
 
     protected $fillable = [
-        'nome',
+        'name',
         'email',
         'password',
-        'tipo',
-        'criador',
-        'ultimo_editor',
+        'role',
+        'created_by',
+        'updated_by',
         'status',
+        'deleted_at',
     ];
 
     protected $hidden = [
@@ -30,8 +32,55 @@ class SystemUser extends Authenticatable
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
+    public function scopeName($query, $name)
+    {
+        return $query->whereFullText('name', $name);
+    }
+
+    public function scopeEmail($query, $email)
+    {
+        return $query->whereFullText('email', $email);
+    }
+
+    public function scopeRole($query, $role)
+    {
+        return $query->where('role', $role);
+    }
+
+    public function scopeStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
+
+    public function scopeCreatedAt($query, $date)
+    {
+        return $query->whereDate('created_at', $date);
+    }
+
+    public function scopeUpdatedAt($query, $date)
+    {
+        return $query->whereDate('updated_at', $date);
+    }
+
+    public function scopeDeletedAt($query, $date)
+    {
+        return $query->whereDate('deleted_at', $date);
+    }
+
+    public function scopeCreatedBy($query, $userId)
+    {
+        return $query->where('created_by', $userId);
+    }
+
+    public function scopeUpdatedBy($query, $userId)
+    {
+        return $query->where('updated_by', $userId);
+    }
+
+    // Existing methods
     public function findForPassport($username)
     {
         return $this->where('email', $username)->first();
@@ -39,12 +88,12 @@ class SystemUser extends Authenticatable
 
     public function creator()
     {
-        return $this->belongsTo(self::class, 'criador');
+        return $this->belongsTo(SystemUser::class, 'created_by')->withTrashed();
     }
 
-    public function lastEditor()
+    public function updater()
     {
-        return $this->belongsTo(self::class, 'ultimo_editor');
+        return $this->belongsTo(SystemUser::class, 'updated_by')->withTrashed();
     }
 
     public function generateToken()

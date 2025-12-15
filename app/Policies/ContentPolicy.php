@@ -28,7 +28,7 @@ class ContentPolicy
      */
     public function create(SystemUser $systemUser): bool
     {
-        return in_array($systemUser->tipo, ['ADM', 'Moderador', 'Operador']);
+        return in_array($systemUser->tipo, ['admin', 'moderator', 'operator']);
     }
 
     /**
@@ -36,7 +36,7 @@ class ContentPolicy
      */
     public function update(SystemUser $systemUser, Content $content): bool
     {
-        return in_array($systemUser->tipo, ['ADM', 'Moderador', 'Operador']);
+        return in_array($systemUser->tipo, ['admin', 'moderator', 'operator']);
     }
 
     /**
@@ -44,7 +44,7 @@ class ContentPolicy
      */
     public function delete(SystemUser $systemUser, Content $content): bool
     {
-        return $systemUser->tipo === 'ADM';
+        return $systemUser->tipo === 'admin';
     }
 
     /**
@@ -60,11 +60,11 @@ class ContentPolicy
      */
     public function forceDelete(SystemUser $systemUser, Content $content): bool
     {
-        return $systemUser->tipo === 'ADM';
+        return $systemUser->tipo === 'admin';
     }
 
     public function changeStatus(SystemUser $systemUser, Content $content): bool
     {
-        return in_array($systemUser->tipo, ['ADM', 'Moderador']);
+        return in_array($systemUser->tipo, ['admin', 'moderator']);
     }
 }

@@ -12,30 +12,30 @@ class SystemUserSeeder extends Seeder
     {
 
         SystemUser::create([
-            'nome' => 'Administrador',
+            'name' => 'Administrador',
             'email' => 'admin@mesominds.com',
             'password' => bcrypt('admin123'),
-            'tipo' => 'ADM',
-            'status' => 'Ativo',
-            'criador' => null,
+            'role' => 'admin',
+            'status' => 'active',
+            'created_by' => null,
         ]);
 
         SystemUser::create([
-            'nome' => 'Moderador',
+            'name' => 'Moderador',
             'email' => 'moderador@mesominds.com',
             'password' => bcrypt('mod123'),
-            'tipo' => 'Moderador',
-            'status' => 'Ativo',
-            'criador' => null,
+            'role' => 'moderator',
+            'status' => 'active',
+            'created_by' => null,
         ]);
 
         SystemUser::create([
-            'nome' => 'Operador',
+            'name' => 'Operador',
             'email' => 'operador@mesominds.com',
             'password' => bcrypt('op123'),
-            'tipo' => 'Operador',
-            'status' => 'Ativo',
-            'criador' => null,
+            'role' => 'operator',
+            'status' => 'active',
+            'created_by' => null,
         ]);
 
         SystemUser::factory()->count(5)->create();

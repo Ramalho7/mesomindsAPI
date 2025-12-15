@@ -375,453 +375,6 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - PUT
-    uri: 'api/users/{user_id}/password'
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      user_id:
-        custom: []
-        name: user_id
-        description: 'The ID of the user.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      user_id: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      password:
-        custom: []
-        name: password
-        description: 'Must be at least 8 characters.'
-        required: true
-        example: '|]|{+-'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      password: '|]|{+-'
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/users
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 401
-        content: '{"success":false,"message":"N\u00e3o autenticado. Token inv\u00e1lido ou ausente."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: api/users
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Store a newly created resource in storage.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      nome:
-        custom: []
-        name: nome
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: b
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      email:
-        custom: []
-        name: email
-        description: 'Must be a valid email address. Must not be greater than 100 characters.'
-        required: true
-        example: zbailey@example.net
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      password:
-        custom: []
-        name: password
-        description: 'Must be at least 8 characters.'
-        required: true
-        example: '-0pBNvYgxw'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      tipo:
-        custom: []
-        name: tipo
-        description: ''
-        required: true
-        example: Operador
-        type: string
-        enumValues:
-          - Professor
-          - Aluno
-          - ADM
-          - Moderador
-          - Operador
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      status:
-        custom: []
-        name: status
-        description: ''
-        required: false
-        example: Ativo
-        type: string
-        enumValues:
-          - Ativo
-          - Inativo
-          - Bloqueado
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      nome: b
-      email: zbailey@example.net
-      password: '-0pBNvYgxw'
-      tipo: Operador
-      status: Ativo
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/users/{id}'
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Display the specified resource.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'The ID of the user.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 401
-        content: '{"success":false,"message":"N\u00e3o autenticado. Token inv\u00e1lido ou ausente."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - PUT
-      - PATCH
-    uri: 'api/users/{id}'
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Update the specified resource in storage.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'The ID of the user.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      nome:
-        custom: []
-        name: nome
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: b
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      email:
-        custom: []
-        name: email
-        description: 'Must be a valid email address. Must not be greater than 100 characters.'
-        required: false
-        example: zbailey@example.net
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      tipo:
-        custom: []
-        name: tipo
-        description: ''
-        required: false
-        example: Moderador
-        type: string
-        enumValues:
-          - Professor
-          - Aluno
-          - ADM
-          - Moderador
-          - Operador
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      status:
-        custom: []
-        name: status
-        description: ''
-        required: false
-        example: Ativo
-        type: string
-        enumValues:
-          - Ativo
-          - Inativo
-          - Bloqueado
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      nome: b
-      email: zbailey@example.net
-      tipo: Moderador
-      status: Ativo
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - DELETE
-    uri: 'api/users/{id}'
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Remove the specified resource from storage.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'The ID of the user.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - PATCH
-    uri: 'api/users/{user_id}/status'
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      user_id:
-        custom: []
-        name: user_id
-        description: 'The ID of the user.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      user_id: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      status:
-        custom: []
-        name: status
-        description: ''
-        required: true
-        example: Bloqueado
-        type: string
-        enumValues:
-          - Ativo
-          - Inativo
-          - Bloqueado
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      status: Bloqueado
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
       - GET
     uri: api/materias/filter
     metadata:
@@ -1214,7 +767,7 @@ endpoints:
         name: status
         description: ''
         required: true
-        example: Ativo
+        example: Rascunho
         type: string
         enumValues:
           - Ativo
@@ -1224,7 +777,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      status: Ativo
+      status: Rascunho
     fileParameters: []
     responses: []
     responseFields: []
@@ -1330,7 +883,7 @@ endpoints:
         name: published_at
         description: 'Must be a valid date.'
         required: false
-        example: '2025-11-28T03:44:56'
+        example: '2025-12-14T21:56:08'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1341,7 +894,7 @@ endpoints:
         name: is_moderator_only
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -1403,8 +956,8 @@ endpoints:
           tag_name: g
           description: 'Quos velit et fugiat sunt nihil accusantium harum.'
       status: Rascunho
-      published_at: '2025-11-28T03:44:56'
-      is_moderator_only: false
+      published_at: '2025-12-14T21:56:08'
+      is_moderator_only: true
       images:
         - architecto
       image_alt_text:
@@ -1523,7 +1076,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: Ativo
+        example: Rascunho
         type: string
         enumValues:
           - Ativo
@@ -1537,7 +1090,7 @@ endpoints:
         name: published_at
         description: 'Must be a valid date.'
         required: false
-        example: '2025-11-28T03:44:56'
+        example: '2025-12-14T21:56:08'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1585,8 +1138,8 @@ endpoints:
       content_type_description: architecto
       content_tag: 'n'
       content_tag_description: architecto
-      status: Ativo
-      published_at: '2025-11-28T03:44:56'
+      status: Rascunho
+      published_at: '2025-12-14T21:56:08'
       is_moderator_only: false
       images:
         - architecto
@@ -1957,7 +1510,7 @@ endpoints:
         name: status
         description: ''
         required: true
-        example: Inativo
+        example: Ativo
         type: string
         enumValues:
           - Ativo
@@ -1966,7 +1519,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      status: Inativo
+      status: Ativo
     fileParameters: []
     responses: []
     responseFields: []
@@ -2024,7 +1577,7 @@ endpoints:
         name: is_moderator_only
         description: ''
         required: true
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -2044,7 +1597,7 @@ endpoints:
     cleanBodyParameters:
       tag_name: b
       description: 'Et animi quos velit et fugiat.'
-      is_moderator_only: false
+      is_moderator_only: true
       count: 16
     fileParameters: []
     responses: []
@@ -2256,7 +1809,7 @@ endpoints:
         name: status
         description: ''
         required: true
-        example: Active
+        example: Inactive
         type: string
         enumValues:
           - Inactive
@@ -2265,7 +1818,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      status: Active
+      status: Inactive
     fileParameters: []
     responses: []
     responseFields: []
@@ -2345,7 +1898,7 @@ endpoints:
         name: type
         description: ''
         required: true
-        example: Multipla
+        example: Aberta
         type: string
         enumValues:
           - Multipla
@@ -2382,7 +1935,7 @@ endpoints:
         name: 'alternatives[].correct'
         description: ''
         required: true
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -2393,11 +1946,11 @@ endpoints:
       content: architecto
       correction: architecto
       materia: 16
-      type: Multipla
+      type: Aberta
       alternatives:
         -
           content: b
-          correct: true
+          correct: false
     fileParameters: []
     responses: []
     responseFields: []
@@ -2589,7 +2142,7 @@ endpoints:
         name: 'alternatives[].correct'
         description: ''
         required: false
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -2604,7 +2157,7 @@ endpoints:
       alternatives:
         -
           content: 'n'
-          correct: true
+          correct: false
     fileParameters: []
     responses: []
     responseFields: []
@@ -2695,7 +2248,7 @@ endpoints:
         name: status
         description: ''
         required: true
-        example: Active
+        example: Inactive
         type: string
         enumValues:
           - Active
@@ -2704,7 +2257,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      status: Active
+      status: Inactive
     fileParameters: []
     responses: []
     responseFields: []
@@ -2788,7 +2341,7 @@ endpoints:
         name: due_date
         description: 'Must be a valid date. Must be a date after <code>now</code>.'
         required: false
-        example: '2051-12-22'
+        example: '2052-01-08'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -2918,7 +2471,7 @@ endpoints:
         name: 'questions[].alternatives[].correct'
         description: ''
         required: true
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -2929,7 +2482,7 @@ endpoints:
       description: 'Et animi quos velit et fugiat.'
       subject_id: architecto
       type: Simulation
-      due_date: '2051-12-22'
+      due_date: '2052-01-08'
       status: Active
       questions:
         -
@@ -2942,7 +2495,7 @@ endpoints:
           alternatives:
             -
               content: architecto
-              correct: true
+              correct: false
     fileParameters: []
     responses: []
     responseFields: []
@@ -3024,7 +2577,7 @@ endpoints:
         name: type
         description: ''
         required: false
-        example: Exercise
+        example: Exam
         type: string
         enumValues:
           - Exam
@@ -3039,7 +2592,7 @@ endpoints:
         name: due_date
         description: 'Must be a valid date. Must be a date after <code>now</code>.'
         required: false
-        example: '2051-12-22'
+        example: '2052-01-08'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3118,7 +2671,7 @@ endpoints:
         name: 'questions[].type'
         description: ''
         required: false
-        example: Aberta
+        example: VerdadeiroFalso
         type: string
         enumValues:
           - Multipla
@@ -3132,7 +2685,7 @@ endpoints:
         name: 'questions[].status'
         description: ''
         required: false
-        example: Active
+        example: Inactive
         type: string
         enumValues:
           - Active
@@ -3187,8 +2740,8 @@ endpoints:
     cleanBodyParameters:
       title: b
       description: 'Et animi quos velit et fugiat.'
-      type: Exercise
-      due_date: '2051-12-22'
+      type: Exam
+      due_date: '2052-01-08'
       status: Inactive
       questions:
         -
@@ -3196,8 +2749,8 @@ endpoints:
           title: 'n'
           content: architecto
           correction: architecto
-          type: Aberta
-          status: Active
+          type: VerdadeiroFalso
+          status: Inactive
           alternatives:
             -
               content: 'n'

@@ -13,6 +13,9 @@ tags:
   -
     name: Endpoints
     description: ''
+  -
+    name: Usuários
+    description: "Filtros disponíveis:\n- name: Filtra por nome (fullText)\n- email: Filtra por email (fullText)\n- role: Filtra por tipo de usuário\n- status: Filtra por status do usuário\n- created_at: Filtra por data de criação\n- updated_at: Filtra por data de atualização\n- deleted_at: Filtra por data de exclusão\n- created_by: Filtra por ID do criador\n- updated_by: Filtra por ID do último editor\n- search: Busca geral em nome e email"
 paths:
   /api/register:
     post:
@@ -1493,12 +1496,12 @@ paths:
                 published_at:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2025-11-28T03:44:56'
+                  example: '2025-12-14T21:56:08'
                   nullable: true
                 is_moderator_only:
                   type: boolean
                   description: ''
-                  example: false
+                  example: true
                   nullable: true
                 images:
                   type: array
@@ -3424,7 +3427,7 @@ paths:
                 is_moderator_only:
                   type: boolean
                   description: ''
-                  example: false
+                  example: true
                 count:
                   type: integer
                   description: ''
@@ -5253,7 +5256,7 @@ paths:
                 type:
                   type: string
                   description: ''
-                  example: Multipla
+                  example: Aberta
                   enum:
                     - Multipla
                     - VerdadeiroFalso
@@ -5273,7 +5276,7 @@ paths:
                       correct:
                         type: boolean
                         description: ''
-                        example: true
+                        example: false
                     required:
                       - content
                       - correct
@@ -8111,7 +8114,7 @@ paths:
                 due_date:
                   type: string
                   description: 'Must be a valid date. Must be a date after <code>now</code>.'
-                  example: '2051-12-22'
+                  example: '2052-01-08'
                   nullable: true
                 status:
                   type: string
@@ -8175,7 +8178,7 @@ paths:
                             correct:
                               type: boolean
                               description: ''
-                              example: true
+                              example: false
                           required:
                             - content
                             - correct
@@ -8244,237 +8247,6 @@ paths:
       tags:
         - Endpoints
       security: []
-  '/api/users/{user_id}/password':
-    put:
-      summary: ''
-      operationId: putApiUsersUser_idPassword
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                password:
-                  type: string
-                  description: 'Must be at least 8 characters.'
-                  example: '|]|{+-'
-              required:
-                - password
-      security: []
-    parameters:
-      -
-        in: path
-        name: user_id
-        description: 'The ID of the user.'
-        example: 1
-        required: true
-        schema:
-          type: integer
-  /api/users:
-    get:
-      summary: ''
-      operationId: getApiUsers
-      description: ''
-      parameters: []
-      responses:
-        401:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  success: false
-                  message: 'Não autenticado. Token inválido ou ausente.'
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: 'Não autenticado. Token inválido ou ausente.'
-      tags:
-        - Endpoints
-      security: []
-    post:
-      summary: 'Store a newly created resource in storage.'
-      operationId: storeANewlyCreatedResourceInStorage
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                nome:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: b
-                email:
-                  type: string
-                  description: 'Must be a valid email address. Must not be greater than 100 characters.'
-                  example: zbailey@example.net
-                password:
-                  type: string
-                  description: 'Must be at least 8 characters.'
-                  example: '-0pBNvYgxw'
-                tipo:
-                  type: string
-                  description: ''
-                  example: Operador
-                  enum:
-                    - Professor
-                    - Aluno
-                    - ADM
-                    - Moderador
-                    - Operador
-                status:
-                  type: string
-                  description: ''
-                  example: Ativo
-                  enum:
-                    - Ativo
-                    - Inativo
-                    - Bloqueado
-              required:
-                - nome
-                - email
-                - password
-                - tipo
-      security: []
-  '/api/users/{id}':
-    get:
-      summary: 'Display the specified resource.'
-      operationId: displayTheSpecifiedResource
-      description: ''
-      parameters: []
-      responses:
-        401:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  success: false
-                  message: 'Não autenticado. Token inválido ou ausente.'
-                properties:
-                  success:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: 'Não autenticado. Token inválido ou ausente.'
-      tags:
-        - Endpoints
-      security: []
-    put:
-      summary: 'Update the specified resource in storage.'
-      operationId: updateTheSpecifiedResourceInStorage
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                nome:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: b
-                email:
-                  type: string
-                  description: 'Must be a valid email address. Must not be greater than 100 characters.'
-                  example: zbailey@example.net
-                tipo:
-                  type: string
-                  description: ''
-                  example: Moderador
-                  enum:
-                    - Professor
-                    - Aluno
-                    - ADM
-                    - Moderador
-                    - Operador
-                status:
-                  type: string
-                  description: ''
-                  example: Ativo
-                  enum:
-                    - Ativo
-                    - Inativo
-                    - Bloqueado
-      security: []
-    delete:
-      summary: 'Remove the specified resource from storage.'
-      operationId: removeTheSpecifiedResourceFromStorage
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      security: []
-    parameters:
-      -
-        in: path
-        name: id
-        description: 'The ID of the user.'
-        example: 1
-        required: true
-        schema:
-          type: integer
-  '/api/users/{user_id}/status':
-    patch:
-      summary: ''
-      operationId: patchApiUsersUser_idStatus
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                status:
-                  type: string
-                  description: ''
-                  example: Bloqueado
-                  enum:
-                    - Ativo
-                    - Inativo
-                    - Bloqueado
-              required:
-                - status
-      security: []
-    parameters:
-      -
-        in: path
-        name: user_id
-        description: 'The ID of the user.'
-        example: 1
-        required: true
-        schema:
-          type: integer
   /api/materias/filter:
     get:
       summary: ''
@@ -8676,7 +8448,7 @@ paths:
                 status:
                   type: string
                   description: ''
-                  example: Ativo
+                  example: Rascunho
                   enum:
                     - Ativo
                     - Inativo
@@ -8742,7 +8514,7 @@ paths:
                 status:
                   type: string
                   description: ''
-                  example: Ativo
+                  example: Rascunho
                   enum:
                     - Ativo
                     - Inativo
@@ -8751,7 +8523,7 @@ paths:
                 published_at:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2025-11-28T03:44:56'
+                  example: '2025-12-14T21:56:08'
                   nullable: true
                 is_moderator_only:
                   type: boolean
@@ -8917,7 +8689,7 @@ paths:
                 status:
                   type: string
                   description: ''
-                  example: Inativo
+                  example: Ativo
                   enum:
                     - Ativo
                     - Inativo
@@ -9022,7 +8794,7 @@ paths:
                 status:
                   type: string
                   description: ''
-                  example: Active
+                  example: Inactive
                   enum:
                     - Inactive
                     - Active
@@ -9123,7 +8895,7 @@ paths:
                       correct:
                         type: boolean
                         description: ''
-                        example: true
+                        example: false
                         nullable: true
       security: []
     delete:
@@ -9163,7 +8935,7 @@ paths:
                 status:
                   type: string
                   description: ''
-                  example: Active
+                  example: Inactive
                   enum:
                     - Active
                     - Inactive
@@ -9211,7 +8983,7 @@ paths:
                 type:
                   type: string
                   description: ''
-                  example: Exercise
+                  example: Exam
                   enum:
                     - Exam
                     - Simulation
@@ -9220,7 +8992,7 @@ paths:
                 due_date:
                   type: string
                   description: 'Must be a valid date. Must be a date after <code>now</code>.'
-                  example: '2051-12-22'
+                  example: '2052-01-08'
                   nullable: true
                 status:
                   type: string
@@ -9258,7 +9030,7 @@ paths:
                       type:
                         type: string
                         description: ''
-                        example: Aberta
+                        example: VerdadeiroFalso
                         enum:
                           - Multipla
                           - VerdadeiroFalso
@@ -9266,7 +9038,7 @@ paths:
                       status:
                         type: string
                         description: ''
-                        example: Active
+                        example: Inactive
                         enum:
                           - Active
                           - Inactive
@@ -9477,3 +9249,226 @@ paths:
         required: true
         schema:
           type: integer
+  '/api/users/{user_id}/password':
+    put:
+      summary: 'updatePassword: Atualiza a senha de um usuário do sistema.'
+      operationId: updatePasswordAtualizaASenhaDeUmUsurioDoSistema
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Usuários
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  description: 'Must be at least 8 characters.'
+                  example: '|]|{+-'
+              required:
+                - password
+      security: []
+    parameters:
+      -
+        in: path
+        name: user_id
+        description: 'The ID of the user.'
+        example: 1
+        required: true
+        schema:
+          type: string
+  /api/users:
+    get:
+      summary: 'Index: Retorna uma lista paginada de usuários do sistema com filtros opcionais.'
+      operationId: indexRetornaUmaListaPaginadaDeUsuriosDoSistemaComFiltrosOpcionais
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Não autenticado. Token inválido ou ausente.'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Não autenticado. Token inválido ou ausente.'
+      tags:
+        - Usuários
+      security: []
+    post:
+      summary: 'Store: Cria um novo usuário do sistema, criador por: ADMIN, moderador ou operador.'
+      operationId: storeCriaUmNovoUsurioDoSistemaCriadorPorADMINModeradorOuOperador
+      description: 'OBS.: Não é self-registration.'
+      parameters: []
+      responses: {  }
+      tags:
+        - Usuários
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: b
+                email:
+                  type: string
+                  description: 'Must be a valid email address. Must not be greater than 100 characters.'
+                  example: zbailey@example.net
+                password:
+                  type: string
+                  description: 'Must be at least 8 characters.'
+                  example: '-0pBNvYgxw'
+                role:
+                  type: string
+                  description: ''
+                  example: admin
+                  enum:
+                    - teacher
+                    - student
+                    - admin
+                    - moderator
+                    - operator
+              required:
+                - name
+                - email
+                - password
+                - role
+      security: []
+  '/api/users/{id}':
+    get:
+      summary: 'Show: Retorna os detalhes de um usuário do sistema.'
+      operationId: showRetornaOsDetalhesDeUmUsurioDoSistema
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Não autenticado. Token inválido ou ausente.'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Não autenticado. Token inválido ou ausente.'
+      tags:
+        - Usuários
+      security: []
+    put:
+      summary: 'update: Atualiza os dados de um usuário do sistema.'
+      operationId: updateAtualizaOsDadosDeUmUsurioDoSistema
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Usuários
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: b
+                email:
+                  type: string
+                  description: 'Must be a valid email address. Must not be greater than 100 characters.'
+                  example: zbailey@example.net
+                tipo:
+                  type: string
+                  description: ''
+                  example: Professor
+                  enum:
+                    - Professor
+                    - Aluno
+                    - ADM
+                    - Moderador
+                    - Operador
+                status:
+                  type: string
+                  description: ''
+                  example: Inativo
+                  enum:
+                    - Ativo
+                    - Inativo
+                    - Bloqueado
+      security: []
+    delete:
+      summary: 'Destroy: Remove um usuário do sistema.'
+      operationId: destroyRemoveUmUsurioDoSistema
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Usuários
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the user.'
+        example: 1
+        required: true
+        schema:
+          type: string
+  '/api/users/{user_id}/status':
+    patch:
+      summary: 'changeStatus: Altera o status de um usuário do sistema.'
+      operationId: changeStatusAlteraOStatusDeUmUsurioDoSistema
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Usuários
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: ''
+                  example: active
+                  enum:
+                    - active
+                    - inactive
+                    - blocked
+              required:
+                - status
+      security: []
+    parameters:
+      -
+        in: path
+        name: user_id
+        description: 'The ID of the user.'
+        example: 1
+        required: true
+        schema:
+          type: string

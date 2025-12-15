@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('class_id');
             $table->unsignedBigInteger('collection_id');
-            $table->unsignedBigInteger('created_by');
-            $table->unsignedBigInteger('updated_by');
+            $table->ulid('created_by');
+            $table->ulid('updated_by');
             $table->dateTime('assigned_at')->nullable();
             $table->dateTime('deadline')->nullable();
             $table->enum('status', ['Active', 'Inactive'])->default('Active');

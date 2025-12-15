@@ -15,25 +15,70 @@ class SystemUserController extends Controller
 {
     use AuthorizesRequests;
 
+    /**
+     * Index: Retorna uma lista paginada de usuários do sistema com filtros opcionais.
+     *
+     * @group Usuários
+     *
+     * Filtros disponíveis:
+     * - name: Filtra por nome (fullText)
+     * - email: Filtra por email (fullText)
+     * - role: Filtra por tipo de usuário
+     * - status: Filtra por status do usuário
+     * - created_at: Filtra por data de criação
+     * - updated_at: Filtra por data de atualização
+     * - deleted_at: Filtra por data de exclusão
+     * - created_by: Filtra por ID do criador
+     * - updated_by: Filtra por ID do último editor
+     * - search: Busca geral em nome e email
+     */
     public function index(Request $request): JsonResponse
     {
         $this->authorize('viewAny', SystemUser::class);
 
-        $query = SystemUser::with(['creator', 'lastEditor']);
+        $query = SystemUser::with(['creator', 'updater']);
 
-        if ($request->has('tipo')) {
-            $query->where('tipo', $request->input('tipo'));
+        if ($request->has('name')) {
+            $query->name($request->input('name'));
+        }
+
+        if ($request->has('email')) {
+            $query->email($request->input('email'));
+        }
+
+        if ($request->has('role')) {
+            $query->role($request->input('role'));
         }
 
         if ($request->has('status')) {
-            $query->where('status', $request->input('status'));
-        } // usar input como padrõa para coleta de dados dos requests
+            $query->status($request->input('status'));
+        }
+
+        if ($request->has('created_at')) {
+            $query->createdAt($request->input('created_at'));
+        }
+
+        if ($request->has('updated_at')) {
+            $query->updatedAt($request->input('updated_at'));
+        }
+
+        if ($request->has('deleted_at')) {
+            $query->deletedAt($request->input('deleted_at'));
+        }
+
+        if ($request->has('created_by')) {
+            $query->createdBy($request->input('created_by'));
+        }
+
+        if ($request->has('updated_by')) {
+            $query->updatedBy($request->input('updated_by'));
+        }
 
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where(function ($q) use ($search) {
-                $q->where('nome', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%");
+                $q->name($search)
+                ->orWhereFullText('email', $search);
             });
         }
 
@@ -46,7 +91,10 @@ class SystemUserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store: Cria um novo usuário do sistema, criador por: ADMIN, moderador ou operador.
+     * OBS.: Não é self-registration.
+     *
+     * @group Usuários
      */
     public function store(StoreSystemUserRequest $request): JsonResponse
     {
@@ -58,9 +106,9 @@ class SystemUserController extends Controller
 
             $user = Auth::user();
 
-            $validated['criador'] = $user->id;
+            $validated['creator'] = $user->id;
 
-            $validated['ultimo_editor'] = $user->id;
+            $validated['updater'] = $user->id;
 
             if (! empty($validated['password'])) {
                 $validated['password'] = bcrypt($validated['password']);
@@ -71,7 +119,7 @@ class SystemUserController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Usuário criado com sucesso',
-                'data' => $user->load(['creator', 'lastEditor']),
+                'data' => $user->load(['creator', 'updater']),
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
@@ -83,7 +131,9 @@ class SystemUserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show: Retorna os detalhes de um usuário do sistema.
+     *
+     * @group Usuários
      */
     public function show(SystemUser $user): JsonResponse
     {
@@ -92,12 +142,14 @@ class SystemUserController extends Controller
 
         return response()->json([
             'sucess' => true,
-            'data' => $user->load(['creator', 'lastEditor']),
+            'data' => $user->load(['creator', 'updater']),
         ]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * update: Atualiza os dados de um usuário do sistema.
+     *
+     * @group Usuários
      */
     public function update(UpdateSystemUserRequest $request, SystemUser $user): JsonResponse
     {
@@ -112,14 +164,14 @@ class SystemUserController extends Controller
                 ], 422);
             }
 
-            $validated['ultimo_editor'] = auth()->id();
+            $validated['updater'] = auth()->id();
 
             $user->update($validated);
 
             return response()->json([
                 'success' => true,
                 'message' => 'Usuário atualizado com sucesso',
-                'data' => $user->fresh()->load(['creator', 'lastEditor']),
+                'data' => $user->fresh()->load(['creator', 'updater']),
             ]);
 
         } catch (\Exception $e) {
@@ -131,14 +183,19 @@ class SystemUserController extends Controller
         }
     }
 
+    /**
+     * updatePassword: Atualiza a senha de um usuário do sistema.
+     *
+     * @group Usuários
+     */
     public function updatePassword(UpdateSystemUserPassword $request, SystemUser $user): JsonResponse
     {
-        $this->authorize('update', $user);
+        $this->authorize('updatePassword', $user);
 
         try {
             $user->update([
                 'password' => bcrypt($request->input('password')),
-                'ultimo_editor' => auth()->id(),
+                'updater' => auth()->id(),
             ]);
 
             return response()->json([
@@ -156,7 +213,9 @@ class SystemUserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Destroy: Remove um usuário do sistema.
+     *
+     * @group Usuários
      */
     public function destroy(SystemUser $user)
     {
@@ -180,10 +239,16 @@ class SystemUserController extends Controller
         }
     }
 
+
+    /**
+     * changeStatus: Altera o status de um usuário do sistema.
+     *
+     * @group Usuários
+     */
     public function changeStatus(Request $request, SystemUser $user): JsonResponse
     {
         $request->validate([
-            'status' => 'required|in:Ativo,Inativo,Bloqueado',
+            'status' => 'required|in:active,inactive,blocked',
         ]);
 
         try {

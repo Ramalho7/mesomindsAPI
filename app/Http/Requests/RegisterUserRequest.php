@@ -22,10 +22,10 @@ class RegisterUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|string',
+            'name' => 'required|string',
             'email' => 'required|email|unique:system_users,email',
             'password' => 'required|string|min:8|confirmed',
-            'tipo' => 'required|in:Aluno,Professor',
+            'role' => 'required|in:student,teacher',
         ];
     }
 
