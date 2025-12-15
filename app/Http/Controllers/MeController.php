@@ -36,13 +36,10 @@ class MeController extends Controller
      *    }
      *  }
      * }
-     *
      * @response 401 {
      *  "success": false,
      *  "message": "Não autenticado. Token inválido ou ausente.."
      * }
-     *
-     * 
      */
     public function me(Request $request)
     {
