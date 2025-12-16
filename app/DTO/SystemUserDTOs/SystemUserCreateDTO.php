@@ -27,7 +27,7 @@ class SystemUserCreateDTO
         string $email,
         SystemUserRoleEnum $role,
         SystemUserStatusEnum $status,
-        ?string $password = null,
+        ?string $password,
         string $created_by,
         string $updated_by,
     ) {
@@ -40,8 +40,12 @@ class SystemUserCreateDTO
         $this->updated_by = $updated_by;
     }
 
-    public static function makeFromRequest(FormRequest $request, string $created_by, string $updated_by): self
+    public static function makeFromRequest(FormRequest $request, ?string $created_by = null, ?string $updated_by = null): self
     {
+        if (! $created_by || ! $updated_by) {
+            throw new \InvalidArgumentException('Os campos "created_by" e "updated_by" são obrigatórios para criar usuários não self-registered.');
+        }
+
         return new self(
             $request['name'],
             $request['email'],
