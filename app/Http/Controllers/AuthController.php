@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\DTO\SystemUserDTOs\SystemUserCreateDTO;
-use App\Enums\SystemUserEnums\SystemUserRoleEnum;
-use App\Enums\SystemUserEnums\SystemUserStatusEnum;
 use App\Http\Requests\SystemUser\LoginUserRequest;
 use App\Http\Requests\SystemUser\RegisterUserRequest;
 use App\Models\SystemUser;

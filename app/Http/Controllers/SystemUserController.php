@@ -44,8 +44,6 @@ class SystemUserController extends Controller
     {
         $this->authorize('viewAny', SystemUser::class);
 
-
-
         $filters = $request->only([
             'name',
             'email',

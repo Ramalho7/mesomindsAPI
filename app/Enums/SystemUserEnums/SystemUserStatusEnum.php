@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Enums\SystemUserEnums;
 
 enum SystemUserStatusEnum: string

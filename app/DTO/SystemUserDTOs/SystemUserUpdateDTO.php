@@ -6,22 +6,23 @@ use App\Enums\SystemUserEnums\SystemUserRoleEnum;
 use App\Enums\SystemUserEnums\SystemUserStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
-
-
 class SystemUserUpdateDTO
 {
     public ?string $name;
+
     public ?string $email;
+
     public ?SystemUserRoleEnum $role;
+
     public ?SystemUserStatusEnum $status;
 
     public string $updated_by;
 
     public function __construct(
-        ?string $name = null,
-        ?string $email = null,
-        ?SystemUserRoleEnum $role = null,
-        ?SystemUserStatusEnum $status = null,
+        ?string $name,
+        ?string $email,
+        ?SystemUserRoleEnum $role,
+        ?SystemUserStatusEnum $status,
         string $updated_by,
     ) {
         $this->name = $name;
@@ -31,7 +32,7 @@ class SystemUserUpdateDTO
         $this->updated_by = $updated_by;
     }
 
-    public static function makeFromRequest(FormRequest $request, string $updated_by = null): self
+    public static function makeFromRequest(FormRequest $request, ?string $updated_by = null): self
     {
         return new self(
             $request['name'] ?? null,
