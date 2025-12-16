@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSystemUserRequest;
-use App\Http\Requests\UpdateSystemUserPassword;
-use App\Http\Requests\UpdateSystemUserRequest;
+use App\DTO\SystemUserDTOs\SystemUserChangeStatusDTO;
+use App\DTO\SystemUserDTOs\SystemUserCreateDTO;
+use App\DTO\SystemUserDTOs\SystemUserUpdateDTO;
+use App\DTO\SystemUserDTOs\SystemUserUpdatePasswordDTO;
+use App\Http\Requests\SystemUser\ChangeStatusSystemUser;
+use App\Http\Requests\SystemUser\StoreSystemUserRequest;
+use App\Http\Requests\SystemUser\UpdateSystemUserPassword;
+use App\Http\Requests\SystemUser\UpdateSystemUserRequest;
 use App\Models\SystemUser;
 use App\Services\SystemUserService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -16,10 +21,7 @@ class SystemUserController extends Controller
 {
     use AuthorizesRequests;
 
-    public function __construct(protected SystemUserService $systemUserService)
-    {
-
-    }
+    public function __construct(protected SystemUserService $systemUserService) {}
 
     /**
      * Index: Retorna uma lista paginada de usuários do sistema com filtros opcionais.
@@ -42,53 +44,22 @@ class SystemUserController extends Controller
     {
         $this->authorize('viewAny', SystemUser::class);
 
-        $query = SystemUser::with(['creator', 'updater']);
 
-        if ($request->has('name')) {
-            $query->name($request->input('name'));
-        }
 
-        if ($request->has('email')) {
-            $query->email($request->input('email'));
-        }
+        $filters = $request->only([
+            'name',
+            'email',
+            'role',
+            'status',
+            'created_at',
+            'updated_at',
+            'deleted_at',
+            'created_by',
+            'updated_by',
+            'search',
+        ]);
 
-        if ($request->has('role')) {
-            $query->role($request->input('role'));
-        }
-
-        if ($request->has('status')) {
-            $query->status($request->input('status'));
-        }
-
-        if ($request->has('created_at')) {
-            $query->createdAt($request->input('created_at'));
-        }
-
-        if ($request->has('updated_at')) {
-            $query->updatedAt($request->input('updated_at'));
-        }
-
-        if ($request->has('deleted_at')) {
-            $query->deletedAt($request->input('deleted_at'));
-        }
-
-        if ($request->has('created_by')) {
-            $query->createdBy($request->input('created_by'));
-        }
-
-        if ($request->has('updated_by')) {
-            $query->updatedBy($request->input('updated_by'));
-        }
-
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where(function ($q) use ($search) {
-                $q->name($search)
-                    ->orWhereFullText('email', $search);
-            });
-        }
-
-        $users = $query->paginate($request->get('per_page', 15));
+        $users = $this->systemUserService->getAll($filters);
 
         return response()->json([
             'success' => true,
@@ -107,18 +78,11 @@ class SystemUserController extends Controller
         $this->authorize('create', SystemUser::class);
 
         try {
-            $validated = $request->validated();
-
             $authenticatedUser = Auth::user();
 
-            $validated['created_by'] = $authenticatedUser->id;
-            $validated['updated_by'] = $authenticatedUser->id;
+            $dto = SystemUserCreateDTO::makeFromRequest($request, $authenticatedUser->id, $authenticatedUser->id);
 
-            if (! empty($validated['password'])) {
-                $validated['password'] = bcrypt($validated['password']);
-            }
-
-            $newUser = SystemUser::create($validated);
+            $newUser = $this->systemUserService->create($dto);
 
             return response()->json([
                 'success' => true,
@@ -146,7 +110,7 @@ class SystemUserController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $user,
+            'data' => $user->load(['creator', 'updater']),
         ]);
     }
 
@@ -155,12 +119,12 @@ class SystemUserController extends Controller
      *
      * @group Usuários
      */
-    public function update(UpdateSystemUserRequest $request, SystemUser $user): JsonResponse
+    public function update(UpdateSystemUserRequest $request, string $id): JsonResponse
     {
+        $user = SystemUser::findOrFail($id);
+
         $this->authorize('update', $user);
         try {
-            $validated = $request->validated();
-
             if ($request->has('password')) {
                 return response()->json([
                     'success' => false,
@@ -168,14 +132,16 @@ class SystemUserController extends Controller
                 ], 422);
             }
 
-            $validated['updated_by'] = auth()->id();
+            $authenticatedUser = Auth::user();
 
-            $user->update($validated);
+            $dto = SystemUserUpdateDTO::makeFromRequest($request, $authenticatedUser->id);
+
+            $updateUser = $this->systemUserService->update($id, $dto);
 
             return response()->json([
                 'success' => true,
                 'message' => 'Usuário atualizado com sucesso',
-                'data' => $user,
+                'data' => $updateUser->fresh()->load(['creator', 'updater']),
             ]);
 
         } catch (\Exception $e) {
@@ -197,10 +163,9 @@ class SystemUserController extends Controller
         $this->authorize('updatePassword', $user);
 
         try {
-            $user->update([
-                'password' => bcrypt($request->input('password')),
-                'updated_by' => auth()->id(),
-            ]);
+            $dto = SystemUserUpdatePasswordDTO::makeFromRequest($request, auth()->id());
+
+            $this->systemUserService->updatePassword($user->id, $dto);
 
             return response()->json([
                 'success' => true,
@@ -227,12 +192,12 @@ class SystemUserController extends Controller
         $this->authorize('delete', $user);
 
         try {
-            $user->delete();
+            $this->systemUserService->delete($user->id);
 
             return response()->json([
                 'success' => true,
                 'message' => 'Usuário excluído com sucesso',
-            ]);
+            ], 204);
 
         } catch (\Exception $e) {
             return response()->json([
@@ -248,16 +213,12 @@ class SystemUserController extends Controller
      *
      * @group Usuários
      */
-    public function changeStatus(Request $request, SystemUser $user): JsonResponse
+    public function changeStatus(ChangeStatusSystemUser $request, SystemUser $user): JsonResponse
     {
-        $request->validate([
-            'status' => 'required|in:active,inactive,blocked',
-        ]);
-
         try {
-            $user->update([
-                'status' => $request->status,
-            ]);
+            $dto = SystemUserChangeStatusDTO::makeFromRequest($request, auth()->id());
+
+            $user = $this->systemUserService->changeStatus($user->id, $dto);
 
             return response()->json([
                 'success' => true,

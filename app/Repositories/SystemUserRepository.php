@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\DTO\SystemUserDTOs\SystemUserChangeStatusDTO;
+use App\DTO\SystemUserDTOs\SystemUserUpdatePasswordDTO;
 use App\Models\SystemUser;
 
 class SystemUserRepository implements SystemUserRepositoryInterface
@@ -10,14 +12,22 @@ class SystemUserRepository implements SystemUserRepositoryInterface
         protected SystemUser $model,
     ) {}
 
-    public function getAll(): array
+    public function getAll(array $filters = []): array
     {
-        return $this->model->paginate()->toArray();
+        $query = $this->model->query();
+
+        foreach ($filters as $key => $value) {
+            if (method_exists($this->model, 'scope'.ucfirst($key)) && ! is_null($value)) {
+                $query->{$key}($value);
+            }
+        }
+
+        return $query->with(['creator', 'updater'])->paginate()->toArray();
     }
 
     public function findOne(string $id): ?SystemUser
     {
-        return $this->model->find($id);
+        return $this->model->with(['creator', 'updater'])->find($id);
     }
 
     public function create($dto): SystemUser
@@ -27,14 +37,38 @@ class SystemUserRepository implements SystemUserRepositoryInterface
 
     public function update($id, $dto): SystemUser
     {
-        $user = $this->model->findOrFail($id);
+        $user = $this->model->findOrFail((string) $id);
+
+        if (! $user) {
+            throw new \Exception('Usuário não encontrado');
+        }
+
         $user->update($dto->toArray());
-        return $user;
+
+        return $user->fresh();
     }
 
     public function delete(string $id): void
     {
         $user = $this->model->findOrFail($id);
         $user->delete();
+    }
+
+    public function updatePassword(string $id, SystemUserUpdatePasswordDTO $dto): SystemUser
+    {
+        $user = $this->model->findOrFail($id);
+
+        $user->update($dto->toArray());
+
+        return $user->fresh();
+    }
+
+    public function changeStatus(string $id, SystemUserChangeStatusDTO $dto): SystemUser
+    {
+        $user = $this->model->findOrFail($id);
+
+        $user->update($dto->toArray());
+
+        return $user->fresh();
     }
 }

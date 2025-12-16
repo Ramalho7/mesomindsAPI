@@ -2,11 +2,13 @@
 
 namespace App\Repositories;
 
+use App\DTO\SystemUserDTOs\SystemUserChangeStatusDTO;
+use App\DTO\SystemUserDTOs\SystemUserUpdatePasswordDTO;
 use App\Models\SystemUser;
 
 interface SystemUserRepositoryInterface
 {
-    public function getAll(): array;
+    public function getAll(array $filters = []): array;
 
     public function findOne(string $id): ?SystemUser;
 
@@ -15,4 +17,8 @@ interface SystemUserRepositoryInterface
     public function update($id, $dto): SystemUser;
 
     public function delete(string $id): void;
+
+    public function updatePassword(string $id, SystemUserUpdatePasswordDTO $dto): SystemUser;
+
+    public function changeStatus(string $id, SystemUserChangeStatusDTO $dto): SystemUser;
 }

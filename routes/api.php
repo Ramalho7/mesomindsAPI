@@ -18,7 +18,7 @@ use App\Models\QuestionCollection;
 use App\Models\StudentAnswer;
 use Illuminate\Support\Facades\Route;
 
-// model binds
+// Model bindings
 Route::model('tiposconteudo', ContentType::class);
 Route::model('tagsconteudo', ContentTag::class);
 Route::model('conteudo', Content::class);
@@ -26,58 +26,81 @@ Route::model('questo', Question::class);
 Route::model('questoescolecao', QuestionCollection::class);
 Route::model('respostaaluno', StudentAnswer::class);
 
-// end-points auth
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+// Public endpoints
+Route::prefix('auth')->group(function () {
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+});
 
-// end-points conteudos public
-Route::get('conteudos', [ContentController::class, 'index']);
-Route::get('conteudos/{conteudo}', [ContentController::class, 'show']);
+Route::prefix('conteudos')->group(function () {
+    Route::get('/', [ContentController::class, 'index']);
+    Route::get('/{conteudo}', [ContentController::class, 'show']);
+});
 
-Route::get('tiposconteudo', [ContentTypeController::class, 'index']);
-Route::get('tagsconteudo', [ContentTagController::class, 'index']);
+Route::prefix('tiposconteudo')->group(function () {
+    Route::get('/', [ContentTypeController::class, 'index']);
+});
 
-// end-points questao public
-Route::get('questoes', [QuestionController::class, 'index']);
+Route::prefix('tagsconteudo')->group(function () {
+    Route::get('/', [ContentTagController::class, 'index']);
+});
 
-Route::get('questoescolecao', [QuestionCollectionController::class, 'index']);
-Route::get('questoescolecao/{questoescolecao}', [QuestionCollectionController::class, 'show']);
+Route::prefix('questoes')->group(function () {
+    Route::get('/', [QuestionController::class, 'index']);
+});
 
-Route::middleware('auth:api')->get('/me', [MeController::class, 'me']);
+Route::prefix('questoescolecao')->group(function () {
+    Route::get('/', [QuestionCollectionController::class, 'index']);
+    Route::get('/{questoescolecao}', [QuestionCollectionController::class, 'show']);
+});
 
+// Authenticated endpoints
 Route::middleware('auth:api')->group(function () {
+    Route::prefix('auth')->group(function () {
+        Route::get('/me', [MeController::class, 'me']);
+        Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/validatetoken', [AuthController::class, 'validateToken']);
+    });
 
-    // end-points auth
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/validatetoken', [AuthController::class, 'validateToken']);
+    Route::prefix('users')->group(function () {
+        Route::patch('/{user}/password', [SystemUserController::class, 'updatePassword']);
+        Route::patch('/{user}/status', [SystemUserController::class, 'changeStatus']);
+        Route::apiResource('/', SystemUserController::class);
+    });
 
-    // end-points user
-    Route::put('/users/{user}/password', [SystemUserController::class, 'updatePassword']);
-    Route::apiResource('users', SystemUserController::class);
-    Route::patch('users/{user}/status', [SystemUserController::class, 'changeStatus']);
+    Route::prefix('materias')->group(function () {
+        Route::get('/filter', [MateriasController::class, 'index']);
+        Route::patch('/{materia}/status', [MateriasController::class, 'changeStatus']);
+        Route::apiResource('/', MateriasController::class);
+    });
 
-    // end-points materia
-    Route::get('materias/filter', [MateriasController::class, 'index']);
-    Route::patch('materias/{materia}/status', [MateriasController::class, 'changeStatus']);
-    Route::apiResource('materias', MateriasController::class);
+    Route::prefix('conteudos')->group(function () {
+        Route::patch('/{conteudo}/status', [ContentController::class, 'changeStatus']);
+        Route::apiResource('/', ContentController::class)->except('index', 'show');
+    });
 
-    // end-points conteudos
-    Route::patch('conteudos/{conteudo}/status', [ContentController::class, 'changeStatus']);
-    Route::apiResource('conteudos', ContentController::class)->except('index', 'show');
+    Route::prefix('tiposconteudo')->group(function () {
+        Route::patch('/{tiposconteudo}/status', [ContentTypeController::class, 'changeStatus']);
+        Route::apiResource('/', ContentTypeController::class)->except('index');
+    });
 
-    Route::patch('tiposconteudo/{tiposconteudo}/status', [ContentTypeController::class, 'changeStatus']);
-    Route::apiResource('tiposconteudo', ContentTypeController::class)->except('index');
+    Route::prefix('tagsconteudo')->group(function () {
+        Route::patch('/{tagsconteudo}/status', [ContentTagController::class, 'changeStatus']);
+        Route::apiResource('/', ContentTagController::class)->except('index');
+    });
 
-    Route::patch('tagsconteudo/{tagsconteudo}/status', [ContentTagController::class, 'changeStatus']);
-    Route::apiResource('tagsconteudo', ContentTagController::class)->except('index');
+    Route::prefix('questoes')->group(function () {
+        Route::patch('/{questo}/status', [QuestionController::class, 'changeStatus']);
+        Route::apiResource('/', QuestionController::class)->except('index');
+    });
 
-    // end-points questao
-    Route::patch('questoes/{questo}/status', [QuestionController::class, 'changeStatus']);
-    Route::apiResource('questoes', QuestionController::class)->except('index');
+    Route::prefix('questoescolecao')->group(function () {
+        Route::patch('/{questoescolecao}/status', [QuestionCollectionController::class, 'changeStatus']);
+        Route::apiResource('/', QuestionCollectionController::class)->except('index', 'show');
+    });
 
-    Route::patch('questoescolecao/{questoescolecao}/status', [QuestionCollectionController::class, 'changeStatus']);
-    Route::apiResource('questoescolecao', QuestionCollectionController::class)->except('index', 'show');
-
-    Route::post('respostasalunos/{respostaaluno}/corrigir', [StudentAnswerController::class, 'correct']);
-    Route::apiResource('respostaalunos', StudentAnswerController::class);
+    Route::prefix('respostasalunos')->group(function () {
+        Route::post('/{respostaaluno}/corrigir', [StudentAnswerController::class, 'correct']);
+        Route::apiResource('/', StudentAnswerController::class);
+    });
 });

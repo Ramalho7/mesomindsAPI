@@ -57,16 +57,7 @@ class AuthController extends Controller
                 ], 403);
             }
 
-            $validated = $request->validated();
-
-            $dto = new SystemUserCreateDTO(
-                name: $validated['name'],
-                email: $validated['email'],
-                role: SystemUserRoleEnum::from($validated['role'] ?? 'student' || 'teacher'),
-                status: SystemUserStatusEnum::ACTIVE,
-            );
-
-            $dto->password = $validated['password'];
+            $dto = SystemUserCreateDTO::makeFromRequest($request);
 
             $user = $this->systemUserService->create($dto);
 
