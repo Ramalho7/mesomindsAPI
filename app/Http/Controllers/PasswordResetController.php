@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\DTO\SystemUserDTOs\PasswordResetDTO;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\SystemUser\ForgotPasswordRequest;
 use App\Http\Requests\SystemUser\ResetPasswordRequest;
 use App\Services\PasswordResetService;

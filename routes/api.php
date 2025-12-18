@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ContentTagController;
 use App\Http\Controllers\ContentTypeController;
 use App\Http\Controllers\MateriasController;
 use App\Http\Controllers\MeController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\QuestionCollectionController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\StudentAnswerController;
@@ -18,8 +18,6 @@ use App\Models\ContentType;
 use App\Models\Question;
 use App\Models\QuestionCollection;
 use App\Models\StudentAnswer;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/test-email', function () {
