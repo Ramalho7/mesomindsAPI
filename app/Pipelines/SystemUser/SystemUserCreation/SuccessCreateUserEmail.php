@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Pipelines\SystemUser\SystemUserCreation;
 
 use App\DTO\SystemUserDTOs\SystemUserCreateDTO;

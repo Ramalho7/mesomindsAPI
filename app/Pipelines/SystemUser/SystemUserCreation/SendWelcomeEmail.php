@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Pipelines\SystemUser\SystemUserCreation;
 
 use App\DTO\SystemUserDTOs\SystemUserCreateDTO;
-use Closure;
 use App\Mail\WelcomeEmail;
+use Closure;
 use Illuminate\Support\Facades\Mail;
 
 class SendWelcomeEmail
