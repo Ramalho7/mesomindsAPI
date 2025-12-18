@@ -6,7 +6,12 @@ use App\DTO\SystemUserDTOs\SystemUserCreateDTO;
 use App\DTO\SystemUserDTOs\SystemUserUpdateDTO;
 use App\DTO\SystemUserDTOs\SystemUserUpdatePasswordDTO;
 use App\Models\SystemUser;
+use App\Pipelines\SystemUser\SystemUserCreation\SendWelcomeEmail;
+use App\Pipelines\SystemUser\SystemUserCreation\SuccessCreateUserEmail;
+use App\Pipelines\SystemUser\SystemUserCreation\ValidateRegisterByAdmin;
+use App\Pipelines\SystemUser\SystemUserCreation\ValidateSelfRegisterRoles;
 use App\Repositories\SystemUserRepositoryInterface;
+use Illuminate\Support\Facades\Pipeline;
 
 class SystemUserService
 {
@@ -24,9 +29,36 @@ class SystemUserService
         return $this->repository->findOne($id);
     }
 
-    public function create(SystemUserCreateDTO $dto): SystemUser
+    public function create(SystemUserCreateDTO $dto, bool $isSelfRegister = false): SystemUser
     {
-        return $this->repository->create($dto);
+
+        if ($isSelfRegister) {
+            return $this->selfRegisterCreate($dto);
+        }
+
+        $user = Pipeline::send($dto)
+            ->withinTransaction()
+            ->through([
+                ValidateRegisterByAdmin::class,
+                SuccessCreateUserEmail::class,
+            ])
+            ->thenReturn();
+
+        return $this->repository->create($user);
+    }
+
+    private function selfRegisterCreate(SystemUserCreateDTO $dto): SystemUser
+    {
+
+        $user = Pipeline::send($dto)
+            ->withinTransaction()
+            ->through([
+                ValidateSelfRegisterRoles::class,
+                SendWelcomeEmail::class,
+            ])
+            ->thenReturn();
+
+        return $this->repository->create($user);
     }
 
     public function update(string $id, SystemUserUpdateDTO $dto): SystemUser

@@ -17,7 +17,7 @@ class StoreSystemUserRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:system_users,email',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:teacher,student,admin,moderator,operator',
+            'role' => 'required|in:admin,moderator,operator',
         ];
     }
 
@@ -35,8 +35,8 @@ class StoreSystemUserRequest extends FormRequest
             'password.min' => 'O campo senha deve ter no mínimo 8 caracteres.',
             'password.confirmed' => 'A confirmação da senha não corresponde.',
             'role.required' => 'O campo função é obrigatório.',
-            'role.in' => 'A função deve ser uma das seguintes: teacher, student, admin, moderator, operator.',
-            'role' => 'required|in:teacher,student,admin,moderator,operator',
+            'role.in' => 'A função deve ser uma das seguintes: admin, moderator, operator.',
+            'role' => 'required|in:admin,moderator,operator',
         ];
     }
 }

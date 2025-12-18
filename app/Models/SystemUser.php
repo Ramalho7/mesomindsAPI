@@ -82,7 +82,6 @@ class SystemUser extends Authenticatable
         return $query->where('updated_by', $userId);
     }
 
-    // Existing methods
     public function findForPassport($username)
     {
         return $this->where('email', $username)->first();

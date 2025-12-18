@@ -10,6 +10,7 @@ use App\Http\Controllers\QuestionCollectionController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\StudentAnswerController;
 use App\Http\Controllers\SystemUserController;
+use App\Mail\WelcomeEmail;
 use App\Models\Content;
 use App\Models\ContentTag;
 use App\Models\ContentType;
@@ -17,6 +18,12 @@ use App\Models\Question;
 use App\Models\QuestionCollection;
 use App\Models\StudentAnswer;
 use Illuminate\Support\Facades\Route;
+
+// Route::get('/test-email', function () {
+//     $email = 'adryelll85@gmail.com';
+//     $name = 'Adryelll';
+//     Mail::to($email)->send(new WelcomeEmail($name));
+// });
 
 // Model bindings
 Route::model('tiposconteudo', ContentType::class);

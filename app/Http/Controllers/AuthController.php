@@ -57,7 +57,7 @@ class AuthController extends Controller
 
             $dto = SystemUserCreateDTO::makeFromRequest($request);
 
-            $user = $this->systemUserService->create($dto);
+            $user = $this->systemUserService->create($dto, true);
 
             $token = $user->generateToken();
 

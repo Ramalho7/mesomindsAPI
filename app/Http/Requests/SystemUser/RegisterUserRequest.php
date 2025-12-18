@@ -34,7 +34,7 @@ class RegisterUserRequest extends FormRequest
         return [
             'password.confirmed' => 'As senhas não coincidem',
             'email.unique' => 'Email já cadastrado',
-            'tipo.in' => 'Tipo de usário inválido. Escolha entre Aluno e Professor.',
+            'role.in' => 'Tipo de usário inválido. Escolha entre Aluno e Professor.',
         ];
     }
 

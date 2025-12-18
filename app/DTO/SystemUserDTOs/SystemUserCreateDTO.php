@@ -4,6 +4,7 @@ namespace App\DTO\SystemUserDTOs;
 
 use App\Enums\SystemUserEnums\SystemUserRoleEnum;
 use App\Enums\SystemUserEnums\SystemUserStatusEnum;
+use Hash;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SystemUserCreateDTO
@@ -16,20 +17,20 @@ class SystemUserCreateDTO
 
     public SystemUserStatusEnum $status;
 
-    public ?string $password = null;
+    public string $password;
 
-    public string $created_by;
+    public ?string $created_by;
 
-    public string $updated_by;
+    public ?string $updated_by;
 
     public function __construct(
         string $name,
         string $email,
         SystemUserRoleEnum $role,
         SystemUserStatusEnum $status,
-        ?string $password,
-        string $created_by,
-        string $updated_by,
+        string $password,
+        ?string $created_by,
+        ?string $updated_by,
     ) {
         $this->name = $name;
         $this->email = $email;
@@ -42,16 +43,12 @@ class SystemUserCreateDTO
 
     public static function makeFromRequest(FormRequest $request, ?string $created_by = null, ?string $updated_by = null): self
     {
-        if (! $created_by || ! $updated_by) {
-            throw new \InvalidArgumentException('Os campos "created_by" e "updated_by" são obrigatórios para criar usuários não self-registered.');
-        }
-
         return new self(
             $request['name'],
             $request['email'],
             SystemUserRoleEnum::from($request['role']),
             SystemUserStatusEnum::from($request['status'] ?? SystemUserStatusEnum::ACTIVE->value),
-            $request['password'] ?? null,
+            $request['password'] ? Hash::needsRehash($request['password']) ? Hash::make($request['password']) : $request['password'] : null,
             $created_by,
             $updated_by,
         );
