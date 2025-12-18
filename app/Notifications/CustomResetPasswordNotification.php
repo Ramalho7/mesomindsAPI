@@ -60,6 +60,6 @@ class CustomResetPasswordNotification extends Notification
             ->line('Se você não solicitou uma redefinição de senha, nenhuma ação adicional é necessária.')
             ->line('Caso tenha problemas ao clicar no botão "Redefinir Senha", copie e cole o link abaixo no seu navegador:')
             ->line($url)
-            ->salutation('Atenciosamente, Equipe MesoMinds');
+            ->salutation('Atenciosamente, Equipe Mesominds');
     }
 }

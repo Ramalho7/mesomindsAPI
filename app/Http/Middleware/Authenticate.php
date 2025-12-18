@@ -20,4 +20,9 @@ class Authenticate extends Middleware
 
         parent::unauthenticated($request, $guards);
     }
+
+    protected function guards()
+    {
+        return ['api', 'web'];
+    }
 }
