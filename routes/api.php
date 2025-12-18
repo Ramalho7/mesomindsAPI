@@ -17,8 +17,8 @@ use App\Models\ContentType;
 use App\Models\Question;
 use App\Models\QuestionCollection;
 use App\Models\StudentAnswer;
-use Illuminate\Http\Request;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/test-email', function () {

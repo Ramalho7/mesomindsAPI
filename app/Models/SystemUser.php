@@ -12,7 +12,7 @@ use Laravel\Passport\HasApiTokens;
 
 class SystemUser extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasUlids, Notifiable, SoftDeletes, CanResetPassword;
+    use CanResetPassword, HasApiTokens, HasFactory, HasUlids, Notifiable, SoftDeletes;
 
     protected $table = 'system_users';
 
