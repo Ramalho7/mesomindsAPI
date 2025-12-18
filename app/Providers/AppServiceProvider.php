@@ -8,6 +8,7 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,5 +29,10 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(60)
                 ->by($request->user()?->id ?? $request->ip());
         });
+
+        ResetPasswordNotification::createUrlUsing(function ($notifiable, $token) {
+        $frontend = env('FRONTEND_URL', config('app.url'));
+        return rtrim($frontend, '/') . '/reset-password?token=' . $token . '&email=' . urlencode($notifiable->getEmailForPasswordReset());
+    });
     }
 }

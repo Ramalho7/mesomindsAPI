@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +12,7 @@ use Laravel\Passport\HasApiTokens;
 
 class SystemUser extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasUlids, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, HasUlids, Notifiable, SoftDeletes, CanResetPassword;
 
     protected $table = 'system_users';
 

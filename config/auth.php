@@ -38,7 +38,7 @@ return [
     'guards' => [
         'api' => [
             'driver' => 'passport',
-            'provider' => 'users',
+            'provider' => 'system_users',
         ],
     ],
 
@@ -60,7 +60,7 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'system_users' => [
             'driver' => 'eloquent',
             'model' => App\Models\SystemUser::class,
         ],
@@ -91,8 +91,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'system_users' => [
+            'provider' => 'system_users',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,
@@ -110,6 +110,6 @@ return [
     |
     */
 
-    'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
+    'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10),
 
 ];
