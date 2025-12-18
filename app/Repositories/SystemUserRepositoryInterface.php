@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\DTO\SystemUserDTOs\SystemUserChangeStatusDTO;
+use App\DTO\SystemUserDTOs\SystemUserCreateDTO;
+use App\DTO\SystemUserDTOs\SystemUserUpdateDTO;
 use App\DTO\SystemUserDTOs\SystemUserUpdatePasswordDTO;
 use App\Models\SystemUser;
 
@@ -12,9 +14,9 @@ interface SystemUserRepositoryInterface
 
     public function findOne(string $id): ?SystemUser;
 
-    public function create($dto): SystemUser;
+    public function create(SystemUserCreateDTO $dto): SystemUser;
 
-    public function update($id, $dto): SystemUser;
+    public function update(string $id, SystemUserUpdateDTO $dto): SystemUser;
 
     public function delete(string $id): void;
 

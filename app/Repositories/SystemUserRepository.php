@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\DTO\SystemUserDTOs\SystemUserChangeStatusDTO;
+use App\DTO\SystemUserDTOs\SystemUserCreateDTO;
+use App\DTO\SystemUserDTOs\SystemUserUpdateDTO;
 use App\DTO\SystemUserDTOs\SystemUserUpdatePasswordDTO;
 use App\Models\SystemUser;
 
@@ -30,12 +32,12 @@ class SystemUserRepository implements SystemUserRepositoryInterface
         return $this->model->with(['creator', 'updater'])->find($id);
     }
 
-    public function create($dto): SystemUser
+    public function create(SystemUserCreateDTO $dto): SystemUser
     {
         return $this->model->create($dto->toArray());
     }
 
-    public function update($id, $dto): SystemUser
+    public function update(string $id, SystemUserUpdateDTO $dto): SystemUser
     {
         $user = $this->model->findOrFail((string) $id);
 
