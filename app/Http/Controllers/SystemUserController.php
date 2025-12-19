@@ -80,7 +80,7 @@ class SystemUserController extends Controller
 
             $this->authorize('createByAdmin', [SystemUser::class, $dto->role]);
 
-            $newUser =  $this->systemUserService->create($dto);
+            $newUser = $this->systemUserService->create($dto);
 
             return response()->json([
                 'success' => true,
