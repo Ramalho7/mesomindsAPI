@@ -20,7 +20,6 @@ class EmailVerifiedWithin30Days
             return response()->json(['message' => 'E-mail não verificado.'], 403);
         }
 
-
         if ($user->email_verified_at->diffInDays(date: now()) > $days) {
             return response()->json([
                 'message' => "Seu e-mail não foi verificado nos últimos {$days} dias.",
