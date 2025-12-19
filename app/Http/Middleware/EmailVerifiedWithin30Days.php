@@ -10,7 +10,7 @@ class EmailVerifiedWithin30Days
 {
     public function handle(Request $request, Closure $next)
     {
-        return $this->verifyEmailWithinDays($request, $next, 0);
+        return $this->verifyEmailWithinDays($request, $next, 30);
     }
 
     protected function verifyEmailWithinDays(Request $request, Closure $next, int $days)
