@@ -28,6 +28,7 @@ class SystemUser extends Authenticatable implements MustVerifyEmail
         'updated_by',
         'status',
         'deleted_at',
+        'email_verified_at',
     ];
 
     protected $hidden = [
@@ -39,6 +40,7 @@ class SystemUser extends Authenticatable implements MustVerifyEmail
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
+        'email_verified_at' => 'datetime',
     ];
 
     /**
