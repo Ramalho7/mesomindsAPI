@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\SystemUserEnums\SystemUserRoleEnum;
 use App\Models\SystemUser;
 
 /**
@@ -27,7 +28,7 @@ class SystemUserPolicy
      */
     public function viewAny(SystemUser $user): bool
     {
-        return $user->role === 'admin';
+        return $user->role === SystemUserRoleEnum::ADMIN;
     }
 
     /**
@@ -37,14 +38,10 @@ class SystemUserPolicy
      * @param  SystemUser  $systemUser  Usuário a ser visualizado.
      * @return bool Retorna `true` se o usuário for administrador ou se estiver visualizando seu próprio registro.
      */
-    public function view(SystemUser $user, ?SystemUser $systemUser = null): bool
+    public function view(SystemUser $user, SystemUser $systemUser): bool
     {
-        if ($user->role === 'admin') {
+        if ($user->role === SystemUserRoleEnum::ADMIN) {
             return true;
-        }
-
-        if ($systemUser === null) {
-            return false;
         }
 
         return $user->id === $systemUser->id;
@@ -56,9 +53,33 @@ class SystemUserPolicy
      * @param  SystemUser  $user  Usuário autenticado.
      * @return bool Retorna `true` se o usuário for administrador.
      */
-    public function create(SystemUser $user): bool
-    {
-        return $user->role === 'admin';
+    // public function create(SystemUser $user): bool
+    // {
+    //     return $user->role === SystemUserRoleEnum::ADMIN;
+    // }
+
+    public function createByAdmin(
+        SystemUser $actor,
+        SystemUserRoleEnum $targetRole
+    ): bool {
+        if ($actor->role !== SystemUserRoleEnum::ADMIN) {
+            return false;
+        }
+
+        return in_array($targetRole, [
+            SystemUserRoleEnum::ADMIN,
+            SystemUserRoleEnum::MODERATOR,
+            SystemUserRoleEnum::OPERATOR,
+        ], true);
+    }
+
+    public function selfRegister(
+        SystemUserRoleEnum $targetRole
+    ): bool {
+        return in_array($targetRole, [
+            SystemUserRoleEnum::STUDENT,
+            SystemUserRoleEnum::TEACHER,
+        ], true);
     }
 
     /**
@@ -68,14 +89,10 @@ class SystemUserPolicy
      * @param  SystemUser  $systemUser  Usuário a ser atualizado.
      * @return bool Retorna `true` se o usuário for administrador ou se estiver atualizando seu próprio registro.
      */
-    public function update(SystemUser $user, ?SystemUser $systemUser = null): bool
+    public function update(SystemUser $user, SystemUser $systemUser): bool
     {
-        if ($user->role === 'admin') {
+        if ($user->role === SystemUserRoleEnum::ADMIN) {
             return true;
-        }
-
-        if ($systemUser === null) {
-            return false;
         }
 
         return $user->id === $systemUser->id;
@@ -88,14 +105,10 @@ class SystemUserPolicy
      * @param  SystemUser  $systemUser  Usuário cuja senha será atualizada.
      * @return bool Retorna `true` se o usuário for administrador ou se estiver atualizando sua própria senha.
      */
-    public function updatePassword(SystemUser $user, ?SystemUser $systemUser): bool
+    public function updatePassword(SystemUser $user, SystemUser $systemUser): bool
     {
-        if ($user->role === 'admin') {
+        if ($user->role === SystemUserRoleEnum::ADMIN) {
             return true;
-        }
-
-        if ($systemUser === null) {
-            return false;
         }
 
         return $user->id === $systemUser->id;
@@ -103,7 +116,7 @@ class SystemUserPolicy
 
     public function updateAny(SystemUser $user): bool
     {
-        return $user->role === 'admin';
+        return $user->role === SystemUserRoleEnum::ADMIN;
     }
 
     /**
@@ -115,7 +128,7 @@ class SystemUserPolicy
      */
     public function delete(SystemUser $user, SystemUser $systemUser): bool
     {
-        if ($user->role === 'admin') {
+        if ($user->role === SystemUserRoleEnum::ADMIN) {
             return true;
         }
 
@@ -124,7 +137,7 @@ class SystemUserPolicy
 
     public function deleteAny(SystemUser $user): bool
     {
-        return $user->role === 'admin';
+        return $user->role === SystemUserRoleEnum::ADMIN;
     }
 
     /**
@@ -146,16 +159,8 @@ class SystemUserPolicy
      * @param  SystemUser  $systemUser  Usuário a ser excluído permanentemente.
      * @return bool Retorna `true` se o usuário for administrador ou se estiver excluindo permanentemente seu próprio registro.
      */
-    public function forceDelete(SystemUser $user, ?SystemUser $systemUser = null): bool
+    public function forceDelete(SystemUser $user, SystemUser $systemUser): bool
     {
-        if ($user->role === 'admin') {
-            return true;
-        }
-
-        if ($systemUser === null) {
-            return false;
-        }
-
-        return $user->id === $systemUser->id;
+        return $user->role === SystemUserRoleEnum::ADMIN;
     }
 }

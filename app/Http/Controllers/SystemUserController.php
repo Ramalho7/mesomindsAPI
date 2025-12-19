@@ -73,14 +73,14 @@ class SystemUserController extends Controller
      */
     public function store(StoreSystemUserRequest $request): JsonResponse
     {
-        $this->authorize('create', SystemUser::class);
-
         try {
             $authenticatedUser = Auth::user();
 
             $dto = SystemUserCreateDTO::makeFromRequest($request, $authenticatedUser->id, $authenticatedUser->id);
 
-            $newUser = $this->systemUserService->create($dto);
+            $this->authorize('createByAdmin', [SystemUser::class, $dto->role]);
+
+            $newUser =  $this->systemUserService->create($dto);
 
             return response()->json([
                 'success' => true,

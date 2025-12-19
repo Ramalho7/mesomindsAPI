@@ -8,8 +8,6 @@ use App\DTO\SystemUserDTOs\SystemUserUpdatePasswordDTO;
 use App\Models\SystemUser;
 use App\Pipelines\SystemUser\SystemUserCreation\SendWelcomeEmail;
 use App\Pipelines\SystemUser\SystemUserCreation\SuccessCreateUserEmail;
-use App\Pipelines\SystemUser\SystemUserCreation\ValidateRegisterByAdmin;
-use App\Pipelines\SystemUser\SystemUserCreation\ValidateSelfRegisterRoles;
 use App\Repositories\SystemUserRepositoryInterface;
 use Illuminate\Support\Facades\Pipeline;
 
@@ -39,7 +37,6 @@ class SystemUserService
         $user = Pipeline::send($dto)
             ->withinTransaction()
             ->through([
-                ValidateRegisterByAdmin::class,
                 SuccessCreateUserEmail::class,
             ])
             ->thenReturn();
@@ -53,7 +50,6 @@ class SystemUserService
         $user = Pipeline::send($dto)
             ->withinTransaction()
             ->through([
-                ValidateSelfRegisterRoles::class,
                 SendWelcomeEmail::class,
             ])
             ->thenReturn();

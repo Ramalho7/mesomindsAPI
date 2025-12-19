@@ -8,6 +8,7 @@ use App\Http\Requests\SystemUser\RegisterUserRequest;
 use App\Models\SystemUser;
 use App\Services\SystemUserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -56,6 +57,8 @@ class AuthController extends Controller
             }
 
             $dto = SystemUserCreateDTO::makeFromRequest($request);
+
+            Gate::authorize('selfRegister', $dto->role);
 
             $user = $this->systemUserService->create($dto, true);
 
