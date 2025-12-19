@@ -49,7 +49,7 @@ class CustomResetPasswordNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = config('app.frontend_url') . '/reset-password?token=' . $this->token . '&email=' . urlencode($this->email);
+        $url = config('app.frontend_url').'/reset-password?token='.$this->token.'&email='.urlencode($this->email);
 
         return (new MailMessage)
             ->subject('Redefinição de Senha')
