@@ -49,8 +49,7 @@ class CustomResetPasswordNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $frontendUrl = env('FRONTEND_URL', config('app.url')).'/reset-password';
-        $url = $frontendUrl.'?token='.$this->token.'&email='.urlencode($this->email);
+        $url = config('app.frontend_url') . '/reset-password?token=' . $this->token . '&email=' . urlencode($this->email);
 
         return (new MailMessage)
             ->subject('Redefinição de Senha')
@@ -60,6 +59,7 @@ class CustomResetPasswordNotification extends Notification
             ->line('Se você não solicitou uma redefinição de senha, nenhuma ação adicional é necessária.')
             ->line('Caso tenha problemas ao clicar no botão "Redefinir Senha", copie e cole o link abaixo no seu navegador:')
             ->line($url)
-            ->salutation('Atenciosamente, Equipe Mesominds');
+            ->salutation('Atenciosamente, equipe '.config('app.name'));
+
     }
 }

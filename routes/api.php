@@ -18,6 +18,7 @@ use App\Models\ContentType;
 use App\Models\Question;
 use App\Models\QuestionCollection;
 use App\Models\StudentAnswer;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/test-email', function () {
@@ -74,9 +75,19 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/me', [MeController::class, 'me']);
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::post('/validatetoken', [AuthController::class, 'validateToken']);
+        Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+
+        $request->fulfill();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'E-mail verificado com sucesso.',
+        ]);
+
+    })->middleware(['auth', 'signed'])->name('verification.verify');
     });
 
-    Route::prefix('users')->group(function () {
+    Route::prefix('users')->middleware('email.verified.30days')->group(function () {
         Route::patch('/{user}/password', [SystemUserController::class, 'updatePassword']);
         Route::patch('/{user}/status', [SystemUserController::class, 'changeStatus']);
         Route::apiResource('/', SystemUserController::class);

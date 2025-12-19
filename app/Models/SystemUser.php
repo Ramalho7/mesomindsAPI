@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Notifications\CustomResetPasswordNotification;
+use App\Notifications\CustomVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-class SystemUser extends Authenticatable
+class SystemUser extends Authenticatable implements MustVerifyEmail
 {
     use CanResetPassword, HasApiTokens, HasFactory, HasUlids, Notifiable, SoftDeletes;
 
@@ -48,6 +50,11 @@ class SystemUser extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new CustomResetPasswordNotification($token, $this->email));
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new CustomVerifyEmail());
     }
 
     public function scopeName($query, $name)

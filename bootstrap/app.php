@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EmailVerifiedWithin30Days;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -30,5 +31,10 @@ return Application::configure(basePath: dirname(__DIR__))
                 ], 401);
             }
         });
+    })
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias([
+            'email.verified.30days' => EmailVerifiedWithin30Days::class,
+        ]);
     })
     ->create();
