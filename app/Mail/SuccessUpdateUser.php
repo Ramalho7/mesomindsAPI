@@ -4,7 +4,6 @@ namespace App\Mail;
 
 use DateTime;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -15,7 +14,9 @@ class SuccessUpdateUser extends Mailable
     use Queueable, SerializesModels;
 
     protected string $UserName;
+
     protected string $creatorName;
+
     protected DateTime $updatedAt;
 
     /**
