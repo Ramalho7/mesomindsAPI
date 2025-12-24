@@ -11,9 +11,27 @@ class SendSuccessUpdateUser
 {
     public function handle(SystemUserUpdateDTO $dto, Closure $next)
     {
-        logger()->info('DTO data:', ['dto' => $dto]);
+        \Log::info('Enviando e-mail de atualização', [
+            'email' => $dto->email,
+            'name' => $dto->name,
+        ]);
 
-        Mail::to([$dto->email, auth()->user()->email])->send(new SuccessUpdateUser($dto->name, auth()->user()->name, now()));
+        try {
+            Mail::to($dto->email)->send(
+                new SuccessUpdateUser(
+                    UserName: $dto->name,
+                    creatorName: 'Sistema', // ou busque o nome do criador
+                    updatedAt: now()
+                )
+            );
+
+            \Log::info('E-mail enviado com sucesso');
+        } catch (\Exception $e) {
+            \Log::error('Erro ao enviar e-mail', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+        }
 
         return $next($dto);
     }

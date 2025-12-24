@@ -36,5 +36,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'email.verified.30days' => EmailVerifiedWithin30Days::class,
         ]);
+
     })
     ->create();

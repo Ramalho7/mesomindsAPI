@@ -117,10 +117,8 @@ class SystemUserController extends Controller
      *
      * @group Usuários
      */
-    public function update(UpdateSystemUserRequest $request, string $id): JsonResponse
+    public function update(UpdateSystemUserRequest $request, SystemUser $user): JsonResponse
     {
-        $user = SystemUser::findOrFail($id);
-
         $this->authorize('update', $user);
         try {
             if ($request->has('password')) {
@@ -134,7 +132,7 @@ class SystemUserController extends Controller
 
             $dto = SystemUserUpdateDTO::makeFromRequest($request, $authenticatedUser->id);
 
-            $updateUser = $this->systemUserService->update($id, $dto);
+            $updateUser = $this->systemUserService->update($user->id, $dto);
 
             return response()->json([
                 'success' => true,

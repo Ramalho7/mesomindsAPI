@@ -40,7 +40,7 @@
 <body>
     <main>
         <div class="email-container">
-            <h1>Olá, {{ $newUserName }}!</h1>
+            <h1>Olá, {{ $UserName }}!</h1>
             <p>O seu perfil foi criado com sucesso.</p>
             <p>Criador: {{ $creatorName }}</p>
         </div>

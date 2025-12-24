@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\SystemUserEnums\SystemUserRoleEnum;
+use App\Enums\SystemUserEnums\SystemUserStatusEnum;
 use App\Notifications\CustomResetPasswordNotification;
 use App\Notifications\CustomVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -41,6 +43,8 @@ class SystemUser extends Authenticatable implements MustVerifyEmail
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
         'email_verified_at' => 'datetime',
+        'role' => SystemUserRoleEnum::class,
+        'status' => SystemUserStatusEnum::class,
     ];
 
     /**
