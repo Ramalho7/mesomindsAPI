@@ -166,7 +166,7 @@ class SystemUserPolicy
 
     public function changeStatus(SystemUser $user, SystemUser $systemUser): bool
     {
-        if($user->role === SystemUserRoleEnum::ADMIN) {
+        if ($user->role === SystemUserRoleEnum::ADMIN) {
             return true;
         }
 
