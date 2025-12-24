@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DTO\SystemUserDTOs\SystemUserCreateDTO;
+use App\Enums\SystemUserEnums\SystemUserStatusEnum;
 use App\Http\Requests\SystemUser\LoginUserRequest;
 use App\Http\Requests\SystemUser\RegisterUserRequest;
 use App\Models\SystemUser;
@@ -131,14 +132,16 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            if ($user->status !== 'active') {
+            \Log::info('User status:', ['status' => $user->status]);
+
+            if ($user->status !== SystemUserStatusEnum::ACTIVE) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Usuário inativo',
                 ], 403);
             }
 
-            if ($user->status === 'banned') {
+            if ($user->status === SystemUserStatusEnum::BANNED) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Usuário Banido',

@@ -14,21 +14,17 @@ class SystemUserUpdateDTO
 
     public ?SystemUserRoleEnum $role;
 
-    public ?SystemUserStatusEnum $status;
-
     public string $updated_by;
 
     public function __construct(
         ?string $name,
         ?string $email,
         ?SystemUserRoleEnum $role,
-        ?SystemUserStatusEnum $status,
         string $updated_by,
     ) {
         $this->name = $name;
         $this->email = $email;
         $this->role = $role;
-        $this->status = $status;
         $this->updated_by = $updated_by;
     }
 
@@ -38,7 +34,6 @@ class SystemUserUpdateDTO
             $request['name'] ?? null,
             $request['email'] ?? null,
             isset($request['role']) ? SystemUserRoleEnum::from($request['role']) : null,
-            isset($request['status']) ? SystemUserStatusEnum::from($request['status']) : null,
             $updated_by,
         );
     }
@@ -55,9 +50,6 @@ class SystemUserUpdateDTO
         }
         if ($this->role !== null) {
             $data['role'] = $this->role->value;
-        }
-        if ($this->status !== null) {
-            $data['status'] = $this->status->value;
         }
 
         if ($this->updated_by !== null) {

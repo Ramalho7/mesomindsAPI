@@ -128,6 +128,13 @@ class SystemUserController extends Controller
                 ], 422);
             }
 
+            if($request->has('status')) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'O status não pode ser atualizado neste endpoint.',
+                ], 422);
+            }
+
             $authenticatedUser = Auth::user();
 
             $dto = SystemUserUpdateDTO::makeFromRequest($request, $authenticatedUser->id);

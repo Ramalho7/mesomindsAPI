@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\SystemUser;
 
+use App\Enums\SystemUserEnums\SystemUserRoleEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -23,6 +24,17 @@ class UpdateSystemUserRequest extends FormRequest
     public function rules(): array
     {
         $userId = $this->route('user');
+        $authUser = auth()->user();
+
+        $roleValidation = 'sometimes|required|in:';
+
+        if ($authUser->role === SystemUserRoleEnum::ADMIN) {
+            $roleValidation .= 'admin,moderator,operator';
+        } elseif (in_array($authUser->role, [SystemUserRoleEnum::STUDENT, SystemUserRoleEnum::TEACHER], true)) {
+            $roleValidation .= 'student,teacher';
+        } else {
+            $roleValidation = 'prohibited';
+        }
 
         return [
             'name' => 'sometimes|required|string|max:255',
@@ -32,8 +44,7 @@ class UpdateSystemUserRequest extends FormRequest
                 'email',
                 Rule::unique('system_users')->ignore($userId),
             ],
-            'role' => 'sometimes|required|in:teacher,student,admin,moderator,operator',
-            'status' => 'sometimes|in:active,inactive,banned,pending',
+            'role' => $roleValidation,
         ];
     }
 
@@ -47,8 +58,8 @@ class UpdateSystemUserRequest extends FormRequest
             'email.email' => 'O campo email deve ser um endereço de email válido.',
             'email.unique' => 'O email informado já está em uso.',
             'role.required' => 'O campo tipo é obrigatório.',
-            'role.in' => 'O tipo deve ser uma das seguintes opções: teacher, student, admin, moderator, operator.',
-            'status.in' => 'O status deve ser uma das seguintes opções: active, inactive, banned, pending.',
+            'role.in' => 'O tipo deve ser uma das seguintes opções: :values.',
+            'role.prohibited' => 'Você não tem permissão para atualizar o campo tipo.',
         ];
     }
 }
