@@ -11,6 +11,8 @@ class SendSuccessUpdateUser
 {
     public function handle(SystemUserUpdateDTO $dto, Closure $next)
     {
+        logger()->info('DTO data:', ['dto' => $dto]);
+
         Mail::to([$dto->email, auth()->user()->email])->send(new SuccessUpdateUser($dto->name, auth()->user()->name, now()));
 
         return $next($dto);
