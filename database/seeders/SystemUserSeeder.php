@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\SystemUser;
 use Faker\Factory as Faker;
+use Hash;
 use Illuminate\Database\Seeder;
 
 class SystemUserSeeder extends Seeder
@@ -14,7 +15,7 @@ class SystemUserSeeder extends Seeder
         SystemUser::create([
             'name' => 'Administrador',
             'email' => 'admin@mesominds.com',
-            'password' => bcrypt('admin123'),
+            'password' => Hash::make('admin123'),
             'role' => 'admin',
             'status' => 'active',
             'created_by' => null,
@@ -23,7 +24,7 @@ class SystemUserSeeder extends Seeder
         SystemUser::create([
             'name' => 'Moderador',
             'email' => 'moderador@mesominds.com',
-            'password' => bcrypt('mod123'),
+            'password' => Hash::make('mod123'),
             'role' => 'moderator',
             'status' => 'active',
             'created_by' => null,
@@ -31,8 +32,8 @@ class SystemUserSeeder extends Seeder
 
         SystemUser::create([
             'name' => 'Operador',
-            'email' => 'operador@mesominds.com',
-            'password' => bcrypt('op123'),
+            'email' => 'operator@mesominds.com',
+            'password' => Hash::make('op123'),
             'role' => 'operator',
             'status' => 'active',
             'created_by' => null,
