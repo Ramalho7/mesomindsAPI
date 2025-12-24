@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,7 +23,7 @@ class SystemUserFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => bcrypt('password'),
+            'password' => Hash::make('password'),
             'role' => $this->faker->randomElement($types),
             'status' => $this->faker->randomElement($statuses),
         ];

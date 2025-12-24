@@ -25,12 +25,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             SystemUserSeeder::class,
-            MateriasSeeder::class,
-            ContentTagSeeder::class,
-            ContentTypeSeeder::class,
-            ContentSeeder::class,
-            QuestionSeeder::class,
-            QuestionCollectionSeeder::class,
+            // MateriasSeeder::class,
+            // ContentTagSeeder::class,
+            // ContentTypeSeeder::class,
+            // ContentSeeder::class,
+            // QuestionSeeder::class,
+            // QuestionCollectionSeeder::class,
         ]);
     }
 }

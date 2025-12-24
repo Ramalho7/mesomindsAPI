@@ -90,7 +90,8 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('users')->middleware('email.verified.30days')->group(function () {
         Route::patch('/{user}/password', [SystemUserController::class, 'updatePassword']);
         Route::patch('/{user}/status', [SystemUserController::class, 'changeStatus']);
-        Route::apiResource('/', SystemUserController::class);
+        Route::put('/{user}', [SystemUserController::class, 'update']);
+        Route::apiResource('', SystemUserController::class);
     });
 
     Route::prefix('materias')->group(function () {

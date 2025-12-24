@@ -8,6 +8,7 @@ use App\DTO\SystemUserDTOs\SystemUserUpdatePasswordDTO;
 use App\Models\SystemUser;
 use App\Pipelines\SystemUser\SystemUserCreation\SendWelcomeEmail;
 use App\Pipelines\SystemUser\SystemUserCreation\SuccessCreateUserEmail;
+use App\Pipelines\SystemUser\SystemUserUpdate\SendSuccessUpdateUser;
 use App\Repositories\SystemUserRepositoryInterface;
 use Illuminate\Support\Facades\Pipeline;
 
@@ -59,6 +60,14 @@ class SystemUserService
 
     public function update(string $id, SystemUserUpdateDTO $dto): SystemUser
     {
+
+        $user = Pipeline::send($dto)
+            ->withinTransaction()
+            ->through([
+                SendSuccessUpdateUser::class,
+            ])
+            ->thenReturn();
+
         $user = $this->repository->update($id, $dto);
 
         return $user->fresh();
