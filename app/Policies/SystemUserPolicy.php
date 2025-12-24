@@ -163,4 +163,13 @@ class SystemUserPolicy
     {
         return $user->role === SystemUserRoleEnum::ADMIN;
     }
+
+    public function changeStatus(SystemUser $user, SystemUser $systemUser): bool
+    {
+        if($user->role === SystemUserRoleEnum::ADMIN) {
+            return true;
+        }
+
+        return $user->id === $systemUser->id;
+    }
 }

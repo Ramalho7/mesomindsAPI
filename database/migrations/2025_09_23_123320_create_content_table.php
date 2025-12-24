@@ -49,7 +49,11 @@ return new class extends Migration
             $table->index('created_by');
             $table->index('updated_by');
             $table->index('deleted_at');
-            $table->fullText(['title', 'body']);
+
+            if (config('database.default') === 'mysql') {
+                $table->fullText(['title', 'body']);
+            }
+
             $table->index('content_tags_id');
             $table->index('content_types_id');
 

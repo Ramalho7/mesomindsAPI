@@ -24,11 +24,14 @@ return new class extends Migration
 
             $table->timestamps();
 
-            $table->fullText('name');
+            if (config('database.default') === 'mysql') {
+                $table->fullText('name');
+                $table->fullText('email');
+            }
+
             $table->index('created_at');
             $table->index('updated_at');
             $table->index('deleted_at');
-            $table->fullText('email');
             $table->index('status');
 
             $table->foreign('created_by')->references('id')->on('system_users')->onDelete('set null');

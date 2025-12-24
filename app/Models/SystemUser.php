@@ -34,7 +34,6 @@ class SystemUser extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $hidden = [
-        'role',
         'password',
     ];
 
@@ -65,12 +64,20 @@ class SystemUser extends Authenticatable implements MustVerifyEmail
 
     public function scopeName($query, $name)
     {
-        return $query->whereFullText('name', $name);
+        if (config('database.default') === 'mysql') {
+            return $query->whereFullText('name', $name);
+        }
+
+        return $query->where('name', 'LIKE', "%{$name}%");
     }
 
     public function scopeEmail($query, $email)
     {
-        return $query->whereFullText('email', $email);
+        if (config('database.default') === 'mysql') {
+            return $query->whereFullText('email', $email);
+        }
+
+        return $query->where('email', 'LIKE', "%{$email}%");
     }
 
     public function scopeRole($query, $role)
