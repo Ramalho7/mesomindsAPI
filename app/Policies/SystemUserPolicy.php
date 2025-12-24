@@ -91,19 +91,6 @@ class SystemUserPolicy
      */
     public function update(SystemUser $user, SystemUser $systemUser): bool
     {
-
-        \Log::info('=== POLICY UPDATE DEBUG ===', [
-            'auth_user_id' => $user->id,
-            'auth_user_role' => $user->role,
-            'auth_user_role_raw' => print_r($user->role, true),
-            'target_user_id' => $systemUser->id,
-            'is_same_user' => $user->id === $systemUser->id,
-            'enum_ADMIN' => SystemUserRoleEnum::ADMIN,
-            'enum_ADMIN_value' => SystemUserRoleEnum::ADMIN->value,
-            'comparison_enum' => $user->role === SystemUserRoleEnum::ADMIN,
-            'comparison_string' => $user->role === 'admin',
-        ]);
-
         if ($user->role === SystemUserRoleEnum::ADMIN) {
             return true;
         }

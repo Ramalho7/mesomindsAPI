@@ -2,28 +2,27 @@
 
 namespace App\Pipelines\SystemUser\SystemUserUpdate;
 
-use App\DTO\SystemUserDTOs\SystemUserUpdateDTO;
-use App\Mail\SuccessUpdateUser;
+use App\DTO\SystemUserDTOs\PasswordResetDTO;
+use App\Mail\SuccessChangePassword;
 use Closure;
 use Illuminate\Support\Facades\Mail;
 
-class SendSuccessUpdateUser
+class SendSuccessUpdatePassword
 {
-    public function handle(SystemUserUpdateDTO $dto, Closure $next)
+    public function handle(PasswordResetDTO $dto, Closure $next)
     {
         try {
             Mail::to($dto->email)->send(
-                new SuccessUpdateUser(
-                    UserName: $dto->name,
-                    creatorName: auth()->user()->name,
-                    updatedAt: now()
+                new SuccessChangePassword(
+                    $dto->email,
+                    now()
                 )
             );
 
         } catch (\Exception $e) {
             \Log::error('Erro ao enviar e-mail', [
                 'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString(),
+                'trace' => $e->getTraceAsString()
             ]);
         }
 

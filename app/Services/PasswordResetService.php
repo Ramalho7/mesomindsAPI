@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\DTO\SystemUserDTOs\PasswordResetDTO;
+use App\Pipelines\SystemUser\SystemUserUpdate\SendSuccessUpdatePassword;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
@@ -26,13 +28,20 @@ class PasswordResetService
                 'password_confirmation' => $dto->password_confirmation,
                 'token' => $dto->token,
             ],
-            function ($user, $password) {
+            function ($user, $password) use ($dto) {
                 $user->forceFill([
                     'password' => Hash::make($password),
                     'remember_token' => Str::random(60),
                 ])->save();
 
                 event(new PasswordReset($user));
+
+                app(Pipeline::class)
+                    ->send($dto)
+                    ->through([
+                        SendSuccessUpdatePassword::class,
+                    ])
+                    ->thenReturn();
             }
         );
 

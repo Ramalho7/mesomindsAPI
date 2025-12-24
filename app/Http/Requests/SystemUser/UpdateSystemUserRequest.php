@@ -58,7 +58,7 @@ class UpdateSystemUserRequest extends FormRequest
             'email.email' => 'O campo email deve ser um endereço de email válido.',
             'email.unique' => 'O email informado já está em uso.',
             'role.required' => 'O campo tipo é obrigatório.',
-            'role.in' => 'O tipo deve ser uma das seguintes opções: :values.',
+            'role.in' => 'O tipo não está dentre as opções permitidas.',
             'role.prohibited' => 'Você não tem permissão para atualizar o campo tipo.',
         ];
     }

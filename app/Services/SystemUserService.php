@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\DTO\SystemUserDTOs\SystemUserCreateDTO;
 use App\DTO\SystemUserDTOs\SystemUserUpdateDTO;
-use App\DTO\SystemUserDTOs\SystemUserUpdatePasswordDTO;
 use App\Models\SystemUser;
 use App\Pipelines\SystemUser\SystemUserCreation\SendWelcomeEmail;
 use App\Pipelines\SystemUser\SystemUserCreation\SuccessCreateUserEmail;
@@ -76,11 +75,6 @@ class SystemUserService
     public function delete(string $id): void
     {
         $this->repository->delete($id);
-    }
-
-    public function updatePassword(string $id, SystemUserUpdatePasswordDTO $dto): SystemUser
-    {
-        return $this->repository->updatePassword($id, $dto);
     }
 
     public function changeStatus(string $id, $dto): SystemUser
