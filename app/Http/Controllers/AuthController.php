@@ -8,16 +8,14 @@ use App\Http\Requests\SystemUser\LoginUserRequest;
 use App\Http\Requests\SystemUser\RegisterUserRequest;
 use App\Models\SystemUser;
 use App\Services\SystemUserService;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Nyholm\Psr7\Response as Psr7Response;
 use Psr\Http\Message\ServerRequestInterface;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-
 
 class AuthController extends Controller
 {
@@ -414,7 +412,7 @@ class AuthController extends Controller
         try {
             $response = $this->authorizationServer->respondToAccessTokenRequest(
                 $serverRequest,
-                new Psr7Response()
+                new Psr7Response
             );
 
             return json_decode((string) $response->getBody(), true);

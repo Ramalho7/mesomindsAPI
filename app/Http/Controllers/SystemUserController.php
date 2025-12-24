@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\DTO\SystemUserDTOs\SystemUserChangeStatusDTO;
 use App\DTO\SystemUserDTOs\SystemUserCreateDTO;
 use App\DTO\SystemUserDTOs\SystemUserUpdateDTO;
-use App\DTO\SystemUserDTOs\SystemUserUpdatePasswordDTO;
 use App\Http\Requests\SystemUser\ChangeStatusSystemUser;
 use App\Http\Requests\SystemUser\StoreSystemUserRequest;
-use App\Http\Requests\SystemUser\UpdateSystemUserPassword;
 use App\Http\Requests\SystemUser\UpdateSystemUserRequest;
 use App\Models\SystemUser;
 use App\Services\SystemUserService;
@@ -128,7 +126,7 @@ class SystemUserController extends Controller
                 ], 422);
             }
 
-            if($request->has('status')) {
+            if ($request->has('status')) {
                 return response()->json([
                     'success' => false,
                     'message' => 'O status não pode ser atualizado neste endpoint.',

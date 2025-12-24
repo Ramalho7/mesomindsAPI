@@ -22,7 +22,7 @@ class SendSuccessUpdatePassword
         } catch (\Exception $e) {
             \Log::error('Erro ao enviar e-mail', [
                 'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
+                'trace' => $e->getTraceAsString(),
             ]);
         }
 

@@ -3,7 +3,6 @@
 namespace App\DTO\SystemUserDTOs;
 
 use App\Enums\SystemUserEnums\SystemUserRoleEnum;
-use App\Enums\SystemUserEnums\SystemUserStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SystemUserUpdateDTO

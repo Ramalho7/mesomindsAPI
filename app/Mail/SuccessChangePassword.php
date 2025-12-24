@@ -14,6 +14,7 @@ class SuccessChangePassword extends Mailable
     use Queueable, SerializesModels;
 
     protected string $userName;
+
     protected DateTime $changedAt;
 
     /**
