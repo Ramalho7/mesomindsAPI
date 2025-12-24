@@ -157,34 +157,6 @@ class SystemUserController extends Controller
     }
 
     /**
-     * updatePassword: Atualiza a senha de um usuário do sistema.
-     *
-     * @group Usuários
-     */
-    public function updatePassword(UpdateSystemUserPassword $request, SystemUser $user): JsonResponse
-    {
-        $this->authorize('updatePassword', $user);
-
-        try {
-            $dto = SystemUserUpdatePasswordDTO::makeFromRequest($request, auth()->id());
-
-            $this->systemUserService->updatePassword($user->id, $dto);
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Senha atualizada com sucesso',
-            ]);
-
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Erro ao atualizar senha',
-                'error' => $e->getMessage(),
-            ], 500);
-        }
-    }
-
-    /**
      * Destroy: Remove um usuário do sistema.
      *
      * @group Usuários
@@ -218,6 +190,9 @@ class SystemUserController extends Controller
      */
     public function changeStatus(ChangeStatusSystemUser $request, SystemUser $user): JsonResponse
     {
+
+        $this->authorize('changeStatus', $user);
+
         try {
             $dto = SystemUserChangeStatusDTO::makeFromRequest($request, auth()->id());
 

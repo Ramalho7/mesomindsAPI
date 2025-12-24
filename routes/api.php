@@ -39,6 +39,7 @@ Route::model('respostaaluno', StudentAnswer::class);
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
 
     Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'])
         ->name('password.email');
@@ -91,7 +92,8 @@ Route::middleware('auth:api')->group(function () {
         Route::patch('/{user}/password', [SystemUserController::class, 'updatePassword']);
         Route::patch('/{user}/status', [SystemUserController::class, 'changeStatus']);
         Route::put('/{user}', [SystemUserController::class, 'update']);
-        Route::apiResource('', SystemUserController::class);
+        Route::delete('/{user}', [SystemUserController::class, 'destroy']);
+        Route::get('/{users}', [SystemUserController::class, 'show']);
     });
 
     Route::prefix('materias')->group(function () {

@@ -58,14 +58,19 @@ class MeController extends Controller
                         'self' => $user->can('view', $user),
                         'any' => $user->can('viewAny', SystemUser::class),
                     ],
-                    'create' => $user->can('create', SystemUser::class),
+                    'create' => [
+                        'any' => $user->can('createByAdmin', [SystemUser::class, $user->role]),
+                        'self' => $user->can('createBySelf', SystemUser::class),
+                    ],
                     'update' => [
                         'self' => $user->can('update', $user),
                         'any' => $user->can('updateAny', SystemUser::class),
+                        'password' => $user->can('updatePassword', $user),
                     ],
                     'delete' => [
                         'self' => $user->can('delete', $user),
                         'any' => $user->can('deleteAny', SystemUser::class),
+                        'force' => $user->can('forceDelete', $user),
                     ],
                 ],
             ],
