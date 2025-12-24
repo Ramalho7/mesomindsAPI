@@ -58,15 +58,21 @@ class CustomVerifyEmail extends Notification
             ['id' => $notifiable->getKey(), 'hash' => sha1($notifiable->getEmailForVerification())]
         );
 
-        $frontendUrl = config('app.frontend_url');
-        $parsedUrl = parse_url($temporarySignedRoute);
+        \Log::info('Backend verification URL: '.$temporarySignedRoute);
 
-        return $frontendUrl.'/verify-email?'.http_build_query([
-            'id' => $notifiable->getKey(),
-            'hash' => sha1($notifiable->getEmailForVerification()),
-            'expires' => $parsedUrl['query']['expires'] ?? null,
-            'signature' => $parsedUrl['query']['signature'] ?? null,
-        ]);
+        $parsedUrl = parse_url($temporarySignedRoute);
+        $queryString = $parsedUrl['query'] ?? '';
+
+        parse_str($queryString, $queryParams);
+
+        $queryParams['id'] = $notifiable->getKey();
+        $queryParams['hash'] = sha1($notifiable->getEmailForVerification());
+
+        $fullQueryString = http_build_query($queryParams);
+
+        $frontendUrl = config('app.frontend_url');
+
+        return $frontendUrl.'/verify-email?'.$fullQueryString;
     }
 
     /**
