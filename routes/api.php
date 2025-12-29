@@ -91,6 +91,7 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('users')->middleware('email.verified.30days')->group(function () {
         Route::get('/', [SystemUserController::class, 'index']);
         Route::post('/', [SystemUserController::class, 'store']);
+        Route::get('/deleted', [SystemUserController::class, 'viewAllDeleted']);
         Route::patch('/{user}/password', [SystemUserController::class, 'updatePassword']);
         Route::patch('/{user}/status', [SystemUserController::class, 'changeStatus']);
         Route::put('/{user}', [SystemUserController::class, 'update']);

@@ -37,6 +37,10 @@ class SystemUserService
         return $this->repository->getAllRecentlyCreated($filters);
     }
 
+    public function getAllDeleted(array $filters = []): array{
+        return $this->repository->getAllDeleted($filters);
+    }
+
     public function findOne(string $id): ?SystemUser
     {
         return $this->repository->findOne($id);

@@ -129,6 +129,31 @@ class SystemUserController extends Controller
         ]);
     }
 
+    public function viewAllDeleted(Request $request): JsonResponse{
+        $this->authorize('viewDeleted', SystemUser::class);
+
+        $filters = $request->only([
+            'name',
+            'email',
+            'role',
+            'status',
+            'created_at',
+            'updated_at',
+            'deleted_at',
+            'created_by',
+            'updated_by',
+            'search',
+            'recently_created',
+        ]);
+
+        $users = $this->systemUserService->getAllDeleted($filters);
+
+        return response()->json([
+            'success' => true,
+            'data' => $users,
+        ]);
+    }
+
     /**
      * update: Atualiza os dados de um usuário do sistema.
      *

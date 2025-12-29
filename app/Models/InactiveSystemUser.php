@@ -19,8 +19,8 @@ class InactiveSystemUser extends Model
     public $incrementing = false;
 
     protected $guarded = [];
-
-    protected $primaryKey = 'string';
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
 
     protected $casts = [
         'role' => SystemUserRoleEnum::class,

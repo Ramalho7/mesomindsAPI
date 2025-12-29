@@ -7,6 +7,7 @@ use App\DTO\SystemUserDTOs\SystemUserCreateDTO;
 use App\DTO\SystemUserDTOs\SystemUserUpdateDTO;
 use App\DTO\SystemUserDTOs\SystemUserUpdatePasswordDTO;
 use App\Models\ActiveSystemUser;
+use App\Models\DelectedSystemUser;
 use App\Models\InactiveSystemUser;
 use App\Models\RecentlyCreatedSystemUser;
 use App\Models\SystemUser;
@@ -72,6 +73,23 @@ class SystemUserRepository implements SystemUserRepositoryInterface
         }
 
         return $query->orderBy('created_at', 'desc')->with(['creator', 'updater'])->paginate()->toArray();
+    }
+
+    public function getAllDeleted(array $filters = []): array{
+        $query = DelectedSystemUser::query();
+
+        foreach ($filters as $key => $value) {
+
+            if ($key === 'recently_created') {
+                continue;
+            }
+
+            if (method_exists($this->model, 'scope'.ucfirst($key)) && ! is_null($value)) {
+                $query->{$key}($value);
+            }
+        }
+
+        return $query->orderBy('deleted_at', 'desc')->with(['creator', 'updater'])->paginate()->toArray();
     }
 
     public function findOne(string $id): ?SystemUser

@@ -18,6 +18,8 @@ interface SystemUserRepositoryInterface
 
     public function getAllRecentlyCreated(array $filters = []): array;
 
+    public function getAllDeleted(array $filters = []): array;
+
     public function findOne(string $id): ?SystemUser;
 
     public function create(SystemUserCreateDTO $dto): SystemUser;

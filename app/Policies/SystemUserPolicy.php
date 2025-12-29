@@ -55,6 +55,13 @@ class SystemUserPolicy
         ], true);
     }
 
+    public function viewDeleted(SystemUser $user): bool
+    {
+        return in_array($user->role, [
+            SystemUserRoleEnum::ADMIN,
+        ]);
+    }
+
     /**
      * Determina se o usuário pode criar novos usuários.
      *
