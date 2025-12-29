@@ -13,10 +13,15 @@ class DelectedSystemUser extends Model
     use SystemUserScopes, ViewsSystemUserRelationships;
 
     protected $table = 'delected_system_user_view';
+
     public $timestamps = false;
+
     public $incrementing = false;
+
     protected $guarded = [];
+
     protected $primaryKey = 'id';
+
     protected $keyType = 'string';
 
     protected $casts = [

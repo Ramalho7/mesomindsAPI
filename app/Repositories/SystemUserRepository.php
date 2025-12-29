@@ -75,7 +75,8 @@ class SystemUserRepository implements SystemUserRepositoryInterface
         return $query->orderBy('created_at', 'desc')->with(['creator', 'updater'])->paginate()->toArray();
     }
 
-    public function getAllDeleted(array $filters = []): array{
+    public function getAllDeleted(array $filters = []): array
+    {
         $query = DelectedSystemUser::query();
 
         foreach ($filters as $key => $value) {

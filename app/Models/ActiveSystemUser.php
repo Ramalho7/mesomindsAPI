@@ -7,7 +7,6 @@ use App\Enums\SystemUserEnums\SystemUserStatusEnum;
 use App\Traits\SystemUserScopes;
 use App\Traits\ViewsSystemUserRelationships;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ActiveSystemUser extends Model
 {
@@ -20,7 +19,9 @@ class ActiveSystemUser extends Model
     public $incrementing = false;
 
     protected $guarded = [];
+
     protected $primaryKey = 'id';
+
     protected $keyType = 'string';
 
     protected $casts = [

@@ -37,7 +37,8 @@ class SystemUserService
         return $this->repository->getAllRecentlyCreated($filters);
     }
 
-    public function getAllDeleted(array $filters = []): array{
+    public function getAllDeleted(array $filters = []): array
+    {
         return $this->repository->getAllDeleted($filters);
     }
 

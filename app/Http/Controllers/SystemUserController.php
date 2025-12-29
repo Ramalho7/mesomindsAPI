@@ -129,7 +129,8 @@ class SystemUserController extends Controller
         ]);
     }
 
-    public function viewAllDeleted(Request $request): JsonResponse{
+    public function viewAllDeleted(Request $request): JsonResponse
+    {
         $this->authorize('viewDeleted', SystemUser::class);
 
         $filters = $request->only([

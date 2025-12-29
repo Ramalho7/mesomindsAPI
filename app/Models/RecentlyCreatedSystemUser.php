@@ -19,7 +19,9 @@ class RecentlyCreatedSystemUser extends Model
     public $incrementing = false;
 
     protected $guarded = [];
+
     protected $primaryKey = 'id';
+
     protected $keyType = 'string';
 
     protected $casts = [
