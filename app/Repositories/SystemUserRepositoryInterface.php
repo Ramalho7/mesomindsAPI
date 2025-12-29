@@ -12,6 +12,12 @@ interface SystemUserRepositoryInterface
 {
     public function getAll(array $filters = []): array;
 
+    public function getAllActive(array $filters = []): array;
+
+    public function getAllInactive(array $filters = []): array;
+
+    public function getAllRecentlyCreated(array $filters = []): array;
+
     public function findOne(string $id): ?SystemUser;
 
     public function create(SystemUserCreateDTO $dto): SystemUser;

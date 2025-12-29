@@ -47,6 +47,14 @@ class SystemUserPolicy
         return $user->id === $systemUser->id;
     }
 
+    public function viewInactive(SystemUser $user): bool
+    {
+        return in_array($user->role, [
+            SystemUserRoleEnum::ADMIN,
+            SystemUserRoleEnum::MODERATOR,
+        ], true);
+    }
+
     /**
      * Determina se o usuário pode criar novos usuários.
      *

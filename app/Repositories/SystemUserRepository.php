@@ -6,6 +6,9 @@ use App\DTO\SystemUserDTOs\SystemUserChangeStatusDTO;
 use App\DTO\SystemUserDTOs\SystemUserCreateDTO;
 use App\DTO\SystemUserDTOs\SystemUserUpdateDTO;
 use App\DTO\SystemUserDTOs\SystemUserUpdatePasswordDTO;
+use App\Models\ActiveSystemUser;
+use App\Models\InactiveSystemUser;
+use App\Models\RecentlyCreatedSystemUser;
 use App\Models\SystemUser;
 
 class SystemUserRepository implements SystemUserRepositoryInterface
@@ -25,6 +28,50 @@ class SystemUserRepository implements SystemUserRepositoryInterface
         }
 
         return $query->with(['creator', 'updater'])->paginate()->toArray();
+    }
+
+    public function getAllActive(array $filters = []): array
+    {
+        $query = ActiveSystemUser::query();
+
+        foreach ($filters as $key => $value) {
+            if (method_exists($this->model, 'scope'.ucfirst($key)) && ! is_null($value)) {
+                $query->{$key}($value);
+            }
+        }
+
+        return $query->with(['creator', 'updater'])->paginate()->toArray();
+    }
+
+    public function getAllInactive(array $filters = []): array
+    {
+        $query = InactiveSystemUser::query();
+
+        foreach ($filters as $key => $value) {
+            if (method_exists($this->model, 'scope'.ucfirst($key)) && ! is_null($value)) {
+                $query->{$key}($value);
+            }
+        }
+
+        return $query->with(['creator', 'updater'])->paginate()->toArray();
+    }
+
+    public function getAllRecentlyCreated(array $filters = []): array
+    {
+        $query = RecentlyCreatedSystemUser::query();
+
+        foreach ($filters as $key => $value) {
+
+            if ($key === 'recently_created') {
+                continue;
+            }
+
+            if (method_exists($this->model, 'scope'.ucfirst($key)) && ! is_null($value)) {
+                $query->{$key}($value);
+            }
+        }
+
+        return $query->orderBy('created_at', 'desc')->with(['creator', 'updater'])->paginate()->toArray();
     }
 
     public function findOne(string $id): ?SystemUser

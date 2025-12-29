@@ -6,10 +6,12 @@ use App\Enums\SystemUserEnums\SystemUserRoleEnum;
 use App\Enums\SystemUserEnums\SystemUserStatusEnum;
 use App\Notifications\CustomResetPasswordNotification;
 use App\Notifications\CustomVerifyEmail;
+use App\Traits\SystemUserScopes;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,7 +19,7 @@ use Laravel\Passport\HasApiTokens;
 
 class SystemUser extends Authenticatable implements MustVerifyEmail
 {
-    use CanResetPassword, HasApiTokens, HasFactory, HasUlids, Notifiable, SoftDeletes;
+    use CanResetPassword, HasApiTokens, HasFactory, HasUlids, Notifiable, SoftDeletes, SystemUserScopes;
 
     protected $table = 'system_users';
 
@@ -63,70 +65,17 @@ class SystemUser extends Authenticatable implements MustVerifyEmail
         $this->notify(new CustomVerifyEmail);
     }
 
-    public function scopeName($query, $name)
-    {
-        if (config('database.default') === 'mysql') {
-            return $query->whereFullText('name', $name);
-        }
-
-        return $query->where('name', 'LIKE', "%{$name}%");
-    }
-
-    public function scopeEmail($query, $email)
-    {
-        if (config('database.default') === 'mysql') {
-            return $query->whereFullText('email', $email);
-        }
-
-        return $query->where('email', 'LIKE', "%{$email}%");
-    }
-
-    public function scopeRole($query, $role)
-    {
-        return $query->where('role', $role);
-    }
-
-    public function scopeStatus($query, $status)
-    {
-        return $query->where('status', $status);
-    }
-
-    public function scopeCreatedAt($query, $date)
-    {
-        return $query->whereDate('created_at', $date);
-    }
-
-    public function scopeUpdatedAt($query, $date)
-    {
-        return $query->whereDate('updated_at', $date);
-    }
-
-    public function scopeDeletedAt($query, $date)
-    {
-        return $query->whereDate('deleted_at', $date);
-    }
-
-    public function scopeCreatedBy($query, $userId)
-    {
-        return $query->where('created_by', $userId);
-    }
-
-    public function scopeUpdatedBy($query, $userId)
-    {
-        return $query->where('updated_by', $userId);
-    }
-
     public function findForPassport($username)
     {
         return $this->where('email', $username)->first();
     }
 
-    public function creator()
+    public function creator(): BelongsTo
     {
         return $this->belongsTo(SystemUser::class, 'created_by')->withTrashed();
     }
 
-    public function updater()
+    public function updater(): BelongsTo
     {
         return $this->belongsTo(SystemUser::class, 'updated_by')->withTrashed();
     }

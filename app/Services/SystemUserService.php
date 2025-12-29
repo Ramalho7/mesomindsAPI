@@ -22,6 +22,21 @@ class SystemUserService
         return $this->repository->getAll($filters);
     }
 
+    public function getAllActive(array $filters = []): array
+    {
+        return $this->repository->getAllActive($filters);
+    }
+
+    public function getAllInactive(array $filters = []): array
+    {
+        return $this->repository->getAllInactive($filters);
+    }
+
+    public function getAllRecentlyCreated(array $filters = []): array
+    {
+        return $this->repository->getAllRecentlyCreated($filters);
+    }
+
     public function findOne(string $id): ?SystemUser
     {
         return $this->repository->findOne($id);

@@ -53,9 +53,30 @@ class SystemUserController extends Controller
             'created_by',
             'updated_by',
             'search',
+            'recently_created',
         ]);
 
-        $users = $this->systemUserService->getAll($filters);
+        if (isset($filters['recently_created']) && $filters['recently_created']) {
+            $users = $this->systemUserService->getAllRecentlyCreated($filters);
+        }
+
+        elseif (isset($filters['status']) && $filters['status'] === 'inactive') {
+            if (! $request->user()->can('viewInactive', SystemUser::class)) {
+                return response()->json([
+                    'success' => false,
+                ], 403);
+            }
+
+            $users = $this->systemUserService->getAllInactive($filters);
+        } elseif (isset($filters['status']) && $filters['status'] === 'active') {
+            $users = $this->systemUserService->getAllActive($filters);
+        } else {
+            if ($request->user()->can('viewInactive', SystemUser::class)) {
+                $users = $this->systemUserService->getAll($filters);
+            } else {
+                $users = $this->systemUserService->getAllActive($filters);
+            }
+        }
 
         return response()->json([
             'success' => true,
