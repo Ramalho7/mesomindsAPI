@@ -34,6 +34,7 @@ class SystemUser extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $hidden = [
+        'role',
         'password',
     ];
 

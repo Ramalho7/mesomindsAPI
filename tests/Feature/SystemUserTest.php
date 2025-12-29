@@ -29,8 +29,6 @@ class SystemUserTest extends TestCase
         ], $attributes));
     }
 
-    // ==================== INDEX TESTS ====================
-
     public function test_admin_can_list_all_users(): void
     {
         $admin = $this->createVerifiedUser([
@@ -54,4 +52,6 @@ class SystemUserTest extends TestCase
                 ],
             ]);
     }
+
+    
 }
