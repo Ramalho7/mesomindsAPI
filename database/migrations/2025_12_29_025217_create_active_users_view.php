@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::statement("DROP VIEW IF EXISTS active_system_users_view");
+        DB::statement('DROP VIEW IF EXISTS active_system_users_view');
     }
 };

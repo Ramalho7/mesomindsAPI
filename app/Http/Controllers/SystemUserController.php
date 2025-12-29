@@ -58,9 +58,7 @@ class SystemUserController extends Controller
 
         if (isset($filters['recently_created']) && $filters['recently_created']) {
             $users = $this->systemUserService->getAllRecentlyCreated($filters);
-        }
-
-        elseif (isset($filters['status']) && $filters['status'] === 'inactive') {
+        } elseif (isset($filters['status']) && $filters['status'] === 'inactive') {
             if (! $request->user()->can('viewInactive', SystemUser::class)) {
                 return response()->json([
                     'success' => false,

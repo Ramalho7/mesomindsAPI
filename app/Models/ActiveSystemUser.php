@@ -16,8 +16,11 @@ class ActiveSystemUser extends Model
     protected $table = 'active_system_users_view';
 
     public $timestamps = false;
+
     public $incrementing = false;
+
     protected $guarded = [];
+
     protected $primaryKey = 'string';
 
     protected $casts = [
@@ -28,12 +31,12 @@ class ActiveSystemUser extends Model
     public function creator(): BelongsTo
     {
         return $this->belongsTo(SystemUser::class, 'created_by')
-        ->select(['id', 'name', 'email', 'status']);
+            ->select(['id', 'name', 'email', 'status']);
     }
 
     public function updater(): BelongsTo
     {
         return $this->belongsTo(SystemUser::class, 'updated_by')
-        ->select(['id', 'name', 'email', 'status']);
+            ->select(['id', 'name', 'email', 'status']);
     }
 }

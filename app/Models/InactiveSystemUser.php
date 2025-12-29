@@ -7,8 +7,6 @@ use App\Enums\SystemUserEnums\SystemUserStatusEnum;
 use App\Traits\SystemUserScopes;
 use App\Traits\ViewsSystemUserRelationships;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use PhpParser\Node\Expr\Cast;
 
 class InactiveSystemUser extends Model
 {
@@ -17,8 +15,11 @@ class InactiveSystemUser extends Model
     protected $table = 'inactive_system_users_view';
 
     public $timestamps = false;
+
     public $incrementing = false;
+
     protected $guarded = [];
+
     protected $primaryKey = 'string';
 
     protected $casts = [

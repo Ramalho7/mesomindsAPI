@@ -13,7 +13,10 @@ class RecentlyCreatedSystemUser extends Model
     protected $table = 'recently_created_system_users_view';
 
     public $timestamps = false;
+
     public $incrementing = false;
+
     protected $guarded = [];
+
     protected $primaryKey = 'string';
 }
