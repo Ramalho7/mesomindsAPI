@@ -45,7 +45,6 @@ class SystemUserController extends Controller
         $filters = $request->only([
             'name',
             'email',
-            'role',
             'status',
             'created_at',
             'updated_at',
@@ -83,7 +82,7 @@ class SystemUserController extends Controller
     }
 
     /**
-     * Store: Cria um novo usuário do sistema, criador por: ADMIN, moderador ou operador.
+     * Store: Cria um novo usuário do sistema, criador por: ADMIN, moderador.
      * OBS.: Não é self-registration
      *
      * @group Usuários
@@ -136,7 +135,6 @@ class SystemUserController extends Controller
         $filters = $request->only([
             'name',
             'email',
-            'role',
             'status',
             'created_at',
             'updated_at',
@@ -144,10 +142,26 @@ class SystemUserController extends Controller
             'created_by',
             'updated_by',
             'search',
-            'recently_created',
         ]);
 
         $users = $this->systemUserService->getAllDeleted($filters);
+
+        return response()->json([
+            'success' => true,
+            'data' => $users,
+        ]);
+    }
+
+    public function viewCreatedDaily(Request $request): JsonResponse
+    {
+        $this->authorize('viewCreatedDaily', SystemUser::class);
+
+        $filters = $request->only([
+            'orderDay',
+            'byDay'
+        ]);
+
+        $users = $this->systemUserService->getCreatedDaily($filters);
 
         return response()->json([
             'success' => true,

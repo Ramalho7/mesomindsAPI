@@ -42,6 +42,11 @@ class SystemUserService
         return $this->repository->getAllDeleted($filters);
     }
 
+    public function getCreatedDaily(array $filters = []):array
+    {
+        return $this->repository->getCreatedDaily($filters);
+    }
+
     public function findOne(string $id): ?SystemUser
     {
         return $this->repository->findOne($id);

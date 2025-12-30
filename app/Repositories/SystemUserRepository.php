@@ -11,6 +11,8 @@ use App\Models\DelectedSystemUser;
 use App\Models\InactiveSystemUser;
 use App\Models\RecentlyCreatedSystemUser;
 use App\Models\SystemUser;
+use App\Models\SystemUserCreatedDaily;
+use Illuminate\Http\JsonResponse;
 
 class SystemUserRepository implements SystemUserRepositoryInterface
 {
@@ -81,16 +83,26 @@ class SystemUserRepository implements SystemUserRepositoryInterface
 
         foreach ($filters as $key => $value) {
 
-            if ($key === 'recently_created') {
-                continue;
-            }
-
             if (method_exists($this->model, 'scope'.ucfirst($key)) && ! is_null($value)) {
                 $query->{$key}($value);
             }
         }
 
         return $query->orderBy('deleted_at', 'desc')->with(['creator', 'updater'])->paginate()->toArray();
+    }
+
+    public function getCreatedDaily(array $filters = []): array{
+
+        $query = SystemUserCreatedDaily::query();
+
+        foreach ($filters as $key => $value) {
+
+            if (method_exists($this->model, 'scope'.ucfirst($key)) && ! is_null($value)) {
+                $query->{$key}($value);
+            }
+        }
+
+        return $query->paginate()->toArray();
     }
 
     public function findOne(string $id): ?SystemUser

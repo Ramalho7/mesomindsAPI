@@ -56,4 +56,14 @@ trait SystemUserScopes
     {
         return $query->where('updated_by', $userId);
     }
+
+    public function scopeOrderDay($query, $order)
+    {
+        return $query->orderBy('day', $order);
+    }
+
+    public function scopeByDay($query, $day)
+    {
+        return $query->where('day', $day);
+    }
 }

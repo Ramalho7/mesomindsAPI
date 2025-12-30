@@ -62,6 +62,14 @@ class SystemUserPolicy
         ]);
     }
 
+    public function viewCreatedDaily(SystemUser $user): bool
+    {
+        return in_array($user->role, [
+            SystemUserRoleEnum::ADMIN,
+            SystemUserRoleEnum::MODERATOR,
+        ]);
+    }
+
     /**
      * Determina se o usuário pode criar novos usuários.
      *
