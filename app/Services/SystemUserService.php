@@ -42,7 +42,7 @@ class SystemUserService
         return $this->repository->getAllDeleted($filters);
     }
 
-    public function getCreatedDaily(array $filters = []):array
+    public function getCreatedDaily(array $filters = []): array
     {
         return $this->repository->getCreatedDaily($filters);
     }

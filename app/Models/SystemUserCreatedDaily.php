@@ -12,10 +12,15 @@ class SystemUserCreatedDaily extends Model
     use SystemUserScopes;
 
     protected $table = 'system_users_created_daily';
+
     public $timestamps = false;
+
     public $incrementing = false;
+
     protected $guarded = [];
+
     protected $primaryKey = 'id';
+
     protected $keyType = 'string';
 
     protected $casts = [

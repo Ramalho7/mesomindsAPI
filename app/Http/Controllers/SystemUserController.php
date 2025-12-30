@@ -158,7 +158,7 @@ class SystemUserController extends Controller
 
         $filters = $request->only([
             'orderDay',
-            'byDay'
+            'byDay',
         ]);
 
         $users = $this->systemUserService->getCreatedDaily($filters);

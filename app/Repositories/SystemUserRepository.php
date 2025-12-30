@@ -12,7 +12,6 @@ use App\Models\InactiveSystemUser;
 use App\Models\RecentlyCreatedSystemUser;
 use App\Models\SystemUser;
 use App\Models\SystemUserCreatedDaily;
-use Illuminate\Http\JsonResponse;
 
 class SystemUserRepository implements SystemUserRepositoryInterface
 {
@@ -91,7 +90,8 @@ class SystemUserRepository implements SystemUserRepositoryInterface
         return $query->orderBy('deleted_at', 'desc')->with(['creator', 'updater'])->paginate()->toArray();
     }
 
-    public function getCreatedDaily(array $filters = []): array{
+    public function getCreatedDaily(array $filters = []): array
+    {
 
         $query = SystemUserCreatedDaily::query();
 
